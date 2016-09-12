@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>自動匯入三立新聞</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.blueopal.min.css" />
+    <script src="http://kendo.cdn.telerik.com/2016.2.714/js/kendo.all.min.js"></script>
+    <style type="text/css">
+        #container {
+            width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="news">金鐘後台新聞</div>
+        <div id="grid">
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+             // 抓金鐘新聞
+            $.ajax({
+                url: "http://gba51.openapis.io/GetNews",
+                method: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    // 只抓最近一頁
+                    for (var i = 0; i < data.News.length; i++) {
+                        $("<span>").text(data.News[i].HyperLink).appendTo($("#news"));
+                    }
+                }
+            });
+
+            // 抓三立新聞
+            $.ajax({
+                url: "http://webapi.setn.com/api/Project/GetProjectNewsList/846/0",
+                method: "GET",
+                dataType: 'jsonp',
+                success: function (data) {
+                    var news = [];
+                    $.each(data[0].newsList, function (index, value) {
+                        news.push({
+                            NewsID: value.newsID,
+                            Title: value.shortSlug,
+                            NewsTime: value.onlineTime,
+                            ImageUrl: value.imageFile + value.imageID + '.jpg'
+                        });
+                    });
+
+                    $('#grid').kendoGrid({
+                        dataSource: { data: news },
+                        columns: [
+                            {
+                                field: "none",
+                                title: "功能",
+                                width:120,
+                                command: {
+                                    name: "新增到 金鐘51",
+                                    click: function (e) {
+                                        var tr = $(e.target).closest("tr");
+                                        var data = this.dataItem(tr);
+                                        $.ajax({
+                                            url: "http://webapi.setn.com/api/ContentPage/GetNewsContent/"+data.NewsID,
+                                            method: "GET",
+                                            dataType: "jsonp",
+                                            success: function (v) {
+                                                alert($( $("<div/>").html(v.newsData.contentPages).text()).text());
+                                            }
+                                        });
+                                        //alert(data.Title);
+                                        //tr.remove();
+                                    }
+                                }
+                            },
+                            {
+                                field: "NewsID",
+                                title: "新聞代碼",
+                                width:120
+                            },
+                            {
+                                field: "NewsTime",
+                                title: "發佈時間",
+                                width: 170
+                            },
+                            {
+                                field: "Title",
+                                title: "標題"
+                            },
+                            {
+                                field: "ImageUrl",
+                                title:"圖片",
+                                template:"<img src='#=ImageUrl#' class='t-img' />"
+                            }
+                        ]
+                    });
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>

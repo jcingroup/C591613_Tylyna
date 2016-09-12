@@ -1,0 +1,94 @@
+﻿@using DotWeb.CommSetup
+@{
+    var LastLoginDateTime = Request.Cookies[CommWebSetup.Cookie_LastLogin];
+    LastLoginDateTime = new HttpCookie(CommWebSetup.Cookie_LastLogin, DateTime.Now.ToString());
+    var Cookie_UserName = Request.Cookies[CommWebSetup.Cookie_UserName];
+
+    var get_now_area = ViewContext.RouteData.DataTokens["area"].ToString();
+    var get_now_controller = ViewContext.RouteData.Values["controller"].ToString();
+    var get_now_action = ViewContext.RouteData.Values["action"].ToString();
+
+    var get_route = (Route)ViewContext.RouteData.Route;
+    var get_def_action = get_route.Defaults["action"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Resources.Res.System_Name</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="~/Content/css/sys.css" rel="stylesheet" />
+    <link href="~/Content/css/vendor/fontAwesome/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/css/vendor/toastr.css" rel="stylesheet" />
+    <link href="~/Content/css/vendor/jquery.loadmask.css" rel="stylesheet" />
+    @RenderSection("IncludeCSS", false)
+    <script src="~/Scripts/build/app/vendors.js?v=@CommWebSetup.CacheVer"></script>
+    <script type="text/javascript">
+        var gb_approot = '@Url.Content("~")';
+        var gb_lang = '@ViewBag.lang';
+        var gb_area = '@get_now_area';
+        var gb_controller = '@get_now_controller';
+        var gb_action = '@get_now_action';
+        var gb_def_action = '@get_def_action';
+    </script>
+</head>
+<body class="@ViewBag.BodyClass">
+    <div id="wrapper">
+        @if (ViewBag.IsFirstPage)
+        { }
+        else {
+            <header id="header" class="navbar navbar-fixed-top navbar-dark bg-primary">
+                <h1 class="logo">
+                    <a class="navbar-brand" href="#" title="@Resources.Res.Info_Home" tabindex="-1">@Resources.Res.System_Name</a>
+                </h1><!-- logo -->
+                <ul class="nav navbar-nav pull-xs-right">
+                    <li class="nav-item">
+                        <span class="nav-link">
+                            @if (ViewBag.user_login == "N")
+                            {
+                                <i class="fa-user"></i> <span>登入身分:</span> @Cookie_UserName.Value
+                            }
+                            else if (ViewBag.user_login == "Y")
+                            {
+                                <i class="fa-user"></i> <span>@ViewBag.RankName:</span> @ViewBag.UserName
+                            }
+                        </span>
+                    </li>
+                    <li class="nav-item bg-warning">
+                        <a href="~/index" class="nav-link">
+                            <i class="fa-home"></i> @Resources.Res.Button_ReturnIndex
+                        </a>
+                    </li>
+                    <li class="nav-item bg-success">
+                        <a href="~/Login/Logout" class="nav-link">
+                            <i class="fa-power-off"></i> @Resources.Res.Button_Logout
+                        </a>
+                    </li>
+                </ul>
+            </header><!-- header //-->
+        }
+        <main id="main">
+
+            @if (ViewBag.IsFirstPage) {
+                @RenderBody()
+            }
+            else {
+                <div id="content">
+                    @RenderBody()
+                    <div id="page_content"></div>
+                </div><!-- content //-->
+                <div id="sidebar">
+                    @RenderSection("sidebar", false)
+                </div><!-- sidebar //-->
+            }
+
+        </main><!-- main //-->
+    </div><!-- wrapper //-->
+    <footer id="footer">
+        <p class="copyright text-muted">
+            <span>Powered By <a href="http://www.jcin.com.tw" target="new">JCIN Information Co.</a></span>
+        </p>
+    </footer><!-- footer //-->
+    @RenderSection("IncludeScript", false)
+</body>
+</html>

@@ -1,0 +1,29 @@
+﻿@using ProcCore.NetExtension;
+@{
+    Layout = "~/Views/Shared/Manage/RLayout.cshtml";
+    ViewBag.BodyClass = "Login";
+    ViewBag.IsFirstPage = true;
+}
+@section IncludeCSS{
+
+}
+@section IncludeScript{
+    <script>
+        var debug_account = '@ViewData["username"]';
+        var debug_password = '@ViewData["password"]';
+        var debug_validate = '@ViewData["validate"]';;
+        var gb_approot = '@Url.Content("~")';
+    </script>
+    <script src="~/Scripts/cdn/jquery.min.js"></script>
+    <script src="~/Scripts/googleReCAPTCHA.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit'></script>
+    <script src="~/Scripts/build/app/vendors.js?v=@CommWebSetup.CacheVer"></script>
+    <script src="~/Scripts/build/app/m_login.js?v=@CommWebSetup.CacheVer"></script>
+    <script src="~/Scripts/cdn/jquery.loadmask.min.js"></script>
+}
+
+<h1 class="logo">
+    <span class="name text-danger">@Resources.Res.System_Name</span>Web Manager
+</h1>
+<p class="copyright text-primary">@Html.Lang("copyright")</p>
+<div class="login-box" id="login-box"></div>

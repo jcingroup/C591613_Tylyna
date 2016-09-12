@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<document>
+
+  <file>
+    <sort>1</sort>
+    <name>B01_news.html</name>
+    <memo>【社區新聞】新增、修改、刪除</memo>
+  </file>
+
+  <file>
+    <sort>2</sort>
+    <name>B02_ad.html</name>
+    <memo>【社區廣告】新增、修改、刪除</memo>
+  </file>
+
+  <file>
+    <sort>3</sort>
+    <name>B03_matter.html</name>
+    <memo>【社區物件】新增、修改、刪除</memo>
+  </file>
+
+  <file>
+    <sort>4</sort>
+    <name>Z01_editor_text.html</name>
+    <memo>【文章編輯】文字段落編排</memo>
+  </file>
+
+  <file>
+    <sort>5</sort>
+    <name>Z02_editor_insert.html</name>
+    <memo>【文章編輯】插入圖片/影片</memo>
+  </file>
+
+  <file>
+    <sort>6</sort>
+    <name>Z03_editor_table.html</name>
+    <memo>【文章編輯】表格 增加/刪除列</memo>
+  </file>
+
+</document>

@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<!-- saved from url=(0014)about:internet -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title:@Resources.Res.System_FrontName</title>
+    <meta name="keywords" content="@Resources.Res.Keywords">
+    <meta name="description" content="@Resources.Res.Description">
+    <script>
+        var gb_approot = '@Url.Content("~")';
+    </script>
+    @RenderSection("css", false)
+</head>
+
+<body class="@ViewBag.BodyClass">
+    @RenderBody()
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,133 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<!-- saved from url=(0014)about:internet -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.WebName-@ViewBag.Title::@Resources.Res.System_FrontName</title>
+    <meta name="keywords" content="@Resources.Res.Keywords">
+    <meta name="description" content="@Resources.Res.Description">
+    <script src="~/Scripts/cdn/BrowerInfo.js"></script>
+    <script>
+        var gb_approot = '@Url.Content("~")';
+    </script>
+    <link href="~/Content/css/page.css?v=@CommWebSetup.CacheVer" rel="stylesheet">
+    <link href="~/Content/css/vendor/icomoon.css?v=@CommWebSetup.CacheVer" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
+    @RenderSection("css", false)
+</head>
+
+<body class="@ViewBag.BodyClass">
+
+    <div id="wrapper">
+
+        <header id="header">
+            <div class="wrap">
+
+                <h1 class="logo">
+                    <span class="parent"><a href="~/Index">@Resources.Res.System_FrontName</a></span>
+                    <span class="child"><a href="~/Neighbor/Content?id=@ViewBag.community_id">@ViewBag.WebName 入口網</a></span>
+                </h1>
+
+                <ul class="topNav list-inline">
+                    <li><a href="~/VIP"><i class="icon-cart"></i>申請加入百業達人</a></li>
+                </ul>
+
+                <nav id="menu" class="navbar">
+                    <h2 class="sr-only">主選單</h2>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="~/Neighbor/Content?id=@ViewBag.community_id#intro" class="scroll"><i class="icon-members"></i>商家簡介</a>
+                        </li>
+                        <li>
+                            <a href="~/Neighbor/Content?id=@ViewBag.community_id#feature" class="scroll"><i class="icon-diamond"></i>商家特色</a>
+                        </li>
+                        <li>
+                            <a href="~/Neighbor/Content?id=@ViewBag.community_id#gallery" class="scroll"><i class="icon-zoom-in"></i>商家實景</a>
+                        </li>
+                        <li>
+                            <a href="~/Neighbor/Content?id=@ViewBag.community_id#diary" class="scroll"><i class="icon-book"></i>商家日誌</a>
+                        </li>
+                        <li>
+                            <a href="~/Neighbor/Sell_list?community_id=@ViewBag.community_id"><i class="icon-house"></i>我要買房</a>
+                        </li>
+                        <li>
+                            <a href="~/Neighbor/Rent_list?community_id=@ViewBag.community_id"><i class="icon-building"></i>我要租屋</a>
+                        </li>
+                        @* <li>
+                            <a href="~/Sell/List"><i class="icon-house"></i>我要買房</a>
+                        </li>
+                        <li>
+                            <a href="~/Rent/List"><i class="icon-building"></i>我要租屋</a>
+                        </li> *@
+                        <li>
+                            <a href="@ViewBag.group_buying_url" target="new"><i class="icon-cart"></i>好康團購</a>
+                        </li>
+                        <li>
+                            <a href="~/Neighbor/Content?id=@ViewBag.community_id#contact" class="scroll"><i class="icon-mail"></i>聯絡方式</a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div><!-- wrap //-->
+        </header><!-- header //-->
+
+        <main id="main">
+            <h1 class="sr-only">@ViewBag.Title::@Resources.Res.System_FrontName</h1>
+            @RenderBody()
+        </main>
+    </div><!-- wrapper //-->
+
+    <footer id="footer">
+        <div class="wrap">
+            <h1 class="logo"><a href="~/Index" title="@Resources.Res.System_FrontName">@Resources.Res.System_FrontName</a></h1>
+            <div class="copyright">Happiness Agent &copy; 2016</div>
+            <ul class="social list-inline">
+                <li><a href="https://www.facebook.com/754952781302809/" target="new"><i class="icon-fb"></i><span class="sr-only">Facebook</span></a></li>
+                <li><a href=""><i class="icon-gplus"></i><span class="sr-only">Google+</span></a></li>
+            </ul>
+            <ul class="contact list-inline">
+                <li><i class="icon-phone"></i><span class="sr-only">電話</span>03-3180692</li>
+                <li><i class="icon-fax"></i><span class="sr-only">傳真</span>03-3180693</li>
+                <li><i class="icon-mail"></i><span class="sr-only">E-mail</span><a href="ahagentcom@gmail.com">ahagentcom@gmail.com</a></li>
+            </ul>
+            <a href="#header" class="goTop scroll img-circle"><i class="icon-angle-double-up"></i></a>
+        </div>
+    </footer><!-- footer -->
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="~/Content/js/jquery.lazyload.min.js"></script>
+    <script type="text/javascript">
+        // Lazyload
+        $("img.lazy").lazyload({ effect: "fadeIn" });
+
+        // 回頂端 & menu fixed
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.goTop').fadeIn();
+            } else {
+                $('.goTop').fadeOut();
+            }
+            if ($(this).scrollTop() > 262) {
+                $('#menu').addClass('fixed');
+            } else {
+                $('#menu').removeClass('fixed');
+            }
+        });
+        $('.scroll').click(function () {
+            var hash = $(this).attr('href').split('#')[1];
+            $('html, body').animate({
+                scrollTop: $("#" + hash).offset().top - 50
+            }, 2000);
+            return false;
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

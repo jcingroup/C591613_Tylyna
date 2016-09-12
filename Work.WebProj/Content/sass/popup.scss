@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+
+// import
+// ------------------------------------------------------------
+
+// Core variables and mixins
+@import "helper/variables";
+@import "_web/var";
+
+@import "helper/mixins";
+@import "helper/function";
+
+// Reset and dependencies
+@import "base/normalize";
+@import "base/print";
+@import "base/reboot";
+
+// Elements
+@import "element/type";
+@import "element/images";
+@import "element/tables";
+@import "element/buttons";
+
+@import "helper/utilities";
+
+@import "_web/element";
+
+
+// element
+// ------------------------------------------------------------
+.h3 {
+    .date {
+        display: block;
+        margin-bottom: $spacer*0.3;
+        font-size: $font-size-lg;
+        color: #847D53;
+    }
+}
+
+
+// layout
+// ------------------------------------------------------------
+.popup {
+    padding: $spacer;
+}
+
+
+

@@ -1,0 +1,39 @@
+﻿@model  IEnumerable<DotWeb.Areas.Base.Controllers.DocInfo>
+
+@using DotWeb.Areas.Base.Controllers;
+@{
+    Layout = "~/Views/Shared/Manage/RLayout.cshtml";
+    ViewBag.MenuName = "系統設定";
+    ViewBag.Caption = "教學影片";
+}
+@section IncludeScript{
+    @Html.Partial("Manage/JSGlobalVar")
+    <script src="~/Scripts/build/comminc.js"></script>
+}
+@section sidebar{
+    @Html.Partial("Manage/vucMenu")
+}
+<ul class="breadcrumb">
+    <li><i class="fa-caret-right"></i> @ViewBag.MenuName</li>
+    <li><i class="fa-angle-right"></i> @ViewBag.Caption</li>         
+</ul>
+
+<h3 class="h3">
+    <span>操作教學影片</span>
+</h3>
+
+<div class="alert alert-warning" role="alert">
+    <p>影片開啟後，可點選 <i class="fa-arrows-alt"></i> 圖示，以全螢幕方式觀看。</p>
+</div>
+
+<ul class="list-group">
+    @foreach (DocInfo doc in Model)
+    {
+        <li>
+            <a class="list-group-item" href="@doc.Link" target="new">
+                <strong class="text-primary">@doc.Sort.</strong>
+                <span>@doc.Momo</span>
+            </a>
+        </li>
+    }
+</ul>
