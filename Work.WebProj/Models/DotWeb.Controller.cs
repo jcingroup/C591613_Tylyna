@@ -139,18 +139,14 @@ namespace DotWeb.Controller
                 #region Working...
                 ViewBag.UserId = UserId;
                 ViewBag.UserName = getUserName == null ? "" : Server.UrlDecode(getUserName.Value);
-
-
                 string asp_net_roles = aspnet_user.Roles.Select(x => x.RoleId).FirstOrDefault();
                 var role = roleManager.FindById(asp_net_roles);
                 ViewBag.RoleName = role.Name;
 
                 departmentId = aspnet_user.department_id;
-
-                isTablet = (new WebInfo()).isTablet();
-
                 //ViewBag.Caption = Resources.Res.ViewbagCapton;
                 //ViewBag.MenuName = Resources.Res.ViewbagMenuName;
+
 
                 #endregion
             }

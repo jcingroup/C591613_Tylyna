@@ -2,7 +2,7 @@
 @{
     var LastLoginDateTime = Request.Cookies[CommWebSetup.Cookie_LastLogin];
     LastLoginDateTime = new HttpCookie(CommWebSetup.Cookie_LastLogin, DateTime.Now.ToString());
-    var Cookie_UserName = Request.Cookies[CommWebSetup.Cookie_UserName];
+    var Cookie_UserName = ViewBag.UserName;
 
     var get_now_area = ViewContext.RouteData.DataTokens["area"].ToString();
     var get_now_controller = ViewContext.RouteData.Values["controller"].ToString();
@@ -36,7 +36,8 @@
     <div id="wrapper">
         @if (ViewBag.IsFirstPage)
         { }
-        else {
+        else
+        {
             <header id="header" class="navbar navbar-fixed-top navbar-dark bg-primary">
                 <h1 class="logo">
                     <a class="navbar-brand" href="#" title="@Resources.Res.Info_Home" tabindex="-1">@Resources.Res.System_Name</a>
@@ -44,14 +45,7 @@
                 <ul class="nav navbar-nav pull-xs-right">
                     <li class="nav-item">
                         <span class="nav-link">
-                            @if (ViewBag.user_login == "N")
-                            {
-                                <i class="fa-user"></i> <span>登入身分:</span> @Cookie_UserName.Value
-                            }
-                            else if (ViewBag.user_login == "Y")
-                            {
-                                <i class="fa-user"></i> <span>@ViewBag.RankName:</span> @ViewBag.UserName
-                            }
+                                <i class="fa-user"></i> <span>登入身分:</span> @Cookie_UserName
                         </span>
                     </li>
                     <li class="nav-item bg-warning">
@@ -69,10 +63,12 @@
         }
         <main id="main">
 
-            @if (ViewBag.IsFirstPage) {
+            @if (ViewBag.IsFirstPage)
+            {
                 @RenderBody()
             }
-            else {
+            else
+            {
                 <div id="content">
                     @RenderBody()
                     <div id="page_content"></div>

@@ -129,7 +129,12 @@ namespace DotWeb.Api
             }
             return t3.ToList();
         }
-
+        public async Task<IHttpActionResult> GetOptionsCommunity()
+        {
+            db0 = getDB0();
+            var options = await db0.Community.Select(x => new { x.community_id, x.community_name }).OrderBy(x => x.community_id).ToListAsync();
+            return Ok(options);
+        }
         #region 後台-參數設定
         [HttpPost]
         public ResultInfo PostAboutUs([FromBody]AboutUsParm md)
@@ -153,9 +158,6 @@ namespace DotWeb.Api
         }
 
         #endregion
-
-
-
         [HttpGet]
         [AllowAnonymous]
         public async Task<IHttpActionResult> GetNewsList(int id)
@@ -179,7 +181,6 @@ namespace DotWeb.Api
             //r.data = result;
             return Ok(result);
         }
-
     }
     #region Parm
 
