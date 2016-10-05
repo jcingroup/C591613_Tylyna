@@ -331,7 +331,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 幸福阿珍 (happiness agent) 幸福代理人 運用現今物聯網的科技技術，創造出符合現今經濟發展趨勢『新型態的不動產獲利模式』及『社區經濟發展』形成一個可以永續經營的產業。 的當地語系化字串。
+        ///   查詢類似  的當地語系化字串。
         /// </summary>
         internal static string Description {
             get {
@@ -511,7 +511,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 社區買屋,社區租屋,社區管理,房屋仲介,不動產,房仲,房地產 的當地語系化字串。
+        ///   查詢類似  的當地語系化字串。
         /// </summary>
         internal static string Keywords {
             get {
@@ -817,7 +817,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 幸福阿珍 Happiness Agent 的當地語系化字串。
+        ///   查詢類似 LITA CAFE 幸福企業社 的當地語系化字串。
         /// </summary>
         internal static string System_FrontName {
             get {
@@ -826,7 +826,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 幸福阿珍 管理系統 的當地語系化字串。
+        ///   查詢類似 LITA CAFE 幸福企業社 管理系統 的當地語系化字串。
         /// </summary>
         internal static string System_Name {
             get {

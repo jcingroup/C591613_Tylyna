@@ -342,10 +342,12 @@
     <Content Include="Content\js\bootstrap\collapse.js" />
     <Content Include="Content\js\bootstrap\dropdown.js" />
     <Content Include="Content\js\bootstrap\util.js" />
+    <Content Include="Content\js\common.js" />
     <Content Include="Content\js\jquery.lazyload.min.js" />
     <Content Include="Content\js\magnific-popup\jquery.magnific-popup.js" />
     <Content Include="Content\js\magnific-popup\jquery.magnific-popup.min.js" />
     <Content Include="Content\js\swiper\swiper.min.js" />
+    <Content Include="Content\js\tab.js" />
     <Content Include="index.aspx" />
     <Content Include="Content\font\fontAwesome\fontawesome-webfont.eot" />
     <Content Include="Content\font\fontAwesome\fontawesome-webfont.ttf" />

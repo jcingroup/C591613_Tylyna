@@ -218,7 +218,7 @@
     <value>開始上傳圖片</value>
   </data>
   <data name="System_Name" xml:space="preserve">
-    <value>幸福阿珍 管理系統</value>
+    <value>LITA CAFE 幸福企業社 管理系統</value>
   </data>
   <data name="CurrencySign" xml:space="preserve">
     <value>NT$</value>
@@ -365,7 +365,7 @@
     <value>此筆訂單編號已付款，請重新檢查訂單編號!</value>
   </data>
   <data name="System_FrontName" xml:space="preserve">
-    <value>幸福阿珍 Happiness Agent</value>
+    <value>LITA CAFE 幸福企業社</value>
   </data>
   <data name="Button_ReturnIndex" xml:space="preserve">
     <value>回首頁</value>
@@ -374,10 +374,10 @@
     <value>要刪除的資料不存在。</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>幸福阿珍 (happiness agent) 幸福代理人 運用現今物聯網的科技技術，創造出符合現今經濟發展趨勢『新型態的不動產獲利模式』及『社區經濟發展』形成一個可以永續經營的產業。</value>
+    <value />
   </data>
   <data name="Keywords" xml:space="preserve">
-    <value>社區買屋,社區租屋,社區管理,房屋仲介,不動產,房仲,房地產</value>
+    <value />
   </data>
   <data name="Log_Err_SendMailFail" xml:space="preserve">
     <value>信箱號碼不正確導致送信失敗，請確認信箱是否正確。</value>

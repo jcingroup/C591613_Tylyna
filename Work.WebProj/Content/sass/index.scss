@@ -27,12 +27,13 @@ $img-index:             '../images/index';
 
 // 本頁專用
 @import "_client/layout";
+@import "_client/unit/nav";
 @import "_client/unit/goTop";
 @import "_client/unit/list";
 @import "_client/unit/btn";
 @import "_client/unit/input-group";
+@import "_client/unit/modal";
 @import "_client/unit/classes";
-@import "_client/unit/nav";
 
 
 // main

@@ -25,25 +25,61 @@
 </head>
 
 <body class="@ViewBag.BodyClass">
+    @* 登入畫面 *@
+    <div id="login" class="modal animate-top">
+        <div class="modal-content">
+            <button onclick="document.getElementById('login').style.display='none'" class="btn-close"></button>
+
+            <form id="tab-1" action="" class="tab-content">
+                <header class="">會員登入</header>
+                <div class="input-group">
+                    <label class="input-group-addon icon-person" data-title="帳號"></label>
+                    <input class="form-element" type="email" id="m_act" required placeholder="請輸入帳號(E-mail地址)">
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon icon-lock2" data-title="密碼"></label>
+                    <input class="form-element" type="password" id="m_pwd" required placeholder="請輸入密碼">
+                </div>
+                <button class="btn">登入</button>
+                <a href="#tab-2" class="js-tab">忘記密碼</a>
+            </form>
+
+            <form id="tab-2" action="" class="tab-content">
+                <header class="">忘記密碼</header>
+                <div class="input-group">
+                    <label class="input-group-addon icon-person" data-title="帳號"></label>
+                    <input class="form-element" type="email" id="m_act" required placeholder="請輸入E-mail地址">
+                </div>
+                <button class="btn">送出</button>
+            </form>
+        </div><!-- modal-content //-->
+    </div><!-- login //-->
+
     <div id="wrapper">
         <header id="header">
-            <h1 class="logo" onclick="location.href='@Url.Content("~/index")'" title="回首頁" tabindex="-1">
-                LITA CAFE 愛鄰舍咖啡豆
-            </h1>
-            <nav id="menu" class="navbar">
-                <a href="~/AboutUs">利他精神</a>
-                <a href="~/Quality">利他嚴選</a>
-                <a href="~/Products">咖啡品項</a>
-                <a href="~/Info">口味介紹</a>
-                <a href="~/Story">利他故事</a>
-                <a href="~/FAQ">FAQ常見問答</a>
-                <a href="~/ContactUs">聯絡我們</a>
-            </nav>
-            <nav class="top-nav">
-                <a href="">Account</a>
-                <a href="">Basket</a>
-                <a href="">Contact Us</a>
-            </nav>
+            <div class="wrap">
+                <h1 class="logo" onclick="location.href='@Url.Content("~/index")'" title="回首頁" tabindex="-1">
+                    @Resources.Res.System_FrontName
+                </h1>
+                <nav id="menu" class="navbar">
+                    <a href="~/AboutUs">利他精神</a>
+                    <a href="~/Quality">利他嚴選</a>
+                    <a href="~/Products">咖啡品項</a>
+                    <a href="~/Info">口味介紹</a>
+                    <a href="~/Story">利他故事</a>
+                    <a href="~/FAQ">FAQ常見問答</a>
+                    <a href="~/ContactUs">聯絡我們</a>
+                </nav>
+                <nav class="top-nav">
+                    @* 登入前顯示如下 *@
+                    <button onclick="document.getElementById('login').style.display='block'">登入</button>
+                    @* 登入後顯示如下 *@
+                    @* <button>登出</button> *@
+
+                    <a href="">購物車</a>
+                    @* <a href="">Contact Us</a> *@
+                </nav>
+            </div>
         </header>
         @if (ViewBag.IsFirstPage)
         {
@@ -78,6 +114,7 @@
 
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
     <script src="~/Content/js/common.js"></script>
+    <script src="~/Content/js/tab.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
