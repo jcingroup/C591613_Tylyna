@@ -10,11 +10,74 @@
     <script>
         var gb_approot = '@Url.Content("~")';
     </script>
+    <link href="~/Content/css/vendor/icomoon.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/Content/css/grid.css">
+    @if (ViewBag.IsFirstPage)
+    {
+        <link href="~/Content/css/index.css?v=@CommWebSetup.CacheVer" rel="stylesheet">
+    }
+    else
+    {
+        <link href="~/Content/css/page.css?v=@CommWebSetup.CacheVer" rel="stylesheet">
+    }
     @RenderSection("css", false)
 </head>
 
 <body class="@ViewBag.BodyClass">
-    @RenderBody()
+    <div id="wrapper">
+        <header id="header">
+            <h1 class="logo" onclick="location.href='@Url.Content("~/index")'" title="回首頁" tabindex="-1">
+                LITA CAFE 愛鄰舍咖啡豆
+            </h1>
+            <nav id="menu" class="navbar">
+                <a href="~/AboutUs">利他精神</a>
+                <a href="~/Quality">利他嚴選</a>
+                <a href="~/Products">咖啡品項</a>
+                <a href="~/Info">口味介紹</a>
+                <a href="~/Story">利他故事</a>
+                <a href="~/FAQ">FAQ常見問答</a>
+                <a href="~/ContactUs">聯絡我們</a>
+            </nav>
+            <nav class="top-nav">
+                <a href="">Account</a>
+                <a href="">Basket</a>
+                <a href="">Contact Us</a>
+            </nav>
+        </header>
+        @if (ViewBag.IsFirstPage)
+        {
+            <div id="banner" class="swiper-container">
+                <ul class="swiper-wrapper">
+                    <li class="swiper-slide"><img src="~/Content/images/Index/banner1.jpg"></li>
+                </ul>
+            </div>
+            @RenderBody()
+        }
+        else
+        {
+            <div id="banner"><h1>@ViewBag.Title</h1></div>
+            <main id="main">
+                @RenderBody()
+            </main>
+        }
+    </div><!-- wrapper //-->
+    <footer id="footer">
+        <div class="foot-contact">
+            <h1 class="logo">LITA CAFE</h1>
+            <h2>幸福企業社 | 桃園市中壢區復興路161號4樓</h2>
+            <p>03-400 0000 | email <a href="mailto:address@lita.com.tw">address@lita.com.tw</a></p>
+        </div>
+        <div class="foot-social">
+            <a href="">Facebook</a>
+            <a href="">Youtube</a>
+            <a href="">LINE</a>
+        </div>
+        <a href="#header" class="goTop icon-chevron-thin-up">BACK TO TOP</a>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
+    <script src="~/Content/js/common.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

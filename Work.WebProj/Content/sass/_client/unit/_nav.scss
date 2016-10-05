@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+// navbar style
+$navbar-height:       80px !default;
+$navbar-bg:           $warning !default; //#2AA19D
+
+// nav style
+$nav-height:          full !default;
+$nav-font-size:       18px !default;
+$nav-color:           $brand-primary !default;
+
+// nav active
+$nav-active-color:    false !default;
+$nav-active-bg:       false !default; //darken($brand-secondary,5)
+
+// 當前選單
+$current:             page('&:nth-child');
+
+// 子選單
+$sub-nav-has:         false !default;
+$sub-nav-root:        if($sub-nav-has, '.root', 'a') !default;
+
+// 行動版
+$mobile-menu-bg:        #424242 !default;
+$mobile-menu-width:     100% !default;
+
+
+// 主選單
+.navbar {
+    @if $navbar-height { height: $navbar-height }
+    @if $navbar-bg     { background: $navbar-bg }
+}
+
+#menu {
+    z-index: z(menu);
+
+    @if $sub-nav-has {
+        li {
+            @extend .float-l;
+            width: percentage(1/length($menu-item));
+
+            // 子選單顯示
+            &:hover, &:active {
+                .sub-nav {
+                    opacity: 1;
+                    visibility: visible;
+                    min-height: 150px;
+                }
+            }
+        }
+        // 有下拉選單的加箭頭
+        .caret {
+            position: relative;
+
+            @include el(before) {
+                @include arrow(up, 10px, 7px, #fff);
+                @include pos-center(x);
+                @include transition(opacity .5s, bottom .3s);
+                opacity: 0;
+                bottom: -8px;
+            }
+        }
+    }
+
+    #{$sub-nav-root} {
+        @if $nav-color     { color: $nav-color; }
+        @if $nav-font-size { font-size: em($nav-font-size); }
+
+        @if ($nav-height == full) {
+            height: 100%;
+            @include text-middle($navbar-height);
+        }
+        @else {
+            height: $nav-height;
+        }
+
+        // 本次專案
+        @extend %inline-block;
+        letter-spacing: 1px;
+
+        &:hover, &:active, &.current {
+            @if $nav-active-bg    { background: $nav-active-bg; }
+            @if $nav-active-color { color:$nav-active-color; }
+        }
+    }
+
+    @if $enable-RWD {
+        @include mq-max(break(#{$mobile-menu-bk},-1)) {
+            @include fixed(top 0);
+            overflow-y: auto;
+            z-index: z(overlay);
+
+            background: $mobile-menu-bg;
+            width: $mobile-menu-width;
+            height: 100%;
+
+            // 本次專案
+            margin-top: 0;
+
+            // 推拉樣式
+            @if $mobile-menu-style == 'push' {
+                left: -$mobile-menu-width;
+                text-align: left;
+
+                @include transition(left .35s);
+
+                .push & { left: 0; }
+
+                #{$sub-nav-root} {
+                    color: #fff;
+                    font-size: em(18px);
+                    padding: $gutter/2 $gutter;
+                }
+            }
+
+            // 全版樣式
+            @else if $mobile-menu-style == 'overlay' {
+                overflow-x: hidden;
+                visibility: hidden;
+                top: -50%;
+                left: 0;
+                opacity: 0;
+                padding: 3% 0;
+
+                @include transition(top .5s, opacity 1s);
+
+                .overlay & {
+                    top: 0;
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+// 第二層選單
+@if $sub-nav-has {
+    .sub-nav {
+        @extend %block, .text-left;
+        opacity: 0;
+        visibility: hidden;
+
+        @if $enable-RWD {
+            @include mq-max(break(#{$mobile-menu-bk},-1)) {
+                display: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                position: static;
+                top: 100%;
+                max-width: 100%;
+
+                background: darken($mobile-menu-bg,10);
+                box-shadow: inset 3px 6px 15px rgba(#000,.5);
+            }
+        }
+    }
+}

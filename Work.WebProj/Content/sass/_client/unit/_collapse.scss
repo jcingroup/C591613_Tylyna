@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+$collapse-title-size:          false !default;
+$collapse-title-color:         false !default;
+
+$collapse-content-color:       false !default;
+$collapse-content-hover-color: false !default;
+
+
+.collapse-title {
+    cursor: pointer; cursor: hand;
+
+    @if $collapse-title-size {
+        font-size: em($collapse-title-size);
+    }
+    @if $collapse-title-color {
+        color: $collapse-title-color;
+    }
+
+    @include el(after, inline-block, '\e900') {
+        color: $brand-primary;
+        margin-left: 8px;
+
+        font-family: 'icomoon' !important;
+        speak: none;
+        text-transform: none;
+        line-height: 1;
+
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    &:hover, &:active, &.current {
+        &::after { color: $brand-secondary; }
+    }
+    &.current {
+        &::after { content: '\e901'}
+    }
+}
+.collapse-content {
+    display: none;
+
+    a {
+        @if $collapse-content-color {
+            color: $collapse-content-color;
+        }
+        &:hover, &:active, &.current {
+            @if $collapse-content-hover-color {
+                color: $collapse-content-hover-color;
+            }
+        }
+    }
+}

@@ -1,0 +1,114 @@
+﻿@charset "UTF-8";
+
+
+// == config
+// ----------------------------------------------------------------------
+$img-path:              '../images' !default;
+$font-path:             '../font' !default;
+
+
+// == font
+// ----------------------------------------------------------------------
+$body-bg:               #F6F6F6 !default;
+$body-color:            #323232;
+$font-family-sp:        'Catamaran', sans-serif;
+$link-color:            darken($brand-primary,15);
+
+$headings-color:        $brand-secondary;
+
+
+// == layout
+// ----------------------------------------------------------------------
+$min-width:             1008px;     // 網頁最小尺寸
+$max-width:             1200px;     // 網頁最寬尺寸: .wrap
+
+$wrapper-bg:            false !default;
+$content-spacing:       30px !default;
+
+// line
+$line:                  4px solid $brand-primary;
+
+// header
+$header-height:         200px !default;
+$header-bg:             url(#{$img-path}/headerBg.gif) -108px 0 no-repeat, #F4F1EA url(#{$img-path}/headerBg2.gif) right -20px no-repeat !default;
+$banner-height:         $header-height !default;
+
+// logo
+$logo-pos:              false !default;
+
+// footer
+$footer-height:         30px !default;
+$footer-bg:             #E5E6DE !default;
+$footer-color:          #AB9F82 !default; //#63889D;
+
+// sidebar
+$sidebar-width:         220px;
+$sidebar-title-height:  55px;
+
+// z-index
+$z-index: (
+    header:             2,
+    main:               1,
+    footer:             5,
+    sidebar:            4,
+    banner:             3,
+    logo:               10,
+    menu:               20,
+    figure:             3,
+    dropdown:           21,
+    tooltip:            22,
+    modal:              23,
+    toggle:             25,
+    goTop:              99,
+    overlay:            999
+);
+
+
+// == module
+// ----------------------------------------------------------------------
+// btn
+$btn-font-size:                 false !default;
+$btn-hover-bg:                  $brand-secondary !default;
+
+// goTop
+$goTop-color:           #fff !default;
+$goTop-styles: (
+    opacity: 0,
+    background: rgba($brand-primary,.8),
+    font-size: 23px,
+    padding: 5px 10px,
+    border-radius: 25px
+) !default;
+$goTop-hover-styles: (
+    background: $brand-primary
+) !default;
+
+
+// == base
+// ----------------------------------------------------------------------
+// table
+$table-border-color:           darken($light-gray,4) !default; //#DCDCDC
+$table-bordered:               true !default;
+$table-pd:                     6px 1% !default;
+$table-bg-hover:               $pale-yellow !default;
+$table-bg-striped:             #F4F4F4 !default;
+$th-td-styled: (
+    font-size: em(15)
+) !default;
+$caption-styled: (
+    font-size: em(17,15),
+    background: lighten($brand-secondary,9.5),
+    color: $white,
+    text-align: center,
+    padding: 8px 12px
+) !default;
+$th-styled: (
+    background: $pale-green,
+    color: darken($brand-secondary,5),
+    line-height: 1.2
+) !default;
+
+
+// form
+$form-element-height:          false !default;
+$form-element-pd:              2px 5px !default;

@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+$mobile-trigger-animate:         true !default;
+$mobile-trigger-thickness:       3px !default;
+$mobile-trigger-width:           42px !default;
+$mobile-trigger-height:          ($mobile-trigger-thickness * 10) !default;
+$mobile-trigger-pd:              0 !default;
+$mobile-trigger-color:           $brand-primary !default;
+$mobile-trigger-position:        relative !default;
+$mobile-trigger-left:            false !default;
+$mobile-trigger-top:             false !default;
+
+
+// == 行動版主選單
+.mobile-trigger {
+    display: none;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    position: $mobile-trigger-position;
+    z-index: z(menu) + 1;
+
+    @if $mobile-trigger-left { left: $mobile-trigger-left; }
+
+    @if $mobile-trigger-top {
+        top: $mobile-trigger-top;
+    }
+    @else {
+        top: 50%;
+        @include transform(translateY(-50%));
+    }
+
+    @include mq-max(break(#{$mobile-menu-bk},-1)) { display: block; }
+
+    // 變形 X 效果
+    @if $mobile-trigger-animate {
+        z-index: z(overlay) + 1;
+
+        width: $mobile-trigger-width;
+        height: $mobile-trigger-height;
+
+        @include transition(background 0.3s);
+        @include prefix(apperance, none, webkit moz);
+
+        // 本次專案
+        @include mq-max(mobile) {
+            @include transform(scale(.6));
+            top: 30%;
+            left: -5px;
+        }
+
+        &:active, &.active {
+            // background-color: darken($brand-primary, 10%);
+            span {
+                background: none;
+                &::before {
+                    top: 0;
+                    @include transform(rotate(45deg));
+                }
+                &::after {
+                    bottom: 0;
+                    @include transform(rotate(-45deg));
+                }
+                &::before, &::after {
+                    // background: $white;
+                    @include prefix(transition-delay, '0, .3s');
+                }
+            }
+        }
+
+        span {
+            @include absolute(left $mobile-trigger-pd right $mobile-trigger-pd top (($mobile-trigger-height / 2) - ($mobile-trigger-thickness / 2)));
+            display: block;
+
+            background: $mobile-trigger-color;
+            height: $mobile-trigger-thickness;
+            margin: auto;
+            @include transition(background 0s 0.3s);
+
+            @include el(all) {
+                width: 100%;
+                height: $mobile-trigger-thickness;
+                background-color: $mobile-trigger-color;
+                @include absolute(left 0);
+                @include prefix(transition-duration, '.3s, .3s');
+                @include prefix(transition-delay, '.3s, 0');
+            }
+            &::before {
+                top: -(($mobile-trigger-height / 2) - ($mobile-trigger-thickness / 2) - $mobile-trigger-pd);
+                @include prefix(transition-property, 'top, transform');
+            }
+            &::after {
+                bottom: -(($mobile-trigger-height / 2) - ($mobile-trigger-thickness / 2) - $mobile-trigger-pd);
+                @include prefix(transition-property, 'bottom, transform');
+            }
+        }
+    } @else {
+        // 專案樣式
+        .lnr {
+            color: $mobile-trigger-color;
+            font-size: em($mobile-trigger-width);
+            vertical-align: middle;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+
+// output
+// ------------------------------------------------------------
+.row {
+    @extend %clearfix;
+    & + & { margin-top: $spacer/2; }
+}
+
+@include make-grid-columns();
+
+.col-first { padding-left: 0; }
+.col-last  { padding-right: 0; }
+.col-rest  { overflow: hidden; }
+
+.col {
+    display: inline-block;
+    vertical-align: top;
+}

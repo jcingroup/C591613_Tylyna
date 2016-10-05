@@ -1,0 +1,76 @@
+
+$selector: '.zoom-anim-dialog';
+$effect: 'mfp-zoom-in';
+
+@import "../_admin/color";
+@import "../_admin/settings";
+
+@import "../helper/function";
+@import "../helper/variables";
+@import "../helper/mixins";
+
+@import "magnific-popup/_main";
+
+
+.dialog {
+    background: white;
+    padding: 20px 30px 30px;
+    text-align: left;
+    width: 75%;
+    max-width: 980px;
+    margin: 40px auto;
+    position: relative;
+}
+
+.#{$effect} {
+
+    // Fade-zoom
+    @if $effect == 'mfp-zoom-in' {
+        #{$selector} {
+            opacity: 0;
+            @include transition(all 0.2s ease-out);
+            @include transform(scale(0.8));
+        }
+
+        // in
+        &.mfp-ready #{$selector} {
+            opacity: 1;
+            @include transform(scale(1));
+        }
+
+        // out
+        &.mfp-removing #{$selector} {
+            @include transform(scale(0.8));
+            opacity: 0;
+        }
+    }
+
+    @if $effect == 'mfp-slide-bottom' {
+        #{$selector} {
+            opacity: 0;
+
+            @include transition(all 0.2s ease-out);
+            @include transform(translateY(-20px) perspective(600px) rotateX(10deg));
+        }
+        // in
+        &.mfp-ready #{$selector} {
+            opacity: 1;
+            @include transform(translateY(0) perspective(600px) rotateX(0));
+        }
+
+        // out
+        &.mfp-removing #{$selector} {
+            opacity: 0;
+            @include transform(translateY(-10px) perspective(600px) rotateX(10deg));
+        }
+    }
+
+    &.mfp-bg {
+        opacity: 0;
+        @include transition(opacity 0.3s ease-out);
+    }
+    // animate in
+    &.mfp-ready.mfp-bg { opacity: 0.8; }
+    // animate out
+    &.mfp-removing.mfp-bg { opacity: 0; }
+}

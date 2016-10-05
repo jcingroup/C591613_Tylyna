@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+// 下為基本樣式(屬性固定)
+$btn-display:            inline-block !default;
+$btn-pd:                 nth($padding-vertical,2) nth($padding-horizontal,2) !default;
+$btn-border-radius:      nth($border-radius,1) !default;
+$btn-font-size:          18px !default;
+$btn-line-height:        1.01 !default;
+$btn-color:              $white !default;
+$btn-bg:                 $brand-primary !default;
+$btn-hover-color:        $white !default;
+$btn-hover-bg:           lighten($brand-primary, 6%) !default;
+$btn-disabled-bg:        $muted !default;
+$btn-effect:             'background .35s, color .5s' !default;
+
+// 下為可自定屬性及樣式
+$btn-styles: (
+    color:               $btn-color,
+    background:          $btn-bg,
+    letter-spacing:      1px
+) !default;
+
+$btn-hover-styles: (
+    color:               $btn-hover-color,
+    background:          $btn-hover-bg
+) !default;
+
+
+// button
+// ----------------------------------------------
+
+button.btn { border: none; }
+
+.btn {
+    // 下為預設樣式
+    @if $btn-display       { display: $btn-display }
+    @if $btn-pd            { padding: $btn-pd }
+    @if $btn-border-radius { border-radius: $btn-border-radius }
+    @if $btn-font-size     { font-size: em($btn-font-size) }
+    @if $btn-line-height   { line-height: $btn-line-height }
+    @if $btn-effect        { @include transition($btn-effect); }
+
+    // 下為追加樣式-自定屬性與樣式
+    @each $attribute, $value in $btn-styles {
+        #{$attribute}: #{$value};
+    }
+
+    &, &:active, &.active {
+        &:focus {
+            @include tab-focus;
+        }
+    }
+    &:active, &.active {
+        outline: 0;
+    }
+    &:hover, &:active, &.active,
+    &:focus, &.focus {
+        @each $attribute, $value in $btn-hover-styles {
+            #{$attribute}: #{$value};
+        }
+    }
+    &.disabled, &[disabled], fieldset[disabled] & {
+        cursor: $cursor-disabled;
+        opacity: .65;
+        @if $btn-disabled-bg { background-color: $btn-disabled-bg; }
+    }
+}
+
+// @if $states {
+
+//     %btn-states {
+//         color: $white;
+//     }
+
+//     $selector: ();
+//     @each $type, $color in $state-type {
+//         $selector: $selector, unquote(".btn-#{$type}");
+
+//         .btn-#{$type} {
+//             background-color: $color;
+//             border-color: darken($color, 5%);
+
+//             &:hover, &:active {
+//                 background-color: darken($color, 10%);
+//                 @extend %btn-states;
+//             }
+//         }
+//     }
+//     #{$selector} {
+//         @extend %btn-states;
+//     }
+// }
