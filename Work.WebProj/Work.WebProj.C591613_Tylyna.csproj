@@ -325,9 +325,20 @@
     <Content Include="Content\font\fontAwesome\fontawesome-webfont.svg" />
     <Content Include="Content\font\icomoon\icomoon.svg" />
     <Content Include="Content\font\themify-icons\themify.svg" />
-    <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\bg.gif" />
+    <Content Include="Content\images\footBg.gif" />
+    <Content Include="Content\images\headerBg.gif" />
+    <Content Include="Content\images\icon-social.gif" />
+    <Content Include="Content\images\icon-topnav.gif" />
+    <Content Include="Content\images\Index\banner.jpg" />
+    <Content Include="Content\images\Index\jumbo.jpg" />
+    <Content Include="Content\images\Index\youtube.jpg" />
     <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\logo_s.gif" />
+    <Content Include="Content\images\nav-line.gif" />
+    <Content Include="Content\images\News\pic1.jpg" />
+    <Content Include="Content\images\News\pic2.jpg" />
+    <Content Include="Content\images\News\pic3.jpg" />
     <Content Include="Content\images\no-pic.gif" />
     <Content Include="Content\images\noIE\bg.gif" />
     <Content Include="Content\images\noIE\brow.gif" />
@@ -438,7 +449,6 @@
     <Content Include="Content\sass\_client\unit\_input-group.scss" />
     <Content Include="Content\sass\_client\unit\_label.scss" />
     <Content Include="Content\sass\_client\unit\_list.scss" />
-    <Content Include="Content\sass\_client\unit\_mobile-trigger.scss" />
     <Content Include="Content\sass\_client\unit\_modal.scss" />
     <Content Include="Content\sass\_client\unit\_nav.scss" />
     <Content Include="Content\sass\_client\unit\_slider.scss" />
@@ -447,6 +457,8 @@
     <Content Include="Content\sass\_client\_color.scss" />
     <Content Include="Content\sass\_client\_layout.scss" />
     <Content Include="Content\sass\_client\_settings.scss" />
+    <Content Include="Content\sass\_client\unit\_banner.scss" />
+    <Content Include="Content\sass\helper\mixins\_mobile-nav.scss" />
     <None Include="index.html" />
     <Content Include="ckeditor\build-config.js" />
     <Content Include="ckeditor\ckeditor.js" />
@@ -607,7 +619,6 @@
     <Folder Include="app_modules\Pikaday\tests\" />
     <Folder Include="Areas\Active\Views\Shared\" />
     <Folder Include="Areas\Base\Views\Shared\" />
-    <Folder Include="Content\images\Index\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="_Code\CReport\" />
   </ItemGroup>

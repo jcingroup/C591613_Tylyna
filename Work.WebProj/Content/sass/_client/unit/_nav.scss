@@ -1,30 +1,30 @@
 @charset "UTF-8";
 
+// setting
+// ------------------------------------------------------------
 // navbar style
-$navbar-height:       80px !default;
-$navbar-bg:           $warning !default; //#2AA19D
+$navbar-height:         80px !default;
+$navbar-bg:             false !default; // #2AA19D
 
 // nav style
-$nav-height:          full !default;
-$nav-font-size:       18px !default;
-$nav-color:           $brand-primary !default;
-
-// nav active
-$nav-active-color:    false !default;
-$nav-active-bg:       false !default; //darken($brand-secondary,5)
+$sub-nav-has:           false !default;    // 子選單
+$nav-root:              if($sub-nav-has, '.root', 'a') !default;
+$nav-height:            false !default;   // 'full' | 18px | flase
+$nav-font-size:         18px !default;
+$nav-color:             $brand-primary !default;
 
 // 當前選單
-$current:             page('&:nth-child');
-
-// 子選單
-$sub-nav-has:         false !default;
-$sub-nav-root:        if($sub-nav-has, '.root', 'a') !default;
+$current:               page('&:nth-child');
 
 // 行動版
+$mobile-menu-bk:        'desktop' !default;     // 從()螢幕寬度以下開始出現行動版選單
+$mobile-menu-style:     'overlay' !default;
 $mobile-menu-bg:        #424242 !default;
 $mobile-menu-width:     100% !default;
 
 
+// main
+// ------------------------------------------------------------
 // 主選單
 .navbar {
     @if $navbar-height { height: $navbar-height }
@@ -34,11 +34,82 @@ $mobile-menu-width:     100% !default;
 #menu {
     z-index: z(menu);
 
-    @if $sub-nav-has {
-        li {
-            @extend .float-l;
-            width: percentage(1/length($menu-item));
+    // 本次專案
+    @extend .clear, .text-right;
+    position: relative;
+    top: 50px;
 
+    #{$nav-root} {
+        @if $nav-color     { color: $nav-color; }
+        @if $nav-font-size { font-size: em($nav-font-size); }
+        @if $nav-height {
+            height: if($nav-height == 'full', 100%, $nav-height);
+            @if $nav-height == 'full' {
+                @include text-middle($navbar-height);
+            }
+        }
+
+        // 本次專案
+        @extend .p-l-24, .font-sp;
+        position: relative;
+
+        &:not(:last-child) {
+            @extend .p-r-24;
+            background: url(#{$img-path}/nav-line.gif) right center no-repeat;
+        }
+
+        @include el(before) {
+            width: 30%;
+            height: 2.5px;
+            background: $nav-color;
+            top: 0;
+            opacity: 0;
+            @include pos-center(x);
+            @include transition(top .35s, opacity .6s);
+        }
+
+        &:hover, &:active, &.current {
+            &::before {
+                top: 120%;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+// mobile-nav
+@if $enable-RWD {
+    @include mobile-nav('menu',break(#{$mobile-menu-bk},-1));
+    @include navBar-trigger('mobile-trigger',break(#{$mobile-menu-bk},-1));
+}
+
+.top-nav {
+    @extend %float-r;
+    position: relative;
+    top: 115px;
+
+    button, a {
+        font-size: em(18);
+        background: url(#{$img-path}/icon-topnav.gif) 0 center no-repeat;
+        height: 24px;
+        padding-left: 27px;
+
+        &:hover, &:active {
+            color: lighten($nav-color,10);
+        }
+    }
+    button {
+        @extend .m-r-16;
+        border: none;
+        color: $nav-color;
+    }
+    a { background-position: -111px center;}
+}
+
+// 第二層選單
+@if $sub-nav-has {
+    #menu {
+        li {
             // 子選單顯示
             &:hover, &:active {
                 .sub-nav {
@@ -61,81 +132,6 @@ $mobile-menu-width:     100% !default;
             }
         }
     }
-
-    #{$sub-nav-root} {
-        @if $nav-color     { color: $nav-color; }
-        @if $nav-font-size { font-size: em($nav-font-size); }
-
-        @if ($nav-height == full) {
-            height: 100%;
-            @include text-middle($navbar-height);
-        }
-        @else {
-            height: $nav-height;
-        }
-
-        // 本次專案
-        @extend %inline-block;
-        letter-spacing: 1px;
-
-        &:hover, &:active, &.current {
-            @if $nav-active-bg    { background: $nav-active-bg; }
-            @if $nav-active-color { color:$nav-active-color; }
-        }
-    }
-
-    @if $enable-RWD {
-        @include mq-max(break(#{$mobile-menu-bk},-1)) {
-            @include fixed(top 0);
-            overflow-y: auto;
-            z-index: z(overlay);
-
-            background: $mobile-menu-bg;
-            width: $mobile-menu-width;
-            height: 100%;
-
-            // 本次專案
-            margin-top: 0;
-
-            // 推拉樣式
-            @if $mobile-menu-style == 'push' {
-                left: -$mobile-menu-width;
-                text-align: left;
-
-                @include transition(left .35s);
-
-                .push & { left: 0; }
-
-                #{$sub-nav-root} {
-                    color: #fff;
-                    font-size: em(18px);
-                    padding: $gutter/2 $gutter;
-                }
-            }
-
-            // 全版樣式
-            @else if $mobile-menu-style == 'overlay' {
-                overflow-x: hidden;
-                visibility: hidden;
-                top: -50%;
-                left: 0;
-                opacity: 0;
-                padding: 3% 0;
-
-                @include transition(top .5s, opacity 1s);
-
-                .overlay & {
-                    top: 0;
-                    visibility: visible;
-                    opacity: 1;
-                }
-            }
-        }
-    }
-}
-
-// 第二層選單
-@if $sub-nav-has {
     .sub-nav {
         @extend %block, .text-left;
         opacity: 0;

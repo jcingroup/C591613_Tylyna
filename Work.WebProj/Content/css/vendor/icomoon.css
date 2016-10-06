@@ -19,32 +19,26 @@
 [class*="icon"]:not(:empty)::before {
   margin-right: .2em; }
 
-.icon-trash-can::before {
-  content: "\e910"; }
+.icon-arrow_drop_down_circle::before {
+  content: "\e5c6"; }
 
-.icon-trash-can2::before {
-  content: "\e916"; }
+.icon-arrow_upward::before {
+  content: "\e5d8"; }
 
-.icon-pen-angled::before {
-  content: "\e917"; }
+.icon-check2::before {
+  content: "\e5ca"; }
 
-.icon-pen-angled2::before {
-  content: "\e918"; }
+.icon-shopping_cart::before {
+  content: "\e8cc"; }
 
-.icon-delete::before {
-  content: "\e872"; }
+.icon-local_mall::before {
+  content: "\e54c"; }
 
-.icon-delete_forever::before {
-  content: "\e92b"; }
+.icon-local_shipping::before {
+  content: "\e558"; }
 
-.icon-undo::before {
-  content: "\e166"; }
-
-.icon-vertical_align_bottom::before {
-  content: "\e258"; }
-
-.icon-vertical_align_top::before {
-  content: "\e25a"; }
+.icon-room::before {
+  content: "\e8b4"; }
 
 .icon-mode_edit::before {
   content: "\e254"; }
@@ -180,9 +174,6 @@
 
 .icon-graduation-cap::before {
   content: "\e914"; }
-
-.icon-pencil::before {
-  content: "\e915"; }
 
 .icon-home::before {
   content: "\e900"; }

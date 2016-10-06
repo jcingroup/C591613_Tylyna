@@ -13,12 +13,11 @@ $enable-RWD:            true;
 // == helper/variables
 // ----------------------------------------------------------------------
 $body-bg:               #FEFCE1;
-$body-color:            #656F5E;
-$font-family-sp:        'Catamaran', sans-serif;
+$body-color:            #595959;
+$font-family-sp:        'Bitter', serif;
 // $link-color:            darken($brand-primary,5);
 
-$font-size-h1:          45px;
-$headings-color:        $brand-primary;
+$headings-color:        $brand-primary !default;
 
 
 // == layout
@@ -27,25 +26,23 @@ $min-width:             1008px;     // 網頁最小尺寸
 $max-width:             1200px;     // 網頁最寬尺寸: .wrap
 $menu-item:             'AboutUs' 'Info' 'Products' 'Story' 'ContactUs';
 
-$wrapper-bg:            url(#{$img-path}/bg.gif) repeat-x 0 bottom !default;
-$content-spacing:       0 !default;
-
-// line
-$line:                  4px solid $brand-primary;
+$wrapper-bg:            url(#{$img-path}/footBg.gif) no-repeat center bottom, url(#{$img-path}/bg.gif) repeat-x 0 bottom !default;
+$content-spacing:       120px !default;
 
 // header
-$header-height:         660px !default;
-$header-bg:             false !default;
-$banner-height:         $header-height !default;
+$header-height:         230px !default;
+$header-bg:             #fff url(#{$img-path}/headerBg.gif) repeat-x 0 150px !default;
+
+// banner
+$banner-height:         350px !default;
 
 // logo
-$logo-img:              false !default;
-$logo-size:             516px 60px !default;
-$logo-pos:              left 0 top 171px !default;
+$logo-img:              'logo.gif' !default; // 'logo.gif' or false
+$logo-size:             400px 110px !default;
 
 // footer
-$footer-height:         280px !default;
-$footer-bg:             #F4F1EA url(#{$img-index}/footerBg.gif) no-repeat 27.5% bottom !default;
+$footer-height:         300px !default;
+$footer-bg:             false !default;
 $footer-color:          darken($brand-primary,10) !default; //#63889D;
 
 // z-index
@@ -69,25 +66,11 @@ $z-index: (
 
 // == unit
 // ----------------------------------------------------------------------
-$mobile-menu-bk:        'desktop' !default;     // 從()螢幕寬度以下開始出現行動版選單
-$mobile-menu-style:     'overlay' !default;
-
-// goTop
-$goTop-color:           #fff;
-$goTop-styles: (
-    opacity: 0,
-    background: rgba($brand-primary,.8),
-    font-size: 23px,
-    padding: 5px 10px,
-    border-radius: 25px
-);
-$goTop-hover-styles: (
-    background: $brand-primary
-);
-
 // btn
-$btn-border-radius:            3px;
-$btn-pd:                       12px 40px;
+$btn-bg:                       #FEF272;
+$btn-color:                    #595959;
+$btn-border-radius:            false;
+$btn-pd:                       12px 30px;
 $btn-hover-bg:                 $brand-secondary;
 
 

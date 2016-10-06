@@ -2,8 +2,16 @@
 
 // 本頁專用變數(覆蓋)
 // ------------------------------------------------------------
-$index:                 true;
-$img-index:             '../images/index';
+$index:                  true;
+$img-index:              '../images/index';
+
+$font-size-h1:           45px;
+$font-size-h3:           30px;
+$headings-color:         #4D4D4D;
+
+$figure-inline:          true;
+$figure-inline-hack:     false;
+
 
 
 // import
@@ -29,10 +37,12 @@ $img-index:             '../images/index';
 @import "_client/layout";
 @import "_client/unit/nav";
 @import "_client/unit/goTop";
+@import "_client/unit/banner";
 @import "_client/unit/list";
 @import "_client/unit/btn";
 @import "_client/unit/input-group";
 @import "_client/unit/modal";
+@import "_client/unit/figure";
 @import "_client/unit/classes";
 
 
@@ -40,5 +50,31 @@ $img-index:             '../images/index';
 // ------------------------------------------------------------
 
 section {
-    @extend %clearfix;
+    &:not(:last-child) { padding-bottom: 60px; }
+}
+
+.news-list {
+    @extend .m-a-0, .m-b-64;
+
+    max-width: 350px;
+
+    &:not(:last-child) {
+        margin-right: 70px;
+    }
+
+    figcaption {
+        @extend %clearfix, .p-a-12, .text-left, .m-t-4;
+        background: #FFF9A7;
+    }
+    img {
+        min-width: 100%;
+        max-height: 270px;
+        min-height: 270px;
+    }
+    p {
+        font-size: em(22);
+    }
+    .btn {
+        @extend .m-t-24;
+    }
 }

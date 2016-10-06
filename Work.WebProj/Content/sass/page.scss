@@ -27,146 +27,14 @@ $img-index:             '../images/index';
 
 // 本頁專用
 @import "_client/layout";
+@import "_client/unit/nav";
 @import "_client/unit/goTop";
 @import "_client/unit/list";
 @import "_client/unit/btn";
 @import "_client/unit/input-group";
+@import "_client/unit/modal";
 @import "_client/unit/classes";
 
 
 // main
 // ------------------------------------------------------------
-
-section {
-    @extend %clearfix;
-
-    h1 { letter-spacing: 2px; }
-}
-
-.login {
-    border-top: $line;
-    background: $white;
-    padding: 42px;
-    padding-top: 25px;
-    border-radius: nth($border-radius,1);
-    box-shadow: 2px 2px 8px #BCB9B4;
-    margin-top: em(200);
-
-    h4 {
-        margin-top: 0;
-        margin-bottom: $spacer*1.6;
-        color: darken($brand-primary,15);
-    }
-    .input-group {
-        margin-bottom: $spacer*1.36;
-    }
-}
-
-.news, .notice { padding-top: $spacer*4; }
-
-.news {
-    z-index: z(main);
-    position: relative;
-    background: url(#{$img-index}/newsBg.gif) center 0 no-repeat;
-
-    @include mq(1920px) {
-        background-size: cover;
-    }
-
-    h1 {
-        font-size: em(48);
-        letter-spacing: 5px;
-        text-shadow: 1px 1px 1px rgba(#5D9F20,.45);
-        margin-bottom: $spacer*2;
-    }
-}
-
-// 最新消息列表
-.news-list {
-    @extend %list-unstyled;
-
-    li {
-        background: #82B27D url(#{$img-index}/news-linkBg.gif) 0 0 repeat-x;
-        padding: $gutter;
-        width: 31%;
-        height: 100%;
-        min-height: 183px;
-        display: inline-block;
-        vertical-align: top;
-        text-align: left;
-        margin: 0 .5%;
-        border-radius: 7px 7px 0 0;
-    }
-
-    small {
-        display: block;
-        color: #25705B;
-        font-size: em(25);
-    }
-    a {
-        color: #334627;
-        font-size: em(17);
-        line-height: 1.8;
-
-        &:hover, &:active { color: lighten($brand-secondary,5) }
-    }
-}
-.notice {
-    background: $white;
-
-    .wrap {
-        background: url(#{$img-index}/noticeBg.gif) right bottom no-repeat;
-        padding-bottom: $spacer*9;
-    }
-
-    a, small { display: block; }
-    a {
-        color: #5B6552;
-        font-size: em(17);
-        margin-bottom: $spacer;
-        position: relative;
-        padding-left: $gutter*2;
-
-        &:hover, &:active { color: darken($light-green,10); }
-        &::before {
-            @include absolute(left 0 top 5px);
-            color: darken($lime,5);
-            font-size: em(22,17);
-        }
-    }
-    small {
-        color: mix($brand-primary,$lime);
-        margin-bottom: 2px;
-    }
-    h1 {
-        position: relative;
-        left: 85px;
-        width: 90%;
-        margin-bottom: $spacer*2;
-
-        img { @include absolute(left -85px top -10px) }
-    }
-}
-
-aside {
-    font-size: em(21);
-    color: $info;
-    border: 1px solid $lime;
-    width: 193px;
-    padding: $gutter;
-    padding-bottom: 0;
-    border-radius: 3px;
-    box-shadow: 0 0 4px rgba(#989A80,.45);
-    margin-top: $spacer*3.4;
-
-    iframe { width: 100%; }
-}
-
-// 小廣告
-.ad {
-    background: #F9F8F4;
-    border-top: 1px solid $muted;
-    padding: 30px 0;
-
-    img { max-height: 55px; margin: 0 .5%}
-}

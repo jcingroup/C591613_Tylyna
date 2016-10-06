@@ -1,24 +1,12 @@
 
-// 回頂端
-$(window).scroll(function () {
-    if ($(this).scrollTop() > 100) {
-        $('.goTop').fadeIn(750);
-    } else {
-        $('.goTop').fadeOut();
-    }
-    // 頁腳特效
-    // var elem = $('#footer');
-    // var window_scroll_top = $(window).scrollTop() + $(window).height() - elem.height() + 70;
-    // if (window_scroll_top > elem.offset().top) {
-    //     $('.goTop').addClass('bottom');
-    // } else {
-    //     $('.goTop').removeClass('bottom')
-    // }
-});
 $('.scroll').click(function (event) {
     $('html, body').animate({
         scrollTop: $($.attr(this, 'href')).offset().top - 50
     }, 750);
+    event.preventDefault();
+});
+$('.goTop').click(function() {
+    $('body, html').stop(true).animate({scrollTop:0},750);
     event.preventDefault();
 });
 

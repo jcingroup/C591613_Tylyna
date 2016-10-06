@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+#banner {
+    position: relative;
+
+    @include el(after) {
+        @include absolute(top 0 left 0 right 0);
+        height: 25px;
+        background: rgba($brand-secondary,.7);
+    }
+}

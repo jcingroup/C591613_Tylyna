@@ -7,7 +7,7 @@
 %center {
     max-width: $max-width;
     margin: 0 $gutter*3;
-    @include mq(wider) { margin: 0 auto; }
+    @include mq(wide) { margin: 0 auto; }
 
     @if $enable-RWD {
         @include mq-max(tablet) { margin: 0; }
@@ -20,8 +20,7 @@
         }
     }
 }
-
-// RWD容器
+// 容器
 %contain {
     @extend %clearfix;
 
@@ -45,13 +44,11 @@
     padding: $gutter;
 }
 
-#header, #footer, #main,  {
-    @extend %contain;
-}
-// #header, #footer, #main, .wrap {
 #header, #footer, #main {
+    @extend %contain;
     position: relative;
 }
+
 #wrapper {
     @if $lte7 { _height: 100%; }
     min-height: 100%;
@@ -64,11 +61,7 @@
     @if not $enable-RWD {
         min-width: $min-width;
     }
-
-    // 本次專案
-    border-top: $line;
 }
-
 
 // header
 // ----------------------------------------------------------------------
@@ -76,6 +69,9 @@
     @if $header-bg { background: $header-bg; }
     height: $header-height;
     z-index: z(header);
+
+    // 本次專案
+    .wrap { position: relative; }
 }
 
 .logo {
@@ -86,18 +82,10 @@
         @include text-pic($logo-img, nth($logo-size,1), nth($logo-size,2), $position:center);
     }
 
-    @if $logo-pos {
-        @if $logo-pos == center {
-            @include pos-center(x);
-        }
-        @else {
-            @include absolute($logo-pos);
-        }
-    } @else {
-        float: left;
-    }
-
     // 本次專案
+    @extend %float-l;
+    position: relative;
+    top: 20px;
 }
 
 
@@ -110,30 +98,55 @@
     z-index: z(footer);
 
     // 本次專案樣式
+    color: $brand-primary;
+}
+.logo-s {
+    @extend %inline-block;
+    @include text-pic('logo_s.gif', 260px, 32px);
+    vertical-align: middle;
 }
 .foot-contact {
+    @extend .p-y-32;
 
+    position: relative;
+
+    @include el(all) {
+        @include pos-center(x);
+        width: 740px;
+        height: 1px;
+        background: lighten($brand-primary,15);
+    }
+    &::before { top: 0; }
+    &::after  { bottom: 0; }
+
+    dt {
+        @extend .m-t-4, .m-b-12;
+        font-size: em(31);
+        font-weight: bold;
+    }
+    span, dd {
+        @extend %inline-block, .p-x-12, .m-a-0;
+        line-height: 1.001;
+        &:last-of-type { border-left: 1px solid $brand-primary; }
+    }
+    dd { @extend .font-xl, .font-sp; }
+    span { vertical-align: middle; }
+}
+.foot-social {
+    a {
+        @extend %inline-block, .m-x-4;
+        @include text-pic('icon-social.gif', 42px, 43px);
+
+        &:nth-child(2) { background-position: -55px 0; }
+        &:nth-child(3) { background-position: -110px 0; }
+    }
 }
 
-
-// RWD
+// main
 // ----------------------------------------------------------------------
-@if $enable-RWD {
-    @if $mobile-menu-style == 'push' {
-        body {
-            @include transition(left .35s);
-            overflow-x: hidden;
-            position: relative;
-            left: 0;
-        }
-        .push {
-            left: $mobile-menu-width;
-            overflow-y: hidden;
-        }
-    }
-    @else if $mobile-menu-style == 'overlay' {
-        .overlay {
-            overflow: hidden;
-        }
+#main {
+    padding-top: 100px;
+    @if $page {
+        @extend %center;
     }
 }

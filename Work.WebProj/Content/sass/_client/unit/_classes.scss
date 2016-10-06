@@ -21,8 +21,8 @@
 .hidden        { display: none; }
 
 .m-x-auto {
-    margin-right: auto !important;
-    margin-left:  auto !important;
+    margin-right: auto;
+    margin-left:  auto;
 }
 
 // spacing (ref: _variables.scss)
@@ -32,20 +32,20 @@
         $length-x:   map-get($lengths, x);
         $length-y:   map-get($lengths, y);
 
-        .#{$abbrev}-a-#{$size} { #{$prop}:        if($length-y == $length-x, $length-y, $length-y $length-x) !important; } // a = All sides
-        .#{$abbrev}-t-#{$size} { #{$prop}-top:    $length-y !important; }
-        .#{$abbrev}-r-#{$size} { #{$prop}-right:  $length-x !important; }
-        .#{$abbrev}-b-#{$size} { #{$prop}-bottom: $length-y !important; }
-        .#{$abbrev}-l-#{$size} { #{$prop}-left:   $length-x !important; }
+        .#{$abbrev}-a-#{$size} { #{$prop}:        if($length-y == $length-x, $length-y, $length-y $length-x); } // a = All sides
+        .#{$abbrev}-t-#{$size} { #{$prop}-top:    $length-y; }
+        .#{$abbrev}-r-#{$size} { #{$prop}-right:  $length-x; }
+        .#{$abbrev}-b-#{$size} { #{$prop}-bottom: $length-y; }
+        .#{$abbrev}-l-#{$size} { #{$prop}-left:   $length-x; }
 
         // Axes
         .#{$abbrev}-x-#{$size} {
-            #{$prop}-right:  $length-x !important;
-            #{$prop}-left:   $length-x !important;
+            #{$prop}-right:  $length-x;
+            #{$prop}-left:   $length-x;
         }
         .#{$abbrev}-y-#{$size} {
-            #{$prop}-top:    $length-y !important;
-            #{$prop}-bottom: $length-y !important;
+            #{$prop}-top:    $length-y;
+            #{$prop}-bottom: $length-y;
         }
     }
 }
