@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
-$underline-color:             rgba(#8BE5E3,.6);
+$underline-color:             $brand-primary;
 $underline-position:          top 100% right 0;
 
-$underline-transform:         scaleX(1);
+$underline-transform:         scaleX(0);
 $underline-transform-origin:  50%;
-$underline-transform-hover:   scaleX(0);
+$underline-transform-hover:   scaleX(1);
 $underline-transition:        'transform .35s ease-out, background .4s';
 
 
@@ -13,7 +13,7 @@ $underline-transition:        'transform .35s ease-out, background .4s';
     position: relative;
 
     @include el(before) {
-        height: 1px; width: 100%;
+        height: 2.5px; width: 100%;
         background: $underline-color;
         @include absolute($underline-position);
         @include prefix(transform, $underline-transform);
@@ -21,7 +21,7 @@ $underline-transition:        'transform .35s ease-out, background .4s';
         @include prefix(transition, $underline-transition);
     }
 
-    &:hover, &:active {
+    &:hover, &:active, &.current {
         &::before {
             @include prefix(transform, $underline-transform-hover);
         }

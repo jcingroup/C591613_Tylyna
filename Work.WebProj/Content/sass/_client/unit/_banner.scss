@@ -19,7 +19,8 @@ $banner-img: append($menu-item, 'Account');
             @extend .font-sp;
             @include pos-center;
             background: url(#{$img-path}/titleBg.png) center center no-repeat;
-            line-height: 101px;
+            background-color: rgba(#fff,.35);
+            line-height: 102px;
             width: 450px;
             letter-spacing: 2px;
         }

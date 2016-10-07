@@ -11,7 +11,7 @@
         var gb_approot = '@Url.Content("~")';
     </script>
     <link href="~/Content/css/vendor/icomoon.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Bitter' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Fenix' rel='stylesheet'>
     <link rel="stylesheet" href="~/Content/css/grid.css">
     @if (ViewBag.IsFirstPage)
     {
@@ -76,12 +76,12 @@
                     @* <a href="">Contact Us</a> *@
                 </nav>
                 <nav id="menu" class="navbar">
-                    <a href="~/Home/AboutUs">ABOUT LITA</a>
-                    <a href="~/Home/Quality">LITA Quality</a>
-                    <a href="~/Products">LITA Caffee</a>
-                    <a href="~/Home/Story">LITA Story</a>
-                    <a href="~/FAQ">FAQ</a>
-                    <a href="~/Home/ContactUs">Contact Us</a>
+                    <a class="@(ViewBag.BodyClass == "AboutUs" ? "current" : "")" href="~/Home/AboutUs">ABOUT LITA</a>
+                    <a class="@(ViewBag.BodyClass == "Quality" ? "current" : "")" href="~/Home/Quality">LITA Quality</a>
+                    <a class="@(ViewBag.BodyClass == "Products" ? "current" : "")" href="~/Products">LITA Caffee</a>
+                    <a class="@(ViewBag.BodyClass == "Story" ? "current" : "")" href="~/Home/Story">LITA Story</a>
+                    <a class="@(ViewBag.BodyClass == "FAQ" ? "current" : "")" href="~/FAQ">FAQ</a>
+                    <a class="@(ViewBag.BodyClass == "ContactUs" ? "current" : "")" href="~/Home/ContactUs">Contact Us</a>
                 </nav>
             </div><!-- wrap //-->
         </header>

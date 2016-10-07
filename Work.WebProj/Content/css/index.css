@@ -262,7 +262,7 @@ img {
   max-width: 100%; }
 
 .font-sp, .foot-contact dd, #menu a {
-  font-family: "Bitter", serif; }
+  font-family: "Fenix", serif; }
 
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
@@ -640,7 +640,7 @@ input:not([type]), [type="text"], [type="password"], [type="date"], [type="datet
     #menu a::before {
       display: block;
       width: 30%;
-      height: 2.5px;
+      height: 2px;
       background: #7C6A42;
       top: 0;
       opacity: 0;
@@ -652,7 +652,7 @@ input:not([type]), [type="text"], [type="password"], [type="date"], [type="datet
       -webkit-transition: top 0.35s, opacity 0.6s;
       transition: top 0.35s, opacity 0.6s; }
     #menu a:hover::before, #menu a:active::before, #menu a.current::before {
-      top: 120%;
+      top: 130%;
       opacity: 1; }
 
 @media (max-width: 61.1875em) {

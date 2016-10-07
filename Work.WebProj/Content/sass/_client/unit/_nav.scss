@@ -60,7 +60,7 @@ $mobile-menu-width:     100% !default;
 
         @include el(before) {
             width: 30%;
-            height: 2.5px;
+            height: 2px;
             background: $nav-color;
             top: 0;
             opacity: 0;
@@ -70,7 +70,7 @@ $mobile-menu-width:     100% !default;
 
         &:hover, &:active, &.current {
             &::before {
-                top: 120%;
+                top: 130%;
                 opacity: 1;
             }
         }

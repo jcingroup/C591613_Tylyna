@@ -34,8 +34,32 @@ $page:                 true;
 @import "_client/unit/input-group";
 @import "_client/unit/modal";
 @import "_client/unit/figure";
-@import "_client/unit/classes";
+@import "_client/unit/hover";
+
+@import "_client/unit/classes"; // 建議放置在最後一個
 
 
 // main
 // ------------------------------------------------------------
+// 內頁裡的子選單(products/quality)
+.sub-nav {
+    @extend %list-inline;
+    li {
+        @extend .m-a-0;
+        padding: 0 75px;
+        &:not(:last-child) {
+            background: url(#{$img-path}/subNav-line.gif) right 50px no-repeat;
+        }
+    }
+    img {
+        @extend .img-center;
+        @include circle(242px);
+    }
+    a {
+        @extend %inline-block, .m-t-48, .font-sp, .hover-underline;
+        font-size: em(30);
+        font-weight: bold;
+
+        &:hover, &:active { @extend .text-primary; }
+    }
+}

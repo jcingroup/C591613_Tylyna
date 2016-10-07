@@ -2,5 +2,15 @@
 @{
     ViewBag.Title = "LITA CAFFEE";
     ViewBag.BodyClass = "Products";
+    ViewBag.subNav = "sub1";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
+
+@Html.Partial("product-nav")
+
+<figure class="products-list">
+    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+    <a href=""></a>
+    <h3>哥倫比亞</h3>
+    <figcaption><span>MORE</span></figcaption>
+</figure>

@@ -331,6 +331,7 @@
     <Content Include="Content\font\icomoon\icomoon.svg" />
     <Content Include="Content\font\themify-icons\themify.svg" />
     <Content Include="Content\images\banner_AboutUs.jpg" />
+    <Content Include="Content\images\banner_Products.jpg" />
     <Content Include="Content\images\bg.gif" />
     <Content Include="Content\images\footBg.gif" />
     <Content Include="Content\images\headerBg.gif" />
@@ -358,6 +359,9 @@
     <Content Include="Content\images\noIE\line.gif" />
     <Content Include="Content\images\noIE\noIE.css" />
     <Content Include="Content\images\noIE\noIE.html" />
+    <Content Include="Content\images\Products\sort.jpg" />
+    <Content Include="Content\images\subNav-line.gif" />
+    <Content Include="Content\images\titleBg.gif" />
     <Content Include="Content\images\titleBg.png" />
     <Content Include="Content\js\bootstrap\collapse.js" />
     <Content Include="Content\js\bootstrap\dropdown.js" />
@@ -509,6 +513,7 @@
     <Content Include="Views\Products\Taste.cshtml" />
     <Content Include="Views\Products\Special.cshtml" />
     <Content Include="Views\User\Receipt_list.cshtml" />
+    <Content Include="Views\Products\product-nav.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
