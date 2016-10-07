@@ -87,23 +87,34 @@ $mobile-menu-width:     100% !default;
     @extend %float-r;
     position: relative;
     top: 115px;
+    color: $nav-color;
 
+    // 登入前
     button, a {
         font-size: em(18);
-        background: url(#{$img-path}/icon-topnav.gif) 0 center no-repeat;
-        height: 24px;
-        padding-left: 27px;
-
-        &:hover, &:active {
-            color: lighten($nav-color,10);
-        }
+        &:hover, &:active { color: lighten($nav-color,10); }
     }
     button {
         @extend .m-r-16;
         border: none;
         color: $nav-color;
+        outline: none;
     }
-    a { background-position: -111px center;}
+    .icon-user, .icon-cart {
+        background: url(#{$img-path}/icon-topnav.gif) 0 center no-repeat;
+        height: 24px;
+        padding-left: 27px;
+    }
+    .icon-cart { background-position: -111px center;}
+
+    // 登入後
+    ul { @extend %inline, .m-x-4; }
+    li {
+        @extend .m-x-0;
+        line-height: 1.01;
+
+        a { color: darken($orange,10); }
+    }
 }
 
 // 第二層選單

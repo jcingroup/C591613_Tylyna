@@ -17,6 +17,7 @@ $body-color:            #595959;
 $font-family-sp:        'Bitter', serif;
 // $link-color:            darken($brand-primary,5);
 
+$font-size-h1:          45px;
 $headings-color:        $brand-primary !default;
 
 
@@ -100,15 +101,17 @@ $btn-hover-bg:                 darken($brand-secondary,15);
 // );
 
 // form
-$input-border-color:            #DEDEDE;
+$input-border-focus:            darken($amber,5);
+$input-placeholder:             lighten($body-color,20);
 
 $form-element-bg:               false;
 $form-element-height:           38px;
 $form-element-radius:           false;
 $form-element-shadow:           false;
 
-$input-group-addon-color:       $brand-primary;
-$input-group-addon-bg:          #F6F6F6;
+$input-group-addon-color:       lighten($brand-primary,65);
+$input-group-addon-bg:          lighten($brand-primary,15);
+$input-group-addon-size:        20px;
 
 
 // == 自定Reset

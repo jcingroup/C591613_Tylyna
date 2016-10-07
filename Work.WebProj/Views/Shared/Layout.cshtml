@@ -28,7 +28,7 @@
     @* 登入畫面 *@
     <div id="login" class="modal animate-top">
         <div class="modal-content">
-            <button onclick="document.getElementById('login').style.display='none'" class="btn-close icon-close"></button>
+            <button onclick="document.getElementById('login').style.display='none'" class="btn-close icon-cross"></button>
 
             <form id="tab-1" action="" class="tab-content">
                 <header class="">會員登入</header>
@@ -47,7 +47,7 @@
             <form id="tab-2" action="" class="tab-content">
                 <header class="">忘記密碼</header>
                 <div class="input-group">
-                    <label class="input-group-addon icon-person" data-title="帳號"></label>
+                    <label class="input-group-addon icon-paper-plane" data-title="E-mail"></label>
                     <input class="form-element" type="email" id="m_act" required placeholder="請輸入E-mail地址">
                 </div>
                 <button class="btn">送出</button>
@@ -63,20 +63,22 @@
                 </h1>
                 <nav class="top-nav">
                     @* 登入前顯示如下 *@
-                    <button onclick="document.getElementById('login').style.display='block'">Account</button>
-                    @* 登入後顯示如下
-                    WELCOME, XXX
-                    <a href="~/Member">會員資料</a>
-                    <button>登出</button> *@
+                    <button class="icon-user" onclick="document.getElementById('login').style.display='block'">Account</button>
+                    @* 登入後顯示如下 *@
+                    @* WELCOME, XXX
+                    <ul class="list-inline font-sm">
+                        <li><a href="~/User">[會員中心]</a></li>
+                        <li><a href="~/User/Receipt_list">[查看訂單]</a></li>
+                        <li><a href="">[登出]</a></li>
+                    </ul> *@
 
-                    <a href="~/Order/Cart">Basket</a>
+                    <a class="icon-cart" href="~/Order/Cart">Basket</a>
                     @* <a href="">Contact Us</a> *@
                 </nav>
                 <nav id="menu" class="navbar">
                     <a href="~/Home/AboutUs">ABOUT LITA</a>
                     <a href="~/Home/Quality">LITA Quality</a>
                     <a href="~/Products">LITA Caffee</a>
-                    <a href="~/Home/Info">LITA Taste</a>
                     <a href="~/Home/Story">LITA Story</a>
                     <a href="~/FAQ">FAQ</a>
                     <a href="~/Home/ContactUs">Contact Us</a>

@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+$banner-img: append($menu-item, 'Account');
+
 #banner {
     position: relative;
 
@@ -7,5 +9,24 @@
         @include absolute(top 0 left 0 right 0);
         height: 25px;
         background: rgba($brand-secondary,.7);
+    }
+
+    @if $page {
+        height: 350px;
+        overflow: hidden;
+
+        h1 {
+            @extend .font-sp;
+            @include pos-center;
+            background: url(#{$img-path}/titleBg.png) center center no-repeat;
+            line-height: 101px;
+            width: 450px;
+            letter-spacing: 2px;
+        }
+        @each $item in $banner-img {
+            .#{$item} & {
+                background: url(#{$img-path}/banner_#{$item}.jpg) center center no-repeat;
+            }
+        }
     }
 }

@@ -8,13 +8,25 @@ namespace DotWeb.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View("list");
+            return View("Kind");
         }
-        public ActionResult list()
+        // 咖啡品項(一般)
+        public ActionResult Kind()
         {
             return View();
         }
-        public ActionResult Content()
+        // 季節限定
+        public ActionResult Special()
+        {
+            return View();
+        }
+        // 彈跳視窗(加入購物車)
+        public ActionResult Detail()
+        {
+            return View();
+        }
+        // 口味介紹-編輯器
+        public ActionResult Taste()
         {
             return View();
         }

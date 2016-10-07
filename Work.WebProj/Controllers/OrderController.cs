@@ -22,10 +22,6 @@ namespace DotWeb.Controllers
         {
             return View();
         }
-        public ActionResult Order_list()
-        {
-            return View();
-        }
     }
 
 }

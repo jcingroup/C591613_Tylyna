@@ -2,8 +2,7 @@
 
 // 本頁專用變數(覆蓋)
 // ------------------------------------------------------------
-$index:                 true;
-$img-index:             '../images/index';
+$page:                 true;
 
 
 // import
@@ -29,10 +28,12 @@ $img-index:             '../images/index';
 @import "_client/layout";
 @import "_client/unit/nav";
 @import "_client/unit/goTop";
+@import "_client/unit/banner";
 @import "_client/unit/list";
 @import "_client/unit/btn";
 @import "_client/unit/input-group";
 @import "_client/unit/modal";
+@import "_client/unit/figure";
 @import "_client/unit/classes";
 
 

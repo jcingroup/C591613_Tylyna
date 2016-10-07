@@ -278,7 +278,7 @@
     <Content Include="ckfinder\core\connector\aspx\lang\vi.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-cn.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-tw.xml" />
-    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -330,6 +330,7 @@
     <Content Include="Content\font\fontAwesome\fontawesome-webfont.svg" />
     <Content Include="Content\font\icomoon\icomoon.svg" />
     <Content Include="Content\font\themify-icons\themify.svg" />
+    <Content Include="Content\images\banner_AboutUs.jpg" />
     <Content Include="Content\images\bg.gif" />
     <Content Include="Content\images\footBg.gif" />
     <Content Include="Content\images\headerBg.gif" />
@@ -357,6 +358,7 @@
     <Content Include="Content\images\noIE\line.gif" />
     <Content Include="Content\images\noIE\noIE.css" />
     <Content Include="Content\images\noIE\noIE.html" />
+    <Content Include="Content\images\titleBg.png" />
     <Content Include="Content\js\bootstrap\collapse.js" />
     <Content Include="Content\js\bootstrap\dropdown.js" />
     <Content Include="Content\js\bootstrap\util.js" />
@@ -495,17 +497,18 @@
     <Content Include="Views\Shared\Layout2.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\Quality.cshtml" />
-    <Content Include="Views\Home\Info.cshtml" />
     <Content Include="Views\Home\Story.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
-    <Content Include="Views\Products\list.cshtml" />
-    <Content Include="Views\Products\Content.cshtml" />
+    <Content Include="Views\Products\Kind.cshtml" />
+    <Content Include="Views\Products\Detail.cshtml" />
     <Content Include="Views\FAQ\FAQ.cshtml" />
     <Content Include="Views\Order\Cart.cshtml" />
-    <Content Include="Views\Member\Member.cshtml" />
+    <Content Include="Views\User\Account.cshtml" />
     <Content Include="Views\Order\Step1_order.cshtml" />
     <Content Include="Views\Order\Step2_check.cshtml" />
-    <Content Include="Views\Order\Order_list.cshtml" />
+    <Content Include="Views\Products\Taste.cshtml" />
+    <Content Include="Views\Products\Special.cshtml" />
+    <Content Include="Views\User\Receipt_list.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
