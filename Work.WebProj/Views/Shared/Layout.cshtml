@@ -64,20 +64,22 @@
                 <nav class="top-nav">
                     @* 登入前顯示如下 *@
                     <button onclick="document.getElementById('login').style.display='block'">Account</button>
-                    @* 登入後顯示如下 *@
-                    @* <button>登出</button> *@
+                    @* 登入後顯示如下
+                    WELCOME, XXX
+                    <a href="~/Member">會員資料</a>
+                    <button>登出</button> *@
 
-                    <a href="">Basket</a>
+                    <a href="~/Order/Cart">Basket</a>
                     @* <a href="">Contact Us</a> *@
                 </nav>
                 <nav id="menu" class="navbar">
-                    <a href="~/AboutUs">ABOUT LITA</a>
-                    <a href="~/Quality">LITA Quality</a>
+                    <a href="~/Home/AboutUs">ABOUT LITA</a>
+                    <a href="~/Home/Quality">LITA Quality</a>
                     <a href="~/Products">LITA Caffee</a>
-                    <a href="~/Info">LITA Taste</a>
-                    <a href="~/Story">LITA Story</a>
+                    <a href="~/Home/Info">LITA Taste</a>
+                    <a href="~/Home/Story">LITA Story</a>
                     <a href="~/FAQ">FAQ</a>
-                    <a href="~/ContactUs">Contact Us</a>
+                    <a href="~/Home/ContactUs">Contact Us</a>
                 </nav>
             </div><!-- wrap //-->
         </header>

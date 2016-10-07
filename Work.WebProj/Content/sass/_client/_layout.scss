@@ -146,6 +146,9 @@
 // ----------------------------------------------------------------------
 #main {
     padding-top: 100px;
+    @if $index {
+        background: url(#{$img-index}/mainBg.gif) center 0 no-repeat;
+    }
     @if $page {
         @extend %center;
     }

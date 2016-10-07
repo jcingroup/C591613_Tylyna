@@ -278,6 +278,11 @@
     <Content Include="ckfinder\core\connector\aspx\lang\vi.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-cn.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-tw.xml" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\FAQController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\CommunityNewsController.cs" />
     <Compile Include="Controllers\Api\GetActionController.cs" />
     <Compile Include="Controllers\Api\MenuController.cs" />
@@ -331,7 +336,9 @@
     <Content Include="Content\images\icon-social.gif" />
     <Content Include="Content\images\icon-topnav.gif" />
     <Content Include="Content\images\Index\banner.jpg" />
+    <Content Include="Content\images\Index\FB-banner.gif" />
     <Content Include="Content\images\Index\jumbo.jpg" />
+    <Content Include="Content\images\Index\mainBg.gif" />
     <Content Include="Content\images\Index\youtube.jpg" />
     <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\logo_s.gif" />
@@ -486,6 +493,19 @@
     <Content Include="Scripts\GoogleAnalytics.js" />
     <Content Include="Scripts\googleReCAPTCHA.js" />
     <Content Include="Views\Shared\Layout2.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
+    <Content Include="Views\Home\Quality.cshtml" />
+    <Content Include="Views\Home\Info.cshtml" />
+    <Content Include="Views\Home\Story.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Products\list.cshtml" />
+    <Content Include="Views\Products\Content.cshtml" />
+    <Content Include="Views\FAQ\FAQ.cshtml" />
+    <Content Include="Views\Order\Cart.cshtml" />
+    <Content Include="Views\Member\Member.cshtml" />
+    <Content Include="Views\Order\Step1_order.cshtml" />
+    <Content Include="Views\Order\Step2_check.cshtml" />
+    <Content Include="Views\Order\Order_list.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

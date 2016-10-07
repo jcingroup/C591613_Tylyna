@@ -45,18 +45,17 @@ figure {
 
     @if $figure-effect { @include transition($figure-effect) }
 
-    img {
-        @if $figure-img-full {
-            min-width: 100%;
-            min-height: 100%;
-        }
-    }
-
     > a {
         @extend %figure-overlay;
         z-index: z(figure);
         white-space: nowrap;
         opacity: 0;
+    }
+    img {
+        @if $figure-img-full {
+            min-width: 100%;
+            min-height: 100%;
+        }
     }
 
     // RWD
@@ -71,5 +70,42 @@ figure {
             margin: 3px; margin-bottom: 15px;
         }
         @include mq-max(phone) { width: 100%; }
+    }
+}
+
+// 最新消息
+.news-list {
+    @extend .m-a-0;
+    max-width: 350px;
+
+    @if $index {
+        &:not(:last-child) { margin-right: 70px; }
+    }
+
+    figcaption {
+        @extend %clearfix, .p-a-12, .text-left, .m-t-4;
+        position: relative;
+        height: 220px;
+        background: #FFF9A7;
+    }
+    img {
+        min-width: 100%;
+        max-height: 270px;
+        min-height: 270px;
+        @include transition(transform .5s, filter 1s);
+    }
+    h3 { @extend .m-b-8; }
+    p { @extend .font-lg; }
+    .btn {
+        @extend .m-t-24;
+        @include absolute(right 12px bottom 12px);
+        z-index: z(figure) + 1;
+    }
+
+    &:hover, &:active {
+        img {
+            @include transform(scale(1.1));
+            @include prefix(filter, brightness(1.2));
+        }
     }
 }

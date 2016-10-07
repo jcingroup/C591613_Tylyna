@@ -53,28 +53,4 @@ section {
     &:not(:last-child) { padding-bottom: 60px; }
 }
 
-.news-list {
-    @extend .m-a-0, .m-b-64;
 
-    max-width: 350px;
-
-    &:not(:last-child) {
-        margin-right: 70px;
-    }
-
-    figcaption {
-        @extend %clearfix, .p-a-12, .text-left, .m-t-4;
-        background: #FFF9A7;
-    }
-    img {
-        min-width: 100%;
-        max-height: 270px;
-        min-height: 270px;
-    }
-    p {
-        font-size: em(22);
-    }
-    .btn {
-        @extend .m-t-24;
-    }
-}

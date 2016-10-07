@@ -67,30 +67,30 @@ $gutters: (
         x:   ($gutter * 4),
         y:   ($gutter * 4)
     ),
-    xs: (
-        x:   ($gutter / 4),
-        y:   ($gutter / 8)
-    ),
-    sm: (
-        x:   ($gutter / 2),
-        y:   ($gutter / 4)
-    ),
-    md: (
-        x:   $gutter,
-        y:   ($gutter / 2)
-    ),
-    lg: (
-        x:   ($gutter * 1.5),
-        y:   ($gutter * 0.75)
-    ),
-    xl: (
-        x:   ($gutter * 2),
-        y:   $gutter
-    ),
-    xxl: (
-        x:   ($gutter * 4),
-        y:   ($gutter * 2)
-    )
+    // xs: (
+    //     x:   ($gutter / 4),
+    //     y:   ($gutter / 8)
+    // ),
+    // sm: (
+    //     x:   ($gutter / 2),
+    //     y:   ($gutter / 4)
+    // ),
+    // md: (
+    //     x:   $gutter,
+    //     y:   ($gutter / 2)
+    // ),
+    // lg: (
+    //     x:   ($gutter * 1.5),
+    //     y:   ($gutter * 0.75)
+    // ),
+    // xl: (
+    //     x:   ($gutter * 2),
+    //     y:   $gutter
+    // ),
+    // xxl: (
+    //     x:   ($gutter * 4),
+    //     y:   ($gutter * 2)
+    // )
 ) !default;
 
 

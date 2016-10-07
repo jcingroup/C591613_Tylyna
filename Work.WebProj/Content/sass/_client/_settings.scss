@@ -54,7 +54,7 @@ $z-index: (
     banner:             3,
     logo:               10,
     menu:               20,
-    figure:             3,
+    figure:             1,
     dropdown:           21,
     tooltip:            22,
     modal:              23,
@@ -70,8 +70,8 @@ $z-index: (
 $btn-bg:                       #FEF272;
 $btn-color:                    #595959;
 $btn-border-radius:            false;
-$btn-pd:                       12px 30px;
-$btn-hover-bg:                 $brand-secondary;
+$btn-pd:                       12px 20px;
+$btn-hover-bg:                 darken($brand-secondary,15);
 
 
 // == base
