@@ -19,6 +19,30 @@
 [class*="icon"]:not(:empty)::before {
   margin-right: .2em; }
 
+.icon-trash-can::before {
+  content: "\e910"; }
+
+.icon-trash-can2::before {
+  content: "\e915"; }
+
+.icon-pen-angled::before {
+  content: "\e916"; }
+
+.icon-pen-angled2::before {
+  content: "\e917"; }
+
+.icon-file-doc::before {
+  content: "\e918"; }
+
+.icon-file-doc2::before {
+  content: "\e919"; }
+
+.icon-file-xls::before {
+  content: "\e91a"; }
+
+.icon-file-xls2::before {
+  content: "\e91b"; }
+
 .icon-arrow_drop_down_circle::before {
   content: "\e5c6"; }
 
@@ -162,9 +186,6 @@
 
 .icon-chevron-thin-up::before {
   content: "\e90f"; }
-
-.icon-trash::before {
-  content: "\e911"; }
 
 .icon-attachment2::before {
   content: "\e912"; }

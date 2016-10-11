@@ -4,3 +4,39 @@
     ViewBag.BodyClass = "Cart";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
+
+<table class="cart-list">
+    <tr>
+        <th colspan="2">商品</th>
+        <th>數量</th>
+        <th>單價</th>
+        <th>小計</th>
+        <th>刪除</th>
+    </tr>
+    <tr>
+        <td><img src="~/Content/images/Products/pic.jpg" alt="商品縮圖demo"></td>
+        <td class="text-left">
+            產品編號: 02-010-01
+            <h5>耶加雪菲</h5>
+            規格型號: 10入濾掛包
+        </td>
+        <td>
+            <input type="number" value="1" min="1" class="form-element text-center">
+        </td>
+        <td>NT$ 490</td>
+        <td><strong>NT$ 490</strong></td>
+        <td><button class="font-xl text-danger icon-trash-can2" title="刪除此項商品"></button></td>
+    </tr>
+    <tfoot>
+        <tr>
+            <td colspan="6" class="text-right">
+                運費：<strong class="text-danger">NT$ 10</strong><br>
+                總計：<strong class="text-danger">NT$ 500</strong>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<p class="submit">
+    <a href="~/Products" class="icon-navigate_before">繼續選購</a>
+    <button class="btn font-lg btn-success">確定結帳 <i class="icon-navigate_next"></i></button>
+</p>

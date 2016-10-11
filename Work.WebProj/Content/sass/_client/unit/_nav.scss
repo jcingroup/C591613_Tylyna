@@ -105,7 +105,16 @@ $mobile-menu-width:     100% !default;
         height: 24px;
         padding-left: 27px;
     }
-    .icon-cart { background-position: -111px center;}
+    .icon-cart { background-position: -111px center; }
+
+    // 購物車數量
+    .cart-num {
+        @extend %inline-block, .text-white;
+        @include circle(16px, center, $deep-orange);
+        @include absolute(right 59px top -1px);
+        font-size: em(10);
+        font-style: normal;
+    }
 
     // 登入後
     ul { @extend %inline, .m-x-4; }

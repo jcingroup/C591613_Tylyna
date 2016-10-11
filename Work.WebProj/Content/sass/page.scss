@@ -22,6 +22,7 @@ $page:                 true;
 
 @import "base/basic";
 @import "base/form";
+@import "base/table";
 @import "base/util";
 
 // 本頁專用
@@ -62,4 +63,98 @@ $page:                 true;
 
         &:hover, &:active { @extend .text-primary; }
     }
+}
+
+// == products
+// 產品列表
+.kind-list {
+    margin: 75px 0 0 25px;
+
+    &:nth-of-type(4n+1) { @extend .m-l-0; }
+
+    img {
+        border-radius: 6px;
+        max-width: 278px;
+        max-height: 270px;
+    }
+    h3 {
+        @extend .m-t-16;
+        font-size: em(25);
+    }
+    figcaption, i {
+        @include pos-center;
+    }
+    figcaption {
+        background: rgba(#000,.6);
+        border-radius: 50%;
+        margin-top: -30px;
+        opacity: 0;
+        @include size(0);
+        @include transition(opacity .5s, border-radius 1s, width .3s, height .3s);
+    }
+    i {
+        font-size: em(50);
+        color: lighten($warning,10);
+    }
+    &:hover, &:active {
+        figcaption {
+            width: 100%;
+            height: 270px;
+            border-radius: 6px;
+            opacity: 1;
+        }
+    }
+}
+
+// 產品詳細資訊(彈出視窗) modal
+.products-intro {
+    @extend .text-left, .p-l-0;
+    dt {
+        @extend .font-sp, .p-b-16, .m-b-16;
+        font-size: em(36);
+        line-height: 1.01;
+        border-bottom: 1px solid #999;
+    }
+}
+.products-pic {
+    @extend .text-right, .p-r-0;
+    max-width: 100%;
+}
+// add card
+.shopping {
+    @extend .m-t-24;
+
+    .icon-cart, .btn { vertical-align: middle; }
+    .icon-cart {
+        @extend %inline-block;
+        background: url(#{$img-path}/icon-cart.gif) 0 0 no-repeat;
+        width: 36px;
+        height: 34px;
+    }
+    .btn {
+        @extend .m-l-4;
+    }
+}
+
+// == 購物車
+.cart-list {
+    @extend .table-bordered, %full, .bg-white;
+
+    img { max-width: 70px; max-height: 70px; }
+    h5 { @extend .m-y-4; }
+    th {
+        &:nth-of-type(n+2) { width: 12.5%; }
+        &:last-of-type { width: 7%; }
+    }
+    td:first-of-type { width: 90px; }
+    button {
+        &:hover, &:active {
+            color: $brand-primary;
+        }
+    }
+}
+.submit {
+    @extend .m-t-24;
+    a { @extend %float-l; }
+    button { @extend %float-r; }
 }

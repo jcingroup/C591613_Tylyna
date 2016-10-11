@@ -15,6 +15,6 @@
 .col-rest  { overflow: hidden; }
 
 .col {
-    display: inline-block;
+    @extend %inline-block;
     vertical-align: top;
 }

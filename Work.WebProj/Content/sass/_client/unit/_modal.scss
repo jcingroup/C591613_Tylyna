@@ -22,25 +22,6 @@ $modal-min-width: 320px;
         }
     }
 }
-
-.modal-content {
-    margin: auto;
-    background-color: #fff;
-    width: 80%;
-    max-width: 800px;
-
-    @include diy-animation(slide-down, .4s) {
-        from { top: -300px; opacity: 0; }
-        to { top: 0; opacity: 1; }
-    }
-
-    @if $enable-RWD {
-        @include mq-max(break(desktop,-1)) {
-            width: 96%;
-        }
-    }
-}
-
 .btn-close {
     @include absolute(top 1% right 1%);
     font-size: em(50);
@@ -52,18 +33,53 @@ $modal-min-width: 320px;
         cursor: pointer;
     }
 }
+.modal-content {
+    margin: auto;
+    background-color: #fff;
+    width: 80%;
 
-// 本次專案
-#login {
-    .modal-content {
-        @extend .p-a-32;
+    @if $enable-RWD {
+        @include mq-max(break(desktop,-1)) {
+            width: 96%;
+        }
     }
+
+    // 本次專案
+    @extend .p-a-32;
+    // 登入
+    #login & { max-width: 700px; }
+    // 產品彈跳
+    #detail & {
+        max-width: 900px;
+        box-shadow: 0 0 15px rgba(#000,.5);
+        border-radius: 13px;
+    }
+}
+// 特效
+.animate-top {
+    position: relative;
+
+    @include diy-animation(slide-down, .4s) {
+        from { top: -300px; opacity: 0; }
+        to   { top: 0; opacity: 1; }
+    }
+}
+.animate-zoom {
+    @include diy-animation(animatezoom, .6s) {
+        from { @include transform(scale(0)); }
+        to   { @include transform(scale(1)); }
+    }
+}
+
+// == 本次專案
+// 登入畫面
+#login {
     header {
         @extend .font-xxl, .m-b-24;
         letter-spacing: 2px;
     }
     .btn {
-        @extend .bg-primary, .text-white, .p-x-32, .p-y-12, .m-r-12;
+        @extend .p-x-32, .p-y-12, .m-r-12;
         border-radius: 2px;
 
         &:hover, &:active { background: darken($amber,10); }

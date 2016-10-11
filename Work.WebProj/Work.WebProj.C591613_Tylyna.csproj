@@ -335,6 +335,7 @@
     <Content Include="Content\images\bg.gif" />
     <Content Include="Content\images\footBg.gif" />
     <Content Include="Content\images\headerBg.gif" />
+    <Content Include="Content\images\icon-cart.gif" />
     <Content Include="Content\images\icon-social.gif" />
     <Content Include="Content\images\icon-topnav.gif" />
     <Content Include="Content\images\Index\banner.jpg" />
@@ -359,6 +360,8 @@
     <Content Include="Content\images\noIE\line.gif" />
     <Content Include="Content\images\noIE\noIE.css" />
     <Content Include="Content\images\noIE\noIE.html" />
+    <Content Include="Content\images\Products\pic-l.jpg" />
+    <Content Include="Content\images\Products\pic.jpg" />
     <Content Include="Content\images\Products\sort.jpg" />
     <Content Include="Content\images\subNav-line.gif" />
     <Content Include="Content\images\titleBg.gif" />

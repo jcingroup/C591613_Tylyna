@@ -5,7 +5,7 @@ $btn-state-color:        $white !default;
 $btn-disabled-bg:        $muted !default;
 $btn-effect:             'background .35s, color .5s' !default;
 $btn-display:            inline-block !default;
-$btn-pd:                 $gutter/2 $gutter !default;
+$btn-pd:                 $form-element-pd !default;
 $btn-pd-sm:              $gutter/3 $gutter/2 !default;
 $btn-border-radius:      nth($border-radius,1) !default;
 $btn-font-size:          18px !default;
@@ -18,11 +18,11 @@ $btn-hover-color:        $btn-state-color !default;
 
 // 下為可自定屬性及樣式
 $btn-styles: (
-    letter-spacing:      1px,
+    // letter-spacing:      1px,
 ) !default;
 
 $btn-link-styles: (
-    letter-spacing:      0,
+    // letter-spacing:      0,
 ) !default;
 
 $btn-hover-styles: () !default;

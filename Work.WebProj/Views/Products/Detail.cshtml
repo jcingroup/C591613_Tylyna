@@ -1,1 +1,37 @@
 ﻿
+@* 彈出視窗 *@
+<div id="detail" class="modal">
+    <button onclick="document.getElementById('detail').style.display='none'" class="btn-close icon-cross"></button>
+
+    <div class="modal-content animate-zoom">
+        <section class="row">
+            <dl class="col-7 products-intro">
+                <dt>瓜地馬拉</dt>
+                <dd>
+                    入口明朗的漿果風味，果酸細緻多變，若隱若現的花香氣息，層次豐富迷人。
+                </dd>
+            </dl>
+            <div class="col-5 products-pic">
+                <img src="~/Content/images/Products/pic-l.jpg" alt="產品圖demo-">
+            </div>
+        </section>
+
+        <form action="" class="shopping">
+            <table class="table-bordered full">
+                <tr>
+                    <td class="text-left font-xl">
+                        袋裝咖啡豆
+                        <small class="block text-info">NT$ 330</small>
+                    </td>
+                    <td class="text-left font-xl">250g/包</td>
+                    <td><input type="number" value="1" min="1" class="text-center"></td>
+                    <td>
+                        <i class="icon-cart"></i>
+                        @* 加到購物車後，top> Basket會呈現購物車數量 *@
+                        <button class="btn">ADD</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div><!-- modal-content //-->
+</div><!-- detail //-->

@@ -4,6 +4,7 @@
 // -----------------------------------------------------------------
 // 共用
 $input-color:               darken($gray,10) !default;
+$input-line-height:         $line-height !default;
 $input-border-color:        #E5E5E5 !default;
 $input-border:              1px solid $input-border-color !default;
 $input-border-focus:        lighten($brand-primary,15%) !default;
@@ -102,14 +103,14 @@ $checkbox-radius:           $form-element-radius !default;
 label {
     display: inline-block;
     margin-bottom: $spacer/2;
-
-    // max-width: 100%; // 強制 IE8 能容納長元素
-    // &[class*="col-"] { margin-bottom: 0; }
 }
 
-button:focus {
-    outline: 1px dotted;
-    outline: 5px auto -webkit-focus-ring-color;
+button {
+    background: none;
+    &:focus {
+        outline: 1px dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+    }
 }
 
 input,
@@ -162,9 +163,9 @@ output {
 // input 預設
 input:not([type]), #{text-inputs(all)}, .form-element {
     background: $input-bg;
-    line-height: $line-height;
 
     @if $input-color              { color: $input-color; }
+    @if $input-line-height        { line-height: $input-line-height; }
     @if $input-border             { border: $input-border; }
     @if $form-element-pd          { padding: $form-element-pd; }
     @if $form-element-transition  { transition: $form-element-transition; }
@@ -190,6 +191,11 @@ input:not([type]), #{text-inputs(all)}, .form-element {
     &:disabled {
         cursor: $cursor-disabled;
     }
+}
+
+#{text-inputs(number)} {
+    @extend .m-x-auto;
+    width: $input-size-sm;
 }
 
 .form-element {
@@ -243,10 +249,7 @@ input:not([type]), #{text-inputs(all)}, .form-element {
     @include mq-max(phone) { display:block; margin-left:0; }
 }
 
-#{text-inputs(number)} {
-    width: $input-size-sm;
-    // margin: auto;
-}
+
 
 // 必填樣式
 [required] {
