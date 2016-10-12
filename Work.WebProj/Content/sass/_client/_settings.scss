@@ -83,7 +83,7 @@ $figure-inline-hack:           false;
 $table-border-color:           #D9D9D9;
 $table-bordered:               true;
 // $table-align:                  false;
-$table-pd:                     5px 8px;
+$table-pd:                     3px 10px;
 $table-margin-bottom:          false;
 // $table-bg-accent:              lighten(#CAE4EF,5); // darken($muted,3)
 // $table-bg-hover:               $pale-yellow;
@@ -105,11 +105,9 @@ $th-styled: (
 // form
 $input-border-focus:            darken($amber,5);
 $input-placeholder:             lighten($body-color,20);
+$input-bg:                      #fff;
 
-$form-element-bg:               false;
-// $form-element-height:           38px;
 $form-element-radius:           false;
-// $form-element-shadow:           false;
 
 $input-group-addon-color:       lighten($brand-primary,65);
 $input-group-addon-bg:          lighten($brand-primary,15);

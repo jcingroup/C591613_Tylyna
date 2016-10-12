@@ -63,3 +63,7 @@ $input-group-addon-size:     false !default;
     @if $input-group-addon-color  { color: $input-group-addon-color; }
     @if $input-group-addon-bg     { background: $input-group-addon-bg; }
 }
+
+.radio-group, .checkbox-group {
+    &:not(:last-of-type) { margin-right: $gutter; }
+}

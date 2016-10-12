@@ -1,7 +1,61 @@
 ﻿
 @{
-    ViewBag.Title = "Step2_check";
+    ViewBag.Title = "LITA Basket";
+    ViewBag.BodyClass = "Cart";
+    Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h2>Step2_check</h2>
+<section class="text-left">
+    <h4>
+        <i class="icon-checkmark font-xl text-success m-r-12"></i>
+        訂單成功送出，謝謝您的訂購！訂單資料可至 <a href="~/User/Account" class="text-success">會員資料</a> 的 <a href="~/User/Receipt_list" class="text-success">歷史訂單</a> 查詢
+    </h4>
+    <table class="payment-list">
+        <caption class="text-left p-b-8">訂單編碼: P201610010001</caption>
+        <tr>
+            <th colspan="2">商品</th>
+            <th>數量</th>
+            <th>單價</th>
+            <th class="text-left">小計</th>
+        </tr>
+        <tr>
+            <td class="pic">
+                <a href="~/Products/Detail#main" class="text-success"><img src="~/Content/images/Products/pic.jpg" alt="商品縮圖demo"></a>
+            </td>
+            <td class="text-left">
+                產品編號: 02-010-01
+                <h5>耶加雪菲</h5>
+                規格型號: 10入濾掛包
+            </td>
+            <td>1</td>
+            <td>NT$ 490</td>
+            <td class="text-left">NT$ 490</td>
+        </tr>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-right">運費</td>
+                <td class="text-left">NT$ 80</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="text-right">總計</td>
+                <td class="text-left text-danger">NT$ 500</td>
+            </tr>
+        </tfoot>
+    </table>
 
+    <ul class="payment-infor">
+        <li><small>收件人姓名</small>Test</li>
+        <li><small>聯絡電話</small>000 <small class="m-l-24">手機</small>000</li>
+        <li><small>收件地址</small></li>
+        <li><small>付款方式</small></li>
+        <li><small>備註</small></li>
+    </ul>
+    <p class="icon-error">
+        請至您的 Email 收取訂單及匯款通知。並於匯款後填寫 <a href="~/Order/Payment" class="btn btn-sm bg-danger">已付款通知</a> 或來電告知帳號後五碼，完成訂購。
+    </p>
+    <footer class="submit">
+        @* 若要用 button
+        <button class="float-r btn font-lg btn-success">繼續購物 <i class="icon-navigate_next"></i></button> *@
+        <a href="~/Products" class="float-r btn font-lg btn-success">繼續購物 <i class="icon-navigate_next"></i></a>
+    </footer>
+</section>

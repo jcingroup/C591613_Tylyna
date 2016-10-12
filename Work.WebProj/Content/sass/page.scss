@@ -3,7 +3,7 @@
 // 本頁專用變數(覆蓋)
 // ------------------------------------------------------------
 $page:                 true;
-
+$enable-ckb-rdo:       true;
 
 // import
 // ------------------------------------------------------------
@@ -44,7 +44,7 @@ $page:                 true;
 // ------------------------------------------------------------
 // 內頁裡的子選單(products/quality)
 .sub-nav {
-    @extend %list-inline;
+    @extend %list-inline, .m-b-64;
     li {
         @extend .m-a-0;
         padding: 0 75px;
@@ -66,47 +66,35 @@ $page:                 true;
 }
 
 // == products
-// 產品列表
+// Normal/Special
+// 產品列表(圖片)
 .kind-list {
-    margin: 75px 0 0 25px;
+    margin: 0 0 0 25px;
+    overflow: visible;
 
+    &:not(:nth-of-type(-4n+1)) { margin-top: 75px; }
     &:nth-of-type(4n+1) { @extend .m-l-0; }
 
     img {
         border-radius: 6px;
         max-width: 278px;
         max-height: 270px;
+        @include transition(transform .2s, box-shadow .5s);
     }
-    h3 {
+    figcaption {
         @extend .m-t-16;
         font-size: em(25);
     }
-    figcaption, i {
-        @include pos-center;
-    }
-    figcaption {
-        background: rgba(#000,.6);
-        border-radius: 50%;
-        margin-top: -30px;
-        opacity: 0;
-        @include size(0);
-        @include transition(opacity .5s, border-radius 1s, width .3s, height .3s);
-    }
-    i {
-        font-size: em(50);
-        color: lighten($warning,10);
-    }
     &:hover, &:active {
-        figcaption {
-            width: 100%;
-            height: 270px;
-            border-radius: 6px;
-            opacity: 1;
+        img {
+            @include transform(scale(1.05));
+            box-shadow: 0 0 15px rgba(#000,.5);
         }
     }
 }
 
-// 產品詳細資訊(彈出視窗) modal
+// Detail
+// 產品詳細資訊
 .products-intro {
     @extend .text-left, .p-l-0;
     dt {
@@ -115,15 +103,22 @@ $page:                 true;
         line-height: 1.01;
         border-bottom: 1px solid #999;
     }
+    .btn-bar { @extend .m-t-24; }
+    .btn { cursor: pointer; }
 }
 .products-pic {
     @extend .text-right, .p-r-0;
     max-width: 100%;
 }
-// add card
-.shopping {
-    @extend .m-t-24;
+// 購物規格清單(彈出視窗) modal
+.shopping-list {
+    @extend %full;
 
+    border-left: 1px solid $table-border-color;
+    border-right: 1px solid $table-border-color;
+
+    .item, .spec { @extend .text-left, .font-lg; }
+    .num { width: 100px; }
     .icon-cart, .btn { vertical-align: middle; }
     .icon-cart {
         @extend %inline-block;
@@ -131,30 +126,72 @@ $page:                 true;
         width: 36px;
         height: 34px;
     }
-    .btn {
-        @extend .m-l-4;
-    }
+    .btn { @extend .m-l-4; }
+}
+// editor
+.editor { @extend .text-left, .m-t-48; }
+
+
+// 品嘗LITA
+.taste-summary {
+    @extend .bg-white, .text-left, .p-x-24, .p-y-32;
+    &:not(:first-of-type) { @extend .m-t-32; }
 }
 
-// == 購物車
+// == 購物車 Order
+.cart-list, .payment-list {
+    h5 { @extend .m-y-4; }
+    .pic { width: 90px; }
+}
+.submit { @extend .m-t-24; }
+
+// 購物列表清單 Cart
 .cart-list {
-    @extend .table-bordered, %full, .bg-white;
+    @extend %full, .table-bordered, .bg-white;
 
     img { max-width: 70px; max-height: 70px; }
-    h5 { @extend .m-y-4; }
     th {
         &:nth-of-type(n+2) { width: 12.5%; }
         &:last-of-type { width: 7%; }
     }
-    td:first-of-type { width: 90px; }
     button {
-        &:hover, &:active {
-            color: $brand-primary;
-        }
+        &:hover, &:active { color: $brand-primary; }
     }
 }
-.submit {
-    @extend .m-t-24;
-    a { @extend %float-l; }
-    button { @extend %float-r; }
+
+// 訂購清單 step1
+.payment-title {
+    em {
+        @extend %inline-block, .m-r-12, .text-white, .font-md;
+        @include circle(25px,center,$danger);
+        @include transform(translateY(-8px));
+        font-style: normal;
+    }
+}
+.payment-list {
+    @extend %full, .bg-white;
+
+    border-left: 1px solid $table-border-color;
+    border-right: 1px solid $table-border-color;
+}
+.payment-data {
+    dl { border-bottom: 1px solid lighten($brand-primary,40); }
+    dt {
+        @extend .text-right, .p-y-4;
+        &:first-child { @extend .p-l-0; }
+    }
+    dd {
+        &:last-child { @extend .p-r-0; }
+    }
+}
+// 訂購完成 step2
+.payment-infor {
+    @extend %list-unstyled, .font-lg, .m-t-32, .m-b-12;
+    border-top: 1px solid lighten($brand-secondary,15);
+    li {
+        @extend .p-y-4;
+        color: #222;
+        border-bottom: 1px solid lighten($brand-secondary,15);
+    }
+    small { @extend .m-r-16; }
 }

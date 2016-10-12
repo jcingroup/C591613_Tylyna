@@ -14,7 +14,7 @@
         <th>刪除</th>
     </tr>
     <tr>
-        <td><img src="~/Content/images/Products/pic.jpg" alt="商品縮圖demo"></td>
+        <td class="pic"><img src="~/Content/images/Products/pic.jpg" alt="商品縮圖demo"></td>
         <td class="text-left">
             產品編號: 02-010-01
             <h5>耶加雪菲</h5>
@@ -30,13 +30,14 @@
     <tfoot>
         <tr>
             <td colspan="6" class="text-right">
-                運費：<strong class="text-danger">NT$ 10</strong><br>
-                總計：<strong class="text-danger">NT$ 500</strong>
+                總計：<strong class="text-danger">NT$ 490</strong> (未含運費)
             </td>
         </tr>
     </tfoot>
 </table>
-<p class="submit">
-    <a href="~/Products" class="icon-navigate_before">繼續選購</a>
-    <button class="btn font-lg btn-success">確定結帳 <i class="icon-navigate_next"></i></button>
-</p>
+<footer class="submit">
+    <a href="~/Products" class="float-l icon-navigate_before">繼續選購</a>
+    @* 若要用 button
+    <button class="float-r btn font-lg btn-success">確定結帳 <i class="icon-navigate_next"></i></button> *@
+    <a href="~/Order/Step1_order" class="float-r btn font-lg btn-success">確定結帳 <i class="icon-navigate_next"></i></a>
+</footer>

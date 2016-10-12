@@ -506,17 +506,17 @@
     <Content Include="Views\Home\Quality.cshtml" />
     <Content Include="Views\Home\Story.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
-    <Content Include="Views\Products\Kind.cshtml" />
+    <Content Include="Views\Products\Normal.cshtml" />
     <Content Include="Views\Products\Detail.cshtml" />
     <Content Include="Views\FAQ\FAQ.cshtml" />
     <Content Include="Views\Order\Cart.cshtml" />
     <Content Include="Views\User\Account.cshtml" />
     <Content Include="Views\Order\Step1_order.cshtml" />
     <Content Include="Views\Order\Step2_check.cshtml" />
-    <Content Include="Views\Products\Taste.cshtml" />
     <Content Include="Views\Products\Special.cshtml" />
     <Content Include="Views\User\Receipt_list.cshtml" />
     <Content Include="Views\Products\product-nav.cshtml" />
+    <Content Include="Views\Products\Taste.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
