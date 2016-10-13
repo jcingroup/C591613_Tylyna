@@ -10,7 +10,7 @@ $navbar-bg:             false !default; // #2AA19D
 $sub-nav-has:           false !default;    // 子選單
 $nav-root:              if($sub-nav-has, '.root', 'a') !default;
 $nav-height:            false !default;   // 'full' | 18px | flase
-$nav-font-size:         18px !default;
+$nav-font-size:         19px !default;
 $nav-color:             $brand-primary !default;
 
 // 當前選單
@@ -50,8 +50,9 @@ $mobile-menu-width:     100% !default;
         }
 
         // 本次專案
-        @extend .p-l-24, .font-sp;
+        @extend .p-l-24;
         position: relative;
+        letter-spacing: 2px;
 
         &:not(:last-child) {
             @extend .p-r-24;
@@ -59,13 +60,13 @@ $mobile-menu-width:     100% !default;
         }
 
         @include el(before) {
+            @include pos-center(x);
+            @include transition(top .35s, opacity .6s);
             width: 30%;
             height: 2px;
             background: $nav-color;
             top: 0;
             opacity: 0;
-            @include pos-center(x);
-            @include transition(top .35s, opacity .6s);
         }
 
         &:hover, &:active, &.current {
@@ -91,7 +92,6 @@ $mobile-menu-width:     100% !default;
 
     // 登入前
     button, a {
-        font-size: em(18);
         &:hover, &:active { color: lighten($nav-color,10); }
     }
     button {
@@ -111,7 +111,7 @@ $mobile-menu-width:     100% !default;
     .cart-num {
         @extend %inline-block, .text-white;
         @include circle(16px, center, $deep-orange);
-        @include absolute(right 59px top -1px);
+        @include absolute(right 53px top -1px);
         font-size: em(10);
         font-style: normal;
     }

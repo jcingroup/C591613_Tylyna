@@ -10,10 +10,16 @@
 
 @include make-grid-columns();
 
-.col-first { padding-left: 0; }
-.col-last  { padding-right: 0; }
-.col-rest  { overflow: hidden; }
+.row-p-a {
+    [class*="col"] {
+        &:first-child { padding-left: 0; }
+        &:last-child { padding-right: 0; }
+    }
+}
+// .col-first { padding-left: 0; }
+// .col-last  { padding-right: 0; }
 
+.col-rest  { overflow: hidden; }
 .col {
     @extend %inline-block;
     vertical-align: top;

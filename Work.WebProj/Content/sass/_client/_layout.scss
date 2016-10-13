@@ -145,7 +145,7 @@
 // main
 // ----------------------------------------------------------------------
 #main {
-    padding-top: 100px;
+    padding-top: 80px;
     @if $index {
         background: url(#{$img-index}/mainBg.gif) center 0 no-repeat;
     }

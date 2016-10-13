@@ -271,7 +271,10 @@ input:not([type]), #{text-inputs(all)}, .form-element {
         border: none;
         border-bottom: 1px solid darken($input-border-color,20);
 
+        @if $input-bg { background: none; }
+
         &:focus {
+            box-shadow: none;
             border-color: $input-border-focus;
         }
     }
@@ -311,7 +314,8 @@ input:not([type]), #{text-inputs(all)}, .form-element {
             &::before { color: $brand-secondary; }
         }
         &:checked + label {
-            background: darken($input-border-focus,20);
+            background: darken($brand-secondary,10); // darken($input-border-focus,20)
+            border-color: darken($brand-secondary,15);
         }
     }
 

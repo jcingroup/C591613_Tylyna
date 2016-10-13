@@ -25,7 +25,7 @@ namespace DotWeb.Controllers
         {
             return View();
         }
-        // 品嚐LITA - all 商品列表
+        // 品嚐LITA - 文案(可設超連結至該商品頁 Detail)
         public ActionResult Taste()
         {
             return View();

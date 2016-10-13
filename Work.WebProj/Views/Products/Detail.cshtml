@@ -8,7 +8,7 @@
 
 @Html.Partial("product-nav")
 
-@* 彈出特效 *@
+@* 彈出特效 - 商品多種包裝(規格類型) *@
 <div id="detail" class="modal">
     <button onclick="document.getElementById('detail').style.display='none'" class="btn-close icon-cross"></button>
 
@@ -73,18 +73,22 @@
 
 <section class="row">
     <dl class="col-7 products-intro">
+        @* 品名 *@
         <dt>瓜地馬拉</dt>
         @* 簡介 *@
         <dd>入口明朗的漿果風味，果酸細緻多變，若隱若現的花香氣息，層次豐富迷人。</dd>
         <dd class="btn-bar">
             <a class="btn bg-danger" onclick="document.getElementById('detail').style.display='block'">我要購買</a>
+            @* 後台可設置個別商品不開放線上訂購 - 不開放時顯示下列文字(後台可編輯) *@
+            歡迎來電洽談 <strong>(00) 000-0000</strong>
         </dd>
     </dl>
     <div class="col-5 products-pic">
-        <img src="~/Content/images/Products/pic-l.jpg" alt="產品圖demo-">
+        <img src="~/Content/images/Products/pic-l.jpg" alt="產品圖demo-寬不超過600px">
     </div>
 </section>
 
+@* 編輯器 - 後台若無資料，則不顯示 *@
 <section class="editor">
     產品更多介紹
 </section>

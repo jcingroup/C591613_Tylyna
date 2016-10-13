@@ -1,7 +1,45 @@
 ﻿
 @{
-    ViewBag.Title = "Receipt_list";
+    ViewBag.Title = "LITA ACCOUNT";
+    ViewBag.BodyClass = "User";
+    ViewBag.subNav = "sub2";
+    Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h2>Receipt_list</h2>
+@Html.Partial("user-nav")
 
+<table class="receipt-list full bg-white">
+    <caption class="text-right p-b-12">
+        訂單狀態：
+        @* 點選後，下方清單會顯示那筆資料 *@
+        <select>
+            <option value="">全部</option>
+            <option value="">待付款</option>
+            <option value="">待出貨</option>
+            <option value="">已出貨</option>
+            <option value="">訂單已取消</option>
+            <option value="">完成訂單</option>
+        </select>
+    </caption>
+    <tr>
+        <th>訂購日期</th>
+        <th>訂單編號</th>
+        <th class="text-left">商品名稱</th>
+        <th>數量</th>
+        <th>訂單狀態</th>
+    </tr>
+    <tr>
+        <td>2016/10/13</td>
+        <td><a href="~/User/Receipt_content" class="text-success">P201610010001</a></td>
+        <td class="text-left">耶加雪菲-濾掛式(5入)</td>
+        <td>1</td>
+        <td>待付款</td>
+    </tr>
+    <tr>
+        <td>2016/10/13</td>
+        <td><a href="~/User/Receipt_content" class="text-success">P201610010001</a></td>
+        <td class="text-left">耶加雪菲-濾掛式(10入)</td>
+        <td>2</td>
+        <td>已出貨</td>
+    </tr>
+</table>

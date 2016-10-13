@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "LITA Basket";
+    ViewBag.BodyClass = "Cart";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<header class="text-left font-xxl m-b-48 underline">
+    已付款通知
+    <small class="block">請填寫付款資料以利確認訂單，謝謝</small>
+</header>
+<form action="" class="reply text-left">
+    <dl class="row row-p-a">
+        <dt class="col-2">* 訂單編號</dt>
+        <dd class="col-4">
+            <input type="text" class="form-element" placeholder="必填" required>
+        </dd>
+        <dt class="col-2">* 匯款帳號後5碼</dt>
+        <dd class="col-4">
+            <input type="number" min="0" class="form-element" placeholder="必填" required>
+        </dd>
+    </dl>
+    <dl class="row row-p-a">
+        <dt class="col-2">* 匯款日期</dt>
+        <dd class="col-4">
+            <input type="date" class="form-element" placeholder="必填" required>
+        </dd>
+        <dt class="col-2">* 匯款時間</dt>
+        <dd class="col-4">
+            <input type="time" class="form-element" placeholder="必填" required>
+        </dd>
+    </dl>
+    <dl class="row row-p-a">
+        <dt class="col-2">匯款金額</dt>
+        <dd class="col-10">
+            <input type="number" min="0" class="form-element">
+        </dd>
+    </dl>
+    <dl class="row row-p-a">
+        <dt class="col-2">備註</dt>
+        <dd class="col-10">
+            <textarea rows="3" class="form-element"></textarea>
+        </dd>
+    </dl>
+    <footer class="submit">
+        @* 使用 button ，<a>為暫放
+        <button class="float-r btn font-lg btn-success">送出 <i class="icon-navigate_next"></i></button> *@
+        <a href="~/Order/Finish" class="float-r btn font-lg btn-success">送出 <i class="icon-navigate_next"></i></a>
+    </footer>
+</form>

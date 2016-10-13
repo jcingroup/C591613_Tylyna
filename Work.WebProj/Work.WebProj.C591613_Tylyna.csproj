@@ -517,6 +517,9 @@
     <Content Include="Views\User\Receipt_list.cshtml" />
     <Content Include="Views\Products\product-nav.cshtml" />
     <Content Include="Views\Products\Taste.cshtml" />
+    <Content Include="Views\Order\Reply.cshtml" />
+    <Content Include="Views\Order\Finish.cshtml" />
+    <Content Include="Views\User\Receipt_content.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,6 +1,79 @@
 ﻿
 @{
     ViewBag.Title = "LITA ACCOUNT";
-    ViewBag.BodyClass = "Member";
+    ViewBag.BodyClass = "User";
+    ViewBag.subNav = "sub1";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
+
+@Html.Partial("user-nav")
+
+<form action="" class="account-data">
+    <fieldset class="m-b-48">
+       <legend>登入設定</legend>
+       <table class="full">
+           <tr>
+               <td class="item">帳號(E-mail)</td>
+               <td>
+                   xxx@gmail.com
+                   <button class="btn font-sm bg-danger m-l-16">變更信箱</button>
+                   @* 按下變更後，上列mail隱藏，出現下列
+                   <input type="email" value="xxx@gmail.com">
+                   <br>
+                   <button class="btn font-sm bg-danger m-l-16">確定變更</button>
+                   <button class="btn font-sm bg-muted m-l-16">取消</button> *@
+               </td>
+           </tr>
+           <tr>
+               <td class="item">密碼</td>
+               <td>
+                   <button class="btn font-sm bg-danger">變更密碼</button>
+                   @* 按下變更後，上列mail隱藏，出現下列
+                   <input type="password" placeholder="請輸入舊密碼">
+                   <input type="password" placeholder="請輸入新密碼">
+                   <input type="password" placeholder="再次輸入新密碼">
+                   <br>
+                   <button class="btn">儲存</button> *@
+               </td>
+           </tr>
+       </table>
+    </fieldset>
+
+    <fieldset class="m-b-48">
+       <legend>會員資料修改</legend>
+       <table class="full">
+           <tr>
+               <td class="item">姓名</td>
+               <td><input type="text" value="王小明"></td>
+               <td class="item">性別</td>
+               <td>
+                   <span class="radio-group">
+                       <input type="radio" name="sex" id="male">
+                       <label for="male" class="icon"></label>男性
+                   </span>
+
+                   <span class="radio-group">
+                       <input type="radio" name="sex" id="female">
+                       <label for="female" class="icon"></label>女性
+                   </span>
+               </td>
+           </tr>
+           <tr>
+               <td class="item">生日</td>
+               <td><input type="date"></td>
+               <td class="item">手機</td>
+               <td><input type="tel" value="00000"></td>
+           </tr>
+           <tr>
+               <td class="item">地址</td>
+               <td colspan="3">
+                   <input type="number" min="0" class="input-size-md" placeholder="郵遞區號">
+                   <input type="text" class="input-size-xl">
+               </td>
+           </tr>
+       </table>
+       <footer class="submit text-center">
+           <button class="btn font-lg p-y-12 p-x-48">儲存</button>
+       </footer>
+    </fieldset>
+</form>

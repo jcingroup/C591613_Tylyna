@@ -69,8 +69,11 @@ $z-index: (
 // ----------------------------------------------------------------------
 // btn
 $btn-border-radius:            false;
-$btn-pd:                       7px 20px;
+$btn-pd:                       8px 20px;
 $btn-hover-bg:                 darken($brand-secondary,15);
+$btn-styles: (
+    text-shadow: 1px 1px 1px rgba(#000,.35)
+);
 
 // figure
 $figure-inline:                true;
@@ -80,10 +83,10 @@ $figure-inline-hack:           false;
 // == base
 // ----------------------------------------------------------------------
 // table
-$table-border-color:           #D9D9D9;
+$table-border-color:           lighten($brand-secondary,15);
 $table-bordered:               true;
 // $table-align:                  false;
-$table-pd:                     3px 10px;
+$table-pd:                     4px 10px;
 $table-margin-bottom:          false;
 // $table-bg-accent:              lighten(#CAE4EF,5); // darken($muted,3)
 // $table-bg-hover:               $pale-yellow;
@@ -105,10 +108,13 @@ $th-styled: (
 // form
 $input-border-focus:            darken($amber,5);
 $input-placeholder:             lighten($body-color,20);
-$input-bg:                      #fff;
+$input-bg:                      lighten($warning,18);
+$input-border-color:            lighten($brand-secondary,15);
 
 $form-element-radius:           false;
+$enable-input-underline:        true;
 
 $input-group-addon-color:       lighten($brand-primary,65);
-$input-group-addon-bg:          lighten($brand-primary,15);
-$input-group-addon-size:        20px;
+$input-group-addon-bg:          darken($amber,12);
+$input-group-addon-size:        23px;
+$input-group-border:            1px solid #ddd;

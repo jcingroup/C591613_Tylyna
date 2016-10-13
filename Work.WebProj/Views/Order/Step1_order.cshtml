@@ -32,16 +32,16 @@
                 <td colspan="3" class="text-left">
                     <span class="radio-group">
                         <input type="radio" name="pay" id="pay1">
-                        <label for="pay1" class="icon"></label>轉帳匯款(滿NT$ 1000免運費)
+                        <label for="pay1" class="icon"></label>轉帳匯款(滿NT$1000免運費)
                     </span>
 
                     <span class="radio-group">
                         <input type="radio" name="pay" id="pay2">
-                        <label for="pay2" class="icon"></label>貨到付款(運費 NT$80)
+                        <label for="pay2" class="icon"></label>貨到付款(NT$2000以下 手續費NT$30)
                     </span>
                 </td>
                 <td class="text-right">運費</td>
-                <td class="text-left">NT$ 10</td>
+                <td class="text-left">NT$ 80</td> @* 依付款方式變動 *@
             </tr>
             <tr>
                 <td colspan="4" class="text-right">總計</td>
@@ -54,20 +54,21 @@
 <section class="m-b-32 text-left">
     <h2 class="payment-title"><em>2</em>填寫購買資訊</h2>
     <form action="" class="payment-data">
-        <dl class="row">
+        <dl class="row row-p-a">
             <dt class="col-2">* E-mail</dt>
             <dd class="col-10">
                 <input type="email" class="form-element" placeholder="請填寫常用的電子信箱，未來將以此做為預設登入帳號" required>
-                初此購物免註冊，若已有會員請先<button class="text-success" onclick="document.getElementById('login').style.display='block'">會員登入</button>
+                初此購物免註冊，若已有會員請先<button class="btn-link text-success" onclick="document.getElementById('login').style.display='block'">會員登入</button>
             </dd>
         </dl>
-        <dl class="row">
+        <dl class="row row-p-a">
             <dt class="col-2">* 收件人姓名</dt>
             <dd class="col-10">
-                <input type="text" class="form-element" placeholder="未來將以此做為會員名稱" required>
+                @* 登入後可修改會員名稱 *@
+                <input type="text" class="form-element" placeholder="預設為會員名稱" required>
             </dd>
         </dl>
-        <dl class="row">
+        <dl class="row row-p-a">
             <dt class="col-2">* 手機</dt>
             <dd class="col-4">
                 <input type="tel" class="form-element" required>
@@ -77,7 +78,7 @@
                 <input type="tel" class="form-element">
             </dd>
         </dl>
-        <dl class="row">
+        <dl class="row row-p-a">
             <dt class="col-2">* 收件地址</dt>
             <dd class="col-2">
                 <input type="number" min="0" class="form-element" placeholder="請輸入郵遞區號">
@@ -86,14 +87,14 @@
                 <input type="text" class="form-element" required>
             </dd>
         </dl>
-        <dl class="row">
+        <dl class="row row-p-a">
             <dt class="col-2">備註</dt>
             <dd class="col-10">
                 <textarea rows="3" class="form-element"></textarea>
             </dd>
         </dl>
         <p class="icon-error">
-            請至您的 Email 收取訂單及匯款通知。並於匯款後填寫 <u>已付款通知</u> 或來電告知帳號後五碼，完成訂購。
+            請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於匯款後填寫 <u>已付款通知</u> 或來電告知帳號後五碼，完成訂購。
         </p>
         <footer class="submit">
             <a href="~/Order/Cart" class="float-l icon-navigate_before">修改訂單內容</a>

@@ -50,6 +50,11 @@
     }
 }
 
+.underline {
+    border-bottom: 1px solid lighten($brand-secondary,15);
+    padding-bottom: $spacer/1.5;
+}
+
 
 // text
 // ------------------------------------------------------------
@@ -57,31 +62,25 @@
 .text-right { text-align: right; }
 .text-center { text-align: center; }
 
-.title {
-    font-size: em(37px);
-    margin-bottom: $spacer*2;
+// .title {
+//     font-size: em(37px);
+//     margin-bottom: $spacer*2;
 
-    span {
-        border-bottom: 1px solid #B4D0DE;
-        padding-bottom: 5px;
-    }
-}
+//     span {
+//         border-bottom: 1px solid #B4D0DE;
+//         padding-bottom: 5px;
+//     }
+// }
+// .title-underline2 {
+//     position: relative;
 
-.title-underline,
-.title-underline2 {
-    border-bottom: 1px solid #DDDAD3;
-    padding-bottom: $spacer/1.5;
-}
-.title-underline2 {
-    position: relative;
-
-    @include el(after) {
-        height: 1px;
-        width: 6%;
-        background: $brand-primary;
-        @include absolute(left 0 bottom -1px);
-    }
-}
+//     @include el(after) {
+//         height: 1px;
+//         width: 6%;
+//         background: $brand-primary;
+//         @include absolute(left 0 bottom -1px);
+//     }
+// }
 
 .font-tiny  { font-size: $font-size-xs; }  // 13px
 .font-sm    { font-size: $font-size-sm; }  // 14px
@@ -90,7 +89,7 @@
 .font-xl    { font-size: rem(25); }
 .font-xxl   { font-size: rem(36); }
 .font-xxxl  { font-size: rem(48); }
-.font-jumbo { font-size: rem(65); }
+.font-jumbo { font-size: rem(66); }
 
 
 // 情境: var.scss> $states: true

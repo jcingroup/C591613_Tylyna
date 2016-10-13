@@ -44,24 +44,44 @@ $enable-ckb-rdo:       true;
 // ------------------------------------------------------------
 // 內頁裡的子選單(products/quality)
 .sub-nav {
-    @extend %list-inline, .m-b-64;
+    @extend %list-inline;
+
+    a { @extend %inline-block; }
     li {
         @extend .m-a-0;
         padding: 0 75px;
         &:not(:last-child) {
             background: url(#{$img-path}/subNav-line.gif) right 50px no-repeat;
         }
+        a {
+            @extend .m-t-48, .font-sp, .hover-underline;
+            font-size: em(30);
+            font-weight: bold;
+
+            &:hover, &:active { @extend .text-primary; }
+        }
     }
     img {
         @extend .img-center;
         @include circle(242px);
     }
-    a {
-        @extend %inline-block, .m-t-48, .font-sp, .hover-underline;
-        font-size: em(30);
-        font-weight: bold;
 
-        &:hover, &:active { @extend .text-primary; }
+    // 會員資料的子選單
+    .User & { @extend .text-left; }
+    > a {
+        @extend .bg-primary, .text-white, .p-y-4, .p-x-32, .m-r-16;
+        font-size: em(27);
+        border-radius: 3px;
+        border: 1px solid darken($brand-primary,5);
+
+        &:hover, &:active {
+            background-color: darken($brand-secondary,5);
+            border-color: darken($brand-secondary,10);
+        }
+        &.current {
+            background-color: darken($amber,10);
+            border-color: darken($amber,15);
+        }
     }
 }
 
@@ -174,15 +194,13 @@ $enable-ckb-rdo:       true;
     border-left: 1px solid $table-border-color;
     border-right: 1px solid $table-border-color;
 }
-.payment-data {
-    dl { border-bottom: 1px solid lighten($brand-primary,40); }
+.payment-data, .reply {
     dt {
         @extend .text-right, .p-y-4;
-        &:first-child { @extend .p-l-0; }
     }
-    dd {
-        &:last-child { @extend .p-r-0; }
-    }
+}
+.payment-data {
+    dl { border-bottom: 1px solid lighten($brand-secondary,15); }
 }
 // 訂購完成 step2
 .payment-infor {
@@ -194,4 +212,17 @@ $enable-ckb-rdo:       true;
         border-bottom: 1px solid lighten($brand-secondary,15);
     }
     small { @extend .m-r-16; }
+}
+
+// == 會員資料
+.account-data {
+    @extend .text-left;
+    td {
+        @extend .p-y-8, .text-left;
+        &.item {
+            @extend .text-right;
+            width: 130px;
+        }
+        // &:last-of-type { @extend .text-left; }
+    }
 }

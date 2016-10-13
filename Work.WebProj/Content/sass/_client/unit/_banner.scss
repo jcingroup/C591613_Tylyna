@@ -16,6 +16,7 @@ $banner-img: append($menu-item, 'Account');
         overflow: hidden;
         background-position: center center;
         background-repeat: no-repeat;
+        background-image: url(#{$img-path}/banner_Products.jpg);
 
         h1 {
             @extend .font-sp;
@@ -26,13 +27,14 @@ $banner-img: append($menu-item, 'Account');
             width: 450px;
             letter-spacing: 2px;
         }
-        @each $item in $banner-img {
-            .#{$item} & {
-                background-image: url(#{$img-path}/banner_#{$item}.jpg);
-            }
-        }
-        .Cart & {
-            background-image: url(#{$img-path}/banner_Products.jpg);
-        }
+        // @each $item in $banner-img {
+        //     .#{$item} & {
+        //         background-image: url(#{$img-path}/banner_#{$item}.jpg);
+        //     }
+        // }
+        // .Cart &,
+        // .User & {
+        //     background-image: url(#{$img-path}/banner_Products.jpg);
+        // }
     }
 }

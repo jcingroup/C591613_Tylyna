@@ -15,16 +15,11 @@ $btn-bg:                 $brand-primary !default;
 $btn-color:              $btn-state-color !default;
 $btn-hover-bg:           lighten($btn-bg, 6%) !default;
 $btn-hover-color:        $btn-state-color !default;
+$btn-link-color:         $link-color !default;
 
 // 下為可自定屬性及樣式
-$btn-styles: (
-    // letter-spacing:      1px,
-) !default;
-
-$btn-link-styles: (
-    // letter-spacing:      0,
-) !default;
-
+$btn-styles: () !default;
+$btn-link-styles: () !default;
 $btn-hover-styles: () !default;
 
 
@@ -73,18 +68,16 @@ button { border: none; }
 }
 
 .btn-link {
-    @if $btn-display       { display: inline; }
-    @if $btn-pd            { padding: 0; }
-    @if $btn-border-radius { border-radius: 0; }
+    display: inline;
+    @if $btn-link-color    { color: $link-color; }
     @if $btn-line-height   { line-height: $line-height; }
     @if $btn-bg            { background: none; }
-    @if $btn-color         { color: $link-color; }
     @if $btn-effect        { @include transition($link-transition); }
     @each $attribute, $value in $btn-link-styles {
         #{$attribute}: #{$value};
     }
     &, &:active, &.active {
-        &:focus {outline: 0;}
+        &:focus { outline: 0; }
     }
     &:hover, &:active, &.active,
     &:focus, &.focus {
