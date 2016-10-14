@@ -3,17 +3,15 @@
     @* Layout = "~/Views/Shared/Manage/RLayout.cshtml"; *@
     @* 暫用 *@
     Layout = "~/Views/Shared/SysLayoutDemo.cshtml";
-    ViewBag.BodyClass = "Products";
+    ViewBag.BodyClass = "Order";
     ViewBag.IsFirstPage = false;
-    ViewBag.Crumb = "利他故事";
+    ViewBag.Crumb = "購物金流維護";
 }
 
 @section Breadcrumb {
     <ul class="breadcrumb">
-        <li><i class="fa-caret-right"></i> 網站資料管理</li>
+        <li><i class="fa-caret-right"></i> 會員及訂單管理</li>
         <li><i class="fa-angle-right"></i> @ViewBag.Crumb</li>
     </ul>
 }
-
-<h3 class="h3">@ViewBag.Crumb</h3>
 

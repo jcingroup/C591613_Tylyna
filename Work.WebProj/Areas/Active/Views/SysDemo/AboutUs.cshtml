@@ -1,7 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "AboutUs";
+    @* Layout = "~/Views/Shared/Manage/RLayout.cshtml"; *@
+    @* 暫用 *@
+    Layout = "~/Views/Shared/SysLayoutDemo.cshtml";
+    ViewBag.BodyClass = "Order";
+    ViewBag.IsFirstPage = false;
+    ViewBag.Crumb = "利它精神";
 }
 
-<h2>AboutUs</h2>
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li><i class="fa-caret-right"></i> 網站資料管理</li>
+        <li><i class="fa-angle-right"></i> @ViewBag.Crumb</li>
+    </ul>
+}
 
+<h3 class="h3">@ViewBag.Crumb</h3>

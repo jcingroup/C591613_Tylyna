@@ -1,7 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Products_Kind";
+    @* Layout = "~/Views/Shared/Manage/RLayout.cshtml"; *@
+    @* 暫用 *@
+    Layout = "~/Views/Shared/SysLayoutDemo.cshtml";
+    ViewBag.BodyClass = "Products";
+    ViewBag.IsFirstPage = false;
+    ViewBag.Crumb = "產品分類維護";
 }
 
-<h2>Products_Kind</h2>
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li><i class="fa-caret-right"></i> 產品管理</li>
+        <li><i class="fa-angle-right"></i> @ViewBag.Crumb</li>
+    </ul>
+}
 
+<h3 class="h3">@ViewBag.Crumb</h3>

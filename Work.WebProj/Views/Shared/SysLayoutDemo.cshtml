@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@Resources.Res.System_Name</title>
+    <link href="~/Content/css/sys.css" rel="stylesheet" />
+    <link href="~/Content/css/vendor/fontAwesome/font-awesome.css" rel="stylesheet" />
+    @RenderSection("IncludeCSS", false)
+</head>
+
+<body class="@ViewBag.BodyClass">
+
+    <div id="wrapper">
+        @if (ViewBag.IsFirstPage)
+        { }
+        else {
+            <header id="header" class="navbar navbar-fixed-top navbar-dark bg-primary">
+                <h1 class="logo">
+                    <a class="navbar-brand" href="#" title="@Resources.Res.Info_Home" tabindex="-1">@Resources.Res.System_Name</a>
+                </h1><!-- logo -->
+                <ul class="nav navbar-nav pull-xs-right">
+                    <li class="nav-item">
+                        <span class="nav-link">
+                            <i class="fa-user"></i> <span>登入身分: admin
+                        </span>
+                    </li>
+                    <li class="nav-item bg-warning">
+                        <a href="~/index" class="nav-link">
+                            <i class="fa-home"></i> @Resources.Res.Button_ReturnIndex
+                        </a>
+                    </li>
+                    <li class="nav-item bg-success">
+                        <a href="~/Login/Logout" class="nav-link">
+                            <i class="fa-power-off"></i> @Resources.Res.Button_Logout
+                        </a>
+                    </li>
+                </ul>
+            </header><!-- header //-->
+        }
+
+        <main id="main">
+
+            @if (ViewBag.IsFirstPage) {
+                @RenderBody()
+            }
+
+            else {
+
+                <div id="content">
+                    @RenderSection("Breadcrumb", false)
+                    @RenderBody()
+                </div><!-- content //-->
+
+                <aside id="sidebar">
+                    <h3 class="h3"><i class="fa-bars"></i> 功能選單 MENU</h3>
+                    <nav id="menu">
+                        <dl class="panel">
+                            <dt class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#menu" href="#menu1" class="panel-title collapsed"><i class="fa-bullhorn"></i> 會員及訂單管理</a>
+                            </dt>
+                            <dd id="menu1" class="panel-collapse collapse">
+                                <ul class="panel-body list-unstyled">
+                                    <li><a href="~/Active/SysDemo/Account_list"><i class="fa-caret-right"></i> 會員資料維護</a></li>
+                                    <li><a href="~/Active/SysDemo/Order_list"><i class="fa-caret-right"></i> 訂單資料維護</a></li>
+                                    <li><a href="~/Active/SysDemo/Payment"><i class="fa-caret-right"></i> 購物金流維護</a></li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        <dl class="panel">
+                            <dt class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#menu" href="#menu2" class="panel-title collapsed"><i class="fa-flag"></i> 產品管理</a>
+                            </dt>
+                            <dd id="menu2" class="panel-collapse collapse">
+                                <ul class="panel-body list-unstyled">
+                                    <li><a href="~/Active/SysDemo/Products_list"><i class="fa-caret-right"></i> 產品資料維護</a></li>
+                                    <li><a href="~/Active/SysDemo/Products_kind"><i class="fa-caret-right"></i> 產品分類維護</a></li>
+                                    <li><a href="~/Active/SysDemo/Taste"><i class="fa-caret-right"></i> 品嘗LITA</a></li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        <dl class="panel">
+                            <dt class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#menu" href="#menu3" class="panel-title collapsed"><i class="fa-info-circle"></i> 網站資料管理</a>
+                            </dt>
+                            <dd id="menu3" class="panel-collapse collapse">
+                                <ul class="panel-body list-unstyled">
+                                    <li><a href="~/Active/SysDemo/Index_data"><i class="fa-caret-right"></i> 首頁維護</a></li>
+                                    <li><a href="~/Active/SysDemo/AboutUs"><i class="fa-caret-right"></i> 利他精神</a></li>
+                                    <li><a href="~/Active/SysDemo/Quality"><i class="fa-caret-right"></i> 利他嚴選</a></li>
+                                    <li><a href="~/Active/SysDemo/Story"><i class="fa-caret-right"></i> 利他故事</a></li>
+                                    <li><a href="~/Active/SysDemo/FAQ_list"><i class="fa-caret-right"></i> 常見問答</a></li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        <dl class="panel">
+                            <dt class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#menu" href="#menu4" class="panel-title collapsed"><i class="fa-cog"></i> 系統設定</a>
+                            </dt>
+                            <dd id="menu4" class="panel-collapse collapse">
+                                <ul class="panel-body list-unstyled">
+                                    <li><a href="~/Base/ChangePW"><i class="fa-caret-right"></i> 變更密碼</a></li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </nav>
+                </aside><!-- sidebar //-->
+            }
+
+        </main><!-- main //-->
+
+    </div><!-- wrapper //-->
+
+    <footer id="footer">
+        <p class="copyright text-muted">
+            <span>Powered By <a href="http://www.jcin.com.tw" target="new">JCIN INFORMATION CO.</a></span>
+        </p>
+    </footer><!-- footer //-->
+
+    @* 引用 jQuery *@
+    <script src="~/Scripts/cdn/jquery-1.10.2.min.js"></script>
+
+    @* 引用 Bootstrap (左選單開合效果) *@
+    <script src="~/Scripts/cdn/bootstrap/util.js"></script>
+    <script src="~/Scripts/cdn/bootstrap/collapse.js"></script>
+
+    <script>
+        // 左選單+目前頁面標記
+        var url = window.location.pathname;
+        $("#menu .panel-body a").each(function () {
+            var href = $(this).attr("href");
+            if ( url.indexOf(href) >= 0 ) {
+
+                $("#menu .panel-body a").not(this).removeClass("active")
+                .parents(".panel-collapse").removeClass("in")
+                .parent(".panel").removeClass("panel-active")
+                .find(".panel-title").addClass("collapsed");
+
+                $(this).addClass("active")
+                .parents(".panel-collapse").addClass("in")
+                .parent(".panel").addClass("panel-active")
+                .find(".panel-title").removeClass("collapsed");
+            }
+        });
+    </script>
+
+    @RenderSection("IncludeScript", false)
+</body>
+</html>

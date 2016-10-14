@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace DotWeb.Areas.Active.Controllers
 {
-    public class SysDemoController : AdminController
+    public class SysDemoController : WebUserController
     {
         // GET: Active/SysDemo
         public ActionResult Index()
@@ -36,6 +36,10 @@ namespace DotWeb.Areas.Active.Controllers
             return View();
         }
         public ActionResult Order_edit()
+        {
+            return View();
+        }
+        public ActionResult Payment()
         {
             return View();
         }

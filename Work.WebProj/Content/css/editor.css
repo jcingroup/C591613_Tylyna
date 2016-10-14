@@ -1,0 +1,56 @@
+/*
+Error: File to import not found or unreadable: _web/var.
+       Load path: D:/Github/C601614_ChaominTrading/ChaominTrading/Content/sass
+        on line 7 of D:\Github\C601614_ChaominTrading\ChaominTrading\Content\sass\editor.scss
+
+2: 
+3: 
+4: // import
+5: // ------------------------------------------------------------
+6: @import "helper/variables";
+7: @import "_web/var";
+8: 
+9: @import "helper/mixins";
+10: @import "helper/function";
+11: 
+12: // Reset and dependencies
+
+Backtrace:
+D:\Github\C601614_ChaominTrading\ChaominTrading\Content\sass\editor.scss:7
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/import_node.rb:66:in `rescue in import'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/import_node.rb:45:in `import'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/import_node.rb:28:in `imported_file'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/import_node.rb:37:in `css_import?'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:301:in `visit_import'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `with_base'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `visit'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `map'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:157:in `visit'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:8:in `visit'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:36:in `css_tree'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:20:in `render'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:268:in `render'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:404:in `run'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:62:in `process_result'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
+D:/__工具/Koala/rubygems/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
+D:/__工具/Koala/bin/sass:18:in `load'
+D:/__工具/Koala/bin/sass:18:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: _web/var.\A        Load path: D:/Github/C601614_ChaominTrading/ChaominTrading/Content/sass\A         on line 7 of D:\Github\C601614_ChaominTrading\ChaominTrading\Content\sass\editor.scss\A \A 2: \A 3: \A 4: // import\A 5: // ------------------------------------------------------------\A 6: @import \"helper/variables\";\A 7: @import \"_web/var\";\A 8: \A 9: @import \"helper/mixins\";\A 10: @import \"helper/function\";\A 11: \A 12: // Reset and dependencies"; }

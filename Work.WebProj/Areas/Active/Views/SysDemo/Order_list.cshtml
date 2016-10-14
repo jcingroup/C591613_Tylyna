@@ -1,7 +1,210 @@
 ﻿
 @{
-    ViewBag.Title = "Order_list";
+    @* Layout = "~/Views/Shared/Manage/RLayout.cshtml"; *@
+    @* 暫用 *@
+    Layout = "~/Views/Shared/SysLayoutDemo.cshtml";
+    ViewBag.BodyClass = "Order";
+    ViewBag.IsFirstPage = false;
+    ViewBag.Crumb = "訂單資料維護";
 }
 
-<h2>Order_list</h2>
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li><i class="fa-caret-right"></i> 會員及訂單管理</li>
+        <li><i class="fa-angle-right"></i> @ViewBag.Crumb</li>
+    </ul>
+}
 
+<h3 class="h3">@ViewBag.Crumb</h3>
+
+<div class="table-header">
+    <div class="table-filter">
+        <div class="form-inline">
+            <label class="text-sm">下單日期</label> @* 如要顯示文字: 把 sr-only 拿掉 *@
+            <input type="date" class="form-control form-control-sm" value="2016-01-01" placeholder="yyyy-mm-dd">
+            <label class="text-sm">付款日期</label>
+            <input type="date" class="form-control form-control-sm" value="2016-01-01" placeholder="yyyy-mm-dd">
+            <label class="sr-only text-sm">訂單編號</label>
+            <input type="text" class="form-control form-control-sm" placeholder="訂單編號...">
+            <label class="sr-only text-sm">產品料號/名稱</label>
+            <input type="text" class="form-control form-control-sm" placeholder="產品料號/名稱...">
+            <label class="text-sm">訂單狀態</label>
+            <select class="form-control form-control-sm">
+                <option value="">全部</option>
+                <option value="">待繳款</option>
+                <option value="">已付款 待對帳確認</option>
+                <option value="">等待出貨(匯款完成)</option>
+                <option value="">等待出貨(貨到付款)</option>
+                <option value="">已出貨</option>
+                <option value="">訂單完成</option>
+                <option value="">己取消訂單</option>
+                <option value="">收到退貨通知</option>
+            </select>
+        </div>
+    </div>
+</div>
+<table class="table table-sm table-bordered table-striped table-hover">
+    <colgroup>
+        <col span="2" style="width:5%">
+        <col style="width:14%">
+        <col style="width:30%">
+        <col span="2" style="width:12%">
+        <col style="width:14%">
+        <col style="width:8%">
+    </colgroup>
+    <thead>
+        <tr>
+            <th class="text-xs-center">刪除</th> @* 文字置中: class="text-xs-center" / 置右: class="text-xs-right" *@
+            <th class="text-xs-center">修改</th>
+            <th>
+                @* 點選排序功能 (點一下遞增, 點兩下遞減) *@
+                <button class="th-sort-toggle">訂單編號</button>
+            </th>
+            <th>
+                @* 遞增排序的樣式 class 加 asc *@
+                <button class="th-sort-toggle asc">產品料號/名稱</button>
+            </th>
+            <th>
+                @* 遞減排序的樣式 class 加 desc *@
+                <button class="th-sort-toggle desc">下單日期</button>
+            </th>
+            <th>
+                @* 遞減排序的樣式 class 加 desc *@
+                <button class="th-sort-toggle desc">付款日期</button>
+            </th>
+            <th class="text-xs-center">
+                @* 如不需要排序功能: 純文字即可 *@
+                訂單狀態
+            </th>
+            <th>
+                <button class="text-xs-center th-sort-toggle">排序</button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @* 建議: 1頁10筆資料 *@
+        <tr>
+            <td class="text-xs-center">
+                <button class="btn btn-link btn-lg text-danger"><i class="fa-times"></i></button>
+            </td>
+            <td class="text-xs-center">
+                <button type="button" class="btn btn-link btn-lg" onclick="location.href='Order_edit'"><i class="fa-pencil"></i></button>
+            </td>
+            <td>P20160010001</td>
+            <td>P2-010-01 耶加雪菲G1 濾掛式(10入)</td>
+            <td>2016/10/1</td>
+            <td>2016/10/2</td>
+            <td class="text-xs-center"><span class="label label-warning label-lg m-b-0">待繳款</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+        <tr>
+            <td class="text-xs-center">
+                <button class="btn btn-link btn-lg text-danger"><i class="fa-times"></i></button>
+            </td>
+            <td class="text-xs-center">
+                <button type="button" class="btn btn-link btn-lg" onclick="location.href='Order_edit'"><i class="fa-pencil"></i></button>
+            </td>
+            <td>P20160010022</td>
+            <td>P2-010-01 耶加雪菲G1 濾掛式(10入) <br>P2-010-01 耶加雪菲G1 濾掛式(5入)</td>
+            <td>2016/10/1</td>
+            <td>2016/10/2</td>
+            <td class="text-xs-center"><span class="label label-info label-lg m-b-0">已付款 待對帳確認</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+        <tr>
+            <td class="text-xs-center">
+                <button class="btn btn-link btn-lg text-danger"><i class="fa-times"></i></button>
+            </td>
+            <td class="text-xs-center">
+                <button type="button" class="btn btn-link btn-lg" onclick="location.href='Order_edit'"><i class="fa-pencil"></i></button>
+            </td>
+            <td>P20160010003</td>
+            <td>P2-010-01 耶加雪菲G1 濾掛式(10入) <br>P2-010-01 耶加雪菲G1 濾掛式(5入)</td>
+            <td>2016/10/1</td>
+            <td>2016/10/2</td>
+            <td class="text-xs-center"><span class="label label-warning label-lg m-b-0">等待出貨(匯款完成)</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+        <tr>
+            <td class="text-xs-center">
+                <button class="btn btn-link btn-lg text-danger"><i class="fa-times"></i></button>
+            </td>
+            <td class="text-xs-center">
+                <button type="button" class="btn btn-link btn-lg" onclick="location.href='Order_edit'"><i class="fa-pencil"></i></button>
+            </td>
+            <td>P20160010044</td>
+            <td>P2-010-01 耶加雪菲G1 濾掛式(10入)</td>
+            <td>2016/10/1</td>
+            <td>2016/10/2</td>
+            <td class="text-xs-center"><span class="label label-success label-lg m-b-0">訂單完成</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+        <tr>
+            <td class="text-xs-center">
+                <button class="btn btn-link btn-lg text-danger"><i class="fa-times"></i></button>
+            </td>
+            <td class="text-xs-center">
+                <button type="button" class="btn btn-link btn-lg" onclick="location.href='Order_edit'"><i class="fa-pencil"></i></button>
+            </td>
+            <td>P20160010055</td>
+            <td>P2-010-01 耶加雪菲G1 濾掛式(10入)</td>
+            <td>2016/10/1</td>
+            <td>2016/10/2</td>
+            <td class="text-xs-center"><span class="label label-default label-lg m-b-0">已取消訂單</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+        <tr>
+            <td class="text-xs-center">
+                <button class="btn btn-link btn-lg text-danger"><i class="fa-times"></i></button>
+            </td>
+            <td class="text-xs-center">
+                <button type="button" class="btn btn-link btn-lg" onclick="location.href='Order_edit'"><i class="fa-pencil"></i></button>
+            </td>
+            <td>P20160010065</td>
+            <td>P2-010-01 耶加雪菲G1 濾掛式(10入)</td>
+            <td>2016/10/1</td>
+            <td>2016/10/2</td>
+            <td class="text-xs-center"><span class="label label-danger label-lg m-b-0">收到退貨通知</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+        <tr>
+            <td class="text-xs-center">
+                <button class="btn btn-link btn-lg text-danger"><i class="fa-times"></i></button>
+            </td>
+            <td class="text-xs-center">
+                <button type="button" class="btn btn-link btn-lg" onclick="location.href='Order_edit'"><i class="fa-pencil"></i></button>
+            </td>
+            <td>P20160010021</td>
+            <td>P2-010-01 耶加雪菲G1 濾掛式(10入)</td>
+            <td>2016/10/1</td>
+            <td>2016/10/2</td>
+            <td class="text-xs-center"><span class="label label-success label-lg m-b-0">已出貨</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+    </tbody>
+</table>
+<div class="table-footer clearfix">
+    <button type="button" class="btn btn-sm btn-success pull-xs-left" onclick="location.href='Order_edit'">
+        <i class="fa-plus-circle"></i> 新增
+    </button>
+    <small class="pull-xs-right">第 1-10 筆，共 20 筆</small>
+    <ul class="pager pager-sm">
+        <li>
+            <a href=""><i class="fa-angle-double-left"></i></a>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-left"></i></a>
+        </li>
+        <li class="form-inline">
+            <label>第</label>
+            <input type="text" class="form-control form-control-sm text-xs-center" style="width:100px">
+            <label>頁，共 2 頁</label>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-right"></i></a>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-double-right"></i></a>
+        </li>
+    </ul>
+</div>

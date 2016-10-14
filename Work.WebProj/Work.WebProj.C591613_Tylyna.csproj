@@ -242,6 +242,7 @@
     <Content Include="Areas\Active\Views\SysDemo\Story.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\FAQ_list.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\FAQ_edit.cshtml" />
+    <Content Include="Areas\Active\Views\SysDemo\Payment.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
@@ -516,7 +517,7 @@
     <Content Include="Scripts\build\app\w_sell_list.js" />
     <Content Include="Scripts\GoogleAnalytics.js" />
     <Content Include="Scripts\googleReCAPTCHA.js" />
-    <Content Include="Views\Shared\Layout2.cshtml" />
+    <Content Include="Views\Shared\SysLayoutDemo.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\Quality.cshtml" />
     <Content Include="Views\Home\Story.cshtml" />
