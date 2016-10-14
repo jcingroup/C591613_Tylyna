@@ -15,3 +15,88 @@
     </ul>
 }
 
+<h3 class="h3">@ViewBag.Crumb</h3>
+
+<form action="">
+    <section class="col-xs-6">
+        <header class="bg-info p-x-1">轉帳匯款資料設定</header>
+        <main class="p-y-1">
+            <dl class="form-group row">
+                <dt class="col-xs-2 text-xs-right">戶名</dt>
+                <dd class="col-xs-10">
+                    <input type="text" class="form-control form-control-sm">
+                </dd>
+            </dl>
+            <dl class="form-group row">
+                <dt class="col-xs-2 text-xs-right">銀行</dt>
+                <dd class="col-xs-10">
+                    <input type="text" class="form-control form-control-sm">
+                </dd>
+            </dl>
+            <dl class="form-group row">
+                <dt class="col-xs-2 text-xs-right">代碼</dt>
+                <dd class="col-xs-10">
+                    <input type="number" class="form-control form-control-sm">
+                </dd>
+            </dl>
+            <dl class="form-group row">
+                <dt class="col-xs-2 text-xs-right">帳號</dt>
+                <dd class="col-xs-10">
+                    <input type="text" class="form-control form-control-sm">
+                </dd>
+            </dl>
+            <dl class="form-group row">
+                <dt class="col-xs-2 text-xs-right">運費設定</dt>
+                <dd class="col-xs-10">
+                    訂單金額少於 NT$
+                    <input type="number" min="0" class="form-control-sm" style="width: 16%" required>
+
+                    須付運費 NT$
+                    <input type="number" min="0" class="form-control-sm" style="width: 16%" required>
+                    元
+                </dd>
+            </dl>
+        </main>
+    </section>
+
+    <section class="col-xs-6">
+        <header class="bg-success p-x-1">貨到付款資料設定</header>
+        <main class="p-y-1">
+            <dl class="form-group row">
+                <dt class="col-xs-2 text-xs-right">戶名</dt>
+                <dd class="col-xs-10">
+                    <input type="text" class="form-control form-control-sm">
+                </dd>
+            </dl>
+            <dl class="form-group row">
+                <dt class="col-xs-2 text-xs-right">銀行</dt>
+                <dd class="col-xs-10">
+                    <input type="text" class="form-control form-control-sm">
+                </dd>
+            </dl>
+            <dl class="form-group row">
+                <dt class="col-xs-2 text-xs-right">代碼</dt>
+                <dd class="col-xs-10">
+                    <input type="number" class="form-control form-control-sm">
+                </dd>
+            </dl>
+            <dl class="form-group row">
+                <dt class="col-xs-2 text-xs-right">帳號</dt>
+                <dd class="col-xs-10">
+                    <input type="text" class="form-control form-control-sm">
+                </dd>
+            </dl>
+            <dl class="form-group row">
+                <dt class="col-xs-2 text-xs-right">運費設定</dt>
+                <dd class="col-xs-10">
+                    訂單金額少於 NT$
+                    <input type="number" min="0" class="form-control-sm" style="width: 16%" required>
+
+                    須付運費 NT$
+                    <input type="number" min="0" class="form-control-sm" style="width: 16%" required>
+                    元
+                </dd>
+            </dl>
+        </main>
+    </section>
+</form>
