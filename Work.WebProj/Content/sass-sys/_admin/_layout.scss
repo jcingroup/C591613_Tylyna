@@ -5,7 +5,7 @@
 -----------------------------------------------------------------------*/
 
 // var
-// 
+//
 $header-height:         48px !default;
 $sidebar-width:         220px !default;
 $footer-height:         51px !default;
@@ -67,7 +67,7 @@ a {
     .navbar-brand {
         padding-top:    $spacer*0.8;
         padding-bottom: $spacer*0.8;
-    }    
+    }
 }
 .navbar-nav {
     border-right: 1px solid #fff;
@@ -131,6 +131,8 @@ a {
     overflow-y: auto;
 
     @include hover-focus {color: $link-color;}
+
+    dl, dd { margin-bottom: 0; }
 
     .panel-active {
         border-right: 2px solid $link-color;

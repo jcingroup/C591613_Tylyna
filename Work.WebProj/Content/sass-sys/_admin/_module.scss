@@ -159,22 +159,31 @@ input[type="file"] {
 // tabs
 // ----------------------------------------------------------------------
 .nav-tabs {
-  .nav-item {
-    .nav-link {
-      color: #999;
-      background: #f7f7f7;
-      border-color: $nav-tabs-border-color $nav-tabs-border-color transparent $nav-tabs-border-color;
-      @include hover-focus {
-        color: lighten($brand-primary,5%);
-        background: #fff;
-      }
+  @include list-unstyled;
+  margin-bottom: 0;
+  li {
+    margin: 0;
+    float: left;
+    margin-bottom: -1px;
+  }
+  a {
+    display: block;
+    padding: 5px 10px;
+    color: #999;
+    background: #f7f7f7;
+    // border-color: $nav-tabs-border-color $nav-tabs-border-color transparent $nav-tabs-border-color;
+    border: 1px solid #D7E7F1;
+    border-bottom: none;
+    @include hover-focus {
+      color: lighten($brand-primary,5%);
+      background: #fff;
+    }
 
-      &.active {
-        color: $gray;
-        background: #fff;
-        border-top: 2px solid $brand-primary;
-        box-shadow: 0 (-2px) 2px #ddd;
-      }
+    &.active {
+      color: $gray;
+      background: #fff;
+      border-top: 2px solid $brand-primary;
+      box-shadow: 0 (-2px) 2px #ddd;
     }
   }
 }

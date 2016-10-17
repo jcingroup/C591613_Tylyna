@@ -17,3 +17,118 @@
 
 <h3 class="h3">@ViewBag.Crumb</h3>
 
+<header class="table-header">
+    <div class="table-filter">
+        <div class="form-inline">
+            <label class="sr-only text-sm">關鍵字</label> @* 如要顯示文字: 把 sr-only 拿掉 *@
+            <input type="text" class="form-control form-control-sm" placeholder="請輸入關鍵字...">
+            <label class="text-sm">主分類</label>
+            <select class="form-control form-control-sm">
+                <option>全部</option>
+                <option>咖啡品項</option>
+                <option>季節限定</option>
+            </select>
+            <label class="text-sm">產品品名</label>
+            <select class="form-control form-control-sm">
+                <option>全部</option>
+                <option>尼加拉瓜</option>
+                <option>瓜地馬拉</option>
+                <option>肯亞</option>
+                <option>耶加雪菲</option>
+                <option>哥倫比亞</option>
+                <option>哥期大黎加</option>
+                <option>黃金曼特寧</option>
+                <option>蒲隆地</option>
+            </select>
+            <label class="text-sm">前台顯示</label>
+            <select class="form-control form-control-sm">
+                <option>全部</option>
+                <option>顯示</option>
+                <option>隱藏</option>
+            </select>
+        </div>
+    </div><!-- table-filter //-->
+</header><!-- table-header //-->
+
+<table class="table table-sm table-bordered table-striped table-hover">
+    <colgroup>
+        <col span="2" style="width:5%">
+    </colgroup>
+    <thead>
+        <tr>
+            <th class="text-xs-center">刪除</th> @* 文字置中: class="text-xs-center" / 置右: class="text-xs-right" *@
+            <th class="text-xs-center">修改</th>
+            <th>
+                @* 點選排序功能 (點一下遞增, 點兩下遞減) *@
+                <button class="th-sort-toggle">主分類</button>
+            </th>
+            <th>產品品名</th>
+            <th>包裝規格</th>
+            <th class="text-xs-center">
+                <button class="th-sort-toggle">前台顯示</button>
+            </th>
+            <th>
+                <button class="text-xs-center th-sort-toggle">排序</button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @* 建議: 1頁10筆資料 *@
+        <tr>
+            <td class="text-xs-center">
+                <button class="btn btn-link btn-lg text-danger"><i class="fa-times"></i></button>
+            </td>
+            <td class="text-xs-center">
+                <button type="button" class="btn btn-link btn-lg" onclick="location.href='Products_edit'"><i class="fa-pencil"></i></button>
+            </td>
+            <td>咖啡品項</td>
+            <td>耶加雪菲</td>
+            <td>
+                <span class="w3-tag label-primary">10入濾掛式包</span>
+                <span class="w3-tag label-primary">5入濾掛式包</span>
+                <span class="w3-tag label-primary">袋裝咖啡豆</span>
+            </td>
+            <td class="text-xs-center"><span class="w3-tag label-success w3-round">顯示</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+        <tr>
+            <td class="text-xs-center">
+                <button class="btn btn-link btn-lg text-danger"><i class="fa-times"></i></button>
+            </td>
+            <td class="text-xs-center">
+                <button type="button" class="btn btn-link btn-lg" onclick="location.href='Products_edit'"><i class="fa-pencil"></i></button>
+            </td>
+            <td>季節限定</td>
+            <td>綜合豆-耶加雪菲.瓜地馬拉.哥斯大黎加.肯亞.尼加拉瓜</td>
+            <td><span class="w3-tag label-primary">袋裝咖啡豆</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-default w3-round">隱藏</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+    </tbody>
+</table>
+
+<footer class="table-footer clearfix">
+    <button type="button" class="btn btn-sm btn-success pull-xs-left" onclick="location.href='Products_edit'">
+        <i class="fa-plus-circle"></i> 新增
+    </button>
+    <small class="pull-xs-right">第 1-10 筆，共 20 筆</small>
+    <ul class="pager pager-sm">
+        <li>
+            <a href=""><i class="fa-angle-double-left"></i></a>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-left"></i></a>
+        </li>
+        <li class="form-inline">
+            <label>第</label>
+            <input type="text" class="form-control form-control-sm text-xs-center" style="width:100px">
+            <label>頁，共 2 頁</label>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-right"></i></a>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-double-right"></i></a>
+        </li>
+    </ul>
+</footer>

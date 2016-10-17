@@ -98,7 +98,7 @@
   input[type="datetime-local"],
   input[type="month"] {
     &.form-control {
-      line-height: $input-height;
+      line-height: $line-height;
     }
 
     &.input-sm,

@@ -17,40 +17,34 @@
 
 <h3 class="h3">@ViewBag.Crumb</h3>
 
-<div class="table-header">
+<header class="table-header">
     <div class="table-filter">
         <div class="form-inline">
-            <label class="text-sm">下單日期</label> @* 如要顯示文字: 把 sr-only 拿掉 *@
-            <input type="date" class="form-control form-control-sm" value="2016-01-01" placeholder="yyyy-mm-dd">
-            <label class="text-sm">付款日期</label>
-            <input type="date" class="form-control form-control-sm" value="2016-01-01" placeholder="yyyy-mm-dd">
-            <label class="sr-only text-sm">訂單編號</label>
+            <label class="sr-only text-sm">訂單編號</label> @* 如要顯示文字: 把 sr-only 拿掉 *@
             <input type="text" class="form-control form-control-sm" placeholder="訂單編號...">
             <label class="sr-only text-sm">產品料號/名稱</label>
             <input type="text" class="form-control form-control-sm" placeholder="產品料號/名稱...">
-            <label class="text-sm">訂單狀態</label>
-            <select class="form-control form-control-sm">
-                <option value="">全部</option>
-                <option value="">待繳款</option>
-                <option value="">已付款 待對帳確認</option>
-                <option value="">等待出貨(匯款完成)</option>
-                <option value="">等待出貨(貨到付款)</option>
-                <option value="">已出貨</option>
-                <option value="">訂單完成</option>
-                <option value="">己取消訂單</option>
-                <option value="">收到退貨通知</option>
-            </select>
+            <label class="text-sm">下單日期</label>
+            <input type="date" class="form-control form-control-sm">
+            <label class="text-sm">付款日期</label>
+            <input type="date" class="form-control form-control-sm">
         </div>
-    </div>
-</div>
+        <div class="form-inline">
+            <label class="text-sm">訂單狀態</label>
+            <button class="btn btn-primary btn-sm">全部</button>
+            <button class="btn btn-sm">待繳款</button>
+            <button class="btn btn-sm">待出貨</button>
+            <button class="btn btn-sm">已出貨</button>
+            <button class="btn btn-sm">退貨中</button>
+            <button class="btn btn-sm">訂單完成</button>
+            <button class="btn btn-sm">取消訂單</button>
+            <button class="btn btn-sm">已結單</button>
+        </div>
+    </div><!-- table-filter //-->
+</header>
 <table class="table table-sm table-bordered table-striped table-hover">
     <colgroup>
         <col span="2" style="width:5%">
-        <col style="width:14%">
-        <col style="width:30%">
-        <col span="2" style="width:12%">
-        <col style="width:14%">
-        <col style="width:8%">
     </colgroup>
     <thead>
         <tr>
@@ -74,7 +68,10 @@
             </th>
             <th class="text-xs-center">
                 @* 如不需要排序功能: 純文字即可 *@
-                訂單狀態
+                付款方式
+            </th>
+            <th class="text-xs-center">
+                <button class="th-sort-toggle">訂單狀態</button>
             </th>
             <th>
                 <button class="text-xs-center th-sort-toggle">排序</button>
@@ -92,9 +89,10 @@
             </td>
             <td>P20160010001</td>
             <td>P2-010-01 耶加雪菲G1 濾掛式(10入)</td>
-            <td>2016/10/1</td>
-            <td>2016/10/2</td>
-            <td class="text-xs-center"><span class="label label-warning label-lg m-b-0">待繳款</span></td>
+            <td class="text-xs-center">2016/10/1</td>
+            <td class="text-xs-center">2016/10/2</td>
+            <td class="text-xs-center">貨到付款</td>
+            <td class="text-xs-center"><span class="w3-tag label-warning w3-round">待繳款</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -106,9 +104,10 @@
             </td>
             <td>P20160010022</td>
             <td>P2-010-01 耶加雪菲G1 濾掛式(10入) <br>P2-010-01 耶加雪菲G1 濾掛式(5入)</td>
-            <td>2016/10/1</td>
-            <td>2016/10/2</td>
-            <td class="text-xs-center"><span class="label label-info label-lg m-b-0">已付款 待對帳確認</span></td>
+            <td class="text-xs-center">2016/10/1</td>
+            <td class="text-xs-center">2016/10/2</td>
+            <td class="text-xs-center">貨到付款</td>
+            <td class="text-xs-center"><span class="w3-tag label-info w3-round">已出貨</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -120,9 +119,10 @@
             </td>
             <td>P20160010003</td>
             <td>P2-010-01 耶加雪菲G1 濾掛式(10入) <br>P2-010-01 耶加雪菲G1 濾掛式(5入)</td>
-            <td>2016/10/1</td>
-            <td>2016/10/2</td>
-            <td class="text-xs-center"><span class="label label-warning label-lg m-b-0">等待出貨(匯款完成)</span></td>
+            <td class="text-xs-center">2016/10/1</td>
+            <td class="text-xs-center">2016/10/2</td>
+            <td class="text-xs-center">轉帳匯款</td>
+            <td class="text-xs-center"><span class="w3-tag label-warning w3-round">待出貨</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -134,9 +134,10 @@
             </td>
             <td>P20160010044</td>
             <td>P2-010-01 耶加雪菲G1 濾掛式(10入)</td>
-            <td>2016/10/1</td>
-            <td>2016/10/2</td>
-            <td class="text-xs-center"><span class="label label-success label-lg m-b-0">訂單完成</span></td>
+            <td class="text-xs-center">2016/10/1</td>
+            <td class="text-xs-center">2016/10/2</td>
+            <td class="text-xs-center">貨到付款</td>
+            <td class="text-xs-center"><span class="w3-tag label-success w3-round">訂單完成</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -148,9 +149,10 @@
             </td>
             <td>P20160010055</td>
             <td>P2-010-01 耶加雪菲G1 濾掛式(10入)</td>
-            <td>2016/10/1</td>
-            <td>2016/10/2</td>
-            <td class="text-xs-center"><span class="label label-default label-lg m-b-0">已取消訂單</span></td>
+            <td class="text-xs-center">2016/10/1</td>
+            <td class="text-xs-center">2016/10/2</td>
+            <td class="text-xs-center">轉帳匯款</td>
+            <td class="text-xs-center"><span class="w3-tag label-default w3-round">取消訂單</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -162,9 +164,10 @@
             </td>
             <td>P20160010065</td>
             <td>P2-010-01 耶加雪菲G1 濾掛式(10入)</td>
-            <td>2016/10/1</td>
-            <td>2016/10/2</td>
-            <td class="text-xs-center"><span class="label label-danger label-lg m-b-0">收到退貨通知</span></td>
+            <td class="text-xs-center">2016/10/1</td>
+            <td class="text-xs-center">2016/10/2</td>
+            <td class="text-xs-center">貨到付款</td>
+            <td class="text-xs-center"><span class="w3-tag label-danger w3-round">退貨中</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -176,14 +179,15 @@
             </td>
             <td>P20160010021</td>
             <td>P2-010-01 耶加雪菲G1 濾掛式(10入)</td>
-            <td>2016/10/1</td>
-            <td>2016/10/2</td>
-            <td class="text-xs-center"><span class="label label-success label-lg m-b-0">已出貨</span></td>
+            <td class="text-xs-center">2016/10/1</td>
+            <td class="text-xs-center">2016/10/2</td>
+            <td class="text-xs-center">轉帳匯款</td>
+            <td class="text-xs-center"><span class="w3-tag label-primary w3-round">已結單</span></td>
             <td class="text-xs-center">10</td>
         </tr>
     </tbody>
 </table>
-<div class="table-footer clearfix">
+<footer class="table-footer clearfix">
     <button type="button" class="btn btn-sm btn-success pull-xs-left" onclick="location.href='Order_edit'">
         <i class="fa-plus-circle"></i> 新增
     </button>
@@ -207,4 +211,4 @@
             <a href=""><i class="fa-angle-double-right"></i></a>
         </li>
     </ul>
-</div>
+</footer>

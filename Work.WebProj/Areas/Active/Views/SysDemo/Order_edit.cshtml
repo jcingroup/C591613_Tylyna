@@ -28,7 +28,7 @@
             <div class="col-xs-4">
                 <input type="text" class="form-control" placeholder="系統自動產生..." disabled>
             </div>
-            <label class="col-xs-1 form-control-label text-xs-right">
+            <label class="col-xs-2 form-control-label text-xs-right">
                 <span class="text-danger">*</span> 購買人
             </label>
             <div class="col-xs-4">
@@ -46,7 +46,7 @@
             <div class="col-xs-4">
                 <input type="date" class="form-control">
             </div>
-            <label class="col-xs-1 form-control-label text-xs-right">
+            <label class="col-xs-2 form-control-label text-xs-right">
                 <span class="text-danger">*</span> 訂單審核
             </label>
             <div class="col-xs-4 form-inline">
@@ -69,9 +69,8 @@
                 <span class="text-danger">*</span> 付款方式
             </label>
             <div class="col-xs-4">
-                <span class="label label-info label-lg m-b-0">轉帳匯款</span>
-                or
-                <span class="label label-info label-lg m-b-0">貨到付款</span>
+                <span class="w3-tag label-default w3-round">轉帳匯款</span>
+                <span class="w3-tag label-default w3-round">貨到付款</span>
 
                 @* 新增時show下方
                 <label class="c-input c-radio">
@@ -85,7 +84,7 @@
                     <span class="text-sm">貨到付款</span>
                 </label> *@
             </div>
-            <label class="col-xs-1 form-control-label text-xs-right">
+            <label class="col-xs-2 form-control-label text-xs-right">
                 <span class="text-danger">*</span> 總金額
             </label>
             <div class="col-xs-4">
@@ -101,16 +100,15 @@
                 <span class="text-danger">*</span> 訂單狀態
             </label>
             <div class="col-xs-4">
-                <button class="btn btn-danger btn-sm">待繳款</button> @* (若選擇轉帳匯款 才出現此項) *@
-                @* 按下待付款 - 就依序顯示下一按鈕
-                <button class="btn btn-danger btn-sm">待對帳</button> (若選擇轉帳匯款 才出現此項)
-                <button class="btn btn-danger btn-sm">等待出貨</button>
-                <button class="btn btn-danger btn-sm">已出貨</button>
-                <button class="btn btn-danger btn-sm">收到款項 待對帳</button> (若選擇貨到付款 才出現此項)
-                <span class="label label-success label-lg m-b-0">訂單完成</button>
-                *@
+                <button class="btn btn-danger btn-sm margin-4">待繳款</button>
+                <button class="btn btn-sm margin-4">待出貨</button>
+                <button class="btn btn-sm margin-4">已出貨</button>
+                <button class="btn btn-sm margin-4">退貨中</button>
+                <button class="btn btn-sm margin-4">訂單完成</button>
+                <button class="btn btn-sm margin-4">取消訂單</button>
+                <button class="btn btn-sm margin-4">已結單</button>
             </div>
-            <label class="col-xs-1 form-control-label text-xs-right">
+            <label class="col-xs-2 form-control-label text-xs-right">
                 <span class="text-danger">*</span> 出貨日期
             </label>
             <div class="col-xs-4">
@@ -139,81 +137,77 @@
         </dl>
     </fieldset>
 
-    <fieldset class="m-t-2">
-        <legend class="h4">已付款通知</legend>
-        <table class="table table-sm table-bordered">
-            <thead>
-                <tr>
-                    <th class="text-xs-center">編輯</th>
-                    <th class="text-xs-center">匯款帳號後5碼</th>
-                    <th class="text-xs-center">匯款日期</th>
-                    <th class="text-xs-center">匯款時間</th>
-                    <th class="text-xs-center">匯款金額</th>
-                </tr>
-            </thead>
+    <table class="table table-sm table-bordered m-t-2">
+        <caption class="table-header w3-large">已付款通知</caption>
+        <thead>
             <tr>
-                <td rowspan="2" class="text-xs-center">
-                    <button class="btn btn-link text-success" title="編輯"><i class="fa fa-pencil"></i></button>
-                </td>
-                <td>
-                    <input type="number" min="0" class="form-control" value="000000" disabled>
-                </td>
-                <td>
-                    <input type="date" value="2016/10/14" class="form-control" disabled>
-                </td>
-                <td>
-                    <input type="time" class="form-control" disabled>
-                </td>
-                <td>
-                    <input type="number" min="0" class="form-control" value="000000" disabled>
-                </td>
+                <th class="text-xs-center">編輯</th>
+                <th class="text-xs-center">匯款帳號後5碼</th>
+                <th class="text-xs-center">匯款日期</th>
+                <th class="text-xs-center">匯款時間</th>
+                <th class="text-xs-center">匯款金額</th>
             </tr>
-            <tr>
-                <td colspan="4">
-                    <textarea rows="1" class="form-control">備註：</textarea>
-                </td>
-            </tr>
-        </table>
-    </fieldset>
+        </thead>
+        <tr>
+            <td rowspan="2" class="text-xs-center">
+                <button class="btn btn-link text-success" title="編輯"><i class="fa fa-pencil fa-lg"></i></button>
+            </td>
+            <td>
+                <input type="number" min="0" class="form-control" value="000000" disabled>
+            </td>
+            <td>
+                <input type="date" value="2016/10/14" class="form-control" disabled>
+            </td>
+            <td>
+                <input type="time" class="form-control" disabled>
+            </td>
+            <td>
+                <input type="number" min="0" class="form-control" value="000000" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <textarea rows="1" class="form-control">備註：</textarea>
+            </td>
+        </tr>
+    </table>
 
-    <fieldset class="m-t-2">
-        <legend class="h4">商品資料明細</legend>
-        <table class="table table-sm table-bordered table-striped table-hover">
-            <thead>
-                <tr>
-                    <th class="text-xs-center">編輯</th>
-                    <th class="text-xs-center">項次</th>
-                    <th class="text-xs-center">料號</th>
-                    <th class="text-xs-center">品名</th>
-                    <th class="text-xs-center">單價</th>
-                    <th class="text-xs-center">數量</th>
-                    <th class="text-xs-center">小計</th>
-                </tr>
-            </thead>
+    <table class="table table-sm table-bordered table-striped table-hover m-t-2">
+        <caption class="table-header w3-large">訂購商品明細</caption>
+        <thead>
             <tr>
-                <td class="text-xs-center">
-                    <button class="btn btn-link text-danger" title="刪除"><i class="fa fa-trash"></i></button>
-                    <button class="btn btn-link text-success" title="編輯"><i class="fa fa-pencil"></i></button>
-                </td>
-                <td class="text-xs-center">1</td>
-                <td>P2-010-01</td>
-                <td class="text-xs-left">
-                    耶加雪菲G1 濾掛式(10入)
-                </td>
-                <td class="text-xs-center">490</td>
-                <td class="text-xs-center">1</td>
-                <td class="text-xs-center">490</td>
+                <th class="text-xs-center">編輯</th>
+                <th class="text-xs-center">項次</th>
+                <th class="text-xs-center">料號</th>
+                <th class="text-xs-center">品名</th>
+                <th class="text-xs-center">單價</th>
+                <th class="text-xs-center">數量</th>
+                <th class="text-xs-center">小計</th>
             </tr>
-            <tfoot>
-                <tr>
-                    <td colspan="7" class="text-xs-right">
-                        運費: 150<br>
-                        總計: 500
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </fieldset>
+        </thead>
+        <tr>
+            <td class="text-xs-center">
+                <button class="btn btn-link text-danger" title="刪除"><i class="fa fa-trash fa-lg"></i></button>
+                <button class="btn btn-link text-success" title="編輯"><i class="fa fa-pencil fa-lg"></i></button>
+            </td>
+            <td class="text-xs-center">1</td>
+            <td>P2-010-01</td>
+            <td class="text-xs-left">
+                耶加雪菲G1 濾掛式(10入)
+            </td>
+            <td class="text-xs-center">490</td>
+            <td class="text-xs-center">1</td>
+            <td class="text-xs-center">490</td>
+        </tr>
+        <tfoot>
+            <tr>
+                <td colspan="7" class="text-xs-right">
+                    運費: 150<br>
+                    總計: 500
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 
     <div class="form-action">
         <button type="button" class="btn btn-primary btn-sm col-xs-offset-1" onclick="location.href='Order_list'">

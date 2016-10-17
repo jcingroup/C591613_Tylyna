@@ -65,6 +65,10 @@
                     @* 加到購物車後，top> Basket會呈現購物車數量 *@
                     <button class="btn">ADD</button>
                 </td>
+            </tr><tr>
+                <td class="item">商業豆</td>
+                <td class="spec">2kg/包</td>
+                <td colspan="2" class="text-left">歡迎來電洽談 00-000-0000</td>
             </tr>
         </table>
     </form><!-- modal-content //-->
@@ -76,11 +80,21 @@
         @* 品名 *@
         <dt>瓜地馬拉</dt>
         @* 簡介 *@
-        <dd>入口明朗的漿果風味，果酸細緻多變，若隱若現的花香氣息，層次豐富迷人。</dd>
+        <dd>
+            <ul class="m-l-24">
+                <li>
+                    風味：入口明朗的漿果風味，果酸細緻多變，若隱若現的花香氣息，層次豐富迷人。<br>
+                    香: 3 甘: 2 苦: 3 酸: 3 醇: 2 (1~5)
+                </li>
+                <li>處理法：水洗</li>
+                <li>焙度：中淺烘焙</li>
+                <li>保存期限：60天 製造日期：詳見包裝</li>
+                <li>風味鑑賞：前段檸檬皮的清香，李子的果酸，質地乾淨，尾段回甜快。</li>
+                <li>保存方式：避免陽光直射，存放在陰涼處，若超過14天可冷藏以延長最佳風味。</li>
+            </ul>
+        </dd>
         <dd class="btn-bar">
             <a class="btn bg-danger" onclick="document.getElementById('detail').style.display='block'">我要購買</a>
-            @* 後台可設置個別商品不開放線上訂購 - 不開放時顯示下列文字(後台可編輯) *@
-            歡迎來電洽談 <strong>(00) 000-0000</strong>
         </dd>
     </dl>
     <div class="col-5 products-pic">
