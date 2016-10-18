@@ -1,0 +1,130 @@
+﻿
+@{
+    @* Layout = "~/Views/Shared/Manage/RLayout.cshtml"; *@
+    @* 暫用 *@
+    Layout = "~/Views/Shared/SysLayoutDemo.cshtml";
+    ViewBag.BodyClass = "Order";
+    ViewBag.IsFirstPage = false;
+    ViewBag.Crumb = "訂單統計及匯出";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li><i class="fa-caret-right"></i> 會員及訂單管理</li>
+        <li><i class="fa-angle-right"></i> @ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="h3">@ViewBag.Crumb</h3>
+
+<header class="table-header">
+    <div class="table-filter">
+        <div class="form-inline">
+            <label class="sr-only text-sm">關鍵字</label> @* 如要顯示文字: 把 sr-only 拿掉 *@
+            <input type="text" class="form-control form-control-sm" placeholder="請輸入關鍵字...">
+            <select class="form-control form-control-sm">
+                <option>選擇出貨狀態</option>
+                <option>待出貨</option>
+                <option>已出貨</option>
+            </select>
+            <label class="sr-only text-sm">下單開始時間(下單日期)</label>
+            <div class="input-group">
+                <span class="input-group-addon">起</span>
+                <input type="date" class="form-control form-control-sm">
+            </div>
+            <label class="sr-only text-sm">結束時間(下單日期)</label>
+            <div class="input-group">
+                <span class="input-group-addon">迄</span>
+                <input type="date" class="form-control form-control-sm">
+            </div>
+            <button class="btn btn-success btn-sm"><i class="fa-print"></i> 列印</button>
+        </div>
+    </div><!-- table-filter //-->
+</header><!-- table-header //-->
+
+<table class="table table-sm table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @* 點選排序功能 (點一下遞增, 點兩下遞減) *@
+                <button class="th-sort-toggle">訂單編號</button>
+            </th>
+            <th>
+                @* 遞增排序的樣式 class 加 asc *@
+                <button class="th-sort-toggle asc">產品料號</button>
+            </th>
+            <th>
+                <button class="th-sort-toggle">產品品名</button>
+            </th>
+            <th class="text-xs-center">
+                @* 如不需要排序功能: 純文字即可 *@
+                產品數量
+            </th>
+            <th class="text-xs-center">單價</th>
+            <th class="text-xs-center">總價</th>
+            <th>
+                @* 遞減排序的樣式 class 加 desc *@
+                <button class="th-sort-toggle">下單日期</button>
+            </th>
+            <th>
+                <button class="th-sort-toggle desc">付款日期</button>
+            </th>
+            <th class="text-xs-center">
+                <button class="th-sort-toggle">出貨日期</button>
+            </th>
+            <th class="text-xs-center">訂購人</th>
+        </tr>
+    </thead>
+    <tbody>
+        @* 建議: 1頁10筆資料 *@
+        <tr>
+            <td><a href="Order_edit">P201610010001</a></td>
+            <td>02-010-01</td>
+            <td>耶加雪菲-10入濾掛式包</td>
+            <td class="text-xs-center">1</td>
+            <td class="text-xs-center">490</td>
+            <td class="text-xs-center">490</td>
+            <td>2016/10/1</td>
+            <td>2016/10/2</td>
+            <td>
+                <span class="w3-tag label-danger">待出貨</span> @* 未出貨時顯示 *@
+            </td>
+            <td>鄧微諭</td>
+        </tr>
+        <tr>
+            <td><a href="Order_edit">P201610010001</a></td>
+            <td>02-010-01</td>
+            <td>耶加雪菲-10入濾掛式包</td>
+            <td class="text-xs-center">1</td>
+            <td class="text-xs-center">490</td>
+            <td class="text-xs-center">490</td>
+            <td>2016/10/1</td>
+            <td>2016/10/2</td>
+            <td>2016/10/20</td>
+            <td>鄧微諭</td>
+        </tr>
+    </tbody>
+</table>
+
+<footer class="table-footer clearfix">
+    <small class="pull-xs-right">第 1-10 筆，共 20 筆</small>
+    <ul class="pager pager-sm">
+        <li>
+            <a href=""><i class="fa-angle-double-left"></i></a>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-left"></i></a>
+        </li>
+        <li class="form-inline">
+            <label>第</label>
+            <input type="text" class="form-control form-control-sm text-xs-center" style="width:100px">
+            <label>頁，共 2 頁</label>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-right"></i></a>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-double-right"></i></a>
+        </li>
+    </ul>
+</footer>

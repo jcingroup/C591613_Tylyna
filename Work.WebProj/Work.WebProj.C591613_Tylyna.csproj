@@ -243,6 +243,8 @@
     <Content Include="Areas\Active\Views\SysDemo\FAQ_list.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\FAQ_edit.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\Payment.cshtml" />
+    <Content Include="Areas\Active\Views\SysDemo\Products_Name.cshtml" />
+    <Content Include="Areas\Active\Views\SysDemo\Order_count.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />

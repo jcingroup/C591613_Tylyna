@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/SysLayoutDemo.cshtml";
     ViewBag.BodyClass = "Products";
     ViewBag.IsFirstPage = false;
-    ViewBag.Crumb = "產品分類維護";
+    ViewBag.Crumb = "產品主分類維護";
 }
 
 @section Breadcrumb {
@@ -16,3 +16,85 @@
 }
 
 <h3 class="h3">@ViewBag.Crumb</h3>
+
+<header class="table-header">
+    <div class="table-filter">
+        <div class="form-inline">
+            <label class="sr-only text-sm">關鍵字</label> @* 如要顯示文字: 把 sr-only 拿掉 *@
+            <input type="text" class="form-control form-control-sm" placeholder="請輸入關鍵字...">
+            <label class="text-sm">前台顯示</label>
+            <select class="form-control form-control-sm">
+                <option>全部</option>
+                <option>顯示</option>
+                <option>隱藏</option>
+            </select>
+        </div>
+    </div><!-- table-filter //-->
+</header><!-- table-header //-->
+
+<table class="table table-sm table-bordered table-striped table-hover">
+    <colgroup>
+        <col style="width: 8%">
+        <col>
+        <col style="width: 15%">
+        <col style="width: 20%">
+    </colgroup>
+    <thead>
+        <tr>
+            <th class="text-xs-center">編輯</th>
+            <th>
+                @* 點選排序功能 (點一下遞增, 點兩下遞減) *@
+                <button class="th-sort-toggle">主分類</button>
+            </th>
+            <th>
+                @* 遞增排序的樣式 class 加 asc *@
+                <button class="th-sort-toggle asc">排序</button>
+            </th>
+            <th>
+                @* 遞減排序的樣式 class 加 desc *@
+                <button class="th-sort-toggle desc">狀態</button>
+            </th>
+        </tr>
+    </thead>
+    @* 按下修改後才顯示 input等修改 *@
+    <tr>
+        <td class="text-xs-center">
+            <button class="btn btn-link text-muted" title="取消修改"><i class="fa fa-reply"></i></button>
+            <button class="btn btn-link text-primary" title="確定修改"><i class="fa fa-check fa-lg"></i></button>
+        </td>
+        <td>
+            <input type="text" value="咖啡品項" class="form-control form-control-sm" placeholder="請輸入產品品名..." required>
+        </td>
+        <td>
+            <input type="number" name="" id="" min="0" value="0" class="form-control form-control-sm text-xs-center">
+        </td>
+        <td>
+            <label class="c-input c-radio">
+                <input type="radio" name="sale1" checked>
+                <span class="c-indicator"></span>
+                <span class="text-sm">顯示</span>
+            </label>
+            <label class="c-input c-radio">
+                <input type="radio" name="sale1">
+                <span class="c-indicator"></span>
+                <span class="text-sm">隱藏</span>
+            </label>
+        </td>
+    </tr>
+    @* 未按下修改時 *@
+    <tr>
+        <td class="text-xs-center">
+            <button class="btn btn-link text-success" title="編輯"><i class="fa fa-pencil fa-lg"></i></button>
+        </td>
+        <td>季節限定</td>
+        <td class="text-xs-center">10</td>
+        <td>
+            <span class="w3-tag label-success w3-round">顯示</span>
+        </td>
+    </tr>
+</table>
+
+@* 可修改，不可新增及刪除 *@
+<footer class="table-footer clearfix">
+    <small class="pull-xs-right">共 2 筆</small>
+</footer>

@@ -17,3 +17,92 @@
 
 <h3 class="h3">@ViewBag.Crumb</h3>
 
+<form action="" class="form form-sm">
+    <section class="form-group row">
+        <label class="col-xs-2 form-control-label text-xs-right">
+            <span class="text-danger">*</span> 會員登入帳號
+        </label>
+        <div class="col-xs-5">
+            <input type="email" class="form-control form-control-sm">
+        </div>
+        <small class="col-xs-5">請輸入常用之E-mail</small>
+    </section>
+    <section class="form-group row">
+        <label class="col-xs-2 form-control-label text-xs-right">
+            <span class="text-danger">*</span> 姓名
+        </label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control form-control-sm">
+        </div>
+    </section>
+    <section class="form-group row">
+        <label class="col-xs-2 form-control-label text-xs-right">
+            性別
+        </label>
+        <div class="col-xs-5">
+            <label class="c-input c-radio">
+                <input type="radio" name="sex">
+                <span class="c-indicator"></span>
+                <span class="text-sm">男性</span>
+            </label>
+            <label class="c-input c-radio m-r-0">
+                <input type="radio" name="sex">
+                <span class="c-indicator"></span>
+                <span class="text-sm">女性</span>
+            </label>
+        </div>
+    </section>
+    <section class="form-group row">
+        <label class="col-xs-2 form-control-label text-xs-right">
+            <span class="text-danger">*</span> 加入日期
+        </label>
+        <div class="col-xs-5">
+            <input type="date" class="form-control form-control-sm">
+        </div>
+    </section>
+    <section class="form-group row">
+        <label class="col-xs-2 form-control-label text-xs-right">
+            <span class="text-danger">*</span> 手機
+        </label>
+        <div class="col-xs-5">
+            <input type="tel" class="form-control form-control-sm">
+        </div>
+    </section>
+    <section class="form-group row">
+        <label class="col-xs-2 form-control-label text-xs-right">
+            生日
+        </label>
+        <div class="col-xs-5">
+            <input type="date" class="form-control form-control-sm">
+        </div>
+    </section>
+    <section class="form-group row">
+        <label class="col-xs-2 form-control-label text-xs-right">
+            地址
+        </label>
+        <div class="col-xs-1">
+            <input type="number" min="0" class="form-control form-control-sm" placeholder="郵遞區號...">
+        </div>
+        <div class="col-xs-4">
+            <input type="text" class="form-control form-control-sm">
+        </div>
+    </section>
+    <section class="form-group row">
+        <label class="col-xs-2 form-control-label text-xs-right">
+            重設密碼
+        </label>
+        <div class="col-xs-5">
+            <button class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> 重設密碼</button>
+        </div>
+        <small class="col-xs-5">預設為「111111」</small>
+    </section>
+
+    <div class="form-action">
+        <button type="button" class="btn btn-primary btn-sm col-xs-offset-1" onclick="location.href='Account_list'">
+            <i class="fa-check"></i> 存檔確認
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='Account_list'">
+            <i class="fa-times"></i> 回列表
+        </button>
+    </div>
+</form>

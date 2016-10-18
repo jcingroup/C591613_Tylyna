@@ -18,35 +18,53 @@ namespace DotWeb.Areas.Active.Controllers
             return View("Order_list");
         }
         // 產品
+        // 資料列表
         public ActionResult Products_list()
         {
             return View();
         }
+        // 資料編輯
         public ActionResult Products_edit()
         {
             return View();
         }
+        // 產品分類
         public ActionResult Products_Kind()
         {
             return View();
-        }        
+        }
+        // 產品品名
+        public ActionResult Products_Name()
+        {
+            return View();
+        }
         // 會員及訂單
+        // 訂單列表
         public ActionResult Order_list()
         {
             return View();
         }
+        // 訂單編輯
         public ActionResult Order_edit()
         {
             return View();
         }
+        // 統計(以待出貨為主)
+        public ActionResult Order_count()
+        {
+            return View();
+        }
+        // 收款方式
         public ActionResult Payment()
         {
             return View();
         }
+        // 會員列表
         public ActionResult Account_list()
         {
             return View();
         }
+        // 會員編輯
         public ActionResult Account_edit()
         {
             return View();

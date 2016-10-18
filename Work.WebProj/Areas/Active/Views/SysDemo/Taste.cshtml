@@ -15,5 +15,40 @@
     </ul>
 }
 
-<h3 class="h3">@ViewBag.Crumb</h3>
+<h3 class="h3">@ViewBag.Crumb<small class="sub"><i class="fa-angle-double-right"></i> 編輯</small></h3>
 
+<!-- <div class="alert alert-warning w3-small">
+    <button type="button" class="close"><i class="fa-times"></i></button>
+    <ol class="m-b-0">
+        <li><span>點選 </span><strong class="fa-bars"></strong><span> 並</span><strong>拖曳</strong><span>，可修改排列順序。</span></li>
+        <li><span>點選 </span><strong class="fa-chevron-up"></strong><span> 可收合/展開，點選 </span><strong class="fa-times"></strong><span> 可刪除。</span></li>
+        <li><span>編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除)，以免行動裝置顯示時會跑版。</span><br><span>ps. youtube 可勾選「用自適應縮放模式」</span></li>
+    </ol>
+</div> -->
+
+<button class="btn btn-success btn-sm" type="button"><i class="fa-plus-circle"></i> 新增</button>
+
+<form action="">
+    <article class="w3-card-2 m-y-1">
+        <header class="w3-padding w3-light-blue form-inline">
+            #0 <input type="text" value="文案一" class="form-control form-control-sm">
+        </header>
+        <main class="w3-padding">
+            <textarea class="form-control form-control-sm" rows="8"></textarea>
+        </main>
+    </article>
+    <article class="w3-card-2 m-y-1">
+        <header class="w3-padding w3-light-blue form-inline">
+            #1 <input type="text" value="文案二" class="form-control form-control-sm">
+        </header>
+        <main class="w3-padding">
+            <textarea class="form-control form-control-sm" rows="8"></textarea>
+        </main>
+    </article>
+
+    <div class="form-action text-xs-center">
+        <button type="button" class="btn btn-primary btn-sm">
+            <i class="fa-check"></i> 儲存
+        </button>
+    </div>
+</form>

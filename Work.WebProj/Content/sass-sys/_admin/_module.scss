@@ -161,7 +161,7 @@ input[type="file"] {
 .nav-tabs {
   @include list-unstyled;
   margin-bottom: 0;
-  li {
+  li, .js-tab {
     margin: 0;
     float: left;
     margin-bottom: -1px;
@@ -192,6 +192,7 @@ input[type="file"] {
   padding: .7em;
   border: 1px solid $nav-tabs-border-color;
   border-top: 0;
+  textarea { border: none; }
 }
 
 

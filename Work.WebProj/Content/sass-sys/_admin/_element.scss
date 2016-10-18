@@ -92,3 +92,36 @@ hr {
 	.checkbox, .checkbox-inline,
 	.radio, .radio-inline        {font-size: $font-size-sm;}
 }
+
+// radio box
+input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+
+    + label {
+        // 共用設定
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        cursor: pointer; cursor:hand;
+        outline: none;
+        user-select: none;
+        margin: 0;
+
+        // 設計樣式
+        background: #FAFAFA;
+        border: 1px solid #ccc;
+        margin-right: 8px;
+        border-radius: 50%;
+        width: 18px; height: 18px;
+    }
+    &:not(:checked):hover + label {
+        border-color: #F0AD4E;
+    }
+    &:checked + label {
+    	box-shadow: 1px 1px .075rem #fff;
+        border: 5px solid #F0AD4E;
+        background: #fff;
+    }
+}

@@ -15,5 +15,40 @@
     </ul>
 }
 
-<h3 class="h3">@ViewBag.Crumb</h3>
+<h3 class="h3">@ViewBag.Crumb<small class="sub"><i class="fa-angle-double-right"></i> 編輯</small></h3>
 
+<form action="">
+    <article class="w3-card-2 m-y-1">
+        <header class="w3-padding w3-light-blue form-inline">
+            #0
+            <input type="text" value="嚴選製程" class="form-control form-control-sm">
+        </header>
+        <main class="w3-padding">
+            <textarea class="form-control form-control-sm" rows="8"></textarea>
+        </main>
+    </article>
+    <article class="w3-card-2 m-y-1">
+        <header class="w3-padding w3-light-blue form-inline">
+            #1
+            <input type="text" value="專業烘焙" class="form-control form-control-sm">
+        </header>
+        <main class="w3-padding">
+            <textarea class="form-control form-control-sm" rows="8"></textarea>
+        </main>
+    </article>
+    <article class="w3-card-2 m-y-1">
+        <header class="w3-padding w3-light-blue form-inline">
+            #2
+            <input type="text" value="安心認證" class="form-control form-control-sm">
+        </header>
+        <main class="w3-padding">
+            <textarea class="form-control form-control-sm" rows="8"></textarea>
+        </main>
+    </article>
+
+    <div class="form-action text-xs-center">
+        <button type="button" class="btn btn-primary btn-sm">
+            <i class="fa-check"></i> 儲存
+        </button>
+    </div>
+</form>

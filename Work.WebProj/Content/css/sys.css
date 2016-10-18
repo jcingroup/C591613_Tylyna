@@ -4782,6 +4782,32 @@ a.bg-danger:focus, a.bg-danger:hover {
 .form-sm .radio, .form-sm .radio-inline {
   font-size: 0.875rem; }
 
+input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden; }
+  input[type='radio'] + label {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+    cursor: hand;
+    outline: none;
+    user-select: none;
+    margin: 0;
+    background: #FAFAFA;
+    border: 1px solid #ccc;
+    margin-right: 8px;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px; }
+  input[type='radio']:not(:checked):hover + label {
+    border-color: #F0AD4E; }
+  input[type='radio']:checked + label {
+    box-shadow: 1px 1px .075rem #fff;
+    border: 5px solid #F0AD4E;
+    background: #fff; }
+
 .card-block {
   padding: 0.75rem 1.25rem; }
 
@@ -4890,7 +4916,7 @@ input[type="file"] {
   padding-left: 0;
   list-style: none;
   margin-bottom: 0; }
-  .nav-tabs li {
+  .nav-tabs li, .nav-tabs .js-tab {
     margin: 0;
     float: left;
     margin-bottom: -1px; }
@@ -4914,6 +4940,8 @@ input[type="file"] {
   padding: .7em;
   border: 1px solid #ddd;
   border-top: 0; }
+  .tab-content textarea {
+    border: none; }
 
 .modal-content {
   border-radius: 0; }
@@ -4930,6 +4958,13 @@ input[type="file"] {
 a.bg-primary-light:focus, a.bg-primary-light:hover {
   background-color: #cce1ed; }
 
+.bg-secondary {
+  color: #fff !important;
+  background-color: #ABBAC3 !important; }
+
+a.bg-secondary:focus, a.bg-secondary:hover {
+  background-color: #8da2ae; }
+
 .text-indigo {
   color: #3F51B5 !important; }
 
@@ -4938,6 +4973,9 @@ a.text-indigo:focus, a.text-indigo:hover {
 
 .margin-4 {
   margin-bottom: 4px; }
+
+.clear {
+  clear: both; }
 
 /*      config
 -----------------------------------------------------------------------*/

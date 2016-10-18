@@ -10,10 +10,17 @@
 
 @section IncludeScript {
     <script>
-        $('.nav-tabs a').click(function (e) {
-          e.preventDefault()
-          $(this).tab('show')
-        })
+        // 頁籤切換
+        var tab = $('.js-tab');
+        var tabContent = '.tab-pane';
+        // $('.tab-pane:gt(0)').hide();
+        $(tab.eq(0).addClass('active').attr('href')).siblings(tabContent).hide();
+        tab.click(function () {
+            event.preventDefault();
+            $($(this).attr('href')).fadeIn().siblings(tabContent).hide();
+            $(this).toggleClass('active');
+            tab.not(this).removeClass('active');
+        });
     </script>
 }
 
@@ -91,9 +98,7 @@
             <dt class="col-xs-2 form-control-label text-xs-right">代表圖</dt>
             <dd class="col-xs-10">
                 @* 瀏覽&上傳檔案 *@
-                <div class="form-control">
-                    <input type="file">
-                </div>
+                <input type="file" class="form-control" name="pic" accept="image/*">
                 @* 照片縮圖 *@
                 <ol class="upload-img list-inline">
                     <li>
@@ -109,12 +114,12 @@
     <table class="table table-sm table-bordered table-striped table-hover m-b-2">
         <caption class="table-header">
             <span class="w3-large">產品規格明細</span>
-            <button type="button" class="btn btn-sm btn-primary pull-xs-right">
+            <button type="button" class="btn btn-sm btn-success pull-xs-right">
                 <i class="fa-plus-circle"></i> 新增
             </button>
         </caption>
         <colgroup>
-            <col style="width: 6%">
+            <col style="width: 7%">
         </colgroup>
         <thead>
             <tr>
@@ -141,11 +146,14 @@
             <td class="text-xs-center">
                 <input type="text" value="10pcs/盒" class="form-control text-xs-center" required>
             </td>
-            <td class="text-xs-center">
-                <div class="input-group">
-                    <span class="input-group-addon">NT$</span>
-                    <input type="number" min="0" value="380" class="form-control text-xs-center" required>
-                </div>
+            <td class="form-inline">
+                <input id="on" type="radio" name="onSale" checked>
+                <label for="on"></label>
+                <input type="number" min="0" value="380" class="form-control text-xs-center">
+                <br>
+                <input id="off" type="radio" name="onSale">
+                <label for="off"></label>
+                不開放線上銷售
             </td>
             <td class="text-xs-center">
                 <label class="c-input c-radio">
@@ -194,7 +202,7 @@
             <td>P2-010-04</td>
             <td>商業豆</td>
             <td class="text-xs-center">2kg/包</td>
-            <td class="text-xs-center">請來電洽談</td>
+            <td class="text-xs-center">不開放線上銷售 請來電洽談</td>
             <td class="text-xs-center">
                 <span class="w3-tag label-success w3-round">上架</span>
             </td>
@@ -202,18 +210,19 @@
     </table>
 
     <section>
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"><a href="#intro" aria-controls="intro" role="tab" data-toggle="tab" class="active">產品簡介</a></li>
-            <li role="presentation"><a href="#more" aria-controls="more" role="tab" data-toggle="tab">產品更多介紹</a></li>
-        </ul>
+        <nav class="nav nav-tabs">
+            <a href="#tab1" class="js-tab active">產品簡介</a>
+            <a href="#tab2" class="js-tab">產品更多介紹</a>
+        </nav>
         <div class="tab-content">
-            <div role="tabpanel" aria-hidden="false" class="tab-pane fade active" id="intro">
-                <textarea type="date" class="form-control" id="intro_s" name="intro_s"></textarea>
-            </div>
-            <div role="tabpanel" aria-hidden="true" class="tab-pane fade" id="more">
-                <textarea type="date" class="form-control" id="intro_s" name="intro_s"></textarea>
-            </div>
-        </div>
+            <article id="tab1" class="tab-pane active">
+                <textarea class="form-control">請在此輸入產品簡介...</textarea>
+            </article>
+            <article id="tab2" class="tab-pane">
+                @* 編輯器(CKeditor-含圖檔上傳) *@
+                <textarea class="form-control">請在此輸入產品更多介紹...</textarea>
+            </article>
+        </div><!-- tab-content //-->
     </section>
 
     <div class="form-action">

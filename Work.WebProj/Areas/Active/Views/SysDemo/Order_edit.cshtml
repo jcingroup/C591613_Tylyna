@@ -101,7 +101,7 @@
             </label>
             <div class="col-xs-4">
                 <button class="btn btn-danger btn-sm margin-4">待繳款</button>
-                <button class="btn btn-sm margin-4">待出貨</button>
+                <button class="btn btn-sm margin-4">待出貨</button> @* 付款通知按下確認後才可被點選 *@
                 <button class="btn btn-sm margin-4">已出貨</button>
                 <button class="btn btn-sm margin-4">退貨中</button>
                 <button class="btn btn-sm margin-4">訂單完成</button>
@@ -148,26 +148,44 @@
                 <th class="text-xs-center">匯款金額</th>
             </tr>
         </thead>
-        <tr>
+        @* 新增時顯示 *@
+        @* <tr>
             <td rowspan="2" class="text-xs-center">
-                <button class="btn btn-link text-success" title="編輯"><i class="fa fa-pencil fa-lg"></i></button>
+                <button class="btn btn-link text-success" title="確認收款"><i class="fa-check"></i><br>確認收款</button>
             </td>
             <td>
-                <input type="number" min="0" class="form-control" value="000000" disabled>
+                <input type="number" min="0" class="form-control" value="000000">
             </td>
             <td>
-                <input type="date" value="2016/10/14" class="form-control" disabled>
+                <input type="date" value="2016/10/14" class="form-control">
             </td>
             <td>
-                <input type="time" class="form-control" disabled>
+                <input type="time" class="form-control">
             </td>
             <td>
-                <input type="number" min="0" class="form-control" value="000000" disabled>
+                <input type="number" min="0" class="form-control" value="000000">
             </td>
         </tr>
         <tr>
             <td colspan="4">
                 <textarea rows="1" class="form-control">備註：</textarea>
+            </td>
+        </tr> *@
+        @* 客戶傳送資料 *@
+        <tr>
+            <td rowspan="2" class="text-xs-center">
+                <button class="btn btn-link text-success" title="確認收款"><i class="fa-check"></i><br>確認收款</button>
+                @* 按下確認收款後，訂單狀態自動變為待出貨，並顯示下方 tag *@
+                @* <span class="w3-tag label-success">已確認</span> *@
+            </td>
+            <td>000000</td>
+            <td>2016/10/14</td>
+            <td>17:04</td>
+            <td>00000</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                備註：
             </td>
         </tr>
     </table>
