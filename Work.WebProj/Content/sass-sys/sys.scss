@@ -275,3 +275,8 @@ $brand-primary: #438EB9;
 [data-tip] {
   @include hover-focus {cursor: pointer;}
 }
+
+.c-input-number {
+  display: inline-block !important;
+  width: 80px !important;
+}

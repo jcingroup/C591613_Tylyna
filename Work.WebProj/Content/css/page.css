@@ -590,7 +590,7 @@ th {
 .block, .img-center, .sub-nav img {
   display: block; }
 
-.logo-s, .foot-contact span, .foot-contact dd, .foot-social a, .top-nav .cart-num, .goTop i, figure, .inline-block, .sub-nav a, .shopping-list .icon-cart, .payment-title em {
+.logo-s, .foot-contact span, .foot-contact dd, .foot-social a, .top-nav .cart-num, .goTop i, figure, .inline-block, .sub-nav a, .shopping-list .icon-cart, .payment-title em, .panel span {
   display: inline-block; }
 
 .top-nav ul, .inline {
@@ -945,6 +945,42 @@ button {
     border-color: #eacb99;
     color: #fff; }
 
+.label {
+  display: inline-block;
+  padding: 2px 5px;
+  margin: 0 5px;
+  border-radius: 3px;
+  background: #d0c3a6;
+  color: #39311f;
+  font-size: 0.875em; }
+
+em.label {
+  font-style: normal; }
+
+.label-primary {
+  background: #7C6A42; }
+
+.label-secondary {
+  background: #DDAB5A; }
+
+.label-muted {
+  background: #F3F0E9; }
+
+.label-success {
+  background: #98C524; }
+
+.label-info {
+  background: #07459B; }
+
+.label-warning {
+  background: #FEE7A6; }
+
+.label-danger {
+  background: #EF8F7F; }
+
+.label-gray {
+  background: #b2b2b2; }
+
 .input-group {
   position: relative;
   display: table;
@@ -1065,6 +1101,27 @@ button {
   #login .btn:hover, #login .btn:active {
     background: #d39e00; }
 
+.collapse-title {
+  cursor: pointer;
+  cursor: hand; }
+  .collapse-title::after {
+    content: "";
+    display: inline-block;
+    color: #fff;
+    margin-left: 8px;
+    font-family: 'icomoon' !important;
+    speak: none;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+  .collapse-title.current::after {
+    content: ""; }
+
+.collapse-content {
+  display: none; }
+
 figure > a {
   width: 100%;
   height: 100%;
@@ -1117,9 +1174,13 @@ figure {
     position: absolute;
     right: 12px;
     bottom: 12px;
-    z-index: 2;
     background: #fef272;
-    color: #595959; }
+    color: #595959;
+    text-shadow: none;
+    z-index: 2; }
+    .news-list .btn:hover, .news-list .btn:active {
+      background: #c28828;
+      color: #fff; }
   .news-list:hover img, .news-list:active img {
     -ms-transform: scale(1.1);
     -webkit-transform: scale(1.1);
@@ -1160,7 +1221,7 @@ figure {
   margin-right: auto;
   margin-left: auto; }
 
-.m-a-0, .foot-contact span, .foot-contact dd, .news-list, .sub-nav li {
+.m-a-0, .foot-contact span, .foot-contact dd, .sub-nav li {
   margin: 0; }
 
 .m-t-0 {
@@ -1172,7 +1233,7 @@ figure {
 .m-b-0 {
   margin-bottom: 0; }
 
-.m-l-0, .kind-list:nth-of-type(4n+1) {
+.m-l-0, .kind-list:nth-of-type(4n+1), .news-content .label {
   margin-left: 0; }
 
 .m-x-0, .top-nav li {
@@ -1209,7 +1270,7 @@ figure {
 .m-a-4 {
   margin: 4px; }
 
-.m-t-4, .foot-contact dt, .news-list figcaption {
+.m-t-4, .foot-contact dt, .news-list figcaption, .news-content article {
   margin-top: 4px; }
 
 .m-r-4 {
@@ -1238,7 +1299,7 @@ figure {
 .m-r-8, .goTop i {
   margin-right: 8px; }
 
-.m-b-8, .news-list h3 {
+.m-b-8, .news-list h3, .panel header, .news-content header {
   margin-bottom: 8px; }
 
 .m-l-8 {
@@ -1261,7 +1322,7 @@ figure {
 .m-r-12, #login .btn, .payment-title em {
   margin-right: 12px; }
 
-.m-b-12, .foot-contact dt, .payment-infor {
+.m-b-12, .foot-contact dt, .payment-infor, .panel:not(:last-child) {
   margin-bottom: 12px; }
 
 .m-l-12 {
@@ -1290,7 +1351,7 @@ figure {
 .m-l-16 {
   margin-left: 16px; }
 
-.m-x-16 {
+.m-x-16, .news-list {
   margin-right: 16px;
   margin-left: 16px; }
 
@@ -1307,7 +1368,7 @@ figure {
 .m-r-24 {
   margin-right: 24px; }
 
-.m-b-24, #login header {
+.m-b-24, #login header, .news-list {
   margin-bottom: 24px; }
 
 .m-l-24 {
@@ -1330,7 +1391,7 @@ figure {
 .m-r-32 {
   margin-right: 32px; }
 
-.m-b-32 {
+.m-b-32, .news-content {
   margin-bottom: 32px; }
 
 .m-l-32 {
@@ -1455,7 +1516,7 @@ figure {
   padding-right: 4px;
   padding-left: 4px; }
 
-.p-y-4, .sub-nav > a, .payment-data dt, .reply dt, .payment-infor li {
+.p-y-4, .sub-nav > a, .payment-data dt, .reply dt, .payment-infor li, .panel header {
   padding-top: 4px;
   padding-bottom: 4px; }
 
@@ -1474,7 +1535,7 @@ figure {
 .p-l-8 {
   padding-left: 8px; }
 
-.p-x-8 {
+.p-x-8, .panel header {
   padding-right: 8px;
   padding-left: 8px; }
 
@@ -1624,13 +1685,13 @@ figure {
   border-bottom: 1px solid #eacb99;
   padding-bottom: 0.66667rem; }
 
-.text-left, .news-list figcaption, .User .sub-nav, .products-intro, .shopping-list .item, .shopping-list .spec, .editor, .taste-summary, .account-data, .account-data td {
+.text-left, .news-list figcaption, .User .sub-nav, .products-intro, .shopping-list .item, .shopping-list .spec, .editor, .taste-summary, .account-data, .account-data td, .panel, .news-content {
   text-align: left; }
 
 .text-right, #menu, .products-pic, .payment-data dt, .reply dt, .account-data td.item {
   text-align: right; }
 
-.text-center {
+.text-center, .label {
   text-align: center; }
 
 .font-tiny {
@@ -1642,7 +1703,7 @@ figure {
 .font-md, .payment-title em {
   font-size: 0.9375rem; }
 
-.font-lg, .news-list p, .shopping-list .item, .shopping-list .spec, .payment-infor {
+.font-lg, .news-list p, .shopping-list .item, .shopping-list .spec, .payment-infor, .panel header {
   font-size: 1.25rem; }
 
 .font-xl, .foot-contact dd {
@@ -1657,7 +1718,7 @@ figure {
 .font-jumbo {
   font-size: 4.125rem; }
 
-.text-white, .top-nav .cart-num, .sub-nav > a, .payment-title em {
+.text-white, .top-nav .cart-num, .label-primary, .label-secondary, .label-muted, .label-success, .label-info, .label-warning, .label-danger, .sub-nav > a, .payment-title em, .panel header {
   color: white; }
 
 .bg-white, .taste-summary, .cart-list, .payment-list {
@@ -1811,3 +1872,11 @@ figure {
 
 .account-data td.item {
   width: 130px; }
+
+.panel header {
+  background: #DDAB5A;
+  border: 1px solid #d9a045; }
+.panel span {
+  width: 45px; }
+.panel article {
+  padding-left: 60px; }

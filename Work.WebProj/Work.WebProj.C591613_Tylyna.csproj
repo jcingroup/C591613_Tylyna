@@ -235,7 +235,7 @@
     <Content Include="Areas\Active\Views\SysDemo\Order_edit.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\Account_list.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\Account_edit.cshtml" />
-    <Content Include="Areas\Active\Views\SysDemo\Index_data.cshtml" />
+    <Content Include="Areas\Active\Views\SysDemo\Index_list.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\AboutUs.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\Quality.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\Taste.cshtml" />
@@ -245,6 +245,10 @@
     <Content Include="Areas\Active\Views\SysDemo\Payment.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\Products_Name.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\Order_count.cshtml" />
+    <Content Include="Areas\Active\Views\SysDemo\Index_edit.cshtml" />
+    <Content Include="Areas\Active\Views\SysDemo\News_list.cshtml" />
+    <Content Include="Areas\Active\Views\SysDemo\News_edit.cshtml" />
+    <Content Include="Areas\Active\Views\SysDemo\ChangePW.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
@@ -296,6 +300,7 @@
     <Content Include="ckfinder\core\connector\aspx\lang\vi.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-cn.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-tw.xml" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
@@ -629,6 +634,8 @@
     <Content Include="Views\Order\Finish.cshtml" />
     <Content Include="Views\User\Receipt_content.cshtml" />
     <Content Include="Views\User\user-nav.cshtml" />
+    <Content Include="Views\News\list.cshtml" />
+    <Content Include="Views\News\content.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

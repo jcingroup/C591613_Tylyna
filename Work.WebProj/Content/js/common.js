@@ -11,28 +11,28 @@ $('.goTop').click(function() {
 });
 
 // 下拉選單
-var $dropbtn = $("[data-dropdown='toggle']");
-var dropcontent = "[data-dropdown='content']";
-$dropbtn.click(function(){
-    event.preventDefault();
-    $(this).next(dropcontent).slideToggle("300");
-});
-$dropbtn.blur(function(){
-    $(this).next(dropcontent).slideUp("300");
-});
+// var $dropbtn = $("[data-dropdown='toggle']");
+// var dropcontent = "[data-dropdown='content']";
+// $dropbtn.click(function(){
+//     event.preventDefault();
+//     $(this).next(dropcontent).slideToggle("300");
+// });
+// $dropbtn.blur(function(){
+//     $(this).next(dropcontent).slideUp("300");
+// });
 
 // 縮放特效
-// var $collapse = $("[data-toggle='collapse']");
-// var fall = '.collapse-content';
+var $collapse = $("[data-toggle='collapse']");
+var fall = '.collapse-content';
 
-// $collapse.click(function () {
-//     $(this).next(fall).slideToggle();
-//     $(this).parent().siblings().children().next().slideUp(150);
-//     // $(this).siblings().next(fall).slideUp();
-//     $(this).toggleClass("current"),
-//             $collapse.not(this).removeClass("current");
-//     return false;
-// });
+$collapse.click(function () {
+    $(this).next(fall).slideToggle();
+    $(this).parent().siblings().children().next().slideUp(100);
+    // $(this).siblings().next(fall).slideUp();
+    $(this).toggleClass("current"),
+            $collapse.not(this).removeClass("current");
+    return false;
+});
 
 // 行動裝置的主選單
 $menuLeft = $('#menu');

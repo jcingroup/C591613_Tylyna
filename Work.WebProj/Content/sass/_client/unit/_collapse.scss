@@ -1,24 +1,17 @@
 @charset "UTF-8";
 
-$collapse-title-size:          false !default;
-$collapse-title-color:         false !default;
-
-$collapse-content-color:       false !default;
-$collapse-content-hover-color: false !default;
+// icon
+$collapse-title-icon:                '\e5c5' !default;
+$collapse-title-icon-color:          $brand-primary !default;
+$collapse-title-hover-icon:          '\e5c7' !default;
+$collapse-title-hover-icon-color:    $brand-secondary !default;
 
 
 .collapse-title {
     cursor: pointer; cursor: hand;
 
-    @if $collapse-title-size {
-        font-size: em($collapse-title-size);
-    }
-    @if $collapse-title-color {
-        color: $collapse-title-color;
-    }
-
-    @include el(after, inline-block, '\e900') {
-        color: $brand-primary;
+    @include el(after, inline-block, $collapse-title-icon) {
+        @if $collapse-title-icon-color { color: $collapse-title-icon-color; }
         margin-left: 8px;
 
         font-family: 'icomoon' !important;
@@ -31,23 +24,16 @@ $collapse-content-hover-color: false !default;
         -moz-osx-font-smoothing: grayscale;
     }
     &:hover, &:active, &.current {
-        &::after { color: $brand-secondary; }
+        &::after {
+            @if $collapse-title-hover-icon-color { color: $collapse-title-hover-icon-color; }
+        }
     }
     &.current {
-        &::after { content: '\e901'}
+        &::after {
+            @if $collapse-title-hover-icon { content: $collapse-title-hover-icon; }
+        }
     }
 }
 .collapse-content {
     display: none;
-
-    a {
-        @if $collapse-content-color {
-            color: $collapse-content-color;
-        }
-        &:hover, &:active, &.current {
-            @if $collapse-content-hover-color {
-                color: $collapse-content-hover-color;
-            }
-        }
-    }
 }

@@ -5,6 +5,9 @@
 $page:                 true;
 $enable-ckb-rdo:       true;
 
+$collapse-title-icon-color: #fff;
+$collapse-title-hover-icon-color: false;
+
 // import
 // ------------------------------------------------------------
 // 本次專案專用變數
@@ -30,10 +33,12 @@ $enable-ckb-rdo:       true;
 @import "_client/unit/nav";
 @import "_client/unit/goTop";
 @import "_client/unit/banner";
-@import "_client/unit/list";
 @import "_client/unit/btn";
+@import "_client/unit/list";
+@import "_client/unit/label";
 @import "_client/unit/input-group";
 @import "_client/unit/modal";
+@import "_client/unit/collapse";
 @import "_client/unit/figure";
 @import "_client/unit/hover";
 
@@ -225,4 +230,32 @@ $enable-ckb-rdo:       true;
         }
         // &:last-of-type { @extend .text-left; }
     }
+}
+
+// FAQ
+.panel {
+    @extend .text-left;
+
+    &:not(:last-child) { @extend .m-b-12; }
+
+    header {
+        @extend .font-lg, .p-y-4, .p-x-8, .m-b-8, .text-white;
+        background: $brand-secondary;
+        border: 1px solid darken($brand-secondary,5);
+    }
+    span {
+        @extend %inline-block;
+        width: 45px;
+    }
+    article {
+        padding-left: 60px;
+    }
+}
+
+// 最新消息
+.news-content {
+    @extend .text-left, .m-b-32;
+    header { @extend .m-b-8; }
+    article { @extend .m-t-4; }
+    .label { @extend .m-l-0; }
 }

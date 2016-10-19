@@ -72,7 +72,11 @@ namespace DotWeb.Areas.Active.Controllers
 
         // 其他頁資訊管理(編輯器)
         // 首頁
-        public ActionResult Index_data()
+        public ActionResult Index_list()
+        {
+            return View();
+        }
+        public ActionResult Index_edit()
         {
             return View();
         }
@@ -97,12 +101,28 @@ namespace DotWeb.Areas.Active.Controllers
             return View();
         }
 
+        // 最新消息
+        public ActionResult News_list()
+        {
+            return View();
+        }
+        public ActionResult News_edit()
+        {
+            return View();
+        }
+
         // FAQ
         public ActionResult FAQ_list()
         {
             return View();
         }
         public ActionResult FAQ_edit()
+        {
+            return View();
+        }
+
+        // 修改密碼
+        public ActionResult ChangePW()
         {
             return View();
         }

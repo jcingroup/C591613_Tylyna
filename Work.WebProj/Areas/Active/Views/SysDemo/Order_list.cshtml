@@ -39,6 +39,7 @@
             <button class="btn btn-sm">訂單完成</button>
             <button class="btn btn-sm">取消訂單</button>
             <button class="btn btn-sm">已結單</button>
+            <button class="btn btn-success btn-sm pull-xs-right"><i class="fa-print"></i> 列印</button>
         </div>
     </div><!-- table-filter //-->
 </header>
@@ -60,21 +61,20 @@
             </th>
             <th>
                 @* 遞減排序的樣式 class 加 desc *@
-                <button class="th-sort-toggle desc">下單日期</button>
+                <button class="text-xs-center th-sort-toggle desc">下單日期</button>
             </th>
             <th>
-                @* 遞減排序的樣式 class 加 desc *@
-                <button class="th-sort-toggle desc">付款日期</button>
+                <button class="text-xs-center th-sort-toggle">付款日期</button>
             </th>
             <th class="text-xs-center">
                 @* 如不需要排序功能: 純文字即可 *@
                 付款方式
             </th>
-            <th class="text-xs-center">
-                <button class="th-sort-toggle">訂單狀態</button>
-            </th>
             <th>
-                <button class="text-xs-center th-sort-toggle">排序</button>
+                <button class="text-xs-center th-sort-toggle">訂單狀態</button>
+            </th>
+            <th class="text-xs-center">
+                <button class="th-sort-toggle">排序</button>
             </th>
         </tr>
     </thead>
