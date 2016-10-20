@@ -12,7 +12,7 @@ $label-mg:              0 5px!default;
 // --------------------------------------------------
 
 .label {
-    display: inline-block;
+    @extend %inline-block;
     padding: $label-pd;
     margin: $label-mg;
     border-radius: $label-border-radius;
@@ -36,8 +36,4 @@ em.label {
             background: $color;
         }
     }
-}
-
-.label-gray {
-    background: lighten($gray,8);
 }

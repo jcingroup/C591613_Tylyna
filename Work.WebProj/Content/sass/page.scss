@@ -232,7 +232,7 @@ $collapse-title-hover-icon-color: false;
     }
 }
 
-// FAQ
+// == FAQ
 .panel {
     @extend .text-left;
 
@@ -252,7 +252,7 @@ $collapse-title-hover-icon-color: false;
     }
 }
 
-// 最新消息
+// == 最新消息
 .news-content {
     @extend .text-left, .m-b-32;
     header { @extend .m-b-8; }

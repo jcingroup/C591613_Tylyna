@@ -488,7 +488,7 @@ input:not([type]), [type="text"], [type="password"], [type="date"], [type="datet
 .logo-s, .foot-contact span, .foot-contact dd, .foot-social a, .top-nav .cart-num, .goTop i, figure, .inline-block {
   display: inline-block; }
 
-.top-nav ul, .inline {
+.top-nav ul, .btn-link, .inline {
   display: inline; }
 
 .logo, .float-l {
@@ -795,7 +795,6 @@ button {
     background-color: #F3F0E9; }
 
 .btn-link {
-  display: inline;
   color: #7C6A42;
   line-height: 1.5;
   background: none;

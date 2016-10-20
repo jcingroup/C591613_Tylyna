@@ -68,7 +68,7 @@ button { border: none; }
 }
 
 .btn-link {
-    display: inline;
+    @extend %inline;
     @if $btn-link-color    { color: $link-color; }
     @if $btn-line-height   { line-height: $line-height; }
     @if $btn-bg            { background: none; }

@@ -590,23 +590,6 @@
     <Content Include="ckeditor\contents.css" />
     <Content Include="ckeditor\styles.js" />
     <Content Include="node_modules\bootstrap\dist\js\bootstrap.js" />
-    <Content Include="Scripts\build\app\m_change_password.js" />
-    <Content Include="Scripts\build\app\m_community.js" />
-    <Content Include="Scripts\build\app\m_community_banner.js" />
-    <Content Include="Scripts\build\app\m_community_news.js" />
-    <Content Include="Scripts\build\app\m_edit.js" />
-    <Content Include="Scripts\build\app\m_edit_detail.js" />
-    <Content Include="Scripts\build\app\m_login.js" />
-    <Content Include="Scripts\build\app\m_matter.js" />
-    <Content Include="Scripts\build\app\m_menu.js" />
-    <Content Include="Scripts\build\app\m_menu_set.js" />
-    <Content Include="Scripts\build\app\m_roles.js" />
-    <Content Include="Scripts\build\app\m_users.js" />
-    <Content Include="Scripts\build\app\vendors.js" />
-    <Content Include="Scripts\build\app\w_neighbor_content.js" />
-    <Content Include="Scripts\build\app\w_neighbor_list.js" />
-    <Content Include="Scripts\build\app\w_sell_content.js" />
-    <Content Include="Scripts\build\app\w_sell_list.js" />
     <Content Include="Scripts\cdn\bootstrap\collapse.js" />
     <Content Include="Scripts\cdn\bootstrap\util.js" />
     <Content Include="Scripts\cdn\jquery-1.10.2.min.js" />
@@ -771,6 +754,7 @@
     <Folder Include="Areas\Base\Views\Shared\" />
     <Folder Include="Content\sass-sys\vendor\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Scripts\build\app\" />
     <Folder Include="_Code\CReport\" />
   </ItemGroup>
   <ItemGroup>

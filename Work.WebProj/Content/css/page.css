@@ -590,10 +590,10 @@ th {
 .block, .img-center, .sub-nav img {
   display: block; }
 
-.logo-s, .foot-contact span, .foot-contact dd, .foot-social a, .top-nav .cart-num, .goTop i, figure, .inline-block, .sub-nav a, .shopping-list .icon-cart, .payment-title em, .panel span {
+.logo-s, .foot-contact span, .foot-contact dd, .foot-social a, .top-nav .cart-num, .goTop i, .label, figure, .inline-block, .sub-nav a, .shopping-list .icon-cart, .payment-title em, .panel span {
   display: inline-block; }
 
-.top-nav ul, .inline {
+.top-nav ul, .btn-link, .inline {
   display: inline; }
 
 .logo, .float-l {
@@ -916,7 +916,6 @@ button {
     background-color: #F3F0E9; }
 
 .btn-link {
-  display: inline;
   color: #7C6A42;
   line-height: 1.5;
   background: none;
@@ -946,7 +945,6 @@ button {
     color: #fff; }
 
 .label {
-  display: inline-block;
   padding: 2px 5px;
   margin: 0 5px;
   border-radius: 3px;
@@ -977,9 +975,6 @@ em.label {
 
 .label-danger {
   background: #EF8F7F; }
-
-.label-gray {
-  background: #b2b2b2; }
 
 .input-group {
   position: relative;

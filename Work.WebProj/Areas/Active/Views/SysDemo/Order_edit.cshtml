@@ -29,24 +29,6 @@
                 <input type="text" class="form-control" placeholder="系統自動產生..." disabled>
             </div>
             <label class="col-xs-2 form-control-label text-xs-right">
-                <span class="text-danger">*</span> 購買人
-            </label>
-            <div class="col-xs-4">
-                <div class="input-group">
-                    <input type="text" class="form-control" maxlength="32" required>
-                    <a href="" class="input-group-addon"><i class="fa fa-search"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section class="form-group row">
-            <label class="col-xs-1 form-control-label text-xs-right">
-                <span class="text-danger">*</span> 下單日期
-            </label>
-            <div class="col-xs-4">
-                <input type="date" class="form-control">
-            </div>
-            <label class="col-xs-2 form-control-label text-xs-right">
                 <span class="text-danger">*</span> 訂單審核
             </label>
             <div class="col-xs-4 form-inline">
@@ -65,24 +47,30 @@
         </section>
 
         <section class="form-group row">
-            <label class="col-xs-1 form-control-label text-xs-right">
-                <span class="text-danger">*</span> 付款方式
+        <label class="col-xs-1 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 下單日期
             </label>
             <div class="col-xs-4">
-                <span class="w3-tag label-default w3-round">轉帳匯款</span>
-                <span class="w3-tag label-default w3-round">貨到付款</span>
+                <input type="date" class="form-control">
+            </div>
+            <label class="col-xs-2 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 購買人
+            </label>
+            <div class="col-xs-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" maxlength="32" required>
+                    <a href="" class="input-group-addon"><i class="fa fa-search"></i></a>
+                </div>
+            </div>
 
-                @* 新增時show下方
-                <label class="c-input c-radio">
-                    <input type="radio" name="pay">
-                    <span class="c-indicator"></span>
-                    <span class="text-sm">轉帳匯款</span>
-                </label>
-                <label class="c-input c-radio">
-                    <input type="radio" name="pay">
-                    <span class="c-indicator"></span>
-                    <span class="text-sm">貨到付款</span>
-                </label> *@
+        </section>
+
+        <section class="form-group row">
+            <label class="col-xs-1 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 出貨日期
+            </label>
+            <div class="col-xs-4">
+                <input type="date" class="form-control">
             </div>
             <label class="col-xs-2 form-control-label text-xs-right">
                 <span class="text-danger">*</span> 總金額
@@ -109,10 +97,23 @@
                 <button class="btn btn-sm margin-4">已結單</button>
             </div>
             <label class="col-xs-2 form-control-label text-xs-right">
-                <span class="text-danger">*</span> 出貨日期
+                <span class="text-danger">*</span> 付款方式
             </label>
             <div class="col-xs-4">
-                <input type="date" class="form-control">
+                <span class="w3-tag label-default w3-round">轉帳匯款</span>
+                <span class="w3-tag label-default w3-round">貨到付款</span>
+
+                @* 新增時show下方
+                <label class="c-input c-radio">
+                    <input type="radio" name="pay">
+                    <span class="c-indicator"></span>
+                    <span class="text-sm">轉帳匯款</span>
+                </label>
+                <label class="c-input c-radio">
+                    <input type="radio" name="pay">
+                    <span class="c-indicator"></span>
+                    <span class="text-sm">貨到付款</span>
+                </label> *@
             </div>
         </section>
     </fieldset>
