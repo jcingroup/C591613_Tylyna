@@ -20,8 +20,8 @@
 <header class="table-header">
     <div class="table-filter">
         <div class="form-inline">
-            <label class="sr-only text-sm">訂單編號</label> @* 如要顯示文字: 把 sr-only 拿掉 *@
-            <input type="text" class="form-control form-control-sm" placeholder="請輸入訂單編號...">
+            <label class="sr-only text-sm">關鍵字</label> @* 如要顯示文字: 把 sr-only 拿掉 *@
+            <input type="text" class="form-control form-control-sm" placeholder="請輸入關鍵字...">
             <label class="text-sm">產品品名</label>
             <select class="form-control form-control-sm">
                 <option>全部</option>
@@ -34,6 +34,8 @@
                 <option>黃金曼特寧</option>
                 <option>蒲隆地</option>
             </select>
+            <label class="text-sm">下單日期</label>
+            <input type="date" class="form-control form-control-sm">
             <button class="btn btn-success btn-sm pull-xs-right"><i class="fa-print"></i> 列印</button>
         </div>
     </div><!-- table-filter //-->
@@ -42,19 +44,26 @@
 <table class="table table-sm table-bordered table-striped table-hover m-b-1">
     <caption class="w3-blue w3-padding">品名：哥倫比亞</caption>
     <colgroup>
-        <col style="width:30%">
-        <col style="width:35%">
         <col style="width:20%">
+        <col style="width:23%">
+        <col span="2" style="width:13%">
+        <col style="width:16%">
         <col style="width:15%">
     </colgroup>
     <thead>
         <tr>
             <th>
-                @* 點選排序功能 (點一下遞增, 點兩下遞減) *@
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="th-sort-toggle">訂單編號</button>
             </th>
             <th>
-                <button class="th-sort-toggle">產品包裝</button>
+                <button class="th-sort-toggle asc">產品包裝</button>
+            </th>
+            <th>
+                <button class="text-xs-center th-sort-toggle desc">下單日期</button>
+            </th>
+            <th class="text-xs-center">
+                購買人
             </th>
             <th class="text-xs-center">
                 @* 如不需要排序功能: 純文字即可 *@
@@ -67,43 +76,55 @@
         <tr>
             <td><a href="Order_edit">P201610010001</a></td>
             <td>咖啡豆</td>
+            <td class="text-xs-center">2016/10/16</td>
+            <td class="text-xs-center">鄧微諭</td>
             <td class="text-xs-right">230</td>
             <td class="text-xs-center">5</td>
         </tr>
         <tr>
             <td><a href="Order_edit">P201610010002</a></td>
             <td>10入濾掛式包</td>
+            <td class="text-xs-center">2016/10/16</td>
+            <td class="text-xs-center">鄧微諭</td>
             <td class="text-xs-right">110</td>
             <td class="text-xs-center">15</td>
         </tr>
         <tr>
             <td><a href="Order_edit">P201610010002</a></td>
             <td>5入濾掛式包</td>
+            <td class="text-xs-center">2016/10/16</td>
+            <td class="text-xs-center">鄧微諭</td>
             <td class="text-xs-right">55</td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
             <td><a href="Order_edit">P201610010001</a></td>
             <td>咖啡豆</td>
+            <td class="text-xs-center">2016/10/16</td>
+            <td class="text-xs-center">鄧微諭</td>
             <td class="text-xs-right">230</td>
             <td class="text-xs-center">1</td>
         </tr>
         <tr>
             <td><a href="Order_edit">P201610010002</a></td>
             <td>10入濾掛式包</td>
+            <td class="text-xs-center">2016/10/16</td>
+            <td class="text-xs-center">鄧微諭</td>
             <td class="text-xs-right">110</td>
             <td class="text-xs-center">1</td>
         </tr>
         <tr>
             <td><a href="Order_edit">P201610010002</a></td>
             <td>5入濾掛式包</td>
+            <td class="text-xs-center">2016/10/16</td>
+            <td class="text-xs-center">鄧微諭</td>
             <td class="text-xs-right">55</td>
             <td class="text-xs-center">1</td>
         </tr>
     </tbody>
     <tfoot class="w3-pale-yellow">
         <tr>
-            <td colspan="2" class="text-xs-right">未出貨總計(g)</td>
+            <td colspan="4" class="text-xs-right">未出貨總計(g)</td>
             <td colspan="2" class="text-xs-center">3865</td>
         </tr>
     </tfoot>
@@ -112,19 +133,26 @@
 <table class="table table-sm table-bordered table-striped table-hover m-b-1">
     <caption class="w3-blue w3-padding">品名：哥斯大黎加</caption>
     <colgroup>
-        <col style="width:30%">
-        <col style="width:35%">
         <col style="width:20%">
+        <col style="width:23%">
+        <col span="2" style="width:13%">
+        <col style="width:16%">
         <col style="width:15%">
     </colgroup>
     <thead>
         <tr>
             <th>
-                @* 點選排序功能 (點一下遞增, 點兩下遞減) *@
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="th-sort-toggle">訂單編號</button>
             </th>
             <th>
-                <button class="th-sort-toggle">產品包裝</button>
+                <button class="th-sort-toggle asc">產品包裝</button>
+            </th>
+            <th>
+                <button class="text-xs-center th-sort-toggle desc">下單日期</button>
+            </th>
+            <th class="text-xs-center">
+                購買人
             </th>
             <th class="text-xs-center">
                 @* 如不需要排序功能: 純文字即可 *@
@@ -137,13 +165,14 @@
         <tr>
             <td><a href="Order_edit">P201610010001</a></td>
             <td>咖啡豆</td>
+            <td class="text-xs-center">2016/10/16</td>
+            <td class="text-xs-center">鄧微諭</td>
             <td class="text-xs-right">230</td>
             <td class="text-xs-center">5</td>
         </tr>
-    </tbody>
     <tfoot class="w3-pale-yellow">
         <tr>
-            <td colspan="2" class="text-xs-right">未出貨總計(g)</td>
+            <td colspan="4" class="text-xs-right">未出貨總計(g)</td>
             <td colspan="2" class="text-xs-center">3865</td>
         </tr>
     </tfoot>
