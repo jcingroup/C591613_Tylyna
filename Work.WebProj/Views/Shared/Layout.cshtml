@@ -80,6 +80,7 @@
                     <a class="@(ViewBag.BodyClass == "Quality" ? "current" : "")" href="~/Home/Quality">利他嚴選</a>
                     <a class="@(ViewBag.BodyClass == "Products" ? "current" : "")" href="~/Products">利他咖啡</a>
                     <a class="@(ViewBag.BodyClass == "Story" ? "current" : "")" href="~/Home/Story">利他故事</a>
+                    <a class="@(ViewBag.BodyClass == "News" ? "current" : "")" href="~/News">最新消息</a>
                     <a class="@(ViewBag.BodyClass == "FAQ" ? "current" : "")" href="~/FAQ">常見問答</a>
                     <a class="@(ViewBag.BodyClass == "ContactUs" ? "current" : "")" href="~/Home/ContactUs">聯絡我們</a>
                 </nav>
@@ -96,7 +97,7 @@
         }
         else
         {
-            <div id="banner"><h1>@ViewBag.Title</h1></div>
+            @* <div id="banner"><h1>@ViewBag.Title</h1></div> *@
         }
 
         <main id="main">
@@ -110,15 +111,16 @@
             <dt>
                 <strong class="logo-s">LITA CAFE</strong>
                 <span>幸福企業社</span>
-                <span>桃園市中壢區復興路161號4樓</span>
+                <span>統編 41446054</span>
             </dt>
-            <dd>03-400 0000</dd>
+            <dd>03-427 583</dd>
+            <dd>桃園市中壢區復興路161號4樓</dd>
             <dd>email <a href="mailto:address@lita.com.tw">address@lita.com.tw</a></dd>
         </dl>
         <div class="foot-social">
-            <a href="">Facebook</a>
-            <a href="">Youtube</a>
-            <a href="">LINE</a>
+            <a href="https://zh-tw.facebook.com/lovelitacafe/" target="_blank">Facebook</a>
+            @* <a href="">Youtube</a>
+            <a href="">LINE</a> *@
         </div>
         <a href="#header" class="goTop"><i class="icon-arrow_upward"></i>BACK TO TOP</a>
     </footer>

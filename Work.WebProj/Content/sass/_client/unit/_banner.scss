@@ -5,11 +5,20 @@ $banner-img: append($menu-item, 'Account');
 #banner {
     position: relative;
 
-    @include el(after) {
-        @include absolute(top 0 left 0 right 0);
-        height: 25px;
-        background: rgba($brand-secondary,.7);
+    @if $index {
+        img {
+            width: 100%;
+            @include mq(wider) {
+                max-width: 1200px;
+            }
+        }
     }
+
+    // @include el(after) {
+    //     @include absolute(top 0 left 0 right 0);
+    //     height: 25px;
+    //     background: rgba($brand-secondary,.7);
+    // }
 
     @if $page {
         height: 350px;

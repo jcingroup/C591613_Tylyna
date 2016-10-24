@@ -72,6 +72,7 @@
 
     // 本次專案
     .wrap { position: relative; }
+    box-shadow: 0 6px 0 rgba($brand-secondary,.8);
 }
 
 .logo {
@@ -85,7 +86,7 @@
     // 本次專案
     @extend %float-l;
     position: relative;
-    top: 20px;
+    top: 18px;
 }
 
 
@@ -102,17 +103,17 @@
 }
 .logo-s {
     @extend %inline-block;
-    @include text-pic('logo_s.gif', 260px, 32px);
+    @include text-pic('logo_s.gif', 171px, 21px);
     vertical-align: middle;
 }
 .foot-contact {
-    @extend .p-y-32;
-
     position: relative;
+    padding-top: 28px;
+    padding-bottom: 28px;
 
     @include el(all) {
         @include pos-center(x);
-        width: 740px;
+        width: 720px;
         height: 1px;
         background: lighten($brand-primary,15);
     }
@@ -120,17 +121,23 @@
     &::after  { bottom: 0; }
 
     dt {
-        @extend .m-t-4, .m-b-12;
-        font-size: em(31);
+        font-size: em(21);
         font-weight: bold;
+        margin-bottom: 10px;
     }
     span, dd {
-        @extend %inline-block, .p-x-12, .m-a-0;
+        @extend %inline-block, .font-sp, .m-a-0;
         line-height: 1.001;
-        &:last-of-type { border-left: 1px solid $brand-primary; }
     }
-    dd { @extend .font-xl, .font-sp; }
-    span { vertical-align: middle; }
+    dd {
+        @extend .p-x-12;
+        font-size: em(18);
+        &:not(:first-of-type) { border-left: 1px solid $brand-primary; }
+    }
+    span {
+        @extend .p-l-8;
+        vertical-align: middle;
+    }
 }
 .foot-social {
     a {

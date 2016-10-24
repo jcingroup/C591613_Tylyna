@@ -71,7 +71,7 @@ namespace DotWeb.Areas.Active.Controllers
         }
 
         // 其他頁資訊管理(編輯器)
-        // 首頁
+        // 首頁輪播圖
         public ActionResult Index_list()
         {
             return View();

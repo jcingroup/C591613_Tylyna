@@ -3,7 +3,7 @@
 // setting
 // ------------------------------------------------------------
 // navbar style
-$navbar-height:         80px !default;
+$navbar-height:         28px !default;
 $navbar-bg:             false !default; // #2AA19D
 
 // nav style
@@ -37,7 +37,7 @@ $mobile-menu-width:     100% !default;
     // 本次專案
     @extend .clear, .text-right;
     position: relative;
-    top: 50px;
+    top: 34px;
 
     #{$nav-root} {
         @if $nav-color     { color: $nav-color; }
@@ -87,7 +87,7 @@ $mobile-menu-width:     100% !default;
 .top-nav {
     @extend %float-r;
     position: relative;
-    top: 115px;
+    top: 63px;
     color: $nav-color;
 
     // 登入前
