@@ -646,7 +646,7 @@ th {
   background: #fff url(../images/headerBg.gif) repeat-x 0 100px;
   height: 165px;
   z-index: 1;
-  box-shadow: 0 6px 0 rgba(221, 171, 90, 0.8); }
+  box-shadow: 0 6px 0 rgba(221, 171, 90, 0.55); }
   #header .wrap {
     position: relative; }
 

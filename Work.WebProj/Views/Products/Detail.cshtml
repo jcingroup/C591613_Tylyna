@@ -66,6 +66,18 @@
                     <button class="btn">ADD</button>
                 </td>
             </tr>
+            <tr>
+                <td class="item">
+                    5入濾掛包
+                    <small class="block text-info">NT$ 190</small>
+                </td>
+                <td class="spec">
+                    55g/盒
+                </td>
+                <td colspan="2" class="text-left">
+                    <span class="label label-secondary font-lg">補貨中</span>
+                </td>
+            </tr>
         </table>
     </form><!-- modal-content //-->
 
@@ -91,6 +103,8 @@
         </dd>
         <dd class="btn-bar">
             <a class="btn bg-danger" onclick="document.getElementById('detail').style.display='block'">我要購買</a>
+            @* 後台設定補貨中時，上列連結隱藏，下列文字顯示 *@
+            @* <span class="label label-secondary font-lg">補貨中</span> *@
         </dd>
     </dl>
     <div class="col-5 products-pic">
@@ -100,5 +114,5 @@
 
 @* 編輯器 - 後台若無資料，則不顯示 *@
 <section class="editor">
-    產品更多介紹
+    產品更多介紹...
 </section>

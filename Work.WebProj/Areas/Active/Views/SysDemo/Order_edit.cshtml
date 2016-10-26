@@ -29,31 +29,6 @@
                 <input type="text" class="form-control" placeholder="系統自動產生..." disabled>
             </div>
             <label class="col-xs-2 form-control-label text-xs-right">
-                <span class="text-danger">*</span> 訂單審核
-            </label>
-            <div class="col-xs-4 form-inline">
-                <label class="c-input c-radio">
-                    <input type="radio" name="hasPass" checked>
-                    <span class="c-indicator"></span>
-                    <span class="text-sm">通過</span>
-                </label>
-                <label class="c-input c-radio m-r-0">
-                    <input type="radio" name="hasPass">
-                    <span class="c-indicator"></span>
-                    <span class="text-sm">不通過</span>
-                </label>
-                <input type="text" class="form-control" placeholder="若不通過請輸入原因...">
-            </div>
-        </section>
-
-        <section class="form-group row">
-        <label class="col-xs-1 form-control-label text-xs-right">
-                <span class="text-danger">*</span> 下單日期
-            </label>
-            <div class="col-xs-4">
-                <input type="date" class="form-control">
-            </div>
-            <label class="col-xs-2 form-control-label text-xs-right">
                 <span class="text-danger">*</span> 購買人
             </label>
             <div class="col-xs-4">
@@ -62,17 +37,10 @@
                     <a href="" class="input-group-addon"><i class="fa fa-search"></i></a>
                 </div>
             </div>
-
         </section>
 
         <section class="form-group row">
             <label class="col-xs-1 form-control-label text-xs-right">
-                <span class="text-danger">*</span> 出貨日期
-            </label>
-            <div class="col-xs-4">
-                <input type="date" class="form-control">
-            </div>
-            <label class="col-xs-2 form-control-label text-xs-right">
                 <span class="text-danger">*</span> 總金額
             </label>
             <div class="col-xs-4">
@@ -81,27 +49,21 @@
                     <input type="number" min="0" class="form-control" required>
                 </div>
             </div>
+            <label class="col-xs-2 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 下單日期
+            </label>
+            <div class="col-xs-4">
+                <input type="date" class="form-control">
+            </div>
         </section>
 
         <section class="form-group row">
             <label class="col-xs-1 form-control-label text-xs-right">
-                <span class="text-danger">*</span> 訂單狀態
-            </label>
-            <div class="col-xs-4">
-                <button class="btn btn-danger btn-sm margin-4">待繳款</button>
-                <button class="btn btn-sm margin-4">待出貨</button> @* 付款通知按下確認後才可被點選 *@
-                <button class="btn btn-sm margin-4">已出貨</button>
-                <button class="btn btn-sm margin-4">退貨中</button>
-                <button class="btn btn-sm margin-4">訂單完成</button>
-                <button class="btn btn-sm margin-4">取消訂單</button>
-                <button class="btn btn-sm margin-4">已結單</button>
-            </div>
-            <label class="col-xs-2 form-control-label text-xs-right">
                 <span class="text-danger">*</span> 付款方式
             </label>
             <div class="col-xs-4">
-                <span class="w3-tag label-default w3-round">轉帳匯款</span>
-                <span class="w3-tag label-default w3-round">貨到付款</span>
+                <span class="w3-tag label-primary w3-round">轉帳匯款</span>
+                @* <span class="w3-tag label-primary w3-round">貨到付款</span> *@
 
                 @* 新增時show下方
                 <label class="c-input c-radio">
@@ -114,6 +76,48 @@
                     <span class="c-indicator"></span>
                     <span class="text-sm">貨到付款</span>
                 </label> *@
+            </div>
+            <label class="col-xs-2 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 出貨日期
+            </label>
+            <div class="col-xs-4">
+                <input type="date" class="form-control">
+            </div>
+        </section>
+
+        <section class="form-group row">
+            <label class="col-xs-1 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 付款狀態
+            </label>
+            <div class="col-xs-4">
+                <span class="w3-tag label-warning w3-round">待付款</span>
+                @* <span class="w3-tag label-info w3-round">已付款</span> *@
+            </div>
+            <label class="col-xs-2 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 出貨狀態
+            </label>
+            <div class="col-xs-4">
+                <button class="btn btn-danger btn-sm margin-4">待出貨</button>
+                <button class="btn btn-sm margin-4">已出貨</button>
+            </div>
+        </section>
+
+        <section class="form-group row">
+            <label class="col-xs-1 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 取消訂單
+            </label>
+            <div class="col-xs-4 form-inline">
+                <label class="c-input c-radio">
+                    <input type="radio" name="hasPass" checked>
+                    <span class="c-indicator"></span>
+                    <span class="text-sm">否</span>
+                </label>
+                <label class="c-input c-radio m-r-0">
+                    <input type="radio" name="hasPass">
+                    <span class="c-indicator"></span>
+                    <span class="text-sm">是</span>
+                </label>
+                <input type="text" class="form-control" placeholder="若取消請輸入原因...">
             </div>
         </section>
     </fieldset>
@@ -138,11 +142,16 @@
         </dl>
     </fieldset>
 
+    @* 僅轉帳匯款才有此區塊 *@
     <table class="table table-sm table-bordered m-t-2">
-        <caption class="table-header w3-large">已付款通知</caption>
+        <caption class="table-header w3-large">
+            已付款通知 <a href="Reply" class="btn btn-sm btn-success pull-xs-right"><i class="fa-check"></i> 確認款項</a>
+            @* 無資料時顯示下列文字 *@
+            @* 尚無付款通知 *@
+        </caption>
         <thead>
             <tr>
-                <th class="text-xs-center">編輯</th>
+                <th class="text-xs-center">核對帳款</th>
                 <th class="text-xs-center">匯款帳號後5碼</th>
                 <th class="text-xs-center">匯款日期</th>
                 <th class="text-xs-center">匯款時間</th>
@@ -152,7 +161,8 @@
         @* 新增時顯示 *@
         @* <tr>
             <td rowspan="2" class="text-xs-center">
-                <button class="btn btn-link text-success" title="確認收款"><i class="fa-check"></i><br>確認收款</button>
+                <span class="w3-tag label-warning w3-round">待確認</span>
+                <span class="w3-tag label-success w3-round">已確認款項</span>
             </td>
             <td>
                 <input type="number" min="0" class="form-control" value="000000">
@@ -172,12 +182,11 @@
                 <textarea rows="1" class="form-control">備註：</textarea>
             </td>
         </tr> *@
-        @* 客戶傳送資料 *@
+        @* 客戶傳送資料後顯示 *@
         <tr>
             <td rowspan="2" class="text-xs-center">
-                <button class="btn btn-link text-success" title="確認收款"><i class="fa-check"></i><br>確認收款</button>
-                @* 按下確認收款後，訂單狀態自動變為待出貨，並顯示下方 tag *@
-                @* <span class="w3-tag label-success">已確認</span> *@
+                <span class="w3-tag label-warning w3-round">未確認</span>
+                @* <span class="w3-tag label-success w3-round">已確認款項</span> *@
             </td>
             <td>000000</td>
             <td>2016/10/14</td>

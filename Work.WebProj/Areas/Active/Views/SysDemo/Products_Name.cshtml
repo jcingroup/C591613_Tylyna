@@ -42,8 +42,8 @@
     <colgroup>
         <col style="width: 7%">
         <col span="2">
-        <col style="width: 10%">
-        <col style="width: 15%">
+        <col style="width: 22%">
+        <col style="width: 8%">
     </colgroup>
     <thead>
         <tr>
@@ -56,46 +56,16 @@
                 <button class="th-sort-toggle">產品品名</button>
             </th>
             <th>
-                @* 遞增排序的樣式 class 加 asc *@
-                <button class="th-sort-toggle asc">排序</button>
+                @* 遞減排序的樣式 class 加 desc *@
+                <button class="text-xs-center th-sort-toggle desc">狀態</button>
             </th>
             <th>
-                @* 遞減排序的樣式 class 加 desc *@
-                <button class="th-sort-toggle desc">狀態</button>
+                @* 遞增排序的樣式 class 加 asc *@
+                <button class="text-xs-center th-sort-toggle asc">排序</button>
             </th>
         </tr>
     </thead>
     @* 按下修改後才顯示 input等修改 *@
-    <tr>
-        <td class="text-xs-center">
-            <button class="btn btn-link text-muted" title="取消修改"><i class="fa fa-reply"></i></button>
-            <button class="btn btn-link text-primary" title="確定修改"><i class="fa fa-check fa-lg"></i></button>
-        </td>
-        <td>
-            <select class="form-control form-control-sm" required>
-                <option>咖啡品項</option>
-                <option>季節限定</option>
-            </select>
-        </td>
-        <td>
-            <input type="text" value="尼加拉瓜" class="form-control form-control-sm" placeholder="請輸入產品品名..." required>
-        </td>
-        <td>
-            <input type="number" name="" id="" min="0" value="0" class="form-control form-control-sm text-xs-center">
-        </td>
-        <td>
-            <label class="c-input c-radio">
-                <input type="radio" name="sale1" checked>
-                <span class="c-indicator"></span>
-                <span class="text-sm">顯示</span>
-            </label>
-            <label class="c-input c-radio">
-                <input type="radio" name="sale1">
-                <span class="c-indicator"></span>
-                <span class="text-sm">隱藏</span>
-            </label>
-        </td>
-    </tr>
     @* 未按下修改時 *@
     <tr>
         <td class="text-xs-center">
@@ -104,10 +74,22 @@
         </td>
         <td>咖啡品項</td>
         <td>瓜地馬拉</td>
+        <td class="text-xs-center">
+            <span class="w3-tag label-default w3-round">隱藏</span>
+        </td>
         <td class="text-xs-center">10</td>
-        <td>
+    </tr>
+    <tr>
+        <td class="text-xs-center">
+            <button class="btn btn-link text-danger" title="刪除"><i class="fa fa-trash fa-lg"></i></button>
+            <button class="btn btn-link text-success" title="編輯"><i class="fa fa-pencil fa-lg"></i></button>
+        </td>
+        <td>咖啡品項</td>
+        <td>商業豆</td>
+        <td class="text-xs-center">
             <span class="w3-tag label-success w3-round">顯示</span>
         </td>
+        <td class="text-xs-center">10</td>
     </tr>
     <tr>
         <td class="text-xs-center">
@@ -116,12 +98,12 @@
         </td>
         <td>季節限定</td>
         <td>綜合豆-耶加雪菲.瓜地馬拉.哥斯大黎加.肯亞.尼加拉瓜</td>
-        <td class="text-xs-center">10</td>
-        <td>
-            <span class="w3-tag label-success w3-round">顯示</span>
+        <td class="text-xs-center">
+            <span class="w3-tag label-warning w3-round">補貨中</span>
         </td>
+        <td class="text-xs-center">10</td>
     </tr>
-    @* 按下新增時 *@
+    @* 按下新增/修改時 *@
     <tr>
         <td class="text-xs-center">
             <button class="btn btn-link text-muted" title="取消修改"><i class="fa fa-reply"></i></button>
@@ -138,9 +120,6 @@
             <input type="text" class="form-control form-control-sm" placeholder="請輸入產品品名..." required>
         </td>
         <td>
-            <input type="number" name="" id="" min="0" value="0" class="form-control form-control-sm text-xs-center">
-        </td>
-        <td>
             <label class="c-input c-radio">
                 <input type="radio" name="sale1" checked>
                 <span class="c-indicator"></span>
@@ -151,6 +130,14 @@
                 <span class="c-indicator"></span>
                 <span class="text-sm">隱藏</span>
             </label>
+            <label class="c-input c-radio">
+                <input type="radio" name="sale1">
+                <span class="c-indicator"></span>
+                <span class="text-sm">補貨中</span>
+            </label>
+        </td>
+        <td>
+            <input type="number" name="" id="" min="0" value="0" class="form-control form-control-sm text-xs-center">
         </td>
     </tr>
 </table>

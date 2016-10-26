@@ -72,7 +72,12 @@
 
     // 本次專案
     .wrap { position: relative; }
-    box-shadow: 0 6px 0 rgba($brand-secondary,.8);
+    @if $index {
+        box-shadow: 0 10px 0 rgba($brand-secondary,.6);
+    }
+    @if $page {
+        box-shadow: 0 6px 0 rgba($brand-secondary,.55);
+    }
 }
 
 .logo {

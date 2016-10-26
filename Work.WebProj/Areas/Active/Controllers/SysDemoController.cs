@@ -54,8 +54,13 @@ namespace DotWeb.Areas.Active.Controllers
         {
             return View();
         }
-        // 收款方式
+        // 購物金流
         public ActionResult Payment()
+        {
+            return View();
+        }
+        // 收款通知
+        public ActionResult Reply()
         {
             return View();
         }
@@ -77,6 +82,11 @@ namespace DotWeb.Areas.Active.Controllers
             return View();
         }
         public ActionResult Index_edit()
+        {
+            return View();
+        }
+        // 首頁影片
+        public ActionResult Index_Youtube()
         {
             return View();
         }

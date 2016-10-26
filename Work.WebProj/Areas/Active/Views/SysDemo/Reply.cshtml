@@ -1,0 +1,137 @@
+﻿
+
+@{
+    @* Layout = "~/Views/Shared/Manage/RLayout.cshtml"; *@
+    @* 暫用 *@
+    Layout = "~/Views/Shared/SysLayoutDemo.cshtml";
+    ViewBag.BodyClass = "Order";
+    ViewBag.IsFirstPage = false;
+    ViewBag.Crumb = "已付款通知";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li><i class="fa-caret-right"></i> 會員及訂單管理</li>
+        <li><i class="fa-angle-right"></i> @ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="h3">@ViewBag.Crumb</h3>
+
+<header class="table-header">
+    <div class="table-filter">
+        <div class="form-inline">
+            <label class="sr-only text-sm">訂單編號</label> @* 如要顯示文字: 把 sr-only 拿掉 *@
+            <input type="text" class="form-control form-control-sm" placeholder="請輸入關鍵字...">
+            <label class="text-sm">付款日期</label>
+            <input type="date" class="form-control form-control-sm">~
+            <input type="date" class="form-control form-control-sm">
+            <label class="text-sm">狀態</label>
+            <select class="form-control form-control-sm">
+                <option value="">全部</option>
+                <option value="">待確認</option>
+                <option value="">已確認</option>
+            </select>
+        </div>
+        <div class="form-inline">
+            <button type="button" class="btn btn-sm btn-danger">
+                <i class="fa-trash-o"></i> 刪除
+            </button>
+            <button type="button" class="btn btn-sm btn-warning">
+                <i class="fa-exclamation-circle"></i> 未確認
+            </button>
+            <button type="button" class="btn btn-sm btn-success">
+                <i class="fa-check"></i> 已確認
+            </button>
+        </div>
+    </div><!-- table-filter //-->
+</header>
+<table class="table table-sm table-bordered table-striped table-hover">
+    <colgroup>
+        <col style="width:6%">
+    </colgroup>
+    <thead>
+        <tr>
+            <th class="text-xs-center">編輯</th> @* 文字置中: class="text-xs-center" / 置右: class="text-xs-right" *@
+            <th>
+                @* 點選排序功能 (點一下遞增asc, 點兩下遞減desc) *@
+                <button class="th-sort-toggle">訂單編號</button>
+            </th>
+            <th class="text-xs-center">
+                @* 如不需要排序功能: 純文字即可 *@
+                購買人
+            </th>
+            <th class="text-xs-center">
+                帳號後5碼
+            </th>
+            <th class="text-xs-center">
+                付款金額
+            </th>
+            <th>
+                <button class="text-xs-center th-sort-toggle">付款日期</button>
+            </th>
+            <th>
+                <button class="text-xs-center th-sort-toggle asc">狀態</button>
+            </th>
+            <th>
+                <button class="text-xs-center th-sort-toggle">排序</button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @* 建議: 1頁10筆資料 *@
+        <tr>
+            <td class="text-xs-center">
+                <label class="c-input c-checkbox">
+                    <input type="checkbox">
+                    <span class="c-indicator"></span>
+                </label>
+            </td>
+            <td><a href="Order_edit">P20160010001</a></td>
+            <td class="text-xs-center">鄧微諭</td>
+            <td class="text-xs-center">00000</td>
+            <td class="text-xs-right">500</td>
+            <td class="text-xs-center">2016/10/1</td>
+            <td class="text-xs-center"><span class="w3-tag label-warning w3-round">未確認</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+        <tr>
+            <td class="text-xs-center">
+                <label class="c-input c-checkbox">
+                    <input type="checkbox">
+                    <span class="c-indicator"></span>
+                </label>
+            </td>
+            <td><a href="Order_edit">P20160010001</a></td>
+            <td class="text-xs-center">鄧微諭</td>
+            <td class="text-xs-center">00000</td>
+            <td class="text-xs-right">500</td>
+            <td class="text-xs-center">2016/10/1</td>
+            <td class="text-xs-center"><span class="w3-tag label-success w3-round">已確認</span></td>
+            <td class="text-xs-center">10</td>
+        </tr>
+    </tbody>
+</table>
+<footer class="table-footer clearfix">
+    <small class="pull-xs-right">第 1-10 筆，共 20 筆</small>
+    <ul class="pager pager-sm">
+        <li>
+            <a href=""><i class="fa-angle-double-left"></i></a>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-left"></i></a>
+        </li>
+        <li class="form-inline">
+            <label>第</label>
+            <input type="text" class="form-control form-control-sm text-xs-center" style="width:100px">
+            <label>頁，共 2 頁</label>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-right"></i></a>
+        </li>
+        <li>
+            <a href=""><i class="fa-angle-double-right"></i></a>
+        </li>
+    </ul>
+</footer>
+

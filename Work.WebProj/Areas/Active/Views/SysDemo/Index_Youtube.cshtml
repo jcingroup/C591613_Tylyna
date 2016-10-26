@@ -1,0 +1,28 @@
+﻿
+@{
+    @* Layout = "~/Views/Shared/Manage/RLayout.cshtml"; *@
+    @* 暫用 *@
+    Layout = "~/Views/Shared/SysLayoutDemo.cshtml";
+    ViewBag.BodyClass = "Products";
+    ViewBag.IsFirstPage = false;
+    ViewBag.Crumb = "首頁影片維護";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li><i class="fa-caret-right"></i> 網站資料管理</li>
+        <li><i class="fa-angle-right"></i> @ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="h3">@ViewBag.Crumb<small class="sub"><i class="fa-angle-double-right"></i> 編輯</small></h3>
+
+<form action="" class="form">
+    <input type="text" class="form-control m-b-1" placeholder="請在此輸入Youtube嵌入連結路徑...">
+
+    <div class="form-action text-xs-center">
+        <button type="button" class="btn btn-primary btn-sm">
+            <i class="fa-check"></i> 儲存
+        </button>
+    </div>
+</form>

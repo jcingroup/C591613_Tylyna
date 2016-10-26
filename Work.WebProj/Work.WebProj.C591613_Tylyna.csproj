@@ -249,7 +249,8 @@
     <Content Include="Areas\Active\Views\SysDemo\News_list.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\News_edit.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\ChangePW.cshtml" />
-    <Content Include="Areas\Active\Views\SysDemo\Youtube.cshtml" />
+    <Content Include="Areas\Active\Views\SysDemo\Index_Youtube.cshtml" />
+    <Content Include="Areas\Active\Views\SysDemo\Reply.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />

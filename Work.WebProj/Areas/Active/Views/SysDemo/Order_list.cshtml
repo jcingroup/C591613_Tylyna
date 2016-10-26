@@ -30,13 +30,11 @@
         <div class="form-inline">
             <label class="text-sm">訂單狀態</label>
             <button class="btn btn-primary btn-sm">全部</button>
-            <button class="btn btn-sm">待繳款</button>
+            <button class="btn btn-sm">待付款</button>
+            <button class="btn btn-sm">已付款</button>
             <button class="btn btn-sm">待出貨</button>
             <button class="btn btn-sm">已出貨</button>
-            <button class="btn btn-sm">退貨中</button>
-            <button class="btn btn-sm">訂單完成</button>
             <button class="btn btn-sm">取消訂單</button>
-            <button class="btn btn-sm">已結單</button>
             <button class="btn btn-success btn-sm pull-xs-right"><i class="fa-print"></i> 列印</button>
         </div>
     </div><!-- table-filter //-->
@@ -44,6 +42,10 @@
 <table class="table table-sm table-bordered table-striped table-hover">
     <colgroup>
         <col span="2" style="width:4%">
+        <col style="width:11%">
+        <col style="width:26%">
+        <col span="6">
+        <col style="width:5%">
     </colgroup>
     <thead>
         <tr>
@@ -68,11 +70,14 @@
                 @* 如不需要排序功能: 純文字即可 *@
                 購買人
             </th>
-            <th class="text-xs-center">
-                付款方式
+            <th>
+                <button class="text-xs-center th-sort-toggle">付款方式</button>
             </th>
             <th>
-                <button class="text-xs-center th-sort-toggle">訂單狀態</button>
+                <button class="text-xs-center th-sort-toggle">付款狀態</button>
+            </th>
+            <th>
+                <button class="text-xs-center th-sort-toggle">出貨狀態</button>
             </th>
             <th class="text-xs-center">
                 <button class="th-sort-toggle">排序</button>
@@ -94,7 +99,8 @@
             <td class="text-xs-center">2016/10/2</td>
             <td class="text-xs-center">鄧微諭</td>
             <td class="text-xs-center">貨到付款</td>
-            <td class="text-xs-center"><span class="w3-tag label-warning w3-round">待繳款</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-warning w3-round">待付款</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-danger w3-round">待出貨</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -110,7 +116,8 @@
             <td class="text-xs-center">2016/10/2</td>
             <td class="text-xs-center">鄧微諭</td>
             <td class="text-xs-center">貨到付款</td>
-            <td class="text-xs-center"><span class="w3-tag label-info w3-round">已出貨</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-warning w3-round">待付款</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-success w3-round">已出貨</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -126,7 +133,8 @@
             <td class="text-xs-center">2016/10/2</td>
             <td class="text-xs-center">錢阜甯</td>
             <td class="text-xs-center">轉帳匯款</td>
-            <td class="text-xs-center"><span class="w3-tag label-warning w3-round">待出貨</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-primary w3-round">已付款</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-danger w3-round">待出貨</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -142,7 +150,8 @@
             <td class="text-xs-center">2016/10/2</td>
             <td class="text-xs-center">錢阜甯</td>
             <td class="text-xs-center">貨到付款</td>
-            <td class="text-xs-center"><span class="w3-tag label-success w3-round">訂單完成</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-primary w3-round">已付款</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-success w3-round">已出貨</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -158,6 +167,7 @@
             <td class="text-xs-center">2016/10/2</td>
             <td class="text-xs-center">錢阜甯</td>
             <td class="text-xs-center">轉帳匯款</td>
+            <td class="text-xs-center"><span class="w3-tag label-warning w3-round">待付款</span></td>
             <td class="text-xs-center"><span class="w3-tag label-default w3-round">取消訂單</span></td>
             <td class="text-xs-center">10</td>
         </tr>
@@ -174,7 +184,8 @@
             <td class="text-xs-center">2016/10/2</td>
             <td class="text-xs-center">錢阜甯</td>
             <td class="text-xs-center">貨到付款</td>
-            <td class="text-xs-center"><span class="w3-tag label-danger w3-round">退貨中</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-primary w3-round">已付款</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-danger w3-round">待出貨</span></td>
             <td class="text-xs-center">10</td>
         </tr>
         <tr>
@@ -190,7 +201,8 @@
             <td class="text-xs-center">2016/10/2</td>
             <td class="text-xs-center">錢阜甯</td>
             <td class="text-xs-center">轉帳匯款</td>
-            <td class="text-xs-center"><span class="w3-tag label-primary w3-round">已結單</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-primary w3-round">已付款</span></td>
+            <td class="text-xs-center"><span class="w3-tag label-success w3-round">已出貨</span></td>
             <td class="text-xs-center">10</td>
         </tr>
     </tbody>

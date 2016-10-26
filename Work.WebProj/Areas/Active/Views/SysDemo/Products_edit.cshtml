@@ -60,6 +60,7 @@
                     <option>哥期大黎加</option>
                     <option>黃金曼特寧</option>
                     <option>蒲隆地</option>
+                    <option>商業豆</option>
                 </select>
             </dd>
         </dl>
@@ -77,6 +78,11 @@
                     <input type="radio" name="show">
                     <span class="c-indicator"></span>
                     <span class="text-sm">隱藏</span>
+                </label>
+                <label class="c-input c-radio">
+                    <input type="radio" name="show">
+                    <span class="c-indicator"></span>
+                    <span class="text-sm">補貨中</span>
                 </label>
             </dd>
         </dl>
@@ -144,18 +150,15 @@
                 <input type="text" value="10入濾掛式包" class="form-control" required>
             </td>
             <td class="text-xs-center">
-                <input type="number" value="110" class="form-control text-xs-center" required>
+                <div class="input-group">
+                    <input type="number" min="0" value="110" class="form-control text-xs-center" required>
+                    <span class="input-group-addon">g</span>
+                </div>
             </td>
             <td>
-                <div class="form-inline">
-                    <input id="on" type="radio" name="onSale" checked>
-                    <label for="on"></label>
-                    NT$
-                    <input type="number" min="0" value="380" class="form-control text-xs-center c-input-number">
-                    <br>
-                    <input id="off" type="radio" name="onSale">
-                    <label for="off"></label>
-                    請來電洽談
+                <div class="input-group">
+                    <span class="input-group-addon">NT$</span>
+                    <input type="number" min="0" value="380" class="form-control text-xs-center" required>
                 </div>
             </td>
             <td class="text-xs-center">
@@ -167,7 +170,7 @@
                 <label class="c-input c-radio">
                     <input type="radio" name="sale1">
                     <span class="c-indicator"></span>
-                    <span class="text-sm">下架</span>
+                    <span class="text-sm">補貨中</span>
                 </label>
             </td>
         </tr>
@@ -179,7 +182,7 @@
             <td>P2-010-02</td>
             <td>5入濾掛式包</td>
             <td class="text-xs-center">55g</td>
-            <td>NT$ 190</td>
+            <td class="text-xs-right">NT$ 190</td>
             <td class="text-xs-center">
                 <span class="w3-tag label-success w3-round">上架</span>
             </td>
@@ -192,22 +195,9 @@
             <td>P2-010-03</td>
             <td>袋裝咖啡豆</td>
             <td class="text-xs-center">230g</td>
-            <td>NT$ 330</td>
+            <td class="text-xs-right">NT$ 330</td>
             <td class="text-xs-center">
-                <span class="w3-tag label-default w3-round">下架</span>
-            </td>
-        </tr>
-        <tr>
-            <td class="text-xs-center">
-                <button class="btn btn-link text-danger" title="刪除"><i class="fa fa-trash fa-lg"></i></button>
-                <button class="btn btn-link text-success" title="編輯"><i class="fa fa-pencil fa-lg"></i></button>
-            </td>
-            <td>P2-010-04</td>
-            <td>商業豆</td>
-            <td class="text-xs-center">2000g</td>
-            <td>請來電洽談</td>
-            <td class="text-xs-center">
-                <span class="w3-tag label-success w3-round">上架</span>
+                <span class="w3-tag label-default w3-round">補貨中</span>
             </td>
         </tr>
     </table>

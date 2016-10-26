@@ -18,72 +18,93 @@
 <h3 class="h3">@ViewBag.Crumb<small class="sub"><i class="fa-angle-double-right"></i> 編輯</small></h3>
 
 <form class="form form-sm">
-    <section class="form-group row">
-        <label class="col-xs-1 form-control-label text-xs-right">
-            <span class="text-danger">*</span> 發佈日期
-        </label>
-        <div class="col-xs-7">
-            @* 自動帶入 今天日期 *@
-            <input type="date" class="form-control" value="2016-01-01" placeholder="yyyy-mm-dd">
-        </div>
-    </section>
-    <section class="form-group row">
-        <label class="col-xs-1 form-control-label text-xs-right">
-            <span class="text-danger">*</span> 狀態
-        </label>
-        <div class="col-xs-7">
-            <label class="c-input c-radio">
-                <input type="radio" name="show" checked>
-                <span class="c-indicator"></span>
-                <span class="text-sm">顯示</span>
+    <section class="col-xs-6">
+        <div class="form-group row">
+            <label class="col-xs-2 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 發佈日期
             </label>
-            <label class="c-input c-radio">
-                <input type="radio" name="show">
-                <span class="c-indicator"></span>
-                <span class="text-sm">隱藏</span>
+            <div class="col-xs-10">
+                @* 自動帶入 今天日期 *@
+                <input type="date" class="form-control" value="2016-01-01" placeholder="yyyy-mm-dd">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-2 form-control-label text-xs-right">
+                排序
             </label>
+            <div class="col-xs-7">
+                @* 如未輸入 自動帶入 0 *@
+                <input type="number" min="0" value="0" class="form-control">
+            </div>
+            <small class="col-xs-3 text-muted">數字愈大愈前面</small> @* 說明文字 *@
         </div>
-    </section>
-    <section class="form-group row">
-        <label class="col-xs-1 form-control-label text-xs-right">
-            <span class="text-danger">*</span> 首頁顯示
-        </label>
-        <div class="col-xs-7">
-            <label class="c-input c-radio">
-                <input type="radio" name="index">
-                <span class="c-indicator"></span>
-                <span class="text-sm">顯示</span>
+        <div class="form-group row">
+            <label class="col-xs-2 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 狀態
             </label>
-            <label class="c-input c-radio">
-                <input type="radio" name="index" checked>
-                <span class="c-indicator"></span>
-                <span class="text-sm">隱藏</span>
+            <div class="col-xs-10">
+                <label class="c-input c-radio">
+                    <input type="radio" name="show" checked>
+                    <span class="c-indicator"></span>
+                    <span class="text-sm">顯示</span>
+                </label>
+                <label class="c-input c-radio">
+                    <input type="radio" name="show">
+                    <span class="c-indicator"></span>
+                    <span class="text-sm">隱藏</span>
+                </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-2 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 首頁顯示
             </label>
+            <div class="col-xs-10">
+                <label class="c-input c-radio">
+                    <input type="radio" name="index">
+                    <span class="c-indicator"></span>
+                    <span class="text-sm">顯示</span>
+                </label>
+                <label class="c-input c-radio">
+                    <input type="radio" name="index" checked>
+                    <span class="c-indicator"></span>
+                    <span class="text-sm">隱藏</span>
+                </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-2 form-control-label text-xs-right">
+                <span class="text-danger">*</span> 消息標題
+            </label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" placeholder="請輸入最新消息標題...">
+            </div>
         </div>
     </section>
-    <section class="form-group row">
-        <label class="col-xs-1 form-control-label text-xs-right">
-            排序
-        </label>
-        <div class="col-xs-7">
-            @* 如未輸入 自動帶入 0 *@
-            <input type="number" min="0" value="0" class="form-control">
+
+    <section class="col-xs-6">
+        <div class="form-group row">
+            <label class="col-xs-2 form-control-label text-xs-right">代表圖</label>
+            <div class="col-xs-10">
+                @* 瀏覽&上傳檔案 *@
+                <input type="file" class="form-control" name="pic" accept="image/*">
+                @* 照片縮圖 *@
+                <ol class="upload-img list-inline">
+                    <li>
+                        <button class="close">&times;</button> @* 刪除圖片的按鈕 *@
+                        <img src="" alt="">
+                    </li>
+                </ol>
+                <small class="text-muted">可上傳 1 張照片，檔案大小不可超過 xxx KB</small>
+            </div>
         </div>
-        <small class="col-xs-4 text-muted">數字愈大愈前面</small> @* 說明文字 *@
     </section>
-    <section class="form-group row">
-        <label class="col-xs-1 form-control-label text-xs-right">
-            <span class="text-danger">*</span> 消息標題
-        </label>
-        <div class="col-xs-7">
-            <input type="text" class="form-control" placeholder="請輸入最新消息標題...">
-        </div>
-    </section>
-    <section class="form-group row">
+
+    <section class="form-group row clear">
         <label class="col-xs-1 form-control-label text-xs-right">
             <span class="text-danger">*</span> 消息內容
         </label>
-        <div class="col-xs-7">
+        <div class="col-xs-11">
             <textarea rows="5" class="form-control" placeholder="請輸入最新消息內容..."></textarea>
         </div>
     </div>

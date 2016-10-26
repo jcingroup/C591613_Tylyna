@@ -17,34 +17,22 @@
 
 <h3 class="h3">@ViewBag.Crumb<small class="sub"><i class="fa-angle-double-right"></i> 編輯</small></h3>
 
-@* <div class="alert alert-warning w3-small">
+<div class="alert alert-warning w3-small">
     <button type="button" class="close"><i class="fa-times"></i></button>
     編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除)，以免行動裝置顯示時會跑版。<br>
     ps. youtube 可勾選「用自適應縮放模式」
-</div> *@
+</div>
 
 <button class="btn btn-success btn-sm" type="button"><i class="fa-plus-circle"></i> 新增</button>
 
 <form action="" class="form form-sm">
     <article class="w3-card-2 m-y-1">
         <header class="w3-padding w3-light-blue form-inline">
-            #0 <input type="text" value="利他故事一" class="form-control form-control-sm">
-            <div class="pull-xs-right">
-                首頁顯示：
-                <label class="c-input c-radio">
-                    <input type="radio" name="show" checked>
-                    <span class="c-indicator"></span>
-                    <span class="text-sm w3-text-white">顯示</span>
-                </label>
-                <label class="c-input c-radio">
-                    <input type="radio" name="show">
-                    <span class="c-indicator"></span>
-                    <span class="text-sm w3-text-white">隱藏</span>
-                </label>
-            </div>
+            #0 <input type="text" class="form-control form-control-sm" placeholder="請在此輸入標題...">
         </header>
         <main class="w3-padding">
-            <textarea class="form-control form-control-sm" rows="8">請輸入Youtube嵌入路徑...</textarea>
+            @* 網頁編輯器 *@
+            <textarea class="form-control form-control-sm" rows="8"></textarea>
         </main>
     </article>
 
