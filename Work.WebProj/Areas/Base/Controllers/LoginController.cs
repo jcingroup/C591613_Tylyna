@@ -404,7 +404,7 @@ namespace DotWeb.Areas.Base.Controllers
                         Response.Cookies.Add(cookie_loginid);
 
                         //LoginType //N:管理者登錄 Y:一般會員登錄
-                        var cookie_login_type = new HttpCookie(CommWebSetup.LoginType, "N".Trim());
+                        var cookie_login_type = new HttpCookie(CommWebSetup.LoginType, "N");
                         cookie_login_type.HttpOnly = true;
                         Response.Cookies.Add(cookie_login_type);
 
