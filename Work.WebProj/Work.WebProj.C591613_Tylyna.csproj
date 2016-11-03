@@ -593,7 +593,6 @@
     <Content Include="ckeditor\config.js" />
     <Content Include="ckeditor\contents.css" />
     <Content Include="ckeditor\styles.js" />
-    <Content Include="node_modules\bootstrap\dist\js\bootstrap.js" />
     <Content Include="Scripts\cdn\bootstrap\collapse.js" />
     <Content Include="Scripts\cdn\bootstrap\util.js" />
     <Content Include="Scripts\cdn\jquery-1.10.2.min.js" />
@@ -601,6 +600,7 @@
     <Content Include="Scripts\cdn\jquery.min.js" />
     <Content Include="Scripts\GoogleAnalytics.js" />
     <Content Include="Scripts\googleReCAPTCHA.js" />
+    <Content Include="Scripts\typings\react-lazyload.js" />
     <Content Include="Views\Shared\SysLayoutDemo.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\Quality.cshtml" />
@@ -717,13 +717,16 @@
     <TypeScriptCompile Include="app_modules\dt\def-data.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap.v3.datetimepicker\bootstrap.v3.datetimepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\ckeditor\ckeditor.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\ed6-promist.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery-sortable\jquery-sortable.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.cookie\jquery.cookie.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\moment\moment-node.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\moment\moment.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-bootstrap\react-bootstrap.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\react-fileupload.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-lazyload.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\react-load-mask.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-redux\react-redux.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react\react-addons-create-fragment.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react\react-addons-css-transition-group.d.ts" />
@@ -748,6 +751,8 @@
     <TypeScriptCompile Include="Scripts\typings\swiper\swiper.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\tsd.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\whatwg-fetch\whatwg-fetch.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\whatwg-streams\whatwg-streams.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -799,7 +804,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptSourceMap>False</TypeScriptSourceMap>
     <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
-    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptTarget>ES6</TypeScriptTarget>
     <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>

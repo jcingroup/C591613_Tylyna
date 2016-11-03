@@ -218,6 +218,8 @@ namespace DotWeb.Areas.Base.Controllers
             removeCookie("user_name");
             removeCookie("community_id");
             removeCookie("user_login");
+            removeCookie(CommWebSetup.LoginId);
+            removeCookie(CommWebSetup.LoginType);
 
 
             ObjectCache cache = MemoryCache.Default;
@@ -225,6 +227,7 @@ namespace DotWeb.Areas.Base.Controllers
 
             //SiteMaps.ReleaseSiteMap();
 
+            FormsAuthentication.SignOut();
             if (getLoginFlag == "Y")
                 return Redirect("~");
             else

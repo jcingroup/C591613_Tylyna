@@ -243,3 +243,14 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+
+Work.WebProj/app_modules/comm-cmpt/comm-cmpt.js
+Work.WebProj/app_modules/comm-func/comm-func.js
+Work.WebProj/app_modules/dt/def-data.js
+Work.WebProj/app_modules/comm-func/comm-func.js
+Work.WebProj/app_modules/comm-typeahead/main.js
+Work.WebProj/app_modules/dt/def-data.js
+
+Work.WebProj/Scripts/src/**/*.js
+/Work.WebProj/_Code/Log

@@ -5,6 +5,7 @@
 /// <reference path="react/react-mixin.d.ts" />
 /// <reference path="moment/moment.d.ts" />
 /// <reference path="react/react-dom.d.ts" />
+/// <reference path="react-redux/react-redux.d.ts" />
 
 /// <reference path="toastr/toastr.d.ts" />
 /// <reference path="../../app_modules/comm-cmpt/comm-cmpt.d.ts" />
