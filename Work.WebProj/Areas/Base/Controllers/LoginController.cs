@@ -17,6 +17,8 @@ using System.Runtime.Caching;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+
 namespace DotWeb.Areas.Base.Controllers
 {
     public class LoginController : WebUserController
@@ -154,7 +156,7 @@ namespace DotWeb.Areas.Base.Controllers
             getLoginResult.url = Url.Content("~/Active/CommunityNews");
             if (get_user_roles_name.Contains("Secretary"))
 
-            Response.Cookies.Add(new HttpCookie(CommWebSetup.Cookie_UserName, item.UserName));
+                Response.Cookies.Add(new HttpCookie(CommWebSetup.Cookie_UserName, item.UserName));
             Response.Cookies.Add(new HttpCookie(CommWebSetup.Cookie_LastLogin, DateTime.Now.ToString("yyyy-MM-dd")));
             #endregion
 
@@ -329,134 +331,114 @@ namespace DotWeb.Areas.Base.Controllers
             Response.Cookies.Set(c);
         }
 
-        #region 前台會員登入
+        #region 後台登入
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<string> ajax_NewLogin(LoginViewModel model)
+        {
+            var userManager = UserManager;
+            LoginResult getLoginResult = new LoginResult();
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public async Task<string> ajax_MemberLogin(MemberLogin obj)
-        //{
-        //    LoginResult rAjaxResult = new LoginResult();
-        //    if (!ModelState.IsValid)
-        //    {
-        //        rAjaxResult.result = false;
-        //        rAjaxResult.message = "資訊不完整";
-        //        return defJSON(rAjaxResult);
-        //    }
+            #region 驗證碼檢查程序
 
-        //    #region 驗證碼檢查程序
-        //    if (string.IsNullOrEmpty(Session["MemberLogin"].ToString()))
-        //    {
-        //        Session["MemberLogin"] = Guid.NewGuid();
-        //        rAjaxResult.result = false;
-        //        rAjaxResult.message = Resources.Res.Log_Err_ImgValideNotEquel;
-        //        return defJSON(rAjaxResult);
-        //    }
+#if DEBUG
+            getLoginResult.vildate = true;
+#else
+            #region Google驗證(目前無使用換成數字驗證碼)
+            if (!ModelState.IsValid)
+            {
+                getLoginResult.result = false;
+                getLoginResult.message = Resources.Res.Login_Err_Normal;
+                return defJSON(getLoginResult);
+            }
+            ValidateResponse Validate = ValidateCaptcha(model.validate);
+            getLoginResult.vildate = Validate.Success;
+            #endregion
+#endif
+            if (!getLoginResult.vildate)
+            {
+                //Session["CheckCode"] = Guid.NewGuid();//只要有錯先隨意產生唯一碼 以防暴力破解，新的CheckCode會在Validate產生。
+                getLoginResult.result = false;
+                getLoginResult.message = Resources.Res.Log_Err_googleValideNotEquel;
+                return defJSON(getLoginResult);
+            }
+            #endregion
 
-        //    rAjaxResult.vildate = Session["MemberLogin"].Equals(obj.validate) ? true : false;
-        //    //#if DEBUG
-        //    //            rAjaxResult.vildate = true;
-        //    //#endif
-        //    if (!rAjaxResult.vildate)
-        //    {
-        //        Session["MemberLogin"] = Guid.NewGuid(); //只要有錯先隨意產生唯一碼 以防暴力破解，新的CheckCode會在Validate產生。
-        //        rAjaxResult.result = false;
-        //        rAjaxResult.message = Resources.Res.Log_Err_ImgValideNotEquel;
-        //        return defJSON(rAjaxResult);
-        //    }
-        //    #endregion
-        //    var db0 = getDB0();
-        //    obj.pwd = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(obj.pwd));
-        //    var get_user = db0.Sales.Where(x => x.account == obj.act & x.password == obj.pwd).FirstOrDefault();
+            try
+            {
+                #region 帳密碼檢查
 
-        //    if (get_user != null)
-        //    {
-        //        #region 前台_會員登入用cookie
-        //        Response.Cookies.Add(new HttpCookie(CommWebSetup.WebCookiesId + ".member_id", Server.UrlEncode(EncryptString.desEncryptBase64(get_user.sales_no))));
-        //        Response.Cookies.Add(new HttpCookie(CommWebSetup.WebCookiesId + ".member_name", Server.UrlEncode(get_user.sales_name)));
-        //        //設定過期時間1天
-        //        //Response.Cookies[CommWebSetup.WebCookiesId + ".member_id"].Expires = DateTime.Now.AddDays(1);
-        //        //Response.Cookies[CommWebSetup.WebCookiesId + ".member_name"].Expires = DateTime.Now.AddDays(1);
-        //        #endregion
-        //        #region 後台_會員登入用cookie
-        //        Session["CheckCode"] = "jcin";
+                using (var db0 = getDB0())
+                {
+                    SignInStatus result;
+                    ApplicationUser get_user;
+                    IEnumerable<string> get_user_roles_name;
+
+                    result = await SignInManager.PasswordSignInAsync(model.account, model.password, model.rememberme, shouldLockout: false);
+
+                    if (result == SignInStatus.Failure)
+                    {
+                        getLoginResult.result = false;
+                        getLoginResult.message = Resources.Res.Login_Err_Password;
+                        return defJSON(getLoginResult);
+                    }
+
+                    getLoginResult.result = true;
+                    get_user = await userManager.FindByNameAsync(model.account);
+                    //get_user_roles_id = get_user.Roles.Select(x=>x.RoleId);
+                    get_user_roles_name = db0.AspNetUsers.FirstOrDefault(x => x.Id == get_user.Id).AspNetRoles.Select(x => x.Name);
+                    //本專案目前一個帳號只對映一個role 以first role為主
+
+                    if (get_user != null)
+                    {
+                        #region 前台_會員登入用cookie
+
+                        string userData = get_user_roles_name.FirstOrDefault();
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, get_user.Id, DateTime.Now, DateTime.Now.AddMinutes(180),false, userData, FormsAuthentication.FormsCookiePath);
+                        
+                        string encTicket = FormsAuthentication.Encrypt(ticket);
+                        Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+
+                        var cookie_loginid = new HttpCookie(CommWebSetup.LoginId, get_user.UserName.Trim());
+                        cookie_loginid.HttpOnly = true;
+                        Response.Cookies.Add(cookie_loginid);
+
+                        //LoginType //N:管理者登錄 Y:一般會員登錄
+                        var cookie_login_type = new HttpCookie(CommWebSetup.LoginType, "N".Trim());
+                        cookie_login_type.HttpOnly = true;
+                        Response.Cookies.Add(cookie_login_type);
+
+                        #endregion
+                        #region 後台_會員登入用cookie
+                        Session["CheckCode"] = "jcin";
+
+                        #endregion
+
+                        getLoginResult.result = true;
+                        string result_url = Url.Content(CommWebSetup.ManageDefCTR);
+
+                        getLoginResult.url = result_url;
+                        return defJSON(getLoginResult);
+                    }
+                    else
+                    {
+                        getLoginResult.result = false;
+                        getLoginResult.message = Resources.Res.Login_Err_Password;//帳號或密碼錯誤 請重新輸入
+                        return defJSON(getLoginResult);
+                    }
 
 
-        //        #region 不同等級(rank)用不同帳號登入
-        //        string login_model = string.Empty;
-        //        if (get_user.rank == (int)SalesRankState.managementOffice)
-        //        {//管理處
-        //            login_model = await ajax_Login(new LoginViewModel()
-        //            {
-        //                account = "ManagementOffice",
-        //                password = "4257386-",
-        //                lang = "zh-TW",
-        //                rememberme = false,
-        //                validate = "jcin"
-        //            });
-        //        }
-        //        else if (get_user.rank == (int)SalesRankState.operationsCenter)
-        //        {//營運中心
-        //            login_model = await ajax_Login(new LoginViewModel()
-        //            {
-        //                account = "OperationsCenter",
-        //                password = "4257386-",
-        //                lang = "zh-TW",
-        //                rememberme = false,
-        //                validate = "jcin"
-        //            });
-        //        }
-        //        else if (get_user.rank == (int)SalesRankState.manager)
-        //        {//經理人
-        //            login_model = await ajax_Login(new LoginViewModel()
-        //            {
-        //                account = "SalesManager",
-        //                password = "4257386-",
-        //                lang = "zh-TW",
-        //                rememberme = false,
-        //                validate = "jcin"
-        //            });
-        //        }
-        //        else
-        //        {//共享會員(一般會員)
-        //            login_model = await ajax_Login(new LoginViewModel()
-        //            {
-        //                account = "user",
-        //                password = "4257386-",
-        //                lang = "zh-TW",
-        //                rememberme = false,
-        //                validate = "jcin"
-        //            });
-        //        }
-        //        #endregion
-        //        LoginResult trnResult = Newtonsoft.Json.JsonConvert.DeserializeObject<LoginResult>(login_model);
-        //        if (trnResult.result)
-        //        {
-        //            Response.Cookies.Add(new HttpCookie("user_login", Server.UrlEncode(EncryptString.desEncryptBase64("Y"))));
-        //        }
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                getLoginResult.result = false;
+                getLoginResult.message = ex.Message;
+                return defJSON(getLoginResult);
+            }
 
-        //        #endregion
-
-        //        rAjaxResult.result = true;
-        //        rAjaxResult.url = Url.Content("~");
-        //        return defJSON(rAjaxResult);
-        //    }
-        //    else
-        //    {
-        //        rAjaxResult.result = false;
-        //        rAjaxResult.message = "帳號或密碼錯誤 請重新輸入";
-        //        return defJSON(rAjaxResult);
-        //    }
-        //}
-        //[AllowAnonymous]
-        //public RedirectResult ajax_MemberLogout()
-        //{
-        //    removeCookie(CommWebSetup.WebCookiesId + ".member_id");
-        //    removeCookie(CommWebSetup.WebCookiesId + ".member_name");
-        //    removeCookie("user_login");
-
-        //    return Redirect("~");
-        //}
-
+        }
         #endregion
 
 

@@ -28,7 +28,7 @@ using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-
+using System.Web.Security;
 
 namespace DotWeb.Controller
 {
@@ -84,6 +84,10 @@ namespace DotWeb.Controller
         protected string aspUserId;
         protected int departmentId;
         protected int defPageSize = 0;
+
+        protected string roleId = string.Empty;
+        protected string roleName = string.Empty;
+
         //訂義取得本次執行 Controller Area Action名稱
         protected string getController = string.Empty;
         protected string getArea = string.Empty;
@@ -116,38 +120,17 @@ namespace DotWeb.Controller
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-
-            var aspnet_user_id = User.Identity.GetUserId(); //一定要有值 無值為系統出問題
-
-            var getUserIdCookie = Request.Cookies[CommWebSetup.WebCookiesId + ".member_id"];
-            var getUserName = Request.Cookies[CommWebSetup.WebCookiesId + ".member_name"];
-            UserId = getUserIdCookie == null ? null : EncryptString.desDecryptBase64(Server.UrlDecode(getUserIdCookie.Value));
-
             ViewBag.IsFirstPage = false; //是否為首頁，請在首頁的Action此值設為True
+            var identity = (FormsIdentity)User.Identity; //一定要有值 無值為系統出問題
 
-            #region 判斷是管理端、用戶端登入
-            var getLoginUserFlag = Request.Cookies["user_login"];
-            LoginUserFlag = getLoginUserFlag == null ? "" :
-                EncryptString.desDecryptBase64(Server.UrlDecode(getLoginUserFlag.Value));
-            ViewBag.user_login = LoginUserFlag;
-            #endregion
-
-            ApplicationUser aspnet_user = UserManager.FindById(aspnet_user_id);
-            //UserId = aspnet_user.Id;
-            if (UserId != null)
-            {
+            if (identity != null) {
                 #region Working...
-                ViewBag.UserId = UserId;
-                ViewBag.UserName = getUserName == null ? "" : Server.UrlDecode(getUserName.Value);
-                string asp_net_roles = aspnet_user.Roles.Select(x => x.RoleId).FirstOrDefault();
-                var role = roleManager.FindById(asp_net_roles);
-                ViewBag.RoleName = role.Name;
+                //本專案目前一個帳號只對映一個role 以first role為主
+                var roles = identity.Ticket.UserData.Split(',');
+                roleId = roles.FirstOrDefault();
 
-                departmentId = aspnet_user.department_id;
-                //ViewBag.Caption = Resources.Res.ViewbagCapton;
-                //ViewBag.MenuName = Resources.Res.ViewbagMenuName;
-
-
+                roleName = roles.FirstOrDefault();
+                ViewBag.RoleName = roles;
                 #endregion
             }
         }

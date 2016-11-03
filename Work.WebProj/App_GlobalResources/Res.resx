@@ -385,4 +385,7 @@
   <data name="Log_Success_SendMail" xml:space="preserve">
     <value>Email已送出，我們會儘快與您聯絡!</value>
   </data>
+  <data name="Log_Err_googleValideNotEquel" xml:space="preserve">
+    <value>請驗證您不是自動程式。</value>
+  </data>
 </root>

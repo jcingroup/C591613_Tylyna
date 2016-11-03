@@ -141,6 +141,8 @@ namespace DotWeb.CommSetup
                 return System.Configuration.ConfigurationManager.AppSettings["DB0"];
             }
         }
+        public const string LoginId = "LoginId";
+        public const string LoginType = "LoginType";
     }
 
     #region Image UpLoad Parma
