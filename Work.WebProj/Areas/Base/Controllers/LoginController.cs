@@ -397,17 +397,17 @@ namespace DotWeb.Areas.Base.Controllers
                         #region 前台_會員登入用cookie
 
                         string userData = get_user_roles_name.FirstOrDefault();
-                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, get_user.Id, DateTime.Now, DateTime.Now.AddMinutes(180),false, userData, FormsAuthentication.FormsCookiePath);
-                        
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, get_user.Id, DateTime.Now, DateTime.Now.AddMinutes(180), false, userData, FormsAuthentication.FormsCookiePath);
+
                         string encTicket = FormsAuthentication.Encrypt(ticket);
                         Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
 
-                        var cookie_loginid = new HttpCookie(CommWebSetup.LoginId, get_user.UserName.Trim());
+                        var cookie_loginid = new HttpCookie(CommWebSetup.LoginId, Server.UrlEncode(EncryptString.desEncryptBase64(get_user.UserName)));
                         cookie_loginid.HttpOnly = true;
                         Response.Cookies.Add(cookie_loginid);
 
                         //LoginType //N:管理者登錄 Y:一般會員登錄
-                        var cookie_login_type = new HttpCookie(CommWebSetup.LoginType, "N");
+                        var cookie_login_type = new HttpCookie(CommWebSetup.LoginType, Server.UrlEncode(EncryptString.desEncryptBase64("N")));
                         cookie_login_type.HttpOnly = true;
                         Response.Cookies.Add(cookie_login_type);
 

@@ -244,13 +244,15 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
+/Work.WebProj/_Code/cache/
+/Work.WebProj/_Code/Log/
+Work.WebProj/_Code/SysUpFiles/
+/Work.WebProj/Scripts/src/*.js
+Work.WebProj/Scripts/src/**/*.js
 
 Work.WebProj/app_modules/comm-cmpt/comm-cmpt.js
 Work.WebProj/app_modules/comm-func/comm-func.js
-Work.WebProj/app_modules/dt/def-data.js
-Work.WebProj/app_modules/comm-func/comm-func.js
+Work.WebProj/app_modules/comm-matter/comm-matter.js
 Work.WebProj/app_modules/comm-typeahead/main.js
-Work.WebProj/app_modules/dt/def-data.js
-
-Work.WebProj/Scripts/src/**/*.js
-/Work.WebProj/_Code/Log
+Work.WebProj/app_modules/Pikaday/pikadaydef.js
+Work.WebProj/app_modules/simple-ajax-uploader/SimpleAjaxUploader.def.js
