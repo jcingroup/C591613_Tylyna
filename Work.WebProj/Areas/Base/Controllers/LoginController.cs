@@ -378,20 +378,27 @@ namespace DotWeb.Areas.Base.Controllers
                     ApplicationUser get_user;
                     IEnumerable<string> get_user_roles_name;
 
-                    string PW_Hash = UserManager.PasswordHasher.HashPassword(model.password);
-                    // result = await SignInManager.PasswordSignInAsync(model.account, model.password, model.rememberme, shouldLockout: false);
-                    var result = await db0.AspNetUsers.AnyAsync(x => x.UserName == model.account & x.PasswordHash == PW_Hash);
+                    //string PW_Hash = UserManager.PasswordHasher.HashPassword(model.password);
+                    get_user = await userManager.FindByNameAsync(model.account);
 
-                    if (result)
+                    if (get_user == null)
                     {
                         getLoginResult.result = false;
                         getLoginResult.message = Resources.Res.Login_Err_Password;
                         return defJSON(getLoginResult);
                     }
+                    else
+                    {
+                        var result = UserManager.PasswordHasher.VerifyHashedPassword(get_user.PasswordHash,model.password);
+                        if (result != PasswordVerificationResult.Success)
+                        {
+                            getLoginResult.result = false;
+                            getLoginResult.message = Resources.Res.Login_Err_Password;
+                            return defJSON(getLoginResult);
+                        }
+                    }
 
                     getLoginResult.result = true;
-                    get_user = await userManager.FindByNameAsync(model.account);
-                    //get_user_roles_id = get_user.Roles.Select(x=>x.RoleId);
                     get_user_roles_name = db0.AspNetUsers.FirstOrDefault(x => x.Id == get_user.Id).AspNetRoles.Select(x => x.Name);
                     //本專案目前一個帳號只對映一個role 以first role為主
 
