@@ -1,6 +1,7 @@
 ﻿import React = require('react');
 import ReactDOM = require('react-dom');
 import CommFunc = require('comm-func');
+import {fetchGet, fetchDelete, fetchPost, fetchPut} from '../ts-comm/ajax';
 
 namespace Login {
 
@@ -63,13 +64,9 @@ namespace Login {
             };
 
             $("body").mask("檢查中請稍後...");
-            var jqxhr = $.ajax({
-                type: "POST",
-                url: gb_approot + 'Base/Login/ajax_Login',
-                data: data,
-                dataType: 'json'
-            })
-                .done((data, textStatus, jqXHRdata) => {
+            fetchPost(gb_approot + 'Base/Login/ajax_Login', data)
+                .then((data) => {
+                    $("body").unmask();
                     if (data.result) {
                         document.location.href = data.url;
                     } else {
@@ -77,16 +74,34 @@ namespace Login {
                         obj.validateUrl = this.getValidateUrl();
                         obj.field.password = '';
                         this.setState(obj);
-                        $("body").unmask();
                         alert(data.message);
                     }
                 })
-                .fail((jqXHR, textStatus, errorThrown) => {
-                    $("body").unmask();
-                    CommFunc.showAjaxError(errorThrown);
-                }
+                .catch((reason) => { $("body").unmask(); })
 
-                );
+
+            //var jqxhr = $.ajax({
+            //    type: "POST",
+            //    url: gb_approot + 'Base/Login/ajax_Login',
+            //    data: data,
+            //    dataType: 'json'
+            //})
+            //    .done((data, textStatus, jqXHRdata) => {
+            //        if (data.result) {
+            //            document.location.href = data.url;
+            //        } else {
+            //            let obj = this.state;
+            //            obj.validateUrl = this.getValidateUrl();
+            //            obj.field.password = '';
+            //            this.setState(obj);
+            //            $("body").unmask();
+            //            alert(data.message);
+            //        }
+            //    })
+            //    .fail((jqXHR, textStatus, errorThrown) => {
+            //        $("body").unmask();
+            //        CommFunc.showAjaxError(errorThrown);
+            //    });
             return;
         }
         render() {

@@ -694,6 +694,7 @@
     <TypeScriptCompile Include="Scripts\src\ts-comm\comm-cmpt.tsx" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\ajax.ts" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\comm-func.ts" />
+    <TypeScriptCompile Include="Scripts\src\ts-comm\comm-run.ts" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\def-data.ts" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\ReactTypeahead.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-change_password.tsx" />

@@ -14,8 +14,10 @@ module.exports = {
         //m_aboutus: path.resolve(__dirname, 'Scripts/src/tsx/m-aboutusy.js'),
         m_community: path.resolve(__dirname, 'Scripts/src/tsx/m-community.js'),
         m_community_news: path.resolve(__dirname, 'Scripts/src/tsx/m-community-news.js'),
-        vendors: ['jquery', 'react', 'react-dom', 'react-addons-update', 'react-bootstrap', 'redux', 'react-redux', 'redux-thunk', 'moment'],
-        //wwwcomm: ['jquery', 'react']
+
+        vendors: ['jquery', 'react', 'react-dom', 'redux', 'react-redux', 'redux-thunk', 'react-addons-update', 'moment',
+            path.resolve(__dirname, 'Scripts/src/ts-comm/comm-run')
+        ]
     },
     output: {
         path: path.resolve(__dirname, 'Scripts/build/app'),
@@ -23,8 +25,10 @@ module.exports = {
     },
     module: {
         loaders: [
-          { test: /\.jsx$/, exclude: [/node_modules/, /app_modules/], loader: 'babel', query: { presets: ['es2015', 'react'] } },
-          { test: /\.css$/, loader: "style-loader!css-loader" }
+           { test: /\.js$/, loader: 'babel-loader', query: { presets: ['es2015'] } },
+          { test: /\.jsx$/, loader: 'babel', query: { presets: ['react', 'es2015'] } },
+          { test: /\.css$/, loader: "style-loader!css-loader" },
+          { test: /\.json$/, loader: 'json' },
         ]
     },
     resolve: {
