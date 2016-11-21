@@ -40,7 +40,7 @@ $collapse-title-hover-icon-color: false;
 @import "_client/unit/modal";
 @import "_client/unit/collapse";
 @import "_client/unit/figure";
-@import "_client/unit/hover";
+// @import "_client/unit/hover";
 
 @import "_client/unit/classes"; // 建議放置在最後一個
 
@@ -52,28 +52,66 @@ $collapse-title-hover-icon-color: false;
     @extend %list-inline;
 
     a { @extend %inline-block; }
-    li {
-        @extend .m-a-0;
-        padding: 0 75px;
+}
+.sub-navImg {
+    a {
+        // @extend %circle;
+
+        width: 242px;
+        margin: 0 75px;
+        padding-top: 270px;
+        position: relative;
+        background-position: center 0;
+        background-repeat: no-repeat;
+
         &:not(:last-child) {
-            background: url(#{$img-path}/subNav-line.gif) right 50px no-repeat;
+            @include el(after) {
+                background: url(#{$img-path}/subNav-line.gif) 0 0 no-repeat;
+                width: 1px;
+                height: 157px;
+                @include absolute(right -75px top 50px);
+            }
         }
-        a {
-            @extend .m-t-48, .font-sp, .hover-underline;
-            font-size: em(30);
-            font-weight: bold;
+        &:hover, &:active, &.current {
+            @extend .text-primary;
 
-            &:hover, &:active { @extend .text-primary; }
+            span::before { @include transform(scaleX(1)); }
         }
     }
-    img {
-        @extend .img-center;
-        @include circle(242px);
-    }
+    span {
+        @extend .font-sp;
 
-    // 會員資料的子選單
-    .User & { @extend .text-left; }
-    > a {
+        @include el(before) {
+            height: 2px; width: 100%;
+            background: $brand-primary;
+
+            @include absolute(top 105% right 0);
+            @include transform(scaleX(0));
+            @include prefix(transform-origin, 50%);
+            @include transition(transform .35s ease-out);
+        }
+        position: relative;
+        font-size: em(30);
+        font-weight: bold;
+    }
+}
+
+// 利他咖啡的子選單
+.Products .sub-navImg a {
+    &:nth-child(1) { background-image: url(#{$img-path}/Products/sort.png); }
+    &:nth-child(2) { background-image: url(#{$img-path}/Products/sort2.png); }
+    &:nth-child(3) { background-image: url(#{$img-path}/Products/sort3.png); }
+}
+.Quality .sub-navImg a {
+    &:nth-child(1) { background-image: url(#{$img-path}/Quality/sort.png); }
+    &:nth-child(2) { background-image: url(#{$img-path}/Quality/sort2.png); }
+    &:nth-child(3) { background-image: url(#{$img-path}/Quality/sort3.png); }
+}
+
+// 會員資料的子選單
+.User .sub-nav {
+    @extend .text-left;
+    a {
         @extend .bg-primary, .text-white, .p-y-4, .p-x-32, .m-r-16;
         font-size: em(27);
         border-radius: 3px;
@@ -156,8 +194,11 @@ $collapse-title-hover-icon-color: false;
     }
     .btn { @extend .m-l-4; }
 }
+
 // editor
-.editor { @extend .text-left, .m-t-48; }
+.editor {
+    @extend .m-t-48; // .text-left,
+}
 
 
 // 品嘗LITA
@@ -261,4 +302,11 @@ $collapse-title-hover-icon-color: false;
     header { @extend .m-b-8; }
     article { @extend .m-t-4; }
     .label { @extend .m-l-0; }
+}
+
+// == 聯絡我們
+.map {
+    border: none;
+    width: 100%;
+    height: 420px;
 }

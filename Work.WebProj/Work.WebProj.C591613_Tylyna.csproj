@@ -390,6 +390,12 @@
     <Content Include="Content\images\Products\pic-l.jpg" />
     <Content Include="Content\images\Products\pic.jpg" />
     <Content Include="Content\images\Products\sort.jpg" />
+    <Content Include="Content\images\Products\sort.png" />
+    <Content Include="Content\images\Products\sort2.png" />
+    <Content Include="Content\images\Products\sort3.png" />
+    <Content Include="Content\images\Quality\sort.png" />
+    <Content Include="Content\images\Quality\sort2.png" />
+    <Content Include="Content\images\Quality\sort3.png" />
     <Content Include="Content\images\subNav-line.gif" />
     <Content Include="Content\images\titleBg.gif" />
     <Content Include="Content\images\titleBg.png" />
