@@ -64,7 +64,7 @@ namespace Login {
             };
 
             $("body").mask("檢查中請稍後...");
-            fetchPost(gb_approot + 'Base/Login/ajax_Login', data)
+            fetchPost(gb_approot + 'Base/Login/ajax_NewLogin', data)
                 .then((data) => {
                     $("body").unmask();
                     if (data.result) {

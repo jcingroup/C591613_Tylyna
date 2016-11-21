@@ -123,8 +123,10 @@ namespace DotWeb.Controller
             ViewBag.IsFirstPage = false; //是否為首頁，請在首頁的Action此值設為True
             var identity = (FormsIdentity)User.Identity; //一定要有值 無值為系統出問題
 
-            if (identity != null) {
+            if (identity != null)
+            {
                 #region Working...
+                aspUserId = EncryptString.desDecryptBase64(Server.UrlDecode(identity.Ticket.Name));//userid
                 //本專案目前一個帳號只對映一個role 以first role為主
                 var roles = identity.Ticket.UserData.Split(',');
                 roleId = roles.FirstOrDefault();
@@ -160,11 +162,11 @@ namespace DotWeb.Controller
                 }
 
                 #region getRoles
-                var aspnet_user_id = User.Identity.GetUserId();
-                ApplicationUser aspnet_user = UserManager.FindById(aspnet_user_id);
+                //var aspnet_user_id = User.Identity.GetUserId();
+                ApplicationUser aspnet_user = UserManager.FindById(this.aspUserId);
                 string asp_net_roles = aspnet_user.Roles.Select(x => x.RoleId).FirstOrDefault();
                 var role = roleManager.FindById(asp_net_roles);
-                var getRoles = db0.AspNetUsers.FirstOrDefault(x => x.Id == aspnet_user_id).AspNetRoles.Select(x => x.Name);
+                var getRoles = db0.AspNetUsers.FirstOrDefault(x => x.Id == this.aspUserId).AspNetRoles.Select(x => x.Name);
 
                 ViewBag.RoleName = role.Name;
                 #endregion

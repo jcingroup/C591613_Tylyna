@@ -12,12 +12,14 @@ using ProcCore.NetExtension;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+
 
 namespace DotWeb.Areas.Base.Controllers
 {
@@ -373,13 +375,14 @@ namespace DotWeb.Areas.Base.Controllers
 
                 using (var db0 = getDB0())
                 {
-                    SignInStatus result;
                     ApplicationUser get_user;
                     IEnumerable<string> get_user_roles_name;
 
-                    result = await SignInManager.PasswordSignInAsync(model.account, model.password, model.rememberme, shouldLockout: false);
+                    string PW_Hash = UserManager.PasswordHasher.HashPassword(model.password);
+                    // result = await SignInManager.PasswordSignInAsync(model.account, model.password, model.rememberme, shouldLockout: false);
+                    var result = await db0.AspNetUsers.AnyAsync(x => x.UserName == model.account & x.PasswordHash == PW_Hash);
 
-                    if (result == SignInStatus.Failure)
+                    if (result)
                     {
                         getLoginResult.result = false;
                         getLoginResult.message = Resources.Res.Login_Err_Password;
@@ -397,7 +400,8 @@ namespace DotWeb.Areas.Base.Controllers
                         #region 前台_會員登入用cookie
 
                         string userData = get_user_roles_name.FirstOrDefault();
-                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, get_user.Id, DateTime.Now, DateTime.Now.AddMinutes(180), false, userData, FormsAuthentication.FormsCookiePath);
+                        string encode_userid = Server.UrlEncode(EncryptString.desEncryptBase64(get_user.Id));//userid 加密
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, encode_userid, DateTime.Now, DateTime.Now.AddMinutes(180), false, userData, FormsAuthentication.FormsCookiePath);
 
                         string encTicket = FormsAuthentication.Encrypt(ticket);
                         Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
