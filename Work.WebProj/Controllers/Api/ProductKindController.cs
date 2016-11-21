@@ -38,7 +38,7 @@ namespace DotWeb.Api
                 predicate = predicate.And(x => x.kind_name.Contains(q.name));
 
             if (q.i_Hide != null)
-                predicate = predicate.And(x => x.i_Hide==q.i_Hide);
+                predicate = predicate.And(x => x.i_Hide == q.i_Hide);
 
 
             int page = (q.page == null ? 1 : (int)q.page);
@@ -48,7 +48,22 @@ namespace DotWeb.Api
             int startRecord = PageCount.PageInfo(page, defPageSize, resultCount);
             var resultItems = await result
                 .OrderBy(x => x.product_kind_id)
-                //.Select(x => new { x.community_news_id, x.title, x.start_date, x.end_date, community_name = x.Community.community_name, x.state })
+                .Select(x => new
+                {
+                    x.product_kind_id,
+                    x.kind_name,
+                    x.sort,
+                    x.i_Hide,
+                    x.i_InsertUserID,
+                    x.i_InsertDeptID,
+                    x.i_InsertDateTime,
+                    x.i_UpdateUserID,
+                    x.i_UpdateDeptID,
+                    x.i_UpdateDateTime,
+                    x.i_Lang,
+                    edit_type = IEditType.update,
+                    view_mode = InputViewMode.view
+                })
                 .Skip(startRecord)
                 .Take(defPageSize)
                 .ToListAsync();

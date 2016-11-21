@@ -3,6 +3,7 @@
         edit_type?: number;
         check_del?: boolean;
         expland_sub?: boolean;
+        view_mode?: InputViewMode;
     }
     interface i_Code {
         code: string;
@@ -82,9 +83,35 @@
         role_array?: Array<UserRoleInfo>;
     }
     interface Option {//分類管理選單用
-        val?: number;
+        val?: any;
         Lname?: string;
     }
+    interface OptionTemplate extends Option {
+        className?: string;
+    }
+    interface PageInfo {
+        total: number;
+        page: number;
+        records: number;
+        startcount: number;
+        endcount: number;
+    }
+    interface ProductKind extends BaseEntityTable {
+        product_kind_id?: number;
+        kind_name?: string;
+        sort?: number;
+        i_Hide?: boolean;
+        i_InsertUserID?: string;
+        i_InsertDeptID?: number;
+        i_InsertDateTime?: any;
+        i_UpdateUserID?: string;
+        i_UpdateDeptID?: number;
+        i_UpdateDateTime?: any;
+        i_Lang?: string;
+    }
+
+
+
     interface Community extends BaseEntityTable {
         community_id?: number;
         community_name?: string;

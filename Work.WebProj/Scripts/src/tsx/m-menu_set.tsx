@@ -27,9 +27,6 @@ namespace MenuSet {
         }
         folder?: server.Option[]
     }
-    interface FormResult extends IResultBase {
-        id: string
-    }
 
     class GridRow extends React.Component<BaseDefine.GridRowPropsBase<Rows>, BaseDefine.GridRowStateBase> {
         constructor() {
@@ -147,7 +144,7 @@ namespace MenuSet {
             e.preventDefault();
             if (this.state.edit_type == 1) {
                 CommFunc.jqPost(this.props.apiPath, this.state.fieldData)
-                    .done((data: FormResult, textStatus, jqXHRdata) => {
+                    .done((data: IResultBase, textStatus, jqXHRdata) => {
                         if (data.result) {
                             CommFunc.tosMessage(null, '新增完成', 1);
                             this.updateType(data.id);

@@ -11,9 +11,7 @@ module.exports = {
         m_change_password: path.resolve(__dirname, 'Scripts/src/tsx/m-change_password.js'),
         m_users: path.resolve(__dirname, 'Scripts/src/tsx/m-users.js'),
         //後台 管理者
-        //m_aboutus: path.resolve(__dirname, 'Scripts/src/tsx/m-aboutusy.js'),
-        m_community: path.resolve(__dirname, 'Scripts/src/tsx/m-community.js'),
-        m_community_news: path.resolve(__dirname, 'Scripts/src/tsx/m-community-news.js'),
+        m_productkind: path.resolve(__dirname, 'Scripts/src/ProductKind/app.js'),
 
         vendors: ['jquery', 'react', 'react-dom', 'redux', 'react-redux', 'redux-thunk', 'react-addons-update', 'moment',
             path.resolve(__dirname, 'Scripts/src/ts-comm/comm-run')

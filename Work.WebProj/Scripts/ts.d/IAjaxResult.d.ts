@@ -9,7 +9,8 @@ interface IResultBase {
     message: string;
     hasData: boolean;
     data: any;
-    infoType: InfoType
+    infoType: InfoType;
+    id: number;
 }
 
 interface IResultData<T> extends IResultBase {

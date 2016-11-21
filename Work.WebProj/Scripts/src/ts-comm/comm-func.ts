@@ -22,7 +22,7 @@ function obj_prop_list(obj) {
         }
     }
 }
-function isValidJSONDate(value: string, userFormat) {
+export function isValidJSONDate(value: string, userFormat) {
     var userFormat = userFormat || 'yyyy-mm-dd';
 
     var delimiter = /[^mdy]/.exec(userFormat)[0];
@@ -49,16 +49,23 @@ function isValidJSONDate(value: string, userFormat) {
 
     return isDate(theDate, theFormat)
 }
-export function moneyFormat(n: number): string {
+export function moneyFormat(n: number, g?: string): string {
     /*
     Autohr:Ajoe
     Date:2015/12/09
     Description:金錢格式
     */
-    let s = n.toString();
-    return s.replace(/./g, function (c, i, a) {
-        return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
-    });
+    if (n == undefined || n == null)
+        return '';
+
+    let glue = (typeof g == 'string' && g != null && g != undefined) ? g : ',';// 決定三個位數的分隔符號
+    let digits = n.toString().split('.');// 先分左邊及小數點後
+
+    let pattern = /(-?\d+)(\d{3})/;
+    while (pattern.test(digits[0])) {//判斷有沒有符合 前面為三個數字
+        digits[0] = digits[0].replace(pattern, "$1" + glue + "$2");
+    }
+    return digits.join(".");
 
 }
 function obj_prop_date(obj: any) {
@@ -131,42 +138,6 @@ export function pad(str: string, len: number, pad: string, dir: number) {
 export function showAjaxError(data: any): void {
     alert('Ajax error,check console info!');
     console.log(data);
-}
-export var jqGet = function jqGet(url: string, data: any): JQueryXHR {
-    return $.ajax({
-        type: "GET",
-        url: url,
-        data: data,
-        dataType: 'json',
-        cache: false
-    });
-};
-export function jqPost(url: string, data: any): JQueryXHR {
-    return $.ajax({
-        type: "POST",
-        url: url,
-        data: data,
-        dataType: 'json',
-        cache: false
-    });
-}
-export function jqPut(url: string, data: any): JQueryXHR {
-    return $.ajax({
-        type: "PUT",
-        url: url,
-        data: data,
-        dataType: 'json',
-        cache: false
-    });
-};
-export function jqDelete(url: string, data: any): JQueryXHR {
-    return $.ajax({
-        type: "DELETE",
-        url: url,
-        data: data,
-        dataType: 'json',
-        cache: false
-    });
 }
 export function tosMessage(title: string, message: string, type: ToastrType) {
 
@@ -336,3 +307,34 @@ export var Ajax = {
         self.send();
     },
 };
+
+export function makeInputValue(e: React.SyntheticEvent) {
+    let input: HTMLInputElement = e.target as HTMLInputElement;
+    let value;
+
+    if (input.value == 'true') {
+        value = true;
+    } else if (input.value == 'false') {
+        value = false;
+    } else {
+        value = input.value;
+    }
+
+    return value;
+}
+export function ifrmDown(download_src) {
+    //background download excel file
+    $('#file_down').remove();
+    var item = $(this).attr('item');
+    var src = src;
+    var encSrc = download_src;
+    var ifram = $('<iframe id="file_down" style="display:none">');
+    ifram.attr('src', encSrc);
+    $(document.body).append(ifram);
+}
+
+export function isNumeric(n): boolean {
+    let m = parseFloat(n);
+    //return !isNaN(parseFloat(n)) && isFinite(n) && m >= 0; //正能正整數
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}

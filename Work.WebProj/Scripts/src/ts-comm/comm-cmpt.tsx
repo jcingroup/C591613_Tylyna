@@ -6,6 +6,7 @@ import Moment = require('moment');
 import Sortable = require('sortablejs');
 import upload = require("simple-ajax-uploader");
 import DT = require("dt");
+import {UIText} from '../ts-comm/def-data';
 
 export class GridButtonModify extends React.Component<{ modify(): void, ver?: number }, { className: string }> {
     constructor(props) {
@@ -63,102 +64,6 @@ export class GridButtonDel extends React.Component<GridButtonDelProps, any>
         return <button type="button" onClick={this.onClick} className="btn-link btn-lg text-danger">
             <i className="fa-times"></i>
         </button>;
-    }
-}
-export class GridNavPage extends React.Component<GridNavPageProps, any> {
-    constructor(props) {
-        super(props)
-        this.nextPage = this.nextPage.bind(this);
-        this.prvePage = this.prvePage.bind(this);
-        this.firstPage = this.firstPage.bind(this);
-        this.lastPage = this.lastPage.bind(this);
-    }
-    static defaultProps = {
-        showAdd: true,
-        showDelete: true
-    };
-    firstPage() {
-        this.props.queryGridData(1);
-    }
-    lastPage() {
-        this.props.queryGridData(this.props.totalPage);
-    }
-    nextPage() {
-        if (this.props.nowPage < this.props.totalPage) {
-            this.props.queryGridData(this.props.nowPage + 1);
-        }
-    }
-    prvePage() {
-        if (this.props.nowPage > 1) {
-            this.props.queryGridData(this.props.nowPage - 1);
-        }
-    }
-    jumpPage() {
-
-    }
-    render() {
-        var setAddButton = null, setDeleteButton = null;
-        if (this.props.showAdd) {
-            setAddButton = <button className="btn btn-sm btn-success"
-                type="button"
-                onClick={this.props.insertType}>
-                <i className="fa-plus-circle"></i> 新增
-            </button>;
-        }
-
-        if (this.props.showDelete) {
-            setDeleteButton = <button className="btn btn-sm btn-danger" type="button"
-                onClick={this.props.deleteSubmit}>
-                <i className="fa-trash-o"></i> 刪除
-            </button>;
-
-        }
-        var oper = null;
-
-        oper = (
-            <div className="table-footer clearfix">
-                <div className="pull-xs-left">
-                    {setAddButton} { }
-                    {setDeleteButton}
-                </div>
-                <small className="pull-xs-right">第{this.props.startCount}-{this.props.endCount}筆，共{this.props.recordCount}筆</small>
-
-                <ul className="pager pager-sm">
-                    <li>
-                        <a href="#" title="移至第一頁" tabIndex={-1} onClick={this.firstPage}>
-                            <i className="fa-angle-double-left"></i>
-                        </a>
-                    </li> { }
-                    <li>
-                        <a href="#" title="上一頁" tabIndex={-1} onClick={this.prvePage}>
-                            <i className="fa-angle-left"></i>
-                        </a>
-                    </li> { }
-                    <li className="form-inline">
-                        <div className="form-group">
-                            <label>第</label>
-                            {' '}
-                            <input style={{ "width": "100px" }} className="form-control form-control-sm text-xs-center" type="number" min="1" tabIndex={-1} value={this.props.nowPage.toString() }
-                                onChange={this.jumpPage} />
-                            {' '}
-                            <label>頁，共{this.props.totalPage}頁</label>
-                        </div>
-                    </li> { }
-                    <li>
-                        <a href="#" title="@Resources.Res.NextPage" tabIndex={-1} onClick={this.nextPage}>
-                            <i className="fa-angle-right"></i>
-                        </a>
-                    </li> { }
-                    <li>
-                        <a href="#" title="移至最後一頁" tabIndex={-1} onClick={this.lastPage}>
-                            <i className="fa-angle-double-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        );
-
-        return oper;
     }
 }
 
@@ -892,3 +797,4 @@ export class StateForGird extends React.Component<{ stateData: Array<server.Stat
         return outHtml;
     }
 } 
+

@@ -46,7 +46,7 @@ namespace DotWeb.AppStart
                 string query_lang = string.Empty; //參數設定語系
                 string[] allow_lang = new string[] { "en-US", "zh-TW" };
 
-                fource_lang = allow_lang[0]; //不預強制語系 此行註解
+                //fource_lang = allow_lang[0]; //不預強制語系 此行註解
                 query_lang = Request.QueryString["lang"]; //參數切換語系 參數查詢列為高優先權
 
                 if (!string.IsNullOrEmpty(query_lang) && allow_lang.Contains(query_lang))

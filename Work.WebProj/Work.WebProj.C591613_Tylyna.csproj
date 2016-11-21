@@ -252,6 +252,7 @@
     <Content Include="Areas\Active\Views\SysDemo\ChangePW.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\Index_Youtube.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\Reply.cshtml" />
+    <Content Include="Areas\Active\Views\ProductData\Kind.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
@@ -699,22 +700,35 @@
     <TypeScriptCompile Include="app_modules\react-datepicker.d\react-datepicker.d.ts" />
     <TypeScriptCompile Include="app_modules\simple-ajax-uploader\SimpleAjaxUploader.def.ts" />
     <TypeScriptCompile Include="app_modules\funtest\fun.ts" />
+    <TypeScriptCompile Include="Scripts\src\action_type.ts" />
+    <TypeScriptCompile Include="Scripts\src\components.tsx" />
+    <TypeScriptCompile Include="Scripts\src\ProductKind\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\ProductKind\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\ProductKind\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\ProductKind\pub.ts" />
+    <TypeScriptCompile Include="Scripts\src\ProductKind\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\ProductKind\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\ProductKind\vwGrid.tsx" />
+    <TypeScriptCompile Include="Scripts\src\ProductKind\vwGridSearch.tsx" />
+    <TypeScriptCompile Include="Scripts\src\ProductKind\vwGridTable.tsx" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\comm-cmpt.tsx" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\ajax.ts" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\comm-func.ts" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\comm-run.ts" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\def-data.ts" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\ReactTypeahead.tsx" />
+    <TypeScriptCompile Include="Scripts\src\ts-comm\tpl.ts" />
+    <TypeScriptCompile Include="Scripts\src\ts-comm\vwMaskLoading.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-change_password.tsx" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\OrderButton.tsx" />
-    <TypeScriptCompile Include="Scripts\src\tsx\m-community-news.tsx" />
-    <TypeScriptCompile Include="Scripts\src\tsx\m-community.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-menu_set.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-parm.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-roles.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-menu.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-login.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-users.tsx" />
+    <TypeScriptCompile Include="Scripts\ts.d\enum\InputViewMode.ts" />
+    <TypeScriptCompile Include="Scripts\ts.d\enum\SelectShowType.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\JSExt.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\Jquery.Ext.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\Toastr.d.ts" />
@@ -722,7 +736,7 @@
     <TypeScriptCompile Include="Scripts\ts.d\IAjaxResult.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\IEditType.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\IKeyValue.d.ts" />
-    <TypeScriptCompile Include="Scripts\src\tsx\a-Modals.d.ts" />
+    <TypeScriptCompile Include="Scripts\src\a-Modals.d.ts" />
     <TypeScriptCompile Include="app_modules\dt\def-data.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap.v3.datetimepicker\bootstrap.v3.datetimepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\ckeditor\ckeditor.d.ts" />
@@ -736,6 +750,7 @@
     <TypeScriptCompile Include="Scripts\typings\react-fileupload.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-lazyload.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-load-mask.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\react-modal\react-modal.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-redux\react-redux.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react\react-addons-create-fragment.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react\react-addons-css-transition-group.d.ts" />
@@ -803,6 +818,7 @@
     <Content Include="Areas\Base\Views\Menu\App_LocalResources\ChangePassword.cshtml.resx" />
     <Content Include="Areas\Base\Views\Menu\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\CommunityNews\App_LocalResources\Main.cshtml.resx" />
+    <Content Include="Areas\Active\Views\ProductData\App_LocalResources\Kind.cshtml.resx" />
     <EmbeddedResource Include="_Code\RPTFile\MemeberLabel.rdlc" />
   </ItemGroup>
   <PropertyGroup>

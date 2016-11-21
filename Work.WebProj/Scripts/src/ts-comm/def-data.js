@@ -475,4 +475,37 @@ exports.twDistrict = [
         ]
     },
 ];
-exports.dateFT = 'YYYY-MM-DD';
+exports.config = {
+    RegNewLineBR: /(?:\\[rn]|[\r\n]+)+/g,
+    dateFT: 'YYYY-MM-DD',
+    dateTime: 'YYYY-MM-DD A hh:mm:ss'
+};
+exports.UIText = {
+    appliaction: '申報',
+    add: '新增',
+    save: '儲存',
+    done: '確定',
+    cancel: '取消',
+    date_null: '無日期',
+    modify: '修改',
+    edit: '編輯',
+    check: '查看 & 審核',
+    delete: '刪除',
+    print: '列印',
+    return: '回上頁',
+    report: '報表',
+    search: '搜尋',
+    mk_loading: '資料載入中...',
+    mk_reading: '資料讀取中...',
+    mk_updating: '資料更新中...',
+    mk_login: '登錄中...',
+    mk_searching: '查詢中...',
+    fi_insert: '新增完成',
+    fi_update: '修改完成',
+    fi_delete: '刪除完成',
+    option_blank: '請選擇',
+};
+exports.IHideTypeData = [
+    { val: false, Lname: '顯示', className: 'w3-tag label-success w3-round' },
+    { val: true, Lname: '隱藏', className: 'w3-tag label-default w3-round' }
+];

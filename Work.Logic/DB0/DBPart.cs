@@ -9,10 +9,17 @@ using System.Linq;
 using System.Collections.Generic;
 namespace ProcCore.Business.DB0
 {
-    public enum EditState
+
+    public enum IEditType
     {
-        Insert = 0,
-        Update = 1
+        none = 0,
+        insert = 1,
+        update = 2
+    }
+    public enum InputViewMode
+    {
+        view = 0,
+        edit = 1
     }
     public enum VisitDetailState
     {

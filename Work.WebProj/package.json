@@ -26,7 +26,8 @@
     "redux-logger": "^2.6.1",
     "babel-polyfill": "^6.9.1",
     "whatwg-fetch": "^1.0.0",
-    "react-fileupload": "^2.4.0"
+    "react-fileupload": "^2.4.0",
+    "react-modal": "^1.5.2"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
