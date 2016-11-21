@@ -38,25 +38,19 @@ namespace DotWeb.Api
         {
             base.Initialize(controllerContext);
 
-            var aspnet_user_id = User.Identity.GetUserId();
+            var identity = (System.Web.Security.FormsIdentity)User.Identity; //一定要有值 無值為系統出問題
             #region 判斷是管理端、用戶端登入
-            var getLoginUserFlag = controllerContext.Request.Headers.GetCookies("user_login").SingleOrDefault();
+            var getLoginUserFlag = controllerContext.Request.Headers.GetCookies(CommWebSetup.LoginType).SingleOrDefault();
             LoginUserFlag = getLoginUserFlag == null ? "" :
-                EncryptString.desDecryptBase64(getLoginUserFlag["user_login"].Value);
+                EncryptString.desDecryptBase64(getLoginUserFlag[CommWebSetup.LoginType].Value);
             #endregion
-            if (aspnet_user_id != null)
+            if (identity != null & LoginUserFlag == "N")
             {
-                ApplicationUser aspnet_user = UserManager.FindById(aspnet_user_id);
+                aspUserId = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(identity.Ticket.Name));//userid
+                ApplicationUser aspnet_user = UserManager.FindById(aspUserId);
                 UserId = aspnet_user.Id;
                 departmentId = aspnet_user.department_id;
                 UserRoles = aspnet_user.Roles.Select(x => x.RoleId);
-            }
-
-            var cki_community_id = controllerContext.Request.Headers.GetCookies("community_id").SingleOrDefault();
-            if (cki_community_id != null)
-            {
-                var c_id = cki_community_id["community_id"].Value;
-                community_id = int.Parse(c_id);
             }
         }
         protected virtual string getRecMessage(string MsgId)

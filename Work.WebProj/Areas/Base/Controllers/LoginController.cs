@@ -74,6 +74,12 @@ namespace DotWeb.Areas.Base.Controllers
             removeCookie("user_name");
             removeCookie("user_login");
             removeCookie("community_id");
+            removeCookie(CommWebSetup.LoginId);
+            removeCookie(CommWebSetup.LoginType);
+            ObjectCache cache = MemoryCache.Default;
+            cache.Clear();
+
+            FormsAuthentication.SignOut();
             ViewBag.BodyClass = "Login";
             ViewBag.Year = DateTime.Now.Year;
 
