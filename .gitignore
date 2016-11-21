@@ -245,6 +245,7 @@ ModelManifest.xml
 .fake/
 
 /Work.WebProj/_Code/cache/
+Work.WebProj/_Code/Cache
 /Work.WebProj/_Code/Log/
 Work.WebProj/_Code/SysUpFiles/
 /Work.WebProj/Scripts/src/*.js
