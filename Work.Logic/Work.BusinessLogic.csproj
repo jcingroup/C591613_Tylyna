@@ -130,6 +130,9 @@
     <Compile Include="DB0\Menu.cs">
       <DependentUpon>C591613_Tylyna.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB0\ProductKind.cs">
+      <DependentUpon>C591613_Tylyna.tt</DependentUpon>
+    </Compile>
     <Compile Include="LogicCenter.cs" />
     <Compile Include="Models\Community_Community.cs" />
     <Compile Include="Models\Community_News.cs" />
