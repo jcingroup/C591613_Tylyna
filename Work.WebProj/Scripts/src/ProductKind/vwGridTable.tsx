@@ -9,11 +9,11 @@ import {clone} from '../ts-comm/comm-func';
 import {Init_Params, Search_Data} from './pub';
 
 
-let EditRowButton = ({view_mode, updateState, cancelState, iKey }) => {
+let EditRowButton = ({view_mode, is_edit, updateState, cancelState, iKey }) => {
     if (view_mode === InputViewMode.view) {
         return (
             <span>
-                <PWButton iconClassName="fa fa-pencil fa-lg" className="btn btn-link text-success" title={UIText.edit} enable={true} onClick={updateState } />
+                <PWButton iconClassName="fa fa-pencil fa-lg" className="btn btn-link text-success" title={UIText.edit} enable={!is_edit} onClick={updateState } />
             </span>
         );
     } else {
@@ -29,20 +29,7 @@ let EditRowButton = ({view_mode, updateState, cancelState, iKey }) => {
         );
     }
 }
-interface GridTableProps {
-    grid: Array<server.ProductKind>;
-    params: Init_Params;
-    page_operator: server.PageInfo,
-    search: Search_Data,
-
-    updateRowState?: Function;
-    cancelRowState?: Function;
-    setRowInputValue?: Function;
-    callSubmit: Function;
-    callGridLoad: Function;
-    setPageInfo: Function,
-}
-export class GridTable extends React.Component<GridTableProps, any>{
+export class GridTable extends React.Component<any, any>{
 
     constructor() {
         super();
@@ -135,6 +122,7 @@ export class GridTable extends React.Component<GridTableProps, any>{
                                         <EditRowButton
                                             key={i}
                                             iKey={i}
+                                            is_edit={pp.is_edit}
                                             view_mode={item.view_mode}
                                             updateState={this.editRowState.bind(this, i, item.product_kind_id) }
                                             cancelState={this.cancelState.bind(this, i, item.edit_type) }/>

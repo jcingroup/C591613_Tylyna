@@ -5,7 +5,7 @@ import { clone, makeInputValue} from '../ts-comm/comm-func';
 import {config} from '../ts-comm/def-data';
 import {ac_type_comm} from '../action_type';
 //view
-import {GridTable} from './vwGridTable';
+import {GridTableView} from './containers';
 import {GridSearch} from './vwGridSearch';
 import {NavPage} from '../components';
 
@@ -70,7 +70,7 @@ export class Grid extends React.Component<any, any>{
                     <GridSearch search={pp.search} page_operator={pp.page_operator}
                         setInputValue={this.props.setInputValue}
                         callGridLoad={this.props.callGridLoad}/>
-                    <GridTable grid={grid}
+                    {/*<GridTable grid={grid}
                         params={pp.params}
                         search={pp.search}
                         page_operator={p_info}
@@ -79,7 +79,8 @@ export class Grid extends React.Component<any, any>{
                         callSubmit={this.props.callSubmit}
                         setRowInputValue={this.props.setRowInputValue}
                         updateRowState={this.props.updateRowState}
-                        cancelRowState={this.props.cancelRowState}/>
+                */    }
+                    <GridTableView />
                     <footer className="table-footer clearfix">
                         <small className="pull-xs-right">共 {grid.length} 筆</small>
                     </footer>
