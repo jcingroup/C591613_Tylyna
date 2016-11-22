@@ -110,8 +110,27 @@
         i_UpdateDeptID?: number;
         i_UpdateDateTime?: any;
         i_Lang?: string;
+        Product?: server.Product[];
     }
-
+    interface Product extends BaseEntityTable {
+        product_id?: number;
+        product_kind_id?: number;
+        product_name?: string;
+        stock_state?: number;
+        info?: string;
+        more_info?: string;
+        sort?: number;
+        i_Hide?: boolean;
+        i_InsertUserID?: string;
+        i_InsertDeptID?: number;
+        i_InsertDateTime?: Date;
+        i_UpdateUserID?: string;
+        i_UpdateDeptID?: number;
+        i_UpdateDateTime?: Date;
+        i_Lang?: string;
+        kind_name?: string;
+        ProductKind?: server.ProductKind;
+    }
 
 
     interface Community extends BaseEntityTable {

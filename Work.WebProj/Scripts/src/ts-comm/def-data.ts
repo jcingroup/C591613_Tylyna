@@ -505,6 +505,7 @@ export const UIText = {
     fi_update: '修改完成',
     fi_delete: '刪除完成',
     option_blank: '請選擇',
+    delete_sure: '確定是否刪除?',
 }
 
 export const IHideTypeData: Array<server.OptionTemplate> = [

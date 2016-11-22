@@ -1,0 +1,77 @@
+﻿import React = require('react');
+import Moment = require('moment');
+
+import { clone, makeInputValue} from '../ts-comm/comm-func';
+import {config} from '../ts-comm/def-data';
+import {ac_type_comm} from '../action_type';
+//view
+import {GridTableView} from './containers';
+import {GridSearch} from './vwGridSearch';
+import {NavPage} from '../components';
+
+export class Grid extends React.Component<any, any>{
+
+    constructor() {
+        super();
+        this.submitQuery = this.submitQuery.bind(this);
+        this.queryGridData = this.queryGridData.bind(this);
+
+        this.addState = this.addState.bind(this);
+
+        this.state = {
+        };
+    }
+    queryGridData(page?: number) {//navpage 用
+        let params = this.props.search;
+
+        params['page'] = page == null ? this.props.page_operator.page : page;
+
+        this.props.callGridLoad(params);
+    }
+    submitQuery(e: React.SyntheticEvent) {//form submit 用
+        e.preventDefault();
+
+        let params = this.props.search;
+        params['page'] = this.props.page_operator.page;
+
+        this.props.callGridLoad(params);
+        return;
+    }
+    addState() {
+        let data: server.Product = {
+            product_id: 0,
+            i_Hide: false,
+            i_Lang: 'zh-TW'
+        };
+        this.props.editState(ac_type_comm.add, 0, data);
+    }
+    render() {
+        let out_html: JSX.Element = null;
+        let pp = this.props;
+        let p_info: server.PageInfo = pp.page_operator;
+        let grid: Array<server.ProductKind> = pp.grid;
+        out_html =
+            (
+                <div>
+                    <div className="alert alert-warning">
+                        <strong>前台顯示</strong> 依排序由大到小排序
+                    </div>
+                    <GridSearch search={pp.search} page_operator={pp.page_operator} init_data={pp.init_data}
+                        setInputValue={this.props.setInputValue}
+                        callGridLoad={this.props.callGridLoad}/>
+                    <GridTableView />
+                    <NavPage
+                        page={p_info.page}
+                        startcount={p_info.startcount}
+                        endcount={p_info.endcount}
+                        total={p_info.total}
+                        records={p_info.records}
+                        mapPage={this.queryGridData}
+                        clickInsertState={this.addState}
+                        showDelete={false}/>
+                </div>
+            );
+
+        return out_html;
+    }
+}

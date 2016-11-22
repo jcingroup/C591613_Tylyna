@@ -25,6 +25,7 @@ namespace DotWeb.Api
             {
                 Product item = await db0.Product.FindAsync(id);
                 var r = new ResultInfo<Product>() { data = item };
+                r.result = true;
                 return Ok(r);
             }
         }
@@ -126,7 +127,7 @@ namespace DotWeb.Api
         }
         public async Task<IHttpActionResult> Post([FromBody]Product md)
         {
-            md.product_kind_id = GetNewId(CodeTable.ProductKind);
+            md.product_kind_id = GetNewId(CodeTable.Product);
 
             md.i_InsertDateTime = DateTime.Now;
             md.i_InsertDeptID = departmentId;
@@ -219,6 +220,30 @@ namespace DotWeb.Api
             {
                 db0.Dispose();
             }
+        }
+
+        [Route("GetInitData")]
+        public async Task<IHttpActionResult> GetInitData()
+        {
+            #region 連接BusinessLogicLibary資料庫並取得資料
+            using (db0 = getDB0())
+            {
+                var kind_list = db0.ProductKind
+                    .Where(x => !x.i_Hide)
+                    .OrderByDescending(x => x.sort)
+                    .Select(x => new
+                    {
+                        val = x.product_kind_id,
+                        Lname = x.kind_name
+                    });
+
+                return Ok(new
+                {
+                    kind_list = await kind_list.ToListAsync(),
+                });
+            }
+
+            #endregion
         }
 
         public class putBodyParam
