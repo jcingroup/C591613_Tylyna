@@ -95,6 +95,8 @@
         records: number;
         startcount: number;
         endcount: number;
+        field?: string;
+        sort?: string;
     }
     interface ProductKind extends BaseEntityTable {
         product_kind_id?: number;

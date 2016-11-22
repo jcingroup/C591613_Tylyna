@@ -79,11 +79,27 @@ const getGridItem = (data) => {
             page: data.page,
             records: data.records,
             startcount: data.startcount,
-            endcount: data.endcount
+            endcount: data.endcount,
+            field : data.field,
+            sort : data.sort
         }
     }
 }
 
+export const setPageInfo = (data) => {
+    return {
+        type: ac_type_comm.update_pageinfo,
+        data
+    }
+}
+
+export const setInputValue = (type, name, value) => {
+    return {
+        type: type,
+        name,
+        value
+    }
+}
 export const setRowInputValue = (type, i, name, value) => {
     return {
         type: type,

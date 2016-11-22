@@ -13,7 +13,6 @@ export class Grid extends React.Component<any, any>{
 
     constructor() {
         super();
-        this.changeSDVal = this.changeSDVal.bind(this);
         this.submitQuery = this.submitQuery.bind(this);
         this.queryGridData = this.queryGridData.bind(this);
 
@@ -23,14 +22,14 @@ export class Grid extends React.Component<any, any>{
         this.state = {
         };
     }
-    queryGridData(page?: number) {
+    queryGridData(page?: number) {//navpage 用
         let params = this.props.search;
 
         params['page'] = page == null ? this.props.page_operator.page : page;
 
-        this.props.ajaxGridItem(params);
+        this.props.callGridLoad(params);
     }
-    submitQuery(e: React.SyntheticEvent) {
+    submitQuery(e: React.SyntheticEvent) {//form submit 用
         e.preventDefault();
 
         let params = this.props.search;
@@ -38,10 +37,6 @@ export class Grid extends React.Component<any, any>{
 
         this.props.callGridLoad(params);
         return;
-    }
-    changeSDVal(name: string, e: React.SyntheticEvent) {
-        let value = makeInputValue(e);
-        this.props.setInputValue(ac_type_comm.chg_sch_val, name, value);
     }
     addType() {
         let data: server.ProductKind = {
@@ -69,9 +64,18 @@ export class Grid extends React.Component<any, any>{
         out_html =
             (
                 <div>
-                    <GridSearch search={pp.search} changeSearchVal={this.changeSDVal} />
+                    <div className="alert alert-warning">
+                        <strong>前台顯示</strong> 依排序由大到小排序
+                    </div>
+                    <GridSearch search={pp.search} page_operator={pp.page_operator}
+                        setInputValue={this.props.setInputValue}
+                        callGridLoad={this.props.callGridLoad}/>
                     <GridTable grid={grid}
                         params={pp.params}
+                        search={pp.search}
+                        page_operator={p_info}
+                        setPageInfo={this.props.setPageInfo}
+                        callGridLoad={this.props.callGridLoad}
                         callSubmit={this.props.callSubmit}
                         setRowInputValue={this.props.setRowInputValue}
                         updateRowState={this.props.updateRowState}

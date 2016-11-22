@@ -3,9 +3,10 @@ import React = require('react');
 import Moment = require('moment');
 import {UIText, IHideTypeData} from '../ts-comm/def-data';
 import {PWButton, InputText, InputNum, RadioBox} from '../components';
+import { OrderButton } from '../ts-comm/OrderButton';
 import {ac_type_comm} from '../action_type';
 import {clone} from '../ts-comm/comm-func';
-import {Init_Params} from './pub';
+import {Init_Params, Search_Data} from './pub';
 
 
 let EditRowButton = ({view_mode, updateState, cancelState, iKey }) => {
@@ -19,7 +20,11 @@ let EditRowButton = ({view_mode, updateState, cancelState, iKey }) => {
         return (
             <span>
                 <PWButton iconClassName="fa fa-reply" className="btn btn-link text-muted" title={UIText.cancel} enable={true} onClick={cancelState } /> { }
-                <PWButton iconClassName="fa fa-check fa-lg" className="btn btn-link text-primary" name={'Done-' + iKey} title={UIText.done} enable={true} type="submit"/>
+                <PWButton iconClassName="fa fa-check fa-lg" className="btn btn-link text-primary"
+                    name={'Done-' + iKey}
+                    formName="GridTable"
+                    title={UIText.done}
+                    enable={true} type="submit"/>
             </span>
         );
     }
@@ -27,16 +32,22 @@ let EditRowButton = ({view_mode, updateState, cancelState, iKey }) => {
 interface GridTableProps {
     grid: Array<server.ProductKind>;
     params: Init_Params;
+    page_operator: server.PageInfo,
+    search: Search_Data,
+
     updateRowState?: Function;
     cancelRowState?: Function;
     setRowInputValue?: Function;
     callSubmit: Function;
+    callGridLoad: Function;
+    setPageInfo: Function,
 }
 export class GridTable extends React.Component<GridTableProps, any>{
 
     constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.setSort = this.setSort.bind(this);
         this.state = {
         };
     }
@@ -64,13 +75,23 @@ export class GridTable extends React.Component<GridTableProps, any>{
         this.props.callSubmit(this.props.params.id, this.props.grid[key], this.props.grid[key].edit_type);
         return;
     }
+    setSort(field, sort) {
+        let pinfo = this.props.page_operator;
+        var parms = {
+            page: pinfo.page,
+            sort: sort,
+            field: field
+        };
+        $.extend(parms, this.props.search);
+
+        this.props.callGridLoad(parms);
+    }
     render() {
         let out_html: JSX.Element = null;
         let pp = this.props;
-
         out_html =
             (
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} id="GridTable">
                     <table className="table table-sm table-bordered table-striped table-hover">
                         <colgroup>
                             <col style={{ "width": "8%" }} />
@@ -81,9 +102,30 @@ export class GridTable extends React.Component<GridTableProps, any>{
                         <thead>
                             <tr>
                                 <th className="text-xs-center">{UIText.edit}</th>
-                                <th>主分類</th>
-                                <th>排序</th>
-                                <th>狀態</th>
+                                <th>
+                                    <OrderButton
+                                        title="	主分類"
+                                        field={'kind_name'}
+                                        sort={pp.page_operator.sort}
+                                        now_field={pp.page_operator.field}
+                                        setSort={this.setSort} />
+                                </th>
+                                <th>
+                                    <OrderButton
+                                        title="排序"
+                                        field={'sort'}
+                                        sort={pp.page_operator.sort}
+                                        now_field={pp.page_operator.field}
+                                        setSort={this.setSort} />
+                                </th>
+                                <th>
+                                    <OrderButton
+                                        title="狀態"
+                                        field={'i_Hide'}
+                                        sort={pp.page_operator.sort}
+                                        now_field={pp.page_operator.field}
+                                        setSort={this.setSort} />
+                                </th>
                             </tr>
                         </thead>
                         <tbody>

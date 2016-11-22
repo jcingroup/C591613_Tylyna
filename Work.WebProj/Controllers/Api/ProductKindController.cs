@@ -12,6 +12,7 @@ using System.Web.Http;
 using LinqKit;
 using System.Data.Entity.Validation;
 using System.Data.Entity.Infrastructure;
+using System.Linq.Dynamic;
 
 namespace DotWeb.Api
 {
@@ -45,9 +46,26 @@ namespace DotWeb.Api
             var result = db0.ProductKind.AsExpandable().Where(predicate);
             var resultCount = await result.CountAsync();
 
+            IQueryable<ProductKind> resultOrderItems = null;
+
+            if (q.field != null)
+            {
+                if (q.sort == "asc")
+                    resultOrderItems = result.OrderBy(q.field);
+
+                if (q.sort == "desc")
+                    resultOrderItems = result.OrderBy(q.field + " descending");
+            }
+            else
+            {
+                resultOrderItems = result.OrderBy(x => x.product_kind_id);
+            }
+
             int startRecord = PageCount.PageInfo(page, defPageSize, resultCount);
-            var resultItems = await result
-                .OrderBy(x => x.product_kind_id)
+            var resultItems = await
+                resultOrderItems
+                .Skip(startRecord)
+                .Take(defPageSize)
                 .Select(x => new
                 {
                     x.product_kind_id,
@@ -64,8 +82,6 @@ namespace DotWeb.Api
                     edit_type = IEditType.update,
                     view_mode = InputViewMode.view
                 })
-                .Skip(startRecord)
-                .Take(defPageSize)
                 .ToListAsync();
 
             db0.Dispose();
@@ -77,7 +93,9 @@ namespace DotWeb.Api
                 page = PageCount.Page,
                 records = PageCount.RecordCount,
                 startcount = PageCount.StartCount,
-                endcount = PageCount.EndCount
+                endcount = PageCount.EndCount,
+                field = q.field,
+                sort = q.sort
             });
 
             #endregion

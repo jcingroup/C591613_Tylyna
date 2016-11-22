@@ -10,8 +10,8 @@ import ReactDOM = require('react-dom');
 export class OrderButton extends React.Component<{
     title: string,
     now_field: string,
-    field: string,
-    sort: string,
+    field?: string,
+    sort?: string,
     setSort(field: string, sort: string): void
 }, { now_sort: string }> {
 

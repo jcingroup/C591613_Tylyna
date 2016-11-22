@@ -1,10 +1,11 @@
 ﻿import update = require('react-addons-update');
 import { combineReducers } from 'redux'
 import {ac_type_comm} from '../action_type';
-import {Init_Params} from './pub';
+import {Init_Params, Search_Data} from './pub';
 
-let searchData = {
-    keyword: '',
+let searchData: Search_Data = {
+    name: '',
+    i_Hide: null
 };
 
 export const search = (state = searchData, action) => {
@@ -63,14 +64,16 @@ let page_operator_state: server.PageInfo = {
     endcount: 0,
     total: 0,
     records: 0,
-    //field: null,
-    //sort: null
+    field: null,
+    sort: null
 }
 export const page_operator = (state = page_operator_state, action) => {
 
     switch (action.type) {
         case ac_type_comm.load:
             return action.pageinfo;
+        case ac_type_comm.update_pageinfo:
+            return action.data;
         default:
             return state
     }

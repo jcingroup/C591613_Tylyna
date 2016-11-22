@@ -355,6 +355,7 @@
     <Content Include="Content\css\sys.css" />
     <Content Include="Content\css\vendor\fontAwesome\font-awesome.css" />
     <Content Include="Content\css\vendor\icomoon.css" />
+    <Content Include="Content\css\vendor\toastr.css" />
     <Content Include="Content\css\vendor\typeahead.css" />
     <Content Include="Content\css\vendor\w3.css" />
     <Content Include="Content\font\fontAwesome\fontawesome-webfont.svg" />

@@ -2,12 +2,14 @@
 import Moment = require('moment');
 import {UIText, IHideTypeData} from '../ts-comm/def-data';
 import {InputText, SelectText, PWButton} from '../components';
-
+import {Search_Data} from './pub';
 import {ac_type_comm} from '../action_type';
 
 interface GridSearchProps {
-    search: any,
-    changeSearchVal: Function
+    search: Search_Data,
+    page_operator: server.PageInfo,
+    setInputValue: Function,
+    callGridLoad: Function
 }
 
 export class GridSearch extends React.Component<GridSearchProps, any>{
@@ -16,6 +18,15 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
         super();
         this.state = {
         };
+    }
+    chgShVal(name: string, value: any, e: React.SyntheticEvent) {
+        this.props.setInputValue(ac_type_comm.chg_sch_val, name, value);
+
+        let params = this.props.search;
+        params['page'] = this.props.page_operator.page;
+        params[name] = value;
+
+        this.props.callGridLoad(params);
     }
     render() {
         let out_html: JSX.Element = null;
@@ -35,7 +46,7 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
                                         inputClassName="form-control form-control-sm"
                                         inputViewMode={InputViewMode.edit}
                                         value={search.name}
-                                        onChange= {pp.changeSearchVal.bind(this, 'name') }
+                                        onChange= {this.chgShVal.bind(this, 'name') }
                                         required={false}
                                         maxLength={100}
                                         placeholder="請輸入關鍵字..."
@@ -46,7 +57,7 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
                                         inputViewMode={InputViewMode.edit}
                                         id={'search-hide'}
                                         value={search.i_Hide}
-                                        onChange= {pp.changeSearchVal.bind(this, 'i_Hide') }
+                                        onChange= {this.chgShVal.bind(this, 'i_Hide') }
                                         required={true}
                                         is_blank={true}
                                         blank_text="全部"

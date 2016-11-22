@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import {AStart} from './vwAStart';
 
 
-import { callGridLoad, callDelete, callSubmit, setRowInputValue,
+import { callGridLoad, callDelete, callSubmit, setRowInputValue, setInputValue, setPageInfo,
     updateRowState, addRowState, cancelRowState} from './actions'
 
 const m1ToProps = (state, ownProps) => {
@@ -24,7 +24,7 @@ const m1Dispatch = (dispatch, ownProps) => {
         callGridLoad,
         callDelete,
         callSubmit,
-        setRowInputValue,
+        setRowInputValue, setInputValue, setPageInfo,
         addRowState,
         updateRowState,
         cancelRowState

@@ -289,7 +289,7 @@ interface SelectTextProps {
     viewClassName?: string;
     disabled?: boolean;
     onChange?: Function;
-    value?: string | number;
+    value?: any;
     id?: string;
     options?: Array<server.Option>;
     required?: boolean;
@@ -471,6 +471,7 @@ interface PWButtonProps {
     type?: string;
     title?: string;
     name?: string;
+    formName?: string;
 }
 export class PWButton extends React.Component<PWButtonProps, any>{
 
@@ -492,7 +493,8 @@ export class PWButton extends React.Component<PWButtonProps, any>{
                     disabled={!this.props.enable}
                     id={this.props.id}
                     title={this.props.title}
-                    name={this.props.name}>
+                    name={this.props.name}
+                    form={this.props.formName}>
                     <i  className={this.props.iconClassName}></i>
                     {this.props.children}
                 </button>
