@@ -13,7 +13,6 @@ export class Grid extends React.Component<any, any>{
 
     constructor() {
         super();
-        this.submitQuery = this.submitQuery.bind(this);
         this.queryGridData = this.queryGridData.bind(this);
 
         this.addType = this.addType.bind(this);
@@ -28,15 +27,6 @@ export class Grid extends React.Component<any, any>{
         params['page'] = page == null ? this.props.page_operator.page : page;
 
         this.props.callGridLoad(params);
-    }
-    submitQuery(e: React.SyntheticEvent) {//form submit 用
-        e.preventDefault();
-
-        let params = this.props.search;
-        params['page'] = this.props.page_operator.page;
-
-        this.props.callGridLoad(params);
-        return;
     }
     addType() {
         let data: server.ProductKind = {

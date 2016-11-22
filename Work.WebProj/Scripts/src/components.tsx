@@ -107,28 +107,19 @@ interface InputNumProps {
     value?: string | number;
     id?: string;
     required?: boolean;
-    maxLength?: number;
-    onBlur?: Function;
     onFocus?: React.EventHandler<React.FocusEvent>;
     tabIndex?: number;
-    only_positive?: boolean; //只能為正數
-    group?: string;
-    ref?: string;
     max?: number;
     min?: number;
-}
-interface InputNumState {
-    show_value?: any
-    prv_value?: any
-    neg_sign_flag?: boolean
+    maxLength?: number;
+    placeholder?: string;
 }
 
-export class InputNum extends React.Component<InputNumProps, InputNumState>{
+export class InputNum extends React.Component<InputNumProps, any>{
 
     constructor() {
         super();
         this.onChange = this.onChange.bind(this);
-        this.onBlur = this.onBlur.bind(this);
 
         this.state = {
             show_value: null,
@@ -142,129 +133,37 @@ export class InputNum extends React.Component<InputNumProps, InputNumState>{
         inputViewMode: InputViewMode.edit,
         only_positive: true
     }
-    is_get_value = false;
-    componentDidMount() {
-        const pp_value = this.props.value;
-        this.setState({ show_value: pp_value, prv_value: pp_value });
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        //alert(this.props.value != prevProps.value && isNumeric(this.props.value))
-        if (this.props.value != prevProps.value && isNumeric(this.props.value)) {
-            //console.log(this.props.id, this.props.value, prevProps.value)
-            const pp_value = this.props.value;
-            this.setState({ prv_value: pp_value, show_value: pp_value })
-        } else if (this.props.value != prevProps.value && (this.props.value == null || this.props.value == '')) {
-            this.setState({ prv_value: '', show_value: '' })
-        }
-    }
-
     onChange(e: React.SyntheticEvent) {
-
-        if (this.props.onChange == undefined || this.props.onChange == null)
-            return;
-
         let input: HTMLInputElement = e.target as HTMLInputElement;
-        let value = input.value;
-        this.state.neg_sign_flag = false;
-
-        if (value === null || value === '' || value === null || value === undefined) {
-            this.setState({ prv_value: null, show_value: null })
-            this.props.onChange('', e);
-        } else {
-            //console.log('value', value, 'isNumeric', isNumeric(value));
-            if (value == '-' && !this.props.only_positive) { //可輸入負號
-                this.setState({ show_value: '-', prv_value: value })
-                this.props.onChange(0, e);
-            } else if (value == '-' && this.props.only_positive) { //不可輸入負號
-                this.setState({ show_value: '', prv_value: '' })
-                this.props.onChange('', e);
-            } else if (isNumeric(value)) {
-
-                let n = parseFloat(value);
-
-                if (this.props.only_positive && n < 0) { //不可輸入負號 值卻小於０
-                    const prv_value = this.state.prv_value === undefined ? '' : this.state.prv_value;
-                    this.setState({ show_value: prv_value })
-                    this.props.onChange(prv_value, e);
-                } else {
-                    this.setState({ show_value: value, prv_value: n }) // 123. 經parseFloat會變成 123
-                    this.props.onChange(n, e);
-                }
-
-            } else {
-                const prv_value = this.state.prv_value === undefined ? '' : this.state.prv_value;
-                this.setState({ show_value: prv_value })
-                this.props.onChange(prv_value, e);
-            }
-        }
+        let value = makeInputValue(e);
+        this.props.onChange(value, e);
     }
-    onBlur(e: React.SyntheticEvent) {
-        let input: HTMLInputElement = e.target as HTMLInputElement;
-        let value = input.value;
-        let pp = this.props;
-        if (value === '-') {
-            this.setState({ show_value: '', prv_value: '' })
-            pp.onChange('', e);
-        } else {
-            if (pp.min != undefined && pp.min != null && pp.value != '' && pp.value < pp.min) {
-                this.setState({ show_value: '', prv_value: '' })
-                pp.onChange('', e);
-            }
 
-            if (pp.max != undefined && pp.max != null && pp.value != '' && pp.value > pp.max) {
-                this.setState({ show_value: '', prv_value: '' })
-                pp.onChange('', e);
-            }
-        }
-        if (this.props.onBlur)
-            this.props.onBlur(e)
-    }
 
     render() {
         let out_html = null;
         let pp = this.props;
+        let value = this.props.value == undefined ? '' : this.props.value;
 
         if (this.props.inputViewMode == InputViewMode.edit) {
             out_html =
                 (
                     <input
                         id={pp.id}
-                        type="text"
+                        type="number"
                         className={pp.inputClassName}
                         width={pp.width}
                         style={pp.style}
-                        value={this.state.show_value}
+                        value={value}
                         onChange={this.onChange}
                         disabled={pp.disabled}
                         required={pp.required}
-                        maxLength={pp.maxLength}
-                        onBlur={this.onBlur}
                         onFocus={pp.onFocus}
                         tabIndex={pp.tabIndex}
-                        data-group={pp.group}
-                        />
-                );
-        }
-
-        if (this.props.inputViewMode == InputViewMode.edit) {
-            out_html =
-                (
-                    <input
-                        id={pp.id}
-                        type="text"
-                        className={pp.inputClassName}
-                        width={pp.width}
-                        style={pp.style}
-                        value={this.state.show_value}
-                        onChange={this.onChange}
-                        disabled={pp.disabled}
-                        required={pp.required}
+                        placeholder={pp.placeholder}
+                        min={pp.min}
+                        max={pp.max}
                         maxLength={pp.maxLength}
-                        onBlur={this.onBlur}
-                        onFocus={pp.onFocus}
-                        tabIndex={pp.tabIndex}
-                        data-group={pp.group}
                         />
                 );
         }
@@ -275,7 +174,7 @@ export class InputNum extends React.Component<InputNumProps, InputNumState>{
                     <span
                         id={this.props.id}
                         className={this.props.viewClassName}>
-                        {this.state.show_value}
+                        {value}
                     </span>
                 );
         }
@@ -691,6 +590,60 @@ export class RadioBox extends React.Component<RadioBoxProps, any>{
                         {this.getLname(value, 'Lname') }
                     </span>
                 );
+        }
+        return out_html;
+    }
+}
+
+export class TagShowAndHide extends React.Component<{ show: boolean, className?: string, style?: any, TagName: TagName }, any>
+{
+    constructor() {
+        super();
+        this.state = {};
+    }
+    render() {
+        let out_html = null;
+        let pp = this.props;
+
+        if (pp.show) {
+            if (pp.TagName === TagName.Td) {
+                out_html = (
+                    <td style={pp.style} className={pp.className}>
+                        {pp.children}
+                    </td>
+                );
+            } else if (pp.TagName === TagName.Tr) {
+                out_html = (
+                    <tr style={pp.style} className={pp.className}>
+                        {pp.children}
+                    </tr>
+                );
+            } else if (pp.TagName === TagName.Th) {
+                out_html = (
+                    <th style={pp.style} className={pp.className}>
+                        {pp.children}
+                    </th>
+                );
+            }
+            else if (pp.TagName === TagName.Span) {
+                out_html = (
+                    <span style={pp.style} className={pp.className}>
+                        {pp.children}
+                    </span>
+                );
+            } else if (pp.TagName === TagName.col) {
+                out_html = (
+                    <col style={pp.style} className={pp.className}>
+                        {pp.children}
+                    </col>
+                );
+            } else if (pp.TagName === TagName.dl) {
+                out_html = (
+                    <dl style={pp.style} className={pp.className}>
+                        {pp.children}
+                    </dl>
+                );
+            }
         }
         return out_html;
     }

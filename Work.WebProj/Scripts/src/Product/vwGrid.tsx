@@ -1,8 +1,7 @@
 ﻿import React = require('react');
 import Moment = require('moment');
-
-import { clone, makeInputValue} from '../ts-comm/comm-func';
-import {config} from '../ts-comm/def-data';
+import {Init_Data} from './pub';
+import {config, IStockStateData} from '../ts-comm/def-data';
 import {ac_type_comm} from '../action_type';
 //view
 import {GridTableView} from './containers';
@@ -13,7 +12,6 @@ export class Grid extends React.Component<any, any>{
 
     constructor() {
         super();
-        this.submitQuery = this.submitQuery.bind(this);
         this.queryGridData = this.queryGridData.bind(this);
 
         this.addState = this.addState.bind(this);
@@ -28,18 +26,16 @@ export class Grid extends React.Component<any, any>{
 
         this.props.callGridLoad(params);
     }
-    submitQuery(e: React.SyntheticEvent) {//form submit 用
-        e.preventDefault();
-
-        let params = this.props.search;
-        params['page'] = this.props.page_operator.page;
-
-        this.props.callGridLoad(params);
-        return;
-    }
     addState() {
+        let init_data: Init_Data = this.props.init_data;
         let data: server.Product = {
             product_id: 0,
+            product_kind_id: init_data.kind_list[0].val,
+            product_name: '',
+            stock_state: IStockStateData[0].val,
+            sort: 0,
+            info: null,
+            more_info: null,
             i_Hide: false,
             i_Lang: 'zh-TW'
         };
@@ -53,6 +49,9 @@ export class Grid extends React.Component<any, any>{
         out_html =
             (
                 <div>
+                    <h3 className="h3">
+                        {gb_caption}
+                    </h3>
                     <div className="alert alert-warning">
                         <strong>前台顯示</strong> 依排序由大到小排序
                     </div>

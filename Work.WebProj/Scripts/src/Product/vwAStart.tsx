@@ -38,9 +38,6 @@ export class AStart extends React.Component<any, any>{
                             {gb_caption}
                         </li>
                     </ul>
-                    <h3 className="h3">
-                        {gb_caption}
-                    </h3>
                     {out_main_view}
                 </div>
             );

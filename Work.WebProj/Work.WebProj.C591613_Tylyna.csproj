@@ -742,6 +742,7 @@
     <TypeScriptCompile Include="Scripts\src\tsx\m-users.tsx" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\InputViewMode.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\SelectShowType.ts" />
+    <TypeScriptCompile Include="Scripts\ts.d\enum\TagShowAndHide.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\JSExt.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\Jquery.Ext.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\Toastr.d.ts" />

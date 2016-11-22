@@ -51,8 +51,11 @@ export const page_operator = (state = page_operator_state, action) => {
             return state
     }
 }
+let init_f: server.Product = {
+    sort: 0
+};
 
-const field = (state: server.Product = {}, action) => {
+const field = (state: server.Product = init_f, action) => {
     switch (action.type) {
         case ac_type_comm.chg_fld_val:
             let f_struct_1 = {
@@ -65,7 +68,7 @@ const field = (state: server.Product = {}, action) => {
         case ac_type_comm.update:
             return action.data;
         case ac_type_comm.load:
-            return {};
+            return init_f;
         default:
             return state
     }

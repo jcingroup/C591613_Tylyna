@@ -16,6 +16,7 @@ const m1ToProps = (state, ownProps) => {
         page_operator: state.page_operator,
         search: state.search,
         grid: state.grid,
+        field: state.field,
         params: state.params
     }
 }

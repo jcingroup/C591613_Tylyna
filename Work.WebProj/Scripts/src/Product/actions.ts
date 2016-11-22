@@ -55,7 +55,7 @@ export const callSubmit = (id, md: server.ProductKind, edit_type: IEditType) => 
                     mask_off();
                     if (data.result) {
                         tosMessage(null, UIText.fi_insert, 1);
-                        dispatch(callGridLoad(null));
+                        dispatch(callUpdateItem(data.id));
                     } else {
                         alert(data.message);
                     }
@@ -68,7 +68,7 @@ export const callSubmit = (id, md: server.ProductKind, edit_type: IEditType) => 
                 .then((data: IResultData<server.ProductKind>) => {
                     if (data.result) {
                         tosMessage(null, UIText.fi_update, 1);
-                        dispatch(callGridLoad(null));
+                        //dispatch(callGridLoad(null));
                     } else {
                         alert(data.message);
                     }
