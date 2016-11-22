@@ -616,7 +616,7 @@ export class NavPage extends React.Component<NavPageProps, any> {
 //RadioBox
 interface RadioBoxProps {
     inputViewMode: InputViewMode
-    radioList: Array<server.Option>;
+    radioList: Array<server.OptionTemplate>;
     name?: string;
     id?: string;
     wrapperClassName?: string;
@@ -624,7 +624,6 @@ interface RadioBoxProps {
     inputClassName?: string;
     spanClassName?: string;
     textClassName?: string;
-    viewClassName?: string;
     disabled?: boolean;
     onChange?: Function;
     value?: any;
@@ -640,10 +639,10 @@ export class RadioBox extends React.Component<RadioBoxProps, any>{
         disabled: false,
         inputViewMode: InputViewMode.edit
     }
-    getLname(val): string {
+    getLname(val, getName): string {
         let result: string = '';
         this.props.radioList.forEach((item, i) => {
-            result = val == item.val ? item.Lname : result;
+            result = val == item.val ? item[getName] : result;
         });
         return result;
     }
@@ -688,8 +687,8 @@ export class RadioBox extends React.Component<RadioBoxProps, any>{
                 (
                     <span
                         id={this.props.id}
-                        className={this.props.viewClassName}>
-                        {this.getLname(value) }
+                        className={this.getLname(value, 'className') }>
+                        {this.getLname(value, 'Lname') }
                     </span>
                 );
         }

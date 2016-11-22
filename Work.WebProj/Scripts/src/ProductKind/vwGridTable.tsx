@@ -167,6 +167,7 @@ export class GridTable extends React.Component<GridTableProps, any>{
                                             name={"i_Hide-" + i}
                                             id={"i_Hide-" + i}
                                             value={item.i_Hide}
+                                            onChange= {this.chgRowVal.bind(this, i, 'i_Hide') }
                                             required={true}
                                             labelClassName="c-input c-radio"
                                             spanClassName="c-indicator"
