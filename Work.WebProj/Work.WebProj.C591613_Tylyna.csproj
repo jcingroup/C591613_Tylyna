@@ -253,6 +253,7 @@
     <Content Include="Areas\Active\Views\SysDemo\Index_Youtube.cshtml" />
     <Content Include="Areas\Active\Views\SysDemo\Reply.cshtml" />
     <Content Include="Areas\Active\Views\ProductData\Kind.cshtml" />
+    <Content Include="Areas\Active\Views\ProductData\Main.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
@@ -304,6 +305,7 @@
     <Content Include="ckfinder\core\connector\aspx\lang\vi.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-cn.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-tw.xml" />
+    <Compile Include="Controllers\Api\ProductController.cs" />
     <Compile Include="Controllers\Api\ProductKindController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\UserController.cs" />

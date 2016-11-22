@@ -26,6 +26,8 @@
         <EntityTypeShape EntityType="C591613_TylynaModel.Community_News" Width="1.5" PointX="14.625" PointY="2.75" />
         <AssociationConnector Association="C591613_TylynaModel.FK_Community_News_Community" />
         <EntityTypeShape EntityType="C591613_TylynaModel.ProductKind" Width="1.5" PointX="8.375" PointY="10.75" />
+        <EntityTypeShape EntityType="C591613_TylynaModel.Product" Width="1.5" PointX="10.625" PointY="11.375" />
+        <AssociationConnector Association="C591613_TylynaModel.FK_Product_ProductKind" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

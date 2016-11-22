@@ -12,16 +12,14 @@ namespace ProcCore.Business.DB0
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductKind
+    public partial class Product
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductKind()
-        {
-            this.Product = new HashSet<Product>();
-        }
-    
+        public int product_id { get; set; }
         public int product_kind_id { get; set; }
-        public string kind_name { get; set; }
+        public string product_name { get; set; }
+        public int stock_state { get; set; }
+        public string info { get; set; }
+        public string more_info { get; set; }
         public int sort { get; set; }
         public bool i_Hide { get; set; }
         public string i_InsertUserID { get; set; }
@@ -32,7 +30,6 @@ namespace ProcCore.Business.DB0
         public Nullable<System.DateTime> i_UpdateDateTime { get; set; }
         public string i_Lang { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Product { get; set; }
+        public virtual ProductKind ProductKind { get; set; }
     }
 }

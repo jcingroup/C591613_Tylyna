@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProcCore.Business.DB0
 {
-    [MetadataType(typeof(Community_NewsMetadata))]
-    public partial class Community_News
+    [MetadataType(typeof(ProductKindMetadata))]
+    public partial class ProductKind
     {
-        private class Community_NewsMetadata
+        private class ProductKindMetadata
         {
             [JsonIgnore()]
-            public virtual Community Community { get; set; }
+            public virtual ICollection<Product> Product { get; set; }
         }
     }
 }

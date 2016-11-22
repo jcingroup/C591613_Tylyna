@@ -41,5 +41,6 @@ namespace ProcCore.Business.DB0
         public virtual DbSet<Community> Community { get; set; }
         public virtual DbSet<Community_News> Community_News { get; set; }
         public virtual DbSet<ProductKind> ProductKind { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
     }
 }

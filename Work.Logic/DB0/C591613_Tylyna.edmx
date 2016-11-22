@@ -208,6 +208,26 @@
           <Property Name="menu_id" Type="int" Nullable="false" />
           <Property Name="role_id" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="product_kind_id" Type="int" Nullable="false" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="stock_state" Type="int" Nullable="false" />
+          <Property Name="info" Type="nvarchar" MaxLength="512" />
+          <Property Name="more_info" Type="nvarchar" MaxLength="512" />
+          <Property Name="sort" Type="int" Nullable="false" />
+          <Property Name="i_Hide" Type="bit" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProductKind">
           <Key>
             <PropertyRef Name="product_kind_id" />
@@ -316,6 +336,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_ProductKind">
+          <End Role="ProductKind" Type="Self.ProductKind" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductKind">
+              <PropertyRef Name="product_kind_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="product_kind_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="C591613_TylynaModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -334,6 +366,7 @@
           <EntitySet Name="i_UserLoginLog" EntityType="Self.i_UserLoginLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuRole" EntityType="Self.MenuRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductKind" EntityType="Self.ProductKind" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Community_News_Community" Association="Self.FK_Community_News_Community">
             <End Role="Community" EntitySet="Community" />
@@ -362,6 +395,10 @@
           <AssociationSet Name="FK_MenuRole_Menu" Association="Self.FK_MenuRole_Menu">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="MenuRole" EntitySet="MenuRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductKind" Association="Self.FK_Product_ProductKind">
+            <End Role="ProductKind" EntitySet="ProductKind" />
+            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -594,6 +631,11 @@
             <End Role="Community_News" EntitySet="Community_News" />
           </AssociationSet>
           <EntitySet Name="ProductKind" EntityType="C591613_TylynaModel.ProductKind" />
+          <EntitySet Name="Product" EntityType="C591613_TylynaModel.Product" />
+          <AssociationSet Name="FK_Product_ProductKind" Association="C591613_TylynaModel.FK_Product_ProductKind">
+            <End Role="ProductKind" EntitySet="ProductKind" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Community">
           <Key>
@@ -666,7 +708,41 @@
           <Property Name="i_UpdateDeptID" Type="Int32" />
           <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
           <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="C591613_TylynaModel.FK_Product_ProductKind" FromRole="ProductKind" ToRole="Product" />
         </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="product_kind_id" Type="Int32" Nullable="false" />
+          <Property Name="product_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="stock_state" Type="Int32" Nullable="false" />
+          <Property Name="info" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="more_info" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="ProductKind" Relationship="C591613_TylynaModel.FK_Product_ProductKind" FromRole="Product" ToRole="ProductKind" />
+        </EntityType>
+        <Association Name="FK_Product_ProductKind">
+          <End Type="C591613_TylynaModel.ProductKind" Role="ProductKind" Multiplicity="1" />
+          <End Type="C591613_TylynaModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductKind">
+              <PropertyRef Name="product_kind_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="product_kind_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -902,6 +978,27 @@
                 <ScalarProperty Name="sort" ColumnName="sort" />
                 <ScalarProperty Name="kind_name" ColumnName="kind_name" />
                 <ScalarProperty Name="product_kind_id" ColumnName="product_kind_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="more_info" ColumnName="more_info" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="stock_state" ColumnName="stock_state" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_kind_id" ColumnName="product_kind_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
