@@ -130,8 +130,19 @@
         i_Lang?: string;
         kind_name?: string;
         ProductKind?: server.ProductKind;
+        ProductDetail?: Array<server.ProductDetail>;
+        Deatil?: Array<server.ProductDetail>;
     }
-
+    interface ProductDetail {
+        product_detail_id?: number;
+        product_id?: number;
+        sn?: string;
+        pack_name?: number;
+        weight?: number;
+        price?: number;
+        stock_state?: number;
+        Product?: server.Product;
+    }
 
     interface Community extends BaseEntityTable {
         community_id?: number;

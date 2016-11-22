@@ -504,8 +504,13 @@ exports.UIText = {
     fi_update: '修改完成',
     fi_delete: '刪除完成',
     option_blank: '請選擇',
+    delete_sure: '確定是否刪除?',
 };
 exports.IHideTypeData = [
     { val: false, Lname: '顯示', className: 'w3-tag label-success w3-round' },
     { val: true, Lname: '隱藏', className: 'w3-tag label-default w3-round' }
+];
+exports.IStockStateData = [
+    { val: 1, Lname: '上架', className: 'w3-tag label-success w3-round' },
+    { val: -1, Lname: '補貨中', className: 'w3-tag label-default w3-round' }
 ];

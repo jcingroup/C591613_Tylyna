@@ -14,6 +14,12 @@ namespace ProcCore.Business.DB0
     
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.ProductDetail = new HashSet<ProductDetail>();
+        }
+    
         public int product_id { get; set; }
         public int product_kind_id { get; set; }
         public string product_name { get; set; }
@@ -31,5 +37,7 @@ namespace ProcCore.Business.DB0
         public string i_Lang { get; set; }
     
         public virtual ProductKind ProductKind { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductDetail> ProductDetail { get; set; }
     }
 }

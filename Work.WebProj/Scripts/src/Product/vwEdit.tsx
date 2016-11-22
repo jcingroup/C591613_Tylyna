@@ -151,68 +151,25 @@ export class Edit extends React.Component<any, any>{
                                 <th className="text-xs-center">狀態</th>
                             </tr>
                         </thead>
-                        <tr>
-                            <td className="text-xs-center">
-                                <button className="btn btn-link text-muted" title="取消修改"><i className="fa fa-reply"></i></button>
-                                <button className="btn btn-link text-primary" title="確定修改"><i className="fa fa-check fa-lg"></i></button>
-                            </td>
-                            <td>
-                                <input type="text" value="P2-010-01" className="form-control" required />
-                            </td>
-                            <td>
-                                <input type="text" value="10入濾掛式包" className="form-control" required />
-                            </td>
-                            <td className="text-xs-center">
-                                <div className="input-group">
-                                    <input type="number" min="0" value="110" className="form-control text-xs-center" required />
-                                    <span className="input-group-addon">g</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="input-group">
-                                    <span className="input-group-addon">NT$</span>
-                                    <input type="number" min="0" value="380" className="form-control text-xs-center" required />
-                                </div>
-                            </td>
-                            <td className="text-xs-center">
-                                <label className="c-input c-radio">
-                                    <input type="radio" name="sale1" checked />
-                                    <span className="c-indicator"></span>
-                                    <span className="text-sm">上架</span>
-                                </label>
-                                <label className="c-input c-radio">
-                                    <input type="radio" name="sale1" />
-                                    <span className="c-indicator"></span>
-                                    <span className="text-sm">補貨中</span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="text-xs-center">
-                                <button className="btn btn-link text-danger" title="刪除"><i className="fa fa-trash fa-lg"></i></button>
-                                <button className="btn btn-link text-success" title="編輯"><i className="fa fa-pencil fa-lg"></i></button>
-                            </td>
-                            <td>P2-010-02</td>
-                            <td>5入濾掛式包</td>
-                            <td className="text-xs-center">55g</td>
-                            <td className="text-xs-right">NT$ 190</td>
-                            <td className="text-xs-center">
-                                <span className="w3-tag label-success w3-round">上架</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="text-xs-center">
-                                <button className="btn btn-link text-danger" title="刪除"><i className="fa fa-trash fa-lg"></i></button>
-                                <button className="btn btn-link text-success" title="編輯"><i className="fa fa-pencil fa-lg"></i></button>
-                            </td>
-                            <td>P2-010-03</td>
-                            <td>袋裝咖啡豆</td>
-                            <td className="text-xs-center">230g</td>
-                            <td className="text-xs-right">NT$ 330</td>
-                            <td className="text-xs-center">
-                                <span className="w3-tag label-default w3-round">補貨中</span>
-                            </td>
-                        </tr>
+                        <tbody>
+                            {
+                                field.Deatil.map((item, i) => {
+                                    return <tr key={i}>
+                                        <td className="text-xs-center">
+                                            <button className="btn btn-link text-danger" title="刪除"><i className="fa fa-trash fa-lg"></i></button>
+                                            <button className="btn btn-link text-success" title="編輯"><i className="fa fa-pencil fa-lg"></i></button>
+                                        </td>
+                                        <td>P2-010-02</td>
+                                        <td>5入濾掛式包</td>
+                                        <td className="text-xs-center">55g</td>
+                                        <td className="text-xs-right">NT$ 190</td>
+                                        <td className="text-xs-center">
+                                            <span className="w3-tag label-success w3-round">上架</span>
+                                        </td>
+                                    </tr>;
+                                })
+                            }
+                        </tbody>
                     </table>
                     <section>
                         <nav className="nav nav-tabs">

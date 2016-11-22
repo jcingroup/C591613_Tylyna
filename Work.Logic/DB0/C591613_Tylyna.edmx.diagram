@@ -28,6 +28,8 @@
         <EntityTypeShape EntityType="C591613_TylynaModel.ProductKind" Width="1.5" PointX="8.375" PointY="10.75" />
         <EntityTypeShape EntityType="C591613_TylynaModel.Product" Width="1.5" PointX="10.625" PointY="11.375" />
         <AssociationConnector Association="C591613_TylynaModel.FK_Product_ProductKind" />
+        <EntityTypeShape EntityType="C591613_TylynaModel.ProductDetail" Width="1.5" PointX="12.875" PointY="12.25" />
+        <AssociationConnector Association="C591613_TylynaModel.FK_ProductDetail_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

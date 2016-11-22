@@ -52,7 +52,8 @@ export const page_operator = (state = page_operator_state, action) => {
     }
 }
 let init_f: server.Product = {
-    sort: 0
+    sort: 0,
+    ProductDetail:[]
 };
 
 const field = (state: server.Product = init_f, action) => {

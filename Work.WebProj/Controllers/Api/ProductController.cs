@@ -24,6 +24,7 @@ namespace DotWeb.Api
             using (db0 = getDB0())
             {
                 Product item = await db0.Product.FindAsync(id);
+                item.Deatil = item.ProductDetail.ToList();
                 var r = new ResultInfo<Product>() { data = item };
                 r.result = true;
                 return Ok(r);

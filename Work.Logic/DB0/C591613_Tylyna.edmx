@@ -228,6 +228,18 @@
           <Property Name="i_UpdateDateTime" Type="datetime" />
           <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
         </EntityType>
+        <EntityType Name="ProductDetail">
+          <Key>
+            <PropertyRef Name="product_detail_id" />
+          </Key>
+          <Property Name="product_detail_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="sn" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="pack_name" Type="int" Nullable="false" />
+          <Property Name="weight" Type="float" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="stock_state" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProductKind">
           <Key>
             <PropertyRef Name="product_kind_id" />
@@ -348,6 +360,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductDetail_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="C591613_TylynaModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -367,6 +391,7 @@
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuRole" EntityType="Self.MenuRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductKind" EntityType="Self.ProductKind" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Community_News_Community" Association="Self.FK_Community_News_Community">
             <End Role="Community" EntitySet="Community" />
@@ -399,6 +424,10 @@
           <AssociationSet Name="FK_Product_ProductKind" Association="Self.FK_Product_ProductKind">
             <End Role="ProductKind" EntitySet="ProductKind" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductDetail_Product" Association="Self.FK_ProductDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -636,6 +665,11 @@
             <End Role="ProductKind" EntitySet="ProductKind" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
+          <EntitySet Name="ProductDetail" EntityType="C591613_TylynaModel.ProductDetail" />
+          <AssociationSet Name="FK_ProductDetail_Product" Association="C591613_TylynaModel.FK_ProductDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Community">
           <Key>
@@ -730,6 +764,7 @@
           <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
           <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="ProductKind" Relationship="C591613_TylynaModel.FK_Product_ProductKind" FromRole="Product" ToRole="ProductKind" />
+          <NavigationProperty Name="ProductDetail" Relationship="C591613_TylynaModel.FK_ProductDetail_Product" FromRole="Product" ToRole="ProductDetail" />
         </EntityType>
         <Association Name="FK_Product_ProductKind">
           <End Type="C591613_TylynaModel.ProductKind" Role="ProductKind" Multiplicity="1" />
@@ -740,6 +775,31 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="product_kind_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductDetail">
+          <Key>
+            <PropertyRef Name="product_detail_id" />
+          </Key>
+          <Property Name="product_detail_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="sn" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="pack_name" Type="Int32" Nullable="false" />
+          <Property Name="weight" Type="Double" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="stock_state" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="C591613_TylynaModel.FK_ProductDetail_Product" FromRole="ProductDetail" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_ProductDetail_Product">
+          <End Type="C591613_TylynaModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="C591613_TylynaModel.ProductDetail" Role="ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="product_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -999,6 +1059,19 @@
                 <ScalarProperty Name="product_name" ColumnName="product_name" />
                 <ScalarProperty Name="product_kind_id" ColumnName="product_kind_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetail">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.ProductDetail">
+              <MappingFragment StoreEntitySet="ProductDetail">
+                <ScalarProperty Name="stock_state" ColumnName="stock_state" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="pack_name" ColumnName="pack_name" />
+                <ScalarProperty Name="sn" ColumnName="sn" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="product_detail_id" ColumnName="product_detail_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
