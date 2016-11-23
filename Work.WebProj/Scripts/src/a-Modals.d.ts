@@ -131,13 +131,15 @@
         kind_name?: string;
         ProductKind?: server.ProductKind;
         ProductDetail?: Array<server.ProductDetail>;
+
         Deatil?: Array<server.ProductDetail>;
+        Pack?: Array<number>;
     }
-    interface ProductDetail {
+    interface ProductDetail extends BaseEntityTable {
         product_detail_id?: number;
         product_id?: number;
         sn?: string;
-        pack_name?: number;
+        pack_type?: number;
         weight?: number;
         price?: number;
         stock_state?: number;

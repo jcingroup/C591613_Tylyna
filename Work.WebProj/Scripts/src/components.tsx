@@ -290,6 +290,7 @@ interface AreaTextProps {
     ref?: string | any;
     defaultValue?: string;
     maxLength?: number;
+    name?: string;
 }
 export class AreaText extends React.Component<AreaTextProps, any>{
 
@@ -320,6 +321,7 @@ export class AreaText extends React.Component<AreaTextProps, any>{
                 (
                     <textarea
                         id={pp.id}
+                        name={pp.name}
                         className={this.props.inputClassName}
                         onChange={this.onChange}
                         disabled={pp.disabled}
@@ -362,7 +364,7 @@ export class AreaText extends React.Component<AreaTextProps, any>{
 
 //PW_Button
 interface PWButtonProps {
-    onClick?: Function;
+    onClick?: React.EventHandler<React.MouseEvent>;
     id?: string;
     className?: string;
     iconClassName?: string;
@@ -371,6 +373,8 @@ interface PWButtonProps {
     title?: string;
     name?: string;
     formName?: string;
+    style?: React.CSSProperties;
+    hidden?: boolean;
 }
 export class PWButton extends React.Component<PWButtonProps, any>{
 
@@ -379,11 +383,17 @@ export class PWButton extends React.Component<PWButtonProps, any>{
     }
     static defaultProps = {
         disabled: false,
-        type: 'button'
+        type: 'button',
+        hidden: false
     }
     render() {
         let out_html = null;
-
+        let set_style: React.CSSProperties = null;
+        if (this.props.style)
+            set_style = this.props;
+        else
+            if (this.props.hidden)
+                set_style = { display: 'none' };
         out_html =
             (
                 <button type={this.props.type}
@@ -393,7 +403,8 @@ export class PWButton extends React.Component<PWButtonProps, any>{
                     id={this.props.id}
                     title={this.props.title}
                     name={this.props.name}
-                    form={this.props.formName}>
+                    form={this.props.formName}
+                    style={set_style}>
                     <i  className={this.props.iconClassName}></i>
                     {this.props.children}
                 </button>

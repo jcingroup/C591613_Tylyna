@@ -11,7 +11,7 @@ CKEDITOR.editorConfig = function (config) {
     // config.uiColor = '#AADC6E';
     config.extraPlugins = 'youtube';
     //config.extraAllowedContent = 'ul(*);';
-    config.contentsCss = ['../../Content/css/editor.css'];
+    //config.contentsCss = ['../../Content/css/editor.css'];
     config.toolbar = [
         {
             name: "basicstyles",

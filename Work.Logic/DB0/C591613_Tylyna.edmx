@@ -235,7 +235,7 @@
           <Property Name="product_detail_id" Type="int" Nullable="false" />
           <Property Name="product_id" Type="int" Nullable="false" />
           <Property Name="sn" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="pack_name" Type="int" Nullable="false" />
+          <Property Name="pack_type" Type="int" Nullable="false" />
           <Property Name="weight" Type="float" Nullable="false" />
           <Property Name="price" Type="float" Nullable="false" />
           <Property Name="stock_state" Type="int" Nullable="false" />
@@ -785,7 +785,7 @@
           <Property Name="product_detail_id" Type="Int32" Nullable="false" />
           <Property Name="product_id" Type="Int32" Nullable="false" />
           <Property Name="sn" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="pack_name" Type="Int32" Nullable="false" />
+          <Property Name="pack_type" Type="Int32" Nullable="false" />
           <Property Name="weight" Type="Double" Nullable="false" />
           <Property Name="price" Type="Double" Nullable="false" />
           <Property Name="stock_state" Type="Int32" Nullable="false" />
@@ -1068,7 +1068,7 @@
                 <ScalarProperty Name="stock_state" ColumnName="stock_state" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="weight" ColumnName="weight" />
-                <ScalarProperty Name="pack_name" ColumnName="pack_name" />
+                <ScalarProperty Name="pack_type" ColumnName="pack_type" />
                 <ScalarProperty Name="sn" ColumnName="sn" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="product_detail_id" ColumnName="product_detail_id" />

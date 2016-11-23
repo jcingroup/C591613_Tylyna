@@ -1,17 +1,18 @@
-/**
+﻿/**
  * @license Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
-
+var d = new Date();
+var n = d.getTime();
 CKEDITOR.editorConfig = function (config) {
     // Define changes to default configuration here. For example:
     config.skin = 'bootstrapck';
-    config.height = 150;
+    config.height = 285;
     config.language = 'zh';
     // config.uiColor = '#AADC6E';
     config.extraPlugins = 'youtube';
     //config.extraAllowedContent = 'ul(*);';
-    config.contentsCss = ['../../Content/css/editor.css'];
+    config.contentsCss = ['../../Content/css/editor.css?v='+n];
     config.toolbar = [
         {
             name: "basicstyles",
@@ -38,32 +39,32 @@ CKEDITOR.editorConfig = function (config) {
 
     //不要轉換htmltag
     config.allowedContent = true;
-    config.fontSize_sizes = '12px/12px;13/13px;16/16px;18/18px;20/20px;22/22px;24/24px;36/36px;48/48px;';
+    config.fontSize_sizes = '13px/13px;14/14px;15/15px;16/16px;17/17px;18/18px;19/19px;20/20px;22/22px;24/24px;36/36px;48/48px;';
     config.font_names = 'Arial;Arial Black;Comic Sans MS;Courier New;Tahoma;Verdana;新細明體;細明體;標楷體;微軟正黑體';
 };
 
 CKEDITOR.stylesSet.add('default', [
     // Block Styles
-    // { name: '標題 - 樣式1', element: 'h1', attributes: { 'class': 'colored' } },
-    { name: '標題 - 樣式1', element: 'h2', attributes: { 'class': 'colored' } },
-    { name: '標題 - 樣式2', element: 'h3', attributes: { 'class': 'colored' } },
-    { name: '標題 - 樣式3', element: 'h4', attributes: { 'class': 'colored' } },
-    { name: '標題 - 樣式4', element: 'h5', attributes: { 'class': 'colored' } },
-    // { name: '標題 - 樣式4', element: 'h6', attributes: { 'class': 'colored' } },
-    // { name: '段落 - 引言', element: 'p', attributes: { 'class': 'leading' } },
-
-    // Inline Styles
-    // { name: '文字 - 強調1', element: 'strong', attributes: { 'class': 'strong2' } },
-    // { name: '文字 - 強調2', element: 'strong', attributes: { 'class': 'strong3' } },
-    // { name: '文字 - 裝飾1', element: 'span', attributes: { 'class': 'underline' } },
-    // { name: '文字 - 裝飾2', element: 'span', attributes: { 'class': 'arrow-right' } },
+    { name: '標題1', element: 'h2' },
+    { name: '標題2', element: 'h3' },
+    // { name: '標題3', element: 'h4' },
+    { name: '標題3', element: 'h4', attributes: { 'class': 'sub-title' } },
+    { name: '標題4', element: 'h5' },
+    { name: '標題5', element: 'h6' },
+    { name: '大段落', element: 'p', attributes: { 'class': 'leading' } },
+    { name: '一般段落', element: 'p' },
 
     // Object Styles
-    { name: '列表-圖示&線', element: 'ul', attributes: { 'class': 'list-icon list-underline' } },
-    { name: '列表-圖示', element: 'ul', attributes: { 'class': 'list-icon' } },
-    { name: '列表-線', element: 'ul', attributes: { 'class': 'list-unstyled list-underline' } },
-    { name: '列表-無圖示', element: 'ul', attributes: { 'class': 'list-unstyled' } },
-    { name: '數字列表-線', element: 'ol', attributes: { 'class': 'list-underline' } },
-    { name: '表格樣式', element: 'table', attributes: { 'class': 'table' } },
-    // { name: '圖片 - 加框', element: 'img', attributes: { 'class': 'thumb' } }
+    { name: '數字列表-無數字', element: 'ol', attributes: { 'class': 'list-unstyled' } },
+    { name: '數字列表-底線', element: 'ol', attributes: { 'class': 'list-underline' } },
+    { name: '數字列表-無數字有底線', element: 'ol', attributes: { 'class': 'list-unstyled list-underline' } },
+    { name: '數字列表-中式數字', element: 'ol', attributes: { 'class': 'list-unstyled list-num' } },
+    { name: '數字列表-中式數字有底線', element: 'ol', attributes: { 'class': 'list-unstyled list-num list-underline' } },
+    { name: '數字列表-條款', element: 'ol', attributes: { 'class': 'list-unstyled list-indent list-underline' } },
+    { name: '圖標列表-無圖標', element: 'ul', attributes: { 'class': 'list-unstyled' } },
+    { name: '圖標列表-底線', element: 'ul', attributes: { 'class': 'list-underline' } },
+    { name: '圖標列表-無圖標有底線', element: 'ul', attributes: { 'class': 'list-unstyled list-underline' } },
+    { name: '圖標列表-條款', element: 'ul', attributes: { 'class': 'list-unstyled list-indent list-underline' } },
+    { name: '表格-外框', element: 'table', attributes: { 'class': 'table-bordered table-hover' } },
+    { name: '表格-強調內容', element: 'td', attributes: { 'class': 'item' } },
 ]);

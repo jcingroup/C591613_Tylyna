@@ -82,6 +82,19 @@ namespace ProcCore.Business.DB0
         public bool role_use { get; set; }
         public string role_name { get; set; }
     }
+    public class m_ProductDetail
+    {
+        public int product_detail_id { get; set; }
+        public int product_id { get; set; }
+        public string sn { get; set; }
+        public int pack_type { get; set; }
+        public double weight { get; set; }
+        public double price { get; set; }
+        public int stock_state { get; set; }
+
+        public IEditType edit_type { get; set; }
+        public InputViewMode view_mode { get; set; }
+    }
     public partial class C591613_TylynaEntities : DbContext
     {
         public C591613_TylynaEntities(string connectionstring)

@@ -37,7 +37,8 @@ export class Grid extends React.Component<any, any>{
             info: null,
             more_info: null,
             i_Hide: false,
-            i_Lang: 'zh-TW'
+            i_Lang: 'zh-TW',
+            Deatil: []
         };
         this.props.editState(ac_type_comm.add, 0, data);
     }

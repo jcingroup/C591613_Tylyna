@@ -483,9 +483,10 @@ exports.config = {
 exports.UIText = {
     appliaction: '申報',
     add: '新增',
-    save: '儲存',
     done: '確定',
+    save: '確定儲存',
     cancel: '取消',
+    cancel_return: '取消 / 放棄儲存',
     date_null: '無日期',
     modify: '修改',
     edit: '編輯',
@@ -513,4 +514,9 @@ exports.IHideTypeData = [
 exports.IStockStateData = [
     { val: 1, Lname: '上架', className: 'w3-tag label-success w3-round' },
     { val: -1, Lname: '補貨中', className: 'w3-tag label-default w3-round' }
+];
+exports.IPackTypeData = [
+    { val: 1, Lname: '袋裝咖啡豆', className: 'w3-tag label-success w3-round' },
+    { val: 2, Lname: '5入濾掛式包', className: 'w3-tag label-success w3-round' },
+    { val: 3, Lname: '10入濾掛式包', className: 'w3-tag label-success w3-round' }
 ];

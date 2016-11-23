@@ -1,33 +1,134 @@
 ﻿import $ = require('jquery');
 import React = require('react');
 import Moment = require('moment');
-import {config, UIText, IHideTypeData} from '../ts-comm/def-data';
+import {config, UIText, IHideTypeData, IStockStateData, IPackTypeData} from '../ts-comm/def-data';
 import {ac_type_comm} from '../action_type';
-import {InputText, InputNum, SelectText, RadioBox, PWButton, TagShowAndHide} from '../components';
+import {InputText, InputNum, SelectText, RadioBox, AreaText, PWButton, TagShowAndHide} from '../components';
 import {MasterImageUpload} from '../ts-comm/comm-cmpt';
+import {Init_Params} from './pub';
+import {clone, tosMessage} from '../ts-comm/comm-func';
 
 
-export class Edit extends React.Component<any, any>{
+let EditRowButton = ({view_mode, is_edit, del, update, cancel, done}) => {
+    if (view_mode === InputViewMode.view) {
+        return (
+            <span>
+                <PWButton iconClassName="fa fa-trash fa-lg" className="btn btn-link text-danger" title={UIText.delete} enable={!is_edit} onClick={del} /> { }
+                <PWButton iconClassName="fa fa-pencil fa-lg" className="btn btn-link text-success" title={UIText.edit} enable={!is_edit} onClick={update } />
+            </span>
+        );
+    } else {
+        return (
+            <span>
+                <PWButton iconClassName="fa fa-reply" className="btn btn-link text-muted" title={UIText.cancel} enable={true} onClick={cancel} /> { }
+                <PWButton iconClassName="fa fa-check fa-lg" className="btn btn-link text-primary" title={UIText.done} enable={true} onClick={done}  />
+            </span>
+        );
+    }
+}
+export class Edit extends React.Component<any, { tab: Array<{ id: string, name: string, class: string }> }>{
 
     constructor() {
         super();
-
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
+            tab: [{ id: 'tab1', name: '產品簡介', class: 'js-tab active' },
+                { id: 'tab2', name: '產品更多介紹', class: 'js-tab' }]
         };
     }
-    componentWillMount() {
-        var tab = $('.js-tab');
-        var tabContent = '.tab-pane';
-        $(tab.eq(0).addClass('active').attr('href')).siblings(tabContent).hide();
-        tab.click(function () {
-            event.preventDefault();
-            $($(this).attr('href')).fadeIn().siblings(tabContent).hide();
-            $(this).toggleClass('active');
-            tab.not(this).removeClass('active');
-        });
+    keep_detail: Array<server.ProductDetail> = [];
+    componentDidMount() {
+        CKEDITOR.replace('info', { customConfig: '../ckeditor/inlineConfig.js' });
+        CKEDITOR.replace('more_info', { customConfig: '../ckeditor/inlineConfig.js' });
     }
     chgVal(name: string, value: any, e: React.SyntheticEvent) {
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);
+    }
+    //detail
+    chgDetailVal(i: number, name: string, value: any, e: React.SyntheticEvent) {
+        this.props.setRowInputValue(ac_type_comm.chg_dil_fld_val, i, name, value);
+    }
+    addDetail() {
+        let params: Init_Params = this.props.params;
+        let data: server.ProductDetail = {
+            product_detail_id: 0,
+            product_id: params.id,
+            sn: null,
+            pack_type: IPackTypeData[0].val,
+            weight: 0,
+            price: 0,
+            stock_state: IStockStateData[0].val,
+            edit_type: IEditType.insert,
+            view_mode: InputViewMode.edit
+        };
+
+        this.props.addRowState(data);
+    }
+    editDetail(i: number, e: React.SyntheticEvent) {
+        this.keep_detail = clone(this.props.field.Deatil);//每次按修改按鈕就重新複製Grid
+        this.props.updateRowState(i);
+    }
+    cancelDetail(i: number, edit_type: IEditType, e: React.SyntheticEvent) {
+        let item: server.ProductDetail = null;
+
+        if (edit_type == IEditType.update) {//修改
+            item = this.keep_detail[i];
+            item.view_mode = InputViewMode.view;
+        }
+        this.props.cancelRowState(edit_type, i, item);
+    }
+    delDetail(id: number) {
+        if (!confirm(UIText.delete_sure)) {
+            return;
+        }
+        let params: Init_Params = this.props.params;
+        this.props.callDetailDel(id, params.id);
+    }
+    doneDetail(i: number) {
+        let params: Init_Params = this.props.params;
+        let item: server.ProductDetail = this.props.field.Deatil[i];
+
+        let check: boolean = false, err_list: Array<string> = [];
+        if (item.sn === null || item.sn === undefined || item.sn === "") {
+            check = true;
+            err_list.push("「料號」欄位未填寫");
+        }
+        if (item.weight === null || item.weight === undefined || item.weight.toString() === "") {
+            check = true;
+            err_list.push("「重量」欄位未填寫");
+        }
+        if (item.price === null || item.price === undefined || item.price.toString() === "") {
+            check = true;
+            err_list.push("「單價」欄位未填寫");
+        }
+        if (check) {
+            tosMessage("資料未填完整!", err_list.join("\n"), ToastrType.error);
+            return;
+        }
+
+        this.props.callDetailSubmit(params.id, item.product_detail_id, item, item.edit_type);
+    }
+    //detail
+    tabClick(tab_id: string, e: React.SyntheticEvent) {
+        e.preventDefault();
+        $('#' + tab_id).fadeIn().siblings(".tab-pane").hide();
+
+        let tab = this.state.tab;
+        tab.forEach((item) => {
+            item.class = item.id === tab_id ? "js-tab active" : "js-tab";
+        })
+        this.setState({ tab: tab })
+    }
+    handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        let field: server.Product = this.props.field;
+        let pp = this.props;
+
+        field.info = CKEDITOR.instances['info'].getData();
+        field.more_info = CKEDITOR.instances['more_info'].getData();
+
+        this.props.callSubmit(pp.params.id, field, pp.edit_type);
+        return;
     }
     render() {
         let out_html: JSX.Element = null;
@@ -37,7 +138,7 @@ export class Edit extends React.Component<any, any>{
 
         out_html =
             (
-                <form className="form form-sm">
+                <form className="form form-sm" onSubmit={this.handleSubmit}>
                     <h3 className="h3">
                         {gb_caption}<small className="sub"><i className="fa-angle-double-right"></i> {UIText.edit}</small>
                     </h3>
@@ -54,7 +155,7 @@ export class Edit extends React.Component<any, any>{
                                     value={field.product_kind_id}
                                     onChange= {this.chgVal.bind(this, 'product_kind_id') }
                                     required={true}
-                                    is_blank={true}
+                                    is_blank={false}
                                     options={pp.init_data.kind_list}
                                     />
                             </dd>
@@ -69,7 +170,7 @@ export class Edit extends React.Component<any, any>{
                                     inputClassName="form-control form-control-sm"
                                     inputViewMode={view_mode}
                                     value={field.product_name}
-                                    onChange= {this.chgVal.bind(this, 'product_kind_id') }
+                                    onChange= {this.chgVal.bind(this, 'product_name') }
                                     required={true}
                                     maxLength={64}
                                     placeholder="請輸入品名..."
@@ -97,6 +198,25 @@ export class Edit extends React.Component<any, any>{
                         </dl>
                         <dl className="form-group row m-b-0">
                             <dt className="col-xs-2 form-control-label text-xs-right">
+                                <span className="text-danger">*</span> 狀態
+                            </dt>
+                            <dd className="col-xs-9">
+                                <RadioBox
+                                    inputViewMode={view_mode}
+                                    name={"stock_state"}
+                                    id={"stock_state"}
+                                    value={field.stock_state}
+                                    onChange= {this.chgVal.bind(this, 'stock_state') }
+                                    required={true}
+                                    labelClassName="c-input c-radio"
+                                    spanClassName="c-indicator"
+                                    textClassName="text-sm"
+                                    radioList={IStockStateData}
+                                    />
+                            </dd>
+                        </dl>
+                        <dl className="form-group row m-b-0">
+                            <dt className="col-xs-2 form-control-label text-xs-right">
                                 排序
                             </dt>
                             <dd className="col-xs-3">
@@ -108,7 +228,6 @@ export class Edit extends React.Component<any, any>{
                                     onChange= {this.chgVal.bind(this, 'sort') }
                                     placeholder="請輸入數字..."
                                     /> { }
-
                             </dd>
                             <dd className="col-xs-6">
                                 <small className="text-muted">數字愈大愈前面</small>
@@ -116,7 +235,7 @@ export class Edit extends React.Component<any, any>{
                         </dl>
                     </section>
                     <section className="col-xs-6 m-b-1">
-                        <TagShowAndHide className="form-group row m-b-0" TagName={TagName.dl} show={pp.edit_type == IEditType.update}>
+                        <dl className="form-group row m-b-0">
                             <dt className="col-xs-2 form-control-label text-xs-right">代表圖</dt>
                             <dd className="col-xs-10">
                                 <MasterImageUpload FileKind="ProductImg"
@@ -128,15 +247,21 @@ export class Edit extends React.Component<any, any>{
                                     url_sort={gb_approot + 'Active/ProductData/axFSort'} />
                                 <small className="text-muted">可上傳 1 張照片，檔案大小不可超過 5000 KB</small>
                             </dd>
-                        </TagShowAndHide>
+                        </dl>
                     </section>
 
                     <table className="table table-sm table-bordered table-striped table-hover m-b-2">
                         <caption className="table-header">
                             <span className="w3-large">產品規格明細</span>
-                            <button type="button" className="btn btn-sm btn-success pull-xs-right">
-                                <i className="fa-plus-circle"></i> 新增
-                            </button>
+                            <TagShowAndHide className="btn pull-xs-right" show={pp.edit_type == IEditType.insert} TagName={TagName.Span}>
+                                <small className="text-danger">請先存檔後，再新增產品規格!</small>
+                            </TagShowAndHide>
+                            <PWButton iconClassName="fa-plus-circle"
+                                className="btn btn-sm btn-success pull-xs-right"
+                                hidden={pp.edit_type == IEditType.insert}
+                                title={UIText.add} enable={!pp.is_edit } onClick={this.addDetail.bind(this) } >
+                                { } {UIText.add}
+                            </PWButton>
                         </caption>
                         <colgroup>
                             <col style={{ "width": "7%" }} />
@@ -156,15 +281,80 @@ export class Edit extends React.Component<any, any>{
                                 field.Deatil.map((item, i) => {
                                     return <tr key={i}>
                                         <td className="text-xs-center">
-                                            <button className="btn btn-link text-danger" title="刪除"><i className="fa fa-trash fa-lg"></i></button>
-                                            <button className="btn btn-link text-success" title="編輯"><i className="fa fa-pencil fa-lg"></i></button>
+                                            <EditRowButton
+                                                view_mode={item.view_mode}
+                                                is_edit={pp.is_edit}
+                                                update={this.editDetail.bind(this, i) }
+                                                del={this.delDetail.bind(this, item.product_detail_id) }
+                                                cancel={this.cancelDetail.bind(this, i, item.edit_type) }
+                                                done={this.doneDetail.bind(this, i) }
+                                                />
                                         </td>
-                                        <td>P2-010-02</td>
-                                        <td>5入濾掛式包</td>
-                                        <td className="text-xs-center">55g</td>
-                                        <td className="text-xs-right">NT$ 190</td>
+                                        <td>
+                                            <InputText
+                                                type="text"
+                                                inputClassName="form-control"
+                                                inputViewMode={item.view_mode}
+                                                value={item.sn}
+                                                onChange= {this.chgDetailVal.bind(this, i, 'sn') }
+                                                required={true}
+                                                maxLength={64}
+                                                placeholder="請輸入料號..."
+                                                />
+                                        </td>
+                                        <td>
+                                            <SelectText
+                                                inputClassName="form-control"
+                                                inputViewMode={item.view_mode}
+                                                id={'pack_type-' + i}
+                                                value={item.pack_type}
+                                                onChange= {this.chgDetailVal.bind(this, i, 'pack_type') }
+                                                required={true}
+                                                is_blank={false}
+                                                options={IPackTypeData}
+                                                />
+                                        </td>
                                         <td className="text-xs-center">
-                                            <span className="w3-tag label-success w3-round">上架</span>
+                                            <div className={item.view_mode == InputViewMode.edit ? "input-group" : ""}>
+                                                <InputNum
+                                                    inputClassName="form-control text-xs-center"
+                                                    inputViewMode={item.view_mode}
+                                                    required={true}
+                                                    value={item.weight}
+                                                    onChange= {this.chgDetailVal.bind(this, i, 'weight') }
+                                                    placeholder="請輸入數字..."
+                                                    min={0}
+                                                    />
+                                                <span className={item.view_mode == InputViewMode.edit ? "input-group-addon" : ""}>g</span>
+                                            </div>
+                                        </td>
+                                        <td className="text-xs-right">
+                                            <div className={item.view_mode == InputViewMode.edit ? "input-group" : ""}>
+                                                <span className={item.view_mode == InputViewMode.edit ? "input-group-addon" : ""}> NT$</span>
+                                                <InputNum
+                                                    inputClassName="form-control text-xs-center"
+                                                    inputViewMode={item.view_mode}
+                                                    required={true}
+                                                    value={item.price}
+                                                    onChange= {this.chgDetailVal.bind(this, i, 'price') }
+                                                    placeholder="請輸入數字..."
+                                                    min={0}
+                                                    />
+                                            </div>
+                                        </td>
+                                        <td className="text-xs-center">
+                                            <RadioBox
+                                                inputViewMode={item.view_mode}
+                                                name={"stock_state-" + i}
+                                                id={"stock_state-" + i}
+                                                value={item.stock_state}
+                                                onChange= {this.chgDetailVal.bind(this, i, 'stock_state') }
+                                                required={true}
+                                                labelClassName="c-input c-radio"
+                                                spanClassName="c-indicator"
+                                                textClassName="text-sm"
+                                                radioList={IStockStateData}
+                                                />
                                         </td>
                                     </tr>;
                                 })
@@ -173,30 +363,42 @@ export class Edit extends React.Component<any, any>{
                     </table>
                     <section>
                         <nav className="nav nav-tabs">
-                            <a href="#tab1" className="js-tab active">產品簡介</a>
-                            <a href="#tab2" className="js-tab">產品更多介紹</a>
+                            {
+                                this.state.tab.map((item, i) => {
+                                    return <a key={i} href={"#" + item.id} className={item.class} onClick={this.tabClick.bind(this, item.id) }>{item.name}</a>;
+                                })
+                            }
+
                         </nav>
                         <div className="tab-content">
                             <article id="tab1" className="tab-pane active">
-                                <textarea className="form-control" rows="8" value="">
-                                    風味：入口明朗的漿果風味，果酸細緻多變，若隱若現的花香氣息，層次豐富迷人。
-                                    香: 3 甘: 2 苦: 3 酸: 3 醇: 2 (1~5)
-                                    處理法：水洗
-                                    焙度：中淺烘焙
-                                    保存期限：60天 製造日期：詳見包裝
-                                    風味鑑賞：前段檸檬皮的清香，李子的果酸，質地乾淨，尾段回甜快。
-                                    保存方式：避免陽光直射，存放在陰涼處，若超過14天可冷藏以延長最佳風味。
-                                </textarea>
+                                <AreaText
+                                    id="info" name="info"
+                                    value={field.info} onChange={this.chgVal.bind(this, 'info') }
+                                    inputClassName="form-control"
+                                    inputViewMode={view_mode}
+                                    required={false}
+                                    maxLength={512}
+                                    rows={8}
+                                    />
                             </article>
                             <article id="tab2" className="tab-pane">
-                                <textarea className="form-control" value="">請在此輸入產品更多介紹...</textarea>
+                                <AreaText
+                                    id="more_info" name="more_info"
+                                    value={field.more_info} onChange={this.chgVal.bind(this, 'more_info') }
+                                    inputClassName="form-control"
+                                    inputViewMode={view_mode}
+                                    required={false}
+                                    maxLength={512}
+                                    rows={8}
+                                    />
                             </article>
                         </div>
                     </section>
 
                     <div className="form-action">
-                        <PWButton iconClassName="fa-check" className="btn btn-primary btn-sm col-xs-offset-1 m-b-1"
-                            title={UIText.save} enable={true} type="submit" >{UIText.save}</PWButton>
+                        <PWButton iconClassName="fa-check" className="btn btn-primary btn-sm col-xs-offset-1"
+                            title={UIText.save} enable={true} type="submit" >{UIText.save}</PWButton> { }
                         <PWButton iconClassName="fa-times" className="btn btn-secondary btn-sm"
                             title={UIText.save} enable={true} onClick={this.props.callGridLoad.bind(this, null) } >{UIText.return}</PWButton>
                     </div>

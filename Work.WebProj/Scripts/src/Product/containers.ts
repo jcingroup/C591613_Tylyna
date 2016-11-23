@@ -7,7 +7,9 @@ import {GridTable} from './vwGridTable';
 
 
 import { callGridLoad, callDelete, callSubmit, callUpdateItem, getInitData,
-    setInputValue, editState} from './actions'
+    setInputValue, setRowInputValue, editState,
+    callDetailLoad, callDetailDel, callDetailSubmit,
+    updateRowState, addRowState, cancelRowState} from './actions'
 
 const m1ToProps = (state, ownProps) => {
     return {
@@ -17,18 +19,19 @@ const m1ToProps = (state, ownProps) => {
         search: state.search,
         grid: state.grid,
         field: state.field,
-        params: state.params
+        params: state.params,
+        is_edit: state.is_edit
     }
 }
 
 const m1Dispatch = (dispatch, ownProps) => {
     let s = bindActionCreators({
-        callGridLoad,
-        callDelete,
-        callSubmit,
+        callGridLoad,callDelete,callSubmit,
         getInitData,
-        setInputValue,
-        editState
+        setInputValue, setRowInputValue,
+        editState,
+        callDetailLoad, callDetailDel, callDetailSubmit,
+        updateRowState, addRowState, cancelRowState
     }, dispatch);
 
     return s;

@@ -1,7 +1,7 @@
 ﻿import $ = require('jquery');
 import React = require('react');
 import Moment = require('moment');
-import {UIText, IHideTypeData} from '../ts-comm/def-data';
+import {UIText, IHideTypeData, IPackTypeData} from '../ts-comm/def-data';
 import {PWButton, RadioBox} from '../components';
 import { OrderButton } from '../ts-comm/OrderButton';
 import {ac_type_comm} from '../action_type';
@@ -93,9 +93,11 @@ export class GridTable extends React.Component<any, any>{
                                 <td>{item.kind_name}</td>
                                 <td>{item.product_name}</td>
                                 <td>
-                                    <span className="w3-tag label-primary">10入濾掛式包</span>
-                                    <span className="w3-tag label-primary">5入濾掛式包</span>
-                                    <span className="w3-tag label-primary">袋裝咖啡豆</span>
+                                    {
+                                        item.Pack.map((dil, j) => {
+                                            return <span key={i + '-' + j} className="w3-tag label-primary">{IPackTypeData.find(x => x.val === dil).Lname }</span>;
+                                        })
+                                    }
                                 </td>
                                 <td className="text-xs-center">
                                     <RadioBox

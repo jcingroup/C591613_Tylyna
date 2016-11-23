@@ -14,5 +14,12 @@
     update_row: 'update_row',
     add_row: 'add_row',
     cancel_row: 'cancel_row',
-    update_pageinfo:'update_pageinfo'
+    update_pageinfo: 'update_pageinfo',
+    //detail
+    get_dil_data: 'get_detail_data',
+    chg_dil_fld_val: 'change_detail_field_value',
+    add_dil: 'add_detail',
+    del_dil: 'del_detail',
+    update_dil: 'update_detail',
+    cancel_dil:'cancel_detail',
 }

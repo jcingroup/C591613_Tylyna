@@ -170,8 +170,8 @@ export class MasterImageUpload extends React.Component<FileUpProps, FileUpState>
     }
     componentWillUnmount() {
         if (this.props.ParentEditType == IEditType.update) {
-            this._sortable.destroy();
-            this._upload.destroy();
+            if (this._sortable != null) { this._sortable.destroy(); }
+            if (this._upload != null) { this._upload.destroy(); }
         }
     }
 
@@ -796,5 +796,5 @@ export class StateForGird extends React.Component<{ stateData: Array<server.Stat
         </span>;
         return outHtml;
     }
-} 
+}
 
