@@ -95,7 +95,9 @@ export class GridTable extends React.Component<any, any>{
                                 <td>
                                     {
                                         item.Pack.map((dil, j) => {
-                                            return <span key={i + '-' + j} className="w3-tag label-primary">{IPackTypeData.find(x => x.val === dil).Lname }</span>;
+                                            return <span key={i + '-' + j}>
+                                                <span className="w3-tag label-primary">{IPackTypeData.find(x => x.val === dil).Lname }</span> { }
+                                            </span>;
                                         })
                                     }
                                 </td>

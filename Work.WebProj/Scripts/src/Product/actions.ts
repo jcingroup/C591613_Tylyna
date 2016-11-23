@@ -8,40 +8,40 @@ import { mask_show, mask_off} from '../ts-comm/vwMaskLoading';
 const apiPath: string = gb_approot + 'api/Product';
 export const callGridLoad = (search: any) => {
     return dispatch => {
-       // mask_show(UIText.mk_loading);
+        mask_show(UIText.mk_loading);
         return fetchGet(apiPath, search)
             .then((data) => {
-                //mask_off();
+                mask_off();
                 dispatch(getGridItem(data));
             })
-            //.catch((reason) => { mask_off(); })
+        .catch((reason) => { mask_off(); })
     }
 }
 export const getInitData = () => {
     return dispatch => {
-        //mask_show(UIText.mk_loading);
+        mask_show(UIText.mk_loading);
         return fetchGet(apiPath + '/GetInitData', {})
             .then((data) => {
-                //mask_off();
+                mask_off();
                 dispatch(setInitData(data));
             })
-            //.catch((reason) => { mask_off(); })
+        .catch((reason) => { mask_off(); })
     }
 }
 export const callUpdateItem = (id) => {
     return dispatch => {
         let pm = { id: id };
-       // mask_show(UIText.mk_loading);
+        mask_show(UIText.mk_loading);
         return fetchGet(apiPath, pm)
             .then((data: IResultData<server.ProductKind>) => {
-                //mask_off();
+                mask_off();
                 if (data.result) {
                     dispatch(editState(ac_type_comm.update, id, data.data));
                 } else {
                     alert(data.message);
                 }
             })
-            //.catch((reason) => { mask_off(); })
+        .catch((reason) => { mask_off(); })
     }
 }
 export const callSubmit = (id, md: server.Product, edit_type: IEditType) => {
@@ -49,10 +49,10 @@ export const callSubmit = (id, md: server.Product, edit_type: IEditType) => {
         let pm = { id: id, md: md };
 
         if (edit_type == IEditType.insert) {
-            //mask_show(UIText.mk_updating);
+            mask_show(UIText.mk_updating);
             return fetchPost(apiPath, md)
                 .then((data: IResultData<server.Product>) => {
-                    //mask_off();
+                    mask_off();
                     if (data.result) {
                         tosMessage(null, UIText.fi_insert, 1);
                         dispatch(callUpdateItem(data.id));
@@ -60,7 +60,7 @@ export const callSubmit = (id, md: server.Product, edit_type: IEditType) => {
                         alert(data.message);
                     }
                 })
-                //.catch((reason) => { mask_off(); })
+            .catch((reason) => { mask_off(); })
         }
 
         if (edit_type == IEditType.update) {
@@ -80,10 +80,10 @@ export const callSubmit = (id, md: server.Product, edit_type: IEditType) => {
 export const callDelete = (id: number | string, params) => {
 
     return dispatch => {
-        //mask_show(UIText.mk_updating);
+        mask_show(UIText.mk_updating);
         return fetchDelete(apiPath, { id: id })
             .then((data: IResultData<server.Product>) => {
-                //mask_off();
+                mask_off();
                 if (data.result) {
                     tosMessage(null, UIText.fi_delete, 1);
                     dispatch(callGridLoad(params));
@@ -91,7 +91,7 @@ export const callDelete = (id: number | string, params) => {
                     alert(data.message);
                 }
             })
-            //.catch((reason) => { mask_off(); })
+        .catch((reason) => { mask_off(); })
     }
 }
 //ajax--
@@ -100,13 +100,13 @@ export const callDelete = (id: number | string, params) => {
 const apiDetailPath: string = gb_approot + 'api/ProductDetail';
 export const callDetailLoad = (main_id: number) => {
     return dispatch => {
-        //mask_show(UIText.mk_loading);
+        mask_show(UIText.mk_loading);
         return fetchGet(apiDetailPath, { main_id: main_id })
             .then((data) => {
-                //mask_off();
+                mask_off();
                 dispatch(getDetailData(data));
             })
-            //.catch((reason) => { mask_off(); })
+        .catch((reason) => { mask_off(); })
     }
 }
 export const callDetailSubmit = (main_id: number, id: number, md: server.ProductDetail, edit_type: IEditType) => {
@@ -114,10 +114,10 @@ export const callDetailSubmit = (main_id: number, id: number, md: server.Product
         let pm = { id: id, md: md };
 
         if (edit_type == IEditType.insert) {
-            //mask_show(UIText.mk_updating);
+            mask_show(UIText.mk_updating);
             return fetchPost(apiDetailPath, md)
                 .then((data: IResultData<server.ProductDetail>) => {
-                    //mask_off();
+                    mask_off();
                     if (data.result) {
                         tosMessage(null, UIText.fi_insert, 1);
                         dispatch(callDetailLoad(main_id));
@@ -125,7 +125,7 @@ export const callDetailSubmit = (main_id: number, id: number, md: server.Product
                         alert(data.message);
                     }
                 })
-                //.catch((reason) => { mask_off(); })
+            .catch((reason) => { mask_off(); })
         }
 
         if (edit_type == IEditType.update) {
@@ -145,10 +145,10 @@ export const callDetailSubmit = (main_id: number, id: number, md: server.Product
 export const callDetailDel = (id: number | string, main_id: number) => {
 
     return dispatch => {
-        //mask_show(UIText.mk_updating);
+        mask_show(UIText.mk_updating);
         return fetchDelete(apiDetailPath, { id: id })
             .then((data: IResultData<server.ProductDetail>) => {
-                //mask_off();
+                mask_off();
                 if (data.result) {
                     tosMessage(null, UIText.fi_delete, 1);
                     dispatch(callDetailLoad(main_id));
@@ -156,7 +156,7 @@ export const callDetailDel = (id: number | string, main_id: number) => {
                     alert(data.message);
                 }
             })
-            //.catch((reason) => { mask_off(); })
+        .catch((reason) => { mask_off(); })
     }
 }
 //ajax-deatil--
