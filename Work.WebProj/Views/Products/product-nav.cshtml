@@ -1,6 +1,7 @@
-﻿
+﻿@model IEnumerable<ProcCore.Business.DB0.ProductKind>
 <nav class="sub-nav sub-navImg m-b-64">
-    <a class="@(ViewBag.subNav == "sub1" ? "current" : "")" href="~/Products/Normal#main"><span>咖啡品項</span></a>
-    <a class="@(ViewBag.subNav == "sub3" ? "current" : "")" href="~/Products/Special#main"><span>季節限定</span></a>
-    <a class="@(ViewBag.subNav == "sub2" ? "current" : "")" href="~/Products/Normal#main"><span>其他</span></a>
+    @foreach (var i in Model)
+    {
+        <a class="@(ViewBag.menu == i.product_kind_id? "current" : "")" href="~/Products?kind=@i.product_kind_id#main"><span>@i.kind_name</span></a>
+    }
 </nav>

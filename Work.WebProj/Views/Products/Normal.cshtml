@@ -1,4 +1,4 @@
-﻿
+﻿@model DotWeb.Controllers.ProductList
 @{
     ViewBag.Title = "LITA CAFFEE";
     ViewBag.BodyClass = "Products";
@@ -6,10 +6,13 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-@Html.Partial("product-nav")
+@Html.Partial("product-nav", Model.menuStroe)
 
-<figure class="kind-list">
-    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-    <a href="~/Products/Detail#main"></a>
-    <figcaption>瓜地馬拉</figcaption>
-</figure>
+@foreach (var p in Model.products)
+{
+    <figure class="kind-list">
+        <img src="@p.img_src" alt="產品圖">
+        <a href="~/Products/Detail?id=@p.product_id#main"></a>
+        <figcaption>@p.product_name</figcaption>
+    </figure>
+}

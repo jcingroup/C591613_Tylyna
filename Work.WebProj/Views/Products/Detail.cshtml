@@ -1,12 +1,13 @@
-﻿
+﻿@model DotWeb.Controllers.ProductContent
 @{
-    ViewBag.Title = "LITA CAFFEE";
-    ViewBag.BodyClass = "Products";
-    ViewBag.subNav = "sub1"; // 咖啡品項 sub1、季節限定 sub2
-    Layout = "~/Views/Shared/Layout.cshtml";
-}
+        ViewBag.Title = "LITA CAFFEE";
+        ViewBag.BodyClass = "Products";
+        //string[] subarr =new string[] { "sub1", "sub2", "sub3" };
+        //ViewBag.subNav = "sub1"; // 咖啡品項 sub1、季節限定 sub2
+        Layout = "~/Views/Shared/Layout.cshtml";
+    }
 
-@Html.Partial("product-nav")
+    @Html.Partial("product-nav", Model.menuStroe)
 
 @* 彈出特效 - 商品多種包裝(規格類型) *@
 <div id="detail" class="modal">
