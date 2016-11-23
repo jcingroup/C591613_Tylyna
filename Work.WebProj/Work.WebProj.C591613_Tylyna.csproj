@@ -803,6 +803,7 @@
     <Folder Include="Content\sass-sys\vendor\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Scripts\build\app\" />
+    <Folder Include="Scripts\src\font\ProductDetail\" />
     <Folder Include="_Code\CReport\" />
   </ItemGroup>
   <ItemGroup>
