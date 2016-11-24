@@ -655,6 +655,13 @@ export class TagShowAndHide extends React.Component<{ show: boolean, className?:
                     </dl>
                 );
             }
+            else if (pp.TagName === TagName.div) {
+                out_html = (
+                    <div style={pp.style} className={pp.className}>
+                        {pp.children}
+                    </div>
+                );
+            }
         }
         return out_html;
     }

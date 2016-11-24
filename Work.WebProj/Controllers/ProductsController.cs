@@ -27,8 +27,8 @@ namespace DotWeb.Controllers
                                .ToList();
                 foreach (var i in md.products)
                 {
-                    var img = getImgFirst("ProductImg", i.product_id.ToString(), "700");
-                    i.img_src = img.src_path;
+                    var img = getImgFirst("ProductImg", i.product_id.ToString(), "600");
+                    i.img_src = img != null ? img.src_path : null;
                 }
 
             }
@@ -45,14 +45,34 @@ namespace DotWeb.Controllers
             return View();
         }
         // 咖啡介紹
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int? id)
         {
             ProductContent md = new ProductContent();
             using (var db0 = getDB0())
             {
+                #region 過濾不存在id
+                bool Exist = db0.Product.Any(x => x.product_id == id & !x.i_Hide);
+                if (id == null || !Exist)
+                {
+                    return Redirect("~/Products/Index");
+                }
+                #endregion
                 var item = db0.Product.Find(id);
-                var img = getImgFirst("ProductImg", item.product_id.ToString(), "700");
-                item.img_src = img.src_path;
+                var img = getImgFirst("ProductImg", item.product_id.ToString(), "600");
+                item.img_src = img != null ? img.src_path : null;
+                item.Deatil = item.ProductDetail
+                     .Select(x => new m_ProductDetail()
+                     {
+                         product_id = x.product_id,
+                         product_detail_id = x.product_detail_id,
+                         sn = x.sn,//料號
+                         pack_type = x.pack_type,//包裝
+                         weight = x.weight,//重量
+                         price = x.price,//單價
+                         stock_state = x.stock_state,//狀態 上架/缺貨中
+                         qty = 1
+                     })
+                    .ToList();
 
                 md.product = item;
                 md.menuStroe = db0.ProductKind

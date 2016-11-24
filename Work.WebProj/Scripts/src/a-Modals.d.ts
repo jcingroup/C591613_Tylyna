@@ -134,6 +134,7 @@
 
         Deatil?: Array<server.ProductDetail>;
         Pack?: Array<number>;
+        img_src?: string;
     }
     interface ProductDetail extends BaseEntityTable {
         product_detail_id?: number;
@@ -144,6 +145,8 @@
         price?: number;
         stock_state?: number;
         Product?: server.Product;
+        //購物車用
+        qty?: number;
     }
 
     interface Community extends BaseEntityTable {

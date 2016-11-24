@@ -92,6 +92,7 @@ namespace ProcCore.Business.DB0
         public double price { get; set; }
         public int stock_state { get; set; }
 
+        public int qty { get; set; }
         public IEditType edit_type { get; set; }
         public InputViewMode view_mode { get; set; }
     }

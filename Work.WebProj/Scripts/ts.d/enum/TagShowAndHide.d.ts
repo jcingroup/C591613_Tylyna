@@ -4,5 +4,6 @@
     Th = 3,
     Span = 4,
     col = 5,
-    dl = 6
+    dl = 6,
+    div = 7
 }

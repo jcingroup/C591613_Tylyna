@@ -13,9 +13,11 @@
         var json_data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.product));
     </script>
     <script src="~/Scripts/build/app/vendors.js?v=@CommWebSetup.CacheVer"></script>
-    <script src="~/Scripts/build/app/w_neighbor_content.js"></script>
+    <script src="~/Scripts/build/font/productdetail.js"></script>
 }
 
+<div id="page_content"></div>
+<!-- 
 @* 彈出特效 - 商品多種包裝(規格類型) *@
 <div id="detail" class="modal">
     <button onclick="document.getElementById('detail').style.display='none'" class="btn-close icon-cross"></button>
@@ -87,9 +89,9 @@
                 </td>
             </tr>
         </table>
-    </form><!-- modal-content //-->
+    </form>
 
-</div><!-- detail //-->
+</div>
 
 <section class="row">
     <dl class="col-7 products-intro">
@@ -123,4 +125,4 @@
 @* 編輯器 - 後台若無資料，則不顯示 *@
 <section class="editor">
     產品更多介紹...
-</section>
+</section>-->

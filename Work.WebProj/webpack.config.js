@@ -13,6 +13,8 @@ module.exports = {
         //後台 管理者
         m_productkind: path.resolve(__dirname, 'Scripts/src/ProductKind/app.js'),
         m_product: path.resolve(__dirname, 'Scripts/src/Product/app.js'),
+        //前台 頁面
+        "../font/productdetail": path.resolve(__dirname, 'Scripts/src/font/ProductDetail/app.js'), //前台電號匯入
 
         vendors: ['jquery', 'react', 'react-dom', 'redux', 'react-redux', 'redux-thunk', 'react-addons-update', 'moment',
             path.resolve(__dirname, 'Scripts/src/ts-comm/comm-run')

@@ -35,6 +35,12 @@ export class GridTable extends React.Component<any, any>{
         params['page'] = this.props.page_operator.page;
         this.props.callDelete(id, params);
     }
+    getPackName(val: number): string {
+        let res: string = "";
+        let item = IPackTypeData.find(x => x.val === val);
+        res = (item != null && item != undefined) ? item.Lname : res;
+        return res;
+    }
     render() {
         let out_html: JSX.Element = null;
         let pp = this.props;
@@ -96,7 +102,7 @@ export class GridTable extends React.Component<any, any>{
                                     {
                                         item.Pack.map((dil, j) => {
                                             return <span key={i + '-' + j}>
-                                                <span className="w3-tag label-primary">{IPackTypeData.find(x => x.val === dil).Lname }</span> { }
+                                                <span className="w3-tag label-primary">{this.getPackName(dil) }</span> { }
                                             </span>;
                                         })
                                     }
