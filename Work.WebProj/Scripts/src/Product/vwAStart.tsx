@@ -3,6 +3,7 @@ import Moment = require('moment');
 
 import {Grid} from './vwGrid';
 import {Edit} from './vwEdit';
+import {HeadView} from '../ts-comm/vwHeadView';
 
 export class AStart extends React.Component<any, any>{
 
@@ -28,16 +29,7 @@ export class AStart extends React.Component<any, any>{
         out_html =
             (
                 <div>
-                    <ul className="breadcrumb">
-                        <li>
-                            <i className="fa-caret-right"></i> { }
-                            {gb_menuname}
-                        </li>
-                        <li>
-                            <i className="fa-angle-right"></i> { }
-                            {gb_caption}
-                        </li>
-                    </ul>
+                    <HeadView />
                     {out_main_view}
                 </div>
             );

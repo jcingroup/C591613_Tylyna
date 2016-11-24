@@ -712,6 +712,12 @@
     <TypeScriptCompile Include="Scripts\src\font\ProductDetail\containers.ts" />
     <TypeScriptCompile Include="Scripts\src\font\ProductDetail\store.ts" />
     <TypeScriptCompile Include="Scripts\src\font\ProductDetail\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\Param\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\Param\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\Param\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\Param\pub.ts" />
+    <TypeScriptCompile Include="Scripts\src\Param\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\Param\vwAStart.tsx" />
     <TypeScriptCompile Include="Scripts\src\Product\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\Product\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\Product\containers.ts" />
@@ -738,6 +744,7 @@
     <TypeScriptCompile Include="Scripts\src\ts-comm\def-data.ts" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\ReactTypeahead.tsx" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\tpl.ts" />
+    <TypeScriptCompile Include="Scripts\src\ts-comm\vwHeadView.tsx" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\vwMaskLoading.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-change_password.tsx" />
     <TypeScriptCompile Include="Scripts\src\ts-comm\OrderButton.tsx" />
@@ -748,6 +755,7 @@
     <TypeScriptCompile Include="Scripts\src\tsx\m-login.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-users.tsx" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\InputViewMode.ts" />
+    <TypeScriptCompile Include="Scripts\ts.d\enum\PayType.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\SelectShowType.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\StockState.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\TagShowAndHide.d.ts" />
@@ -810,6 +818,7 @@
     <Folder Include="Content\sass-sys\vendor\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Scripts\build\app\" />
+    <Folder Include="Scripts\build\font\" />
     <Folder Include="_Code\CReport\" />
   </ItemGroup>
   <ItemGroup>

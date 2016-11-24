@@ -13,6 +13,7 @@ module.exports = {
         //後台 管理者
         m_productkind: path.resolve(__dirname, 'Scripts/src/ProductKind/app.js'),
         m_product: path.resolve(__dirname, 'Scripts/src/Product/app.js'),
+        m_param: path.resolve(__dirname, 'Scripts/src/Param/app.js'),
         //前台 頁面
         "../font/productdetail": path.resolve(__dirname, 'Scripts/src/font/ProductDetail/app.js'), //前台電號匯入
 
