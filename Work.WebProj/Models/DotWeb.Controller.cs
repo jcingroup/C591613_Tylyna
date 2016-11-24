@@ -741,8 +741,14 @@ namespace DotWeb.Controller
 
                 ViewBag.VisitCount = visitCount;
                 ViewBag.IsFirstPage = false; //是否為首頁，請在首頁的Action此值設為True
-                //ajax_GetSidebarData();//取得左選單內容
-                //ajax_GetAboutUsData();//layout下方aboutus
+                #region 購物車
+                ViewBag.P_Count = 0;
+                if (Session["ShoppingCart"] != null)
+                {
+                    List<PurchaseDetail> cart = (List<PurchaseDetail>)Session["ShoppingCart"];
+                    ViewBag.P_Count = cart.Count;
+                }
+                #endregion
 
                 this.isTablet = (new WebInfo()).isTablet();
             }

@@ -353,7 +353,7 @@
     <value>此筆資料已結案!無法刪除!!</value>
   </data>
   <data name="Log_Err_AddCart_Exist" xml:space="preserve">
-    <value>此{0}不存在,請重新選擇!謝謝~!</value>
+    <value>此{0}不存在或補貨中,請重新選擇!謝謝~!</value>
   </data>
   <data name="Log_Err_Cart_ProductExist" xml:space="preserve">
     <value>購物車內無此商品~!</value>

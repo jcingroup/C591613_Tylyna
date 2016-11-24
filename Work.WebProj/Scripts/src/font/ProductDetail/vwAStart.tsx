@@ -12,6 +12,7 @@ export class AStart extends React.Component<any, any>{
         super();
         this.openDetailModal = this.openDetailModal.bind(this);
         this.closeDetailModal = this.closeDetailModal.bind(this);
+        this.addProductToCart = this.addProductToCart.bind(this);
         this.state = {
         };
     }
@@ -30,35 +31,21 @@ export class AStart extends React.Component<any, any>{
     chgVal(i: number, name: string, value: any, e: React.SyntheticEvent) {
         this.props.setRowInputValue(ac_type_comm.chg_dil_fld_val, i, name, value);
     }
-    renderDetail(i: number, detail: server.ProductDetail) {
-        let d_html = [];
-        if (detail.stock_state === StockState.replenishment) {//補貨中
-            d_html.push(
-                <td colSpan="2" className="text-left" key={'d-' + i}>
-                    <span className="label label-secondary font-lg">補貨中</span>
-                </td>
-            );
-        } else {
-            d_html.push(
-                <td className="num"  key={'d-t-' + i}>
-                    <InputNum
-                        inputClassName="form-element text-center"
-                        inputViewMode={InputViewMode.edit}
-                        required={true}
-                        value={detail.qty}
-                        onChange= {this.chgVal.bind(this, i, 'qty') }
-                        min={1}
-                        /> { }
-                </td>
-            );
-            d_html.push(
-                <td className="add-cart"  key={'d-b-' + i}>
-                    <i className="icon-cart"></i>
-                    <button className="btn">ADD</button>
-                </td>
-            );
-        }
-        return d_html;
+    addProductToCart(detail: server.ProductDetail) {
+        let item: server.Product = this.props.field;
+        let md: server.PurchaseDetail = {
+            purchase_detail_id: 0,
+            purchase_no: '',
+            product_id: detail.product_id,
+            product_detail_id: detail.product_detail_id,
+            qty: detail.qty,
+            price: detail.price,
+            sub_total: detail.qty * detail.price,
+            p_d_sn: detail.sn,
+            p_d_pack_type: detail.pack_type,
+            p_name: item.product_name
+        };
+        this.props.addCart(md);
     }
     render() {
         let out_html: JSX.Element = null;
@@ -80,7 +67,23 @@ export class AStart extends React.Component<any, any>{
                                             <td className="spec">
                                                 {detail.weight}g/包
                                             </td>
-                                            {this.renderDetail(i, detail) }
+                                            <TagShowAndHide TagName={TagName.Td} show={detail.stock_state === StockState.replenishment} colSpan={2} className="text-left" key={'d-' + i}>
+                                                <span className="label label-secondary font-lg">補貨中</span>
+                                            </TagShowAndHide>
+                                            <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== StockState.replenishment} className="num"  key={'d-t-' + i}>
+                                                <InputNum
+                                                    inputClassName="form-element text-center"
+                                                    inputViewMode={InputViewMode.edit}
+                                                    required={true}
+                                                    value={detail.qty}
+                                                    onChange= {this.chgVal.bind(this, i, 'qty') }
+                                                    min={1}
+                                                    /> { }
+                                            </TagShowAndHide>
+                                            <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== StockState.replenishment} className="add-cart"  key={'d-b-' + i}>
+                                                <i className="icon-cart"></i>
+                                                <button className="btn" type="button" onClick={this.addProductToCart.bind(this, detail) }>ADD</button>
+                                            </TagShowAndHide>
                                         </tr>;
                                     })
                                 }

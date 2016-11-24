@@ -3,6 +3,8 @@ using DotWeb.Controller;
 using System.Collections.Generic;
 using ProcCore.Business.DB0;
 using System.Linq;
+using ProcCore.HandleResult;
+using System;
 
 namespace DotWeb.Controllers
 {
@@ -88,6 +90,76 @@ namespace DotWeb.Controllers
         public ActionResult Taste()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 產品加入購物車
+        /// </summary>
+        /// <param name="md"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public string addCart(PurchaseDetail md)
+        {
+            ResultInfo r = new ResultInfo();
+            List<PurchaseDetail> mds = null;
+            try
+            {
+                using (var db0 = getDB0())
+                {
+                    //確認該產品是否存在,是否在上架中
+                    bool p_check = db0.ProductDetail.Any(x => x.product_detail_id == md.product_detail_id & x.product_id == x.product_id &
+                                                              x.Product.stock_state == (int)StockState.on_store_shelves & x.stock_state == (int)StockState.on_store_shelves &
+                                                              !x.Product.i_Hide);
+
+                    if (p_check)
+                    {
+                        #region  重抓產品資料(不要相信使用者給的產品資料)
+                        var p_d = db0.ProductDetail.Find(md.product_detail_id);
+                        md.p_d_sn = p_d.sn;//產品料號
+                        md.p_name = p_d.Product.product_name;//產品名稱
+                        md.p_d_pack_type = p_d.pack_type;//產品包裝
+                        md.price = p_d.price;//產品價格
+                        #endregion
+
+                        if (Session["ShoppingCart"] == null)
+                        {
+                            mds = new List<PurchaseDetail>();
+                            mds.Add(md);
+                        }
+                        else
+                        {
+                            mds = (List<PurchaseDetail>)Session["ShoppingCart"];
+                            //判斷產品是否已存在
+                            var item = mds.Where(x => x.product_id == md.product_id & x.product_detail_id == md.product_detail_id).FirstOrDefault();
+                            if (item != null)
+                            {
+                                item.qty += md.qty;
+                                item.price = md.price;
+                                item.sub_total = item.qty * item.price;
+                            }
+                            else
+                            {
+                                mds.Add(md);
+                            }
+                        }
+                        Session["ShoppingCart"] = mds;
+                        r.result = true;
+                        r.id = mds.Count();//購物車目前數量
+                    }
+                    else
+                    {
+                        r.result = false;
+                        r.message = string.Format(Resources.Res.Log_Err_AddCart_Exist, md.p_name);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message;
+            }
+            return defJSON(r);
         }
     }
     public class ProductList

@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 //view
 import {AStart} from './vwAStart';
 
-import { setData, setRowInputValue} from './actions'
+import { setData, setRowInputValue, addCart} from './actions'
 
 const m1ToProps = (state, ownProps) => {
     return {
@@ -15,7 +15,8 @@ const m1ToProps = (state, ownProps) => {
 const m1Dispatch = (dispatch, ownProps) => {
     let s = bindActionCreators({
         setData,
-        setRowInputValue
+        setRowInputValue,
+        addCart
     }, dispatch);
 
     return s;

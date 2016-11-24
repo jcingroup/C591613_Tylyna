@@ -556,7 +556,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 此{0}不存在,請重新選擇!謝謝~! 的當地語系化字串。
+        ///   查詢類似 此{0}不存在或補貨中,請重新選擇!謝謝~! 的當地語系化字串。
         /// </summary>
         internal static string Log_Err_AddCart_Exist {
             get {

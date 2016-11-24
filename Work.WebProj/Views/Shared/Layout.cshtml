@@ -66,13 +66,13 @@
                     <button class="icon-user" onclick="document.getElementById('login').style.display='block'">會員登入</button>
                     @* 登入後顯示如下 *@
                     @* WELCOME, XXX
-                    <ul class="list-inline font-sm">
-                        <li><a href="~/User">[會員中心]</a></li>
-                        <li><a href="~/User/Receipt_list">[查看訂單]</a></li>
-                        <li><a href="">[登出]</a></li>
-                    </ul> *@
+                        <ul class="list-inline font-sm">
+                            <li><a href="~/User">[會員中心]</a></li>
+                            <li><a href="~/User/Receipt_list">[查看訂單]</a></li>
+                            <li><a href="">[登出]</a></li>
+                        </ul> *@
 
-                    <a class="icon-cart" href="~/Order/Cart">購物車<i class="cart-num">1</i></a>
+                    <a class="icon-cart" href="~/Order/Cart">購物車<i class="cart-num" id="cart-num">@ViewBag.P_Count</i></a>
                     @* <a href="">Contact Us</a> *@
                 </nav>
                 <nav id="menu" class="navbar">
@@ -121,7 +121,7 @@
         <div class="foot-social">
             <a href="https://zh-tw.facebook.com/lovelitacafe/" target="_blank">Facebook</a>
             @* <a href="">Youtube</a>
-            <a href="">LINE</a> *@
+                <a href="">LINE</a> *@
         </div>
         <a href="#header" class="goTop"><i class="icon-arrow_upward"></i>BACK TO TOP</a>
     </footer>

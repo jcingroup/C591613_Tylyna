@@ -157,130 +157,44 @@
         qty?: number;
     }
 
-    interface Community extends BaseEntityTable {
-        community_id?: number;
-        community_name?: string;
-        account?: string;
-        passwd?: string;
-        intro?: string;
-        finish?: string;
-        address?: string;
-        typeOfBuild?: string;
-        total_floor?: number;
-        holders?: number;
-        perOfHolder?: number;
-        manage?: string;
-        company?: string;
-        build?: string;
-        txt_spot?: string;
-        txt_public?: string;
-        tel?: string;
-        email?: string;
-        contact?: string;
-        age?: number;
-        info_content?: string;
-
-        under_floor?: number;
-        over_floor?: number;
-        map_iframe?: string;
-        group_buying_url?: string;
-
-        list_src?: string;
-        imgurl_CommunityList?: string;
-        imgurl_CommunityDoor?: Array<string>;
-        imgurl_CommunityPublic?: Array<string>;
-    }
-    interface Community_News {
-        community_news_id?: number;
-        community_id?: number;
-        title?: string;
-        context?: string;
-        start_date?: string;
-        end_date?: string;
-        state?: string;
-        community_name?: string;
+    interface Purchase {
+        purchase_no?: string;
+        customer_id?: number;
+        order_date?: Date;
+        payment_date?: Date;
+        pay_type?: number;
+        pay_state?: number;
+        ship_state?: number;
+        cancel_reason?: string;
+        total?: number;
+        ship_fee?: number;
+        receive_email?: string;
+        receive_name?: string;
+        receive_tel?: string;
+        receive_mobile?: string;
+        receive_zip?: string;
+        receive_address?: string;
+        receive_memo?: string;
+        remit_no?: string;
+        remit_date?: Date;
+        remit_money?: number;
+        remit_memo?: string;
+        PurchaseDetail?: Array<server.ProductDetail>;
     }
 
-    interface Community_Banner {
-        community_banner_id?: number;
-        community_id?: number;
-        title?: string;
-        context?: string;
-        start_date?: string;
-        end_date?: string;
-        state?: string;
-        community_name?: string;
-        imgurl_CommunityBannerPhoto_1?: string;
-    }
-
-    interface Edit extends BaseEntityTable {
-        edit_id?: number;
-        edit_name?: string;
-        edit_content?: string;
-        sort?: number;
-    }
-    interface Matter {
-        matter_id?: number;
-        community_id?: number;
-        zip?: string;
-        city?: string;
-        country?: string;
-        address?: string;
-        bedrooms?: number;
-        livingrooms?: number;
-        bathrooms?: number;
-        rooms?: number;
-        build_area?: number;
-        land_area?: number;
-        house_area?: number;
-        balcony_area?: number;
-        umbrella_aea?: number;
-        public_area?: number;
-        age?: number;
-        buildhouses?: number;
-        typeOfHouse?: string;
-        managementFeeOfMonth?: number;
-        architecture?: string;
-        parking?: string;
-        orientation?: string;
-        guard?: string;
-        is_end?: boolean;
-        is_darkroom?: boolean;
-        wall_materials?: string;
-        matter_name?: string;
-        info_type?: string;
-        start_date?: Date;
-        end_date?: Date;
-        state?: string;
-        title?: string;
+    interface PurchaseDetail {
+        purchase_detail_id?: number;
+        purchase_no?: string;
+        product_id?: number;
+        product_detail_id?: number;
+        qty?: number;
         price?: number;
-
-        rentOfMonh?: number;
-
-        rent_management?: string;
-        rent_short_date?: string;
-        rent_cook?: string;
-        rent_pet?: string;
-        rent_identity?: string;
-        rent_sex?: string;
-        rent_start_date?: string;
-        rent_furniture?: string;
-        rent_equip?: string;
-        unit_area_price?: number;
-
-        list_src?: string;
-        sn?: string;
-        context_life?: string;
-        map_iframe?: string;
-        total_floor?: number;
-        site_floor?: string;
-        is_elevator?: boolean;
-        community_name?: string;
-        imgurl_MatterPhoto_1?: string;
-        imgurl_MatterPhoto?: Array<string>;
-        imgurl_MatterStyle?: string;
-
-        deposit?: number;
-        build_state?: string;
+        sub_total?: number;
+        p_d_sn?: string;
+        p_name?: string;
+        p_d_pack_type?: number;
+        Product?: server.Product;
+        ProductDetail?: server.ProductDetail;
+        Purchase?: server.Purchase;
     }
 } 

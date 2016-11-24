@@ -606,7 +606,7 @@ export class RadioBox extends React.Component<RadioBoxProps, any>{
     }
 }
 
-export class TagShowAndHide extends React.Component<{ show: boolean, className?: string, style?: any, TagName: TagName }, any>
+export class TagShowAndHide extends React.Component<{ show: boolean, className?: string, style?: any, colSpan?: number, TagName: TagName }, any>
 {
     constructor() {
         super();
@@ -619,13 +619,13 @@ export class TagShowAndHide extends React.Component<{ show: boolean, className?:
         if (pp.show) {
             if (pp.TagName === TagName.Td) {
                 out_html = (
-                    <td style={pp.style} className={pp.className}>
+                    <td style={pp.style} className={pp.className} colSpan={this.props.colSpan}>
                         {pp.children}
                     </td>
                 );
             } else if (pp.TagName === TagName.Tr) {
                 out_html = (
-                    <tr style={pp.style} className={pp.className}>
+                    <tr style={pp.style} className={pp.className} colSpan={this.props.colSpan}>
                         {pp.children}
                     </tr>
                 );

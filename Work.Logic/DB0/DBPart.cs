@@ -21,21 +21,10 @@ namespace ProcCore.Business.DB0
         view = 0,
         edit = 1
     }
-    public enum VisitDetailState
-    {
-        none,
-        wait,
-        progress,
-        finish,
-        pause
-    }
-    public enum EditorState
-    {
-        Aboutus = 1,
-        Program = 2,
-        Recruit = 3,
-        VIP = 4,
-        Vendor = 5
+    public enum StockState
+    {//產品狀況
+        on_store_shelves = 1,//上架中
+        replenishment = -1//補貨中
     }
     #region set CodeSheet
 

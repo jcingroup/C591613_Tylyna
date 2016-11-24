@@ -505,6 +505,7 @@ export const UIText = {
     fi_insert: '新增完成',
     fi_update: '修改完成',
     fi_delete: '刪除完成',
+    fi_addCart: '已成功加入購物車',
     option_blank: '請選擇',
     delete_sure: '確定是否刪除?',
 }
