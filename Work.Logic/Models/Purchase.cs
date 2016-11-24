@@ -5,14 +5,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProcCore.Business.DB0
 {
-    [MetadataType(typeof(ProductDetailMetadata))]
-    public partial class ProductDetail
+    [MetadataType(typeof(PurchaseMetadata))]
+    public partial class Purchase
     {
-        private class ProductDetailMetadata
+        private class PurchaseMetadata
         {
-            [JsonIgnore()]
-            public virtual Product Product { get; set; }
-
             [JsonIgnore()]
             public virtual ICollection<PurchaseDetail> PurchaseDetail { get; set; }
         }

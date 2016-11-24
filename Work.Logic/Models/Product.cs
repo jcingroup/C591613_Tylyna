@@ -17,6 +17,9 @@ namespace ProcCore.Business.DB0
 
             [JsonIgnore()]
             public virtual ICollection<ProductDetail> ProductDetail { get; set; }
+
+            [JsonIgnore()]
+            public virtual ICollection<PurchaseDetail> PurchaseDetail { get; set; }
         }
     }
 }

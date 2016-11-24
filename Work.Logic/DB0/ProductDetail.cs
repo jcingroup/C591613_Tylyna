@@ -14,6 +14,12 @@ namespace ProcCore.Business.DB0
     
     public partial class ProductDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProductDetail()
+        {
+            this.PurchaseDetail = new HashSet<PurchaseDetail>();
+        }
+    
         public int product_detail_id { get; set; }
         public int product_id { get; set; }
         public string sn { get; set; }
@@ -23,5 +29,7 @@ namespace ProcCore.Business.DB0
         public int stock_state { get; set; }
     
         public virtual Product Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseDetail> PurchaseDetail { get; set; }
     }
 }

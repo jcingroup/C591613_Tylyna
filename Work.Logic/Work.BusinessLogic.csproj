@@ -139,7 +139,15 @@
     <Compile Include="DB0\ProductKind.cs">
       <DependentUpon>C591613_Tylyna.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB0\Purchase.cs">
+      <DependentUpon>C591613_Tylyna.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\PurchaseDetail.cs">
+      <DependentUpon>C591613_Tylyna.tt</DependentUpon>
+    </Compile>
     <Compile Include="LogicCenter.cs" />
+    <Compile Include="Models\Purchase.cs" />
+    <Compile Include="Models\PurchaseDetail.cs" />
     <Compile Include="Models\ProductDetail.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Matter.cs" />

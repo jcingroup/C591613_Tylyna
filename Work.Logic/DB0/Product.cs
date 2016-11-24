@@ -18,6 +18,7 @@ namespace ProcCore.Business.DB0
         public Product()
         {
             this.ProductDetail = new HashSet<ProductDetail>();
+            this.PurchaseDetail = new HashSet<PurchaseDetail>();
         }
     
         public int product_id { get; set; }
@@ -39,5 +40,7 @@ namespace ProcCore.Business.DB0
         public virtual ProductKind ProductKind { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductDetail> ProductDetail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseDetail> PurchaseDetail { get; set; }
     }
 }
