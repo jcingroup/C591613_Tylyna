@@ -4,6 +4,7 @@ using ProcCore.HandleResult;
 using System.Collections.Generic;
 using ProcCore.Business.DB0;
 using System;
+using System.Linq;
 
 namespace DotWeb.Controllers
 {
@@ -38,7 +39,7 @@ namespace DotWeb.Controllers
         {
             return View();
         }
-
+        #region 購物車
         /// <summary>
         /// 取得購物車資料
         /// </summary>
@@ -70,6 +71,60 @@ namespace DotWeb.Controllers
             }
             return defJSON(r);
         }
-    }
+        [HttpPost]
+        public string delProductCart(int p_d_id)
+        {
+            ResultInfo<List<PurchaseDetail>> r = new ResultInfo<List<PurchaseDetail>>();
+            List<PurchaseDetail> mds = new List<PurchaseDetail>();
+            try
+            {
+                if (Session["ShoppingCart"] != null)
+                    mds = (List<PurchaseDetail>)Session["ShoppingCart"];
 
+                var del_item = mds.Where(x => x.product_detail_id == p_d_id).FirstOrDefault();
+                if (del_item != null)
+                    mds.Remove(del_item);
+                Session["ShoppingCart"] = mds;
+
+                r.result = true;
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message;
+            }
+            return defJSON(r);
+        }
+        [HttpPost]
+        public string delProductCart(chgQty p)
+        {
+            ResultInfo<List<PurchaseDetail>> r = new ResultInfo<List<PurchaseDetail>>();
+            List<PurchaseDetail> mds = new List<PurchaseDetail>();
+            try
+            {
+                if (Session["ShoppingCart"] != null)
+                    mds = (List<PurchaseDetail>)Session["ShoppingCart"];
+
+                var item = mds.Where(x => x.product_detail_id == p.p_d_id).FirstOrDefault();
+                if (item != null) {
+                    item.qty = p.qty;
+                }
+                Session["ShoppingCart"] = mds;
+
+                r.result = true;
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message;
+            }
+            return defJSON(r);
+        }
+        #endregion
+    }
+    public class chgQty
+    {
+        public int p_d_id { get; set; }
+        public int qty { get; set; }
+    }
 }
