@@ -8,6 +8,7 @@ namespace ProcCore.Business.DB0
     [MetadataType(typeof(PurchaseDetailMetadata))]
     public partial class PurchaseDetail
     {
+        public string img_src { get; set; }
         private class PurchaseDetailMetadata
         {
             [JsonIgnore()]

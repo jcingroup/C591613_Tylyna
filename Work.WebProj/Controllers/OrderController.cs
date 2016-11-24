@@ -1,6 +1,9 @@
 ﻿using System.Web.Mvc;
 using DotWeb.Controller;
-
+using ProcCore.HandleResult;
+using System.Collections.Generic;
+using ProcCore.Business.DB0;
+using System;
 
 namespace DotWeb.Controllers
 {
@@ -34,6 +37,38 @@ namespace DotWeb.Controllers
         public ActionResult Finish()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 取得購物車資料
+        /// </summary>
+        /// <param name="md"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public string getCart()
+        {
+            ResultInfo<List<PurchaseDetail>> r = new ResultInfo<List<PurchaseDetail>>();
+            List<PurchaseDetail> mds = new List<PurchaseDetail>();
+            try
+            {
+                if (Session["ShoppingCart"] != null)
+                    mds = (List<PurchaseDetail>)Session["ShoppingCart"];
+
+                foreach (var i in mds)
+                {
+                    var img = getImgFirst("ProductImg", i.product_id.ToString(), "600");
+                    i.img_src = img != null ? img.src_path : null;
+                }
+
+                r.data = mds;
+                r.result = true;
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message;
+            }
+            return defJSON(r);
         }
     }
 

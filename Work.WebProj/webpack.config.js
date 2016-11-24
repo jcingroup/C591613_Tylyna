@@ -15,7 +15,8 @@ module.exports = {
         m_product: path.resolve(__dirname, 'Scripts/src/Product/app.js'),
         m_param: path.resolve(__dirname, 'Scripts/src/Param/app.js'),
         //前台 頁面
-        "../font/productdetail": path.resolve(__dirname, 'Scripts/src/font/ProductDetail/app.js'), //前台電號匯入
+        "../font/productdetail": path.resolve(__dirname, 'Scripts/src/font/ProductDetail/app.js'),
+        "../font/shoppingcart": path.resolve(__dirname, 'Scripts/src/font/ShoppingCart/app.js'),
 
         vendors: ['jquery', 'react', 'react-dom', 'redux', 'react-redux', 'redux-thunk', 'react-addons-update', 'moment',
             path.resolve(__dirname, 'Scripts/src/ts-comm/comm-run')

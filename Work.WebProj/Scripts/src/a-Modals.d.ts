@@ -196,5 +196,7 @@
         Product?: server.Product;
         ProductDetail?: server.ProductDetail;
         Purchase?: server.Purchase;
+
+        img_src?: string;
     }
 } 

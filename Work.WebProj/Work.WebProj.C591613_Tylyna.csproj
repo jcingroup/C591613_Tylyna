@@ -703,6 +703,11 @@
     <TypeScriptCompile Include="app_modules\funtest\fun.ts" />
     <TypeScriptCompile Include="Scripts\src\action_type.ts" />
     <TypeScriptCompile Include="Scripts\src\components.tsx" />
+    <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\vwAStart.tsx" />
     <TypeScriptCompile Include="Scripts\src\font\ProductDetail\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\font\ProductDetail\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\font\ProductDetail\containers.ts" />

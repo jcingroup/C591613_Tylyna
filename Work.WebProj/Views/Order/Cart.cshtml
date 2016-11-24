@@ -4,8 +4,15 @@
     ViewBag.BodyClass = "Cart";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
+@section Scripts {
+    <script src="~/Scripts/build/app/vendors.js?v=@CommWebSetup.CacheVer"></script>
+    <script src="~/Scripts/build/font/shoppingcart.js"></script>
+}
 
-<h2 class="text-left">購物車</h2>
+<div id="page_content"></div>
+
+<!--
+    <h2 class="text-left">購物車</h2>
 <table class="cart-list">
     <tr>
         <th colspan="2">商品</th>
@@ -42,3 +49,5 @@
     <button class="float-r btn font-lg btn-success">確定結帳 <i class="icon-navigate_next"></i></button> *@
     <a href="~/Order/Step1_order" class="float-r btn font-lg btn-success">確定結帳 <i class="icon-navigate_next"></i></a>
 </footer>
+
+-->

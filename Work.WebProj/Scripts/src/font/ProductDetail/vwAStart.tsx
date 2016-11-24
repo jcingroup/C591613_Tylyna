@@ -78,7 +78,7 @@ export class AStart extends React.Component<any, any>{
                                                     value={detail.qty}
                                                     onChange= {this.chgVal.bind(this, i, 'qty') }
                                                     min={1}
-                                                    /> { }
+                                                    />
                                             </TagShowAndHide>
                                             <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== StockState.replenishment} className="add-cart"  key={'d-b-' + i}>
                                                 <i className="icon-cart"></i>
