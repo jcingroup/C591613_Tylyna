@@ -48,9 +48,8 @@ namespace ProcCore.Business.LogicConect
     #region Parm Section
     public enum ParmDefine
     {
-        Open, AboutUs, Email, PurchaseTotal,
-        HomoiothermyFee, RefrigerFee,
-        AccountName, BankName, BankCode, AccountNumber, Fee
+        Open, AboutUs, Email,
+        AccountName, BankName, BankCode, AccountNumber
     }
     #endregion
 

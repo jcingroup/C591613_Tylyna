@@ -200,8 +200,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Active\ActiveAreaRegistration.cs" />
+    <Compile Include="Areas\Active\Controllers\ParamDataController.cs" />
     <Compile Include="Areas\Active\Controllers\ProductDataController.cs" />
-    <Compile Include="Areas\Active\Controllers\CommunityNewsController.cs" />
     <Compile Include="Areas\Active\Controllers\SysDemoController.cs" />
     <Compile Include="Areas\Base\Controllers\DocController.cs" />
     <Compile Include="Areas\Base\Controllers\LoginController.cs" />
@@ -225,7 +225,6 @@
     <Content Include="app_modules\simple-ajax-uploader\package.json" />
     <Content Include="app_modules\dt\package.json" />
     <Content Include="app_modules\comm-typeahead\package.json" />
-    <Content Include="Areas\Active\Views\CommunityNews\Main.cshtml" />
     <Content Include="app_modules\ImgFileSort\package.json" />
     <Content Include="app_modules\ImgFileSort\c-ImgFileSort.jsx" />
     <Content Include="app_modules\comm-matter\package.json" />
@@ -254,6 +253,7 @@
     <Content Include="Areas\Active\Views\SysDemo\Reply.cshtml" />
     <Content Include="Areas\Active\Views\ProductData\Kind.cshtml" />
     <Content Include="Areas\Active\Views\ProductData\Main.cshtml" />
+    <Content Include="Areas\Active\Views\ParamData\Main.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
@@ -305,6 +305,7 @@
     <Content Include="ckfinder\core\connector\aspx\lang\vi.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-cn.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-tw.xml" />
+    <Compile Include="Controllers\Api\ParamController.cs" />
     <Compile Include="Controllers\Api\ProductDetailController.cs" />
     <Compile Include="Controllers\Api\ProductController.cs" />
     <Compile Include="Controllers\Api\ProductKindController.cs" />
@@ -838,8 +839,8 @@
   <ItemGroup>
     <Content Include="Areas\Base\Views\Menu\App_LocalResources\ChangePassword.cshtml.resx" />
     <Content Include="Areas\Base\Views\Menu\App_LocalResources\Main.cshtml.resx" />
-    <Content Include="Areas\Active\Views\CommunityNews\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\ProductData\App_LocalResources\Kind.cshtml.resx" />
+    <Content Include="Areas\Active\Views\ParamData\App_LocalResources\Main.cshtml.resx" />
     <EmbeddedResource Include="_Code\RPTFile\MemeberLabel.rdlc" />
   </ItemGroup>
   <PropertyGroup>

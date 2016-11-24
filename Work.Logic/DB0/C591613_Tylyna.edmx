@@ -297,6 +297,16 @@
           <Property Name="p_name" Type="nvarchar" MaxLength="64" />
           <Property Name="p_d_pack_type" Type="int" />
         </EntityType>
+        <EntityType Name="Shipment">
+          <Key>
+            <PropertyRef Name="shipment_id" />
+          </Key>
+          <Property Name="shipment_id" Type="int" Nullable="false" />
+          <Property Name="pay_type" Type="int" Nullable="false" />
+          <Property Name="limit_money" Type="int" Nullable="false" />
+          <Property Name="shipment_fee" Type="int" Nullable="false" />
+          <Property Name="bank_charges" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Community_News_Community">
           <End Role="Community" Type="Self.Community" Multiplicity="1" />
           <End Role="Community_News" Type="Self.Community_News" Multiplicity="*" />
@@ -472,6 +482,7 @@
           <EntitySet Name="ProductKind" EntityType="Self.ProductKind" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Community_News_Community" Association="Self.FK_Community_News_Community">
             <End Role="Community" EntitySet="Community" />
             <End Role="Community_News" EntitySet="Community_News" />
@@ -775,6 +786,7 @@
             <End Role="Purchase" EntitySet="Purchase" />
             <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
           </AssociationSet>
+          <EntitySet Name="Shipment" EntityType="C591613_TylynaModel.Shipment" />
           </EntityContainer>
         <EntityType Name="Community">
           <Key>
@@ -991,6 +1003,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Shipment">
+          <Key>
+            <PropertyRef Name="shipment_id" />
+          </Key>
+          <Property Name="shipment_id" Type="Int32" Nullable="false" />
+          <Property Name="pay_type" Type="Int32" Nullable="false" />
+          <Property Name="limit_money" Type="Int32" Nullable="false" />
+          <Property Name="shipment_fee" Type="Int32" Nullable="false" />
+          <Property Name="bank_charges" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1303,6 +1325,17 @@
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="purchase_no" ColumnName="purchase_no" />
                 <ScalarProperty Name="purchase_detail_id" ColumnName="purchase_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shipment">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.Shipment">
+              <MappingFragment StoreEntitySet="Shipment">
+                <ScalarProperty Name="bank_charges" ColumnName="bank_charges" />
+                <ScalarProperty Name="shipment_fee" ColumnName="shipment_fee" />
+                <ScalarProperty Name="limit_money" ColumnName="limit_money" />
+                <ScalarProperty Name="pay_type" ColumnName="pay_type" />
+                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

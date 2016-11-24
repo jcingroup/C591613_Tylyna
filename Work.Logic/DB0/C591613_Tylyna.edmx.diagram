@@ -35,6 +35,7 @@
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Product" />
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_ProductDetail" />
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Purchase" />
+        <EntityTypeShape EntityType="C591613_TylynaModel.Shipment" Width="1.5" PointX="0.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

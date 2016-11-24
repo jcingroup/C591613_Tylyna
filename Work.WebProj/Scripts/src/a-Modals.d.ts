@@ -98,6 +98,14 @@
         field?: string;
         sort?: string;
     }
+
+    interface Shipment {
+        shipment_id: number;
+        pay_type: number;
+        limit_money: number;
+        shipment_fee: number;
+        bank_charges: number;
+    }
     interface ProductKind extends BaseEntityTable {
         product_kind_id?: number;
         kind_name?: string;
