@@ -84,9 +84,19 @@ namespace DotWeb.Controllers
                 var del_item = mds.Where(x => x.product_detail_id == p_d_id).FirstOrDefault();
                 if (del_item != null)
                     mds.Remove(del_item);
-                Session["ShoppingCart"] = mds;
 
-                r.result = true;
+                if (Session["ShoppingCart"] == null || del_item == null)
+                {
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_Cart_ProductExist;
+                }
+                else
+                {//有抓到購物車及刪除資料才更新購物車內容
+                    Session["ShoppingCart"] = mds;
+                    r.result = true;
+                    r.id = mds.Count();
+                }
+
             }
             catch (Exception ex)
             {
@@ -96,7 +106,7 @@ namespace DotWeb.Controllers
             return defJSON(r);
         }
         [HttpPost]
-        public string delProductCart(chgQty p)
+        public string chgProductQty(chgQty p)
         {
             ResultInfo<List<PurchaseDetail>> r = new ResultInfo<List<PurchaseDetail>>();
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
@@ -106,12 +116,22 @@ namespace DotWeb.Controllers
                     mds = (List<PurchaseDetail>)Session["ShoppingCart"];
 
                 var item = mds.Where(x => x.product_detail_id == p.p_d_id).FirstOrDefault();
-                if (item != null) {
+                if (item != null)
+                {
                     item.qty = p.qty;
+                    item.sub_total = p.qty * item.price;
                 }
-                Session["ShoppingCart"] = mds;
 
-                r.result = true;
+                if (Session["ShoppingCart"] == null || item == null)
+                {
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_Cart_ProductExist;
+                }
+                else
+                {//有抓到購物車及修改資料才更新購物車內容
+                    Session["ShoppingCart"] = mds;
+                    r.result = true;
+                }
             }
             catch (Exception ex)
             {

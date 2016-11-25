@@ -108,22 +108,30 @@ interface InputNumProps {
     id?: string;
     required?: boolean;
     onFocus?: React.EventHandler<React.FocusEvent>;
+    onBlur?: Function;
     tabIndex?: number;
     max?: number;
     min?: number;
     maxLength?: number;
     placeholder?: string;
+    only_positive?: boolean; //只能為正數
+}
+interface InputNumState {
+    show_value?: any
+    prv_value?: any
+    neg_sign_flag?: boolean
 }
 
-export class InputNum extends React.Component<InputNumProps, any>{
+export class InputNum extends React.Component<InputNumProps, InputNumState>{
 
     constructor() {
         super();
         this.onChange = this.onChange.bind(this);
+        this.onBlur = this.onBlur.bind(this);
 
         this.state = {
-            show_value: null,
-            prv_value: null,
+            show_value: 0,
+            prv_value: 0,
             neg_sign_flag: false
         };
     }
@@ -133,28 +141,96 @@ export class InputNum extends React.Component<InputNumProps, any>{
         inputViewMode: InputViewMode.edit,
         only_positive: true
     }
-    onChange(e: React.SyntheticEvent) {
-        let input: HTMLInputElement = e.target as HTMLInputElement;
-        let value = makeInputValue(e);
-        this.props.onChange(value, e);
+    is_get_value = false;
+    componentDidMount() {
+        const pp_value = this.props.value;
+        this.setState({ show_value: pp_value, prv_value: pp_value });
     }
+    componentDidUpdate(prevProps, prevState) {
+        //alert(this.props.value != prevProps.value && isNumeric(this.props.value))
+        if (this.props.value != prevProps.value && isNumeric(this.props.value)) {
+            //console.log(this.props.id, this.props.value, prevProps.value)
+            const pp_value = this.props.value;
+            this.setState({ prv_value: pp_value, show_value: pp_value })
+        } else if (this.props.value != prevProps.value && (this.props.value == null || this.props.value == '')) {
+            this.setState({ prv_value: '', show_value: '' })
+        }
+    }
+    onChange(e: React.SyntheticEvent) {
 
+        if (this.props.onChange == undefined || this.props.onChange == null)
+            return;
 
+        let input: HTMLInputElement = e.target as HTMLInputElement;
+        let value = input.value;
+        this.state.neg_sign_flag = false;
+
+        if (value === null || value === '' || value === null || value === undefined) {
+            this.setState({ prv_value: null, show_value: null })
+            this.props.onChange('', e);
+        } else {
+            //console.log('value', value, 'isNumeric', isNumeric(value));
+            if (value == '-' && !this.props.only_positive) { //可輸入負號
+                this.setState({ show_value: '-', prv_value: value })
+                this.props.onChange(0, e);
+            } else if (value == '-' && this.props.only_positive) { //不可輸入負號
+                this.setState({ show_value: '', prv_value: '' })
+                this.props.onChange('', e);
+            } else if (isNumeric(value)) {
+
+                let n = parseFloat(value);
+
+                if (this.props.only_positive && n < 0) { //不可輸入負號 值卻小於０
+                    const prv_value = this.state.prv_value === undefined ? '' : this.state.prv_value;
+                    this.setState({ show_value: prv_value })
+                    this.props.onChange(prv_value, e);
+                } else {
+                    this.setState({ show_value: value, prv_value: n }) // 123. 經parseFloat會變成 123
+                    this.props.onChange(n, e);
+                }
+
+            } else {
+                const prv_value = this.state.prv_value === undefined ? '' : this.state.prv_value;
+                this.setState({ show_value: prv_value })
+                this.props.onChange(prv_value, e);
+            }
+        }
+    }
+    onBlur(e: React.SyntheticEvent) {
+        let input: HTMLInputElement = e.target as HTMLInputElement;
+        let value = input.value;
+        let pp = this.props;
+        if (value === '-') {
+            this.setState({ show_value: '', prv_value: '' })
+            pp.onChange('', e);
+        } else {
+            if (pp.min != undefined && pp.min != null && pp.value != '' && pp.value < pp.min) {
+                this.setState({ show_value: '', prv_value: '' })
+                pp.onChange('', e);
+            }
+
+            if (pp.max != undefined && pp.max != null && pp.value != '' && pp.value > pp.max) {
+                this.setState({ show_value: '', prv_value: '' })
+                pp.onChange('', e);
+            }
+        }
+        if (this.props.onBlur)
+            this.props.onBlur(e);
+    }
     render() {
         let out_html = null;
         let pp = this.props;
-        let value = this.props.value == undefined ? '' : this.props.value;
 
         if (this.props.inputViewMode == InputViewMode.edit) {
             out_html =
                 (
                     <input
                         id={pp.id}
-                        type="number"
+                        type="text"
                         className={pp.inputClassName}
                         width={pp.width}
                         style={pp.style}
-                        value={value}
+                        value={this.state.show_value}
                         onChange={this.onChange}
                         disabled={pp.disabled}
                         required={pp.required}
@@ -163,6 +239,7 @@ export class InputNum extends React.Component<InputNumProps, any>{
                         placeholder={pp.placeholder}
                         min={pp.min}
                         max={pp.max}
+                        onBlur={this.onBlur}
                         maxLength={pp.maxLength}
                         />
                 );
@@ -174,7 +251,7 @@ export class InputNum extends React.Component<InputNumProps, any>{
                     <span
                         id={this.props.id}
                         className={this.props.viewClassName}>
-                        {value}
+                        {this.state.show_value}
                     </span>
                 );
         }

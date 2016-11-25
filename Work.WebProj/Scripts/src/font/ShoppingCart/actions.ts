@@ -37,21 +37,37 @@ export const setRowInputValue = (type, i, name, value) => {
     }
 }
 
-//export const addCart = (md: server.PurchaseDetail) => {
-//    return dispatch => {
-//        let pm = { md: md };
-//        mask_show(UIText.mk_updating);
-//        return fetchPost(apiPath, pm)
-//            .then((data: IResultData<server.PurchaseDetail>) => {
-//                mask_off();
-//                if (data.result) {
-//                    //tosMessage(null, UIText.fi_addCart, 1);
-//                    alert(UIText.fi_addCart);
-//                    document.getElementById('cart-num').textContent = data.id.toString();
-//                } else {
-//                    alert(data.message);
-//                }
-//            })
-//            .catch((reason) => { mask_off(); })
-//    }
-//}
+export const delProduct = (p_detial_id: number) => {
+    return dispatch => {
+        let pm = { p_d_id: p_detial_id };
+        mask_show(UIText.mk_updating);
+        return fetchPost(apiPath + '/delProductCart', pm)
+            .then((data: IResultData<server.PurchaseDetail>) => {
+                mask_off();
+                if (data.result) {
+                    document.getElementById('cart-num').textContent = data.id.toString();
+                    dispatch(callLoad());
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch((reason) => { mask_off(); })
+    }
+}
+
+export const chgProductQty = (p_detial_id: number, qty: number) => {
+    return dispatch => {
+        let pm = { p_d_id: p_detial_id, qty: qty };
+        mask_show(UIText.mk_updating);
+        return fetchPost(apiPath + '/chgProductQty', pm)
+            .then((data: IResultData<server.PurchaseDetail>) => {
+                mask_off();
+                if (data.result) {
+                    dispatch(callLoad());
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch((reason) => { mask_off(); })
+    }
+}

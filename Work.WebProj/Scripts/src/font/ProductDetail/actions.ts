@@ -30,8 +30,8 @@ export const addCart = (md: server.PurchaseDetail) => {
             .then((data: IResultData<server.PurchaseDetail>) => {
                 mask_off();
                 if (data.result) {
-                    //tosMessage(null, UIText.fi_addCart, 1);
-                    alert(UIText.fi_addCart);
+                    tosMessage(null, UIText.fi_addCart, 1);
+                    //alert(UIText.fi_addCart);
                     document.getElementById('cart-num').textContent = data.id.toString();
                 } else {
                     alert(data.message);

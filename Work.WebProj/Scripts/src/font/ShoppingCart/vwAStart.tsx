@@ -12,13 +12,28 @@ export class AStart extends React.Component<any, any>{
         };
     }
     chgVal(i: number, name: string, value: any, e: React.SyntheticEvent) {
+        let grid: Array<server.PurchaseDetail> = this.props.grid;
+        let sub_total: number = grid[i].price * value;
+
         this.props.setRowInputValue(ac_type_comm.chg_grid_val, i, name, value);
+        this.props.setRowInputValue(ac_type_comm.chg_grid_val, i, "sub_total", sub_total);
     }
     getPackName(val: number): string {
         let res: string = "";
         let item = IPackTypeData.find(x => x.val === val);
         res = (item != null && item != undefined) ? item.Lname : res;
         return res;
+    }
+    delProduct(id: number) {
+        if (!confirm(UIText.delete_sure)) {
+            return;
+        }
+        this.props.delProduct(id);
+    }
+    chgProductQty(i) {
+        let grid: Array<server.PurchaseDetail> = this.props.grid;
+
+        this.props.chgProductQty(grid[i].product_detail_id, grid[i].qty);
     }
     render() {
         let out_html: JSX.Element = null;
@@ -57,11 +72,14 @@ export class AStart extends React.Component<any, any>{
                                             value={item.qty}
                                             onChange= {this.chgVal.bind(this, i, 'qty') }
                                             min={1}
+                                            onBlur={this.chgProductQty.bind(this, i) }
                                             />
                                     </td>
                                     <td>NT$ {item.price}</td>
-                                    <td><strong>NT$ {item.price * item.qty}</strong></td>
-                                    <td><button className="font-xl text-danger icon-trash-can2" type="button" title="刪除此項商品"></button></td>
+                                    <td><strong>NT$ {item.sub_total}</strong></td>
+                                    <td>
+                                        <button className="font-xl text-danger icon-trash-can2" type="button" title="刪除此項商品" onClick={this.delProduct.bind(this, item.product_detail_id) }></button>
+                                    </td>
                                 </tr>;
                             })
                         }
