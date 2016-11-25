@@ -70,47 +70,20 @@
           <Property Name="sort" Type="int" Nullable="false" />
           <Property Name="community_id" Type="int" />
         </EntityType>
-        <EntityType Name="Community">
+        <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="community_id" />
+            <PropertyRef Name="customer_id" />
           </Key>
-          <Property Name="community_id" Type="int" Nullable="false" />
-          <Property Name="community_name" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="account" Type="varchar" MaxLength="64" />
-          <Property Name="passwd" Type="varchar" MaxLength="64" />
-          <Property Name="intro" Type="ntext" />
-          <Property Name="finish" Type="varchar" MaxLength="50" />
-          <Property Name="address" Type="nvarchar" MaxLength="50" />
-          <Property Name="typeOfBuild" Type="nvarchar" MaxLength="50" />
-          <Property Name="total_floor" Type="int" />
-          <Property Name="holders" Type="int" />
-          <Property Name="perOfHolder" Type="int" />
-          <Property Name="manage" Type="nvarchar" MaxLength="50" />
-          <Property Name="company" Type="nvarchar" MaxLength="50" />
-          <Property Name="build" Type="nvarchar" MaxLength="50" />
-          <Property Name="txt_spot" Type="ntext" />
-          <Property Name="txt_public" Type="ntext" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="c_pw" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="c_name" Type="nvarchar" MaxLength="64" />
+          <Property Name="gender" Type="bit" />
           <Property Name="tel" Type="varchar" MaxLength="50" />
-          <Property Name="email" Type="varchar" MaxLength="50" />
-          <Property Name="contact" Type="nvarchar" MaxLength="50" />
-          <Property Name="age" Type="float" />
-          <Property Name="under_floor" Type="int" />
-          <Property Name="over_floor" Type="int" />
-          <Property Name="map_iframe" Type="varchar" MaxLength="4000" />
-          <Property Name="group_buying_url" Type="varchar" MaxLength="4000" />
-          <Property Name="info_content" Type="ntext" />
-        </EntityType>
-        <EntityType Name="Community_News">
-          <Key>
-            <PropertyRef Name="community_news_id" />
-          </Key>
-          <Property Name="community_news_id" Type="int" Nullable="false" />
-          <Property Name="community_id" Type="int" Nullable="false" />
-          <Property Name="title" Type="nvarchar" MaxLength="200" />
-          <Property Name="context" Type="ntext" />
-          <Property Name="start_date" Type="smalldatetime" />
-          <Property Name="end_date" Type="smalldatetime" />
-          <Property Name="state" Type="char" MaxLength="1" />
+          <Property Name="mobile" Type="varchar" MaxLength="50" />
+          <Property Name="zip" Type="varchar" MaxLength="5" />
+          <Property Name="address" Type="nvarchar" MaxLength="128" />
+          <Property Name="birthday" Type="date" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -307,18 +280,6 @@
           <Property Name="shipment_fee" Type="int" Nullable="false" />
           <Property Name="bank_charges" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Community_News_Community">
-          <End Role="Community" Type="Self.Community" Multiplicity="1" />
-          <End Role="Community_News" Type="Self.Community_News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Community">
-              <PropertyRef Name="community_id" />
-            </Principal>
-            <Dependent Role="Community_News">
-              <PropertyRef Name="community_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -423,6 +384,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Purchase_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PurchaseDetail_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
@@ -466,8 +439,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Community" EntityType="Self.Community" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Community_News" EntityType="Self.Community_News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="i_Currency" EntityType="Self.i_Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="i_IDX" EntityType="Self.i_IDX" Schema="dbo" store:Type="Tables" />
@@ -483,10 +455,6 @@
           <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Community_News_Community" Association="Self.FK_Community_News_Community">
-            <End Role="Community" EntitySet="Community" />
-            <End Role="Community_News" EntitySet="Community_News" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -518,6 +486,10 @@
           <AssociationSet Name="FK_ProductDetail_Product" Association="Self.FK_ProductDetail_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductDetail" EntitySet="ProductDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_Customer" Association="Self.FK_Purchase_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Purchase" EntitySet="Purchase" />
           </AssociationSet>
           <AssociationSet Name="FK_PurchaseDetail_Product" Association="Self.FK_PurchaseDetail_Product">
             <End Role="Product" EntitySet="Product" />
@@ -755,12 +727,6 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="Menu" EntitySet="Menu" />
           </AssociationSet>
-          <EntitySet Name="Community" EntityType="C591613_TylynaModel.Community" />
-          <EntitySet Name="Community_News" EntityType="C591613_TylynaModel.Community_News" />
-          <AssociationSet Name="FK_Community_News_Community" Association="C591613_TylynaModel.FK_Community_News_Community">
-            <End Role="Community" EntitySet="Community" />
-            <End Role="Community_News" EntitySet="Community_News" />
-          </AssociationSet>
           <EntitySet Name="ProductKind" EntityType="C591613_TylynaModel.ProductKind" />
           <EntitySet Name="Product" EntityType="C591613_TylynaModel.Product" />
           <AssociationSet Name="FK_Product_ProductKind" Association="C591613_TylynaModel.FK_Product_ProductKind">
@@ -787,63 +753,12 @@
             <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
           </AssociationSet>
           <EntitySet Name="Shipment" EntityType="C591613_TylynaModel.Shipment" />
+          <EntitySet Name="Customer" EntityType="C591613_TylynaModel.Customer" />
+          <AssociationSet Name="FK_Purchase_Customer" Association="C591613_TylynaModel.FK_Purchase_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="Community">
-          <Key>
-            <PropertyRef Name="community_id" />
-          </Key>
-          <Property Name="community_id" Type="Int32" Nullable="false" />
-          <Property Name="community_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="account" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="passwd" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="finish" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="typeOfBuild" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="total_floor" Type="Int32" />
-          <Property Name="holders" Type="Int32" />
-          <Property Name="perOfHolder" Type="Int32" />
-          <Property Name="manage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="build" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="txt_spot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="txt_public" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="age" Type="Double" />
-          <Property Name="under_floor" Type="Int32" />
-          <Property Name="over_floor" Type="Int32" />
-          <Property Name="map_iframe" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="group_buying_url" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="info_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Community_News" Relationship="C591613_TylynaModel.FK_Community_News_Community" FromRole="Community" ToRole="Community_News" />
-        </EntityType>
-        <EntityType Name="Community_News">
-          <Key>
-            <PropertyRef Name="community_news_id" />
-          </Key>
-          <Property Name="community_news_id" Type="Int32" Nullable="false" />
-          <Property Name="community_id" Type="Int32" Nullable="false" />
-          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="context" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="start_date" Type="DateTime" Precision="0" />
-          <Property Name="end_date" Type="DateTime" Precision="0" />
-          <Property Name="state" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Community" Relationship="C591613_TylynaModel.FK_Community_News_Community" FromRole="Community_News" ToRole="Community" />
-        </EntityType>
-        <Association Name="FK_Community_News_Community">
-          <End Type="C591613_TylynaModel.Community" Role="Community" Multiplicity="1" />
-          <End Type="C591613_TylynaModel.Community_News" Role="Community_News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Community">
-              <PropertyRef Name="community_id" />
-            </Principal>
-            <Dependent Role="Community_News">
-              <PropertyRef Name="community_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ProductKind">
           <Key>
             <PropertyRef Name="product_kind_id" />
@@ -948,6 +863,7 @@
           <Property Name="remit_money" Type="Double" />
           <Property Name="remit_memo" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PurchaseDetail" Relationship="C591613_TylynaModel.FK_PurchaseDetail_Purchase" FromRole="Purchase" ToRole="PurchaseDetail" />
+          <NavigationProperty Name="Customer" Relationship="C591613_TylynaModel.FK_Purchase_Customer" FromRole="Purchase" ToRole="Customer" />
         </EntityType>
         <EntityType Name="PurchaseDetail">
           <Key>
@@ -1013,6 +929,34 @@
           <Property Name="shipment_fee" Type="Int32" Nullable="false" />
           <Property Name="bank_charges" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="c_pw" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="c_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="Boolean" />
+          <Property Name="tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Purchase" Relationship="C591613_TylynaModel.FK_Purchase_Customer" FromRole="Customer" ToRole="Purchase" />
+        </EntityType>
+        <Association Name="FK_Purchase_Customer">
+          <End Type="C591613_TylynaModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="C591613_TylynaModel.Purchase" Role="Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1190,50 +1134,6 @@
               <ScalarProperty Name="menu_id" ColumnName="menu_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Community">
-            <EntityTypeMapping TypeName="C591613_TylynaModel.Community">
-              <MappingFragment StoreEntitySet="Community">
-                <ScalarProperty Name="info_content" ColumnName="info_content" />
-                <ScalarProperty Name="group_buying_url" ColumnName="group_buying_url" />
-                <ScalarProperty Name="map_iframe" ColumnName="map_iframe" />
-                <ScalarProperty Name="over_floor" ColumnName="over_floor" />
-                <ScalarProperty Name="under_floor" ColumnName="under_floor" />
-                <ScalarProperty Name="age" ColumnName="age" />
-                <ScalarProperty Name="contact" ColumnName="contact" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="tel" ColumnName="tel" />
-                <ScalarProperty Name="txt_public" ColumnName="txt_public" />
-                <ScalarProperty Name="txt_spot" ColumnName="txt_spot" />
-                <ScalarProperty Name="build" ColumnName="build" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="manage" ColumnName="manage" />
-                <ScalarProperty Name="perOfHolder" ColumnName="perOfHolder" />
-                <ScalarProperty Name="holders" ColumnName="holders" />
-                <ScalarProperty Name="total_floor" ColumnName="total_floor" />
-                <ScalarProperty Name="typeOfBuild" ColumnName="typeOfBuild" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="finish" ColumnName="finish" />
-                <ScalarProperty Name="intro" ColumnName="intro" />
-                <ScalarProperty Name="passwd" ColumnName="passwd" />
-                <ScalarProperty Name="account" ColumnName="account" />
-                <ScalarProperty Name="community_name" ColumnName="community_name" />
-                <ScalarProperty Name="community_id" ColumnName="community_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Community_News">
-            <EntityTypeMapping TypeName="C591613_TylynaModel.Community_News">
-              <MappingFragment StoreEntitySet="Community_News">
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="context" ColumnName="context" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="community_id" ColumnName="community_id" />
-                <ScalarProperty Name="community_news_id" ColumnName="community_news_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProductKind">
             <EntityTypeMapping TypeName="C591613_TylynaModel.ProductKind">
               <MappingFragment StoreEntitySet="ProductKind">
@@ -1336,6 +1236,22 @@
                 <ScalarProperty Name="limit_money" ColumnName="limit_money" />
                 <ScalarProperty Name="pay_type" ColumnName="pay_type" />
                 <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+                <ScalarProperty Name="c_pw" ColumnName="c_pw" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

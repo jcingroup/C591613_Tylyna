@@ -4,8 +4,14 @@
     ViewBag.BodyClass = "Cart";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
+@section Scripts {
+    <script src="~/Scripts/build/app/vendors.js?v=@CommWebSetup.CacheVer"></script>
+    <script src="~/Scripts/build/font/order.js"></script>
+}
 
-<section class="m-b-32 text-left">
+<div id="page_content"></div>
+<!--
+    <section class="m-b-32 text-left">
     <h2 class="payment-title"><em>1</em>確定訂單明細</h2>
     <table class="payment-list">
         <tr>
@@ -50,6 +56,9 @@
         </tfoot>
     </table>
 </section>
+
+-->
+
 
 <section class="m-b-32 text-left">
     <h2 class="payment-title"><em>2</em>填寫購買資訊</h2>

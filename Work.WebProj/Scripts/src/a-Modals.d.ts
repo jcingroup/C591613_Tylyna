@@ -179,7 +179,9 @@
         remit_date?: Date;
         remit_money?: number;
         remit_memo?: string;
-        PurchaseDetail?: Array<server.ProductDetail>;
+        PurchaseDetail?: Array<server.PurchaseDetail>;
+
+        Deatil?: Array<server.PurchaseDetail>;
     }
 
     interface PurchaseDetail {

@@ -44,5 +44,6 @@ namespace ProcCore.Business.DB0
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseDetail> PurchaseDetail { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

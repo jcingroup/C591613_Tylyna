@@ -22,7 +22,29 @@ namespace DotWeb.Controllers
         // 填寫訂單資料
         public ActionResult Step1_order()
         {
-            return View();
+            Purchase md = new Purchase();
+            List<PurchaseDetail> mds = new List<PurchaseDetail>();
+            if (Session["ShoppingCart"] != null)
+                mds = (List<PurchaseDetail>)Session["ShoppingCart"];
+
+            if (mds.Count() <= 0)//購物車內沒資料,無法連到確認訂單
+            {
+                return Redirect("~/Order/Index");
+            }
+            using (var db0 = getDB0())
+            {
+                md = new Purchase()
+                {
+                    purchase_no=null,//後面再帶入
+                    customer_id=0,//後面再帶入
+                    pay_state=0,
+                    ship_state=0,
+                    Deatil=mds
+                };
+
+            }
+
+            return View(md);
         }
         // 下訂完成
         public ActionResult Step2_check()

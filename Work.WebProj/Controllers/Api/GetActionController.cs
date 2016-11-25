@@ -129,12 +129,6 @@ namespace DotWeb.Api
             }
             return t3.ToList();
         }
-        public async Task<IHttpActionResult> GetOptionsCommunity()
-        {
-            db0 = getDB0();
-            var options = await db0.Community.Select(x => new { x.community_id, x.community_name }).OrderBy(x => x.community_id).ToListAsync();
-            return Ok(options);
-        }
         #region 後台-參數設定
         [HttpPost]
         public ResultInfo PostAboutUs([FromBody]AboutUsParm md)
@@ -158,29 +152,6 @@ namespace DotWeb.Api
         }
 
         #endregion
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IHttpActionResult> GetNewsList(int id)
-        {
-            db0 = getDB0();
-
-
-            var predicate = PredicateBuilder.True<Community_News>();
-            predicate = predicate.And(x => x.start_date <= DateTime.Now);
-            predicate = predicate.And(x => x.end_date >= DateTime.Now);
-            predicate = predicate.And(x => x.state == "A");
-            predicate = predicate.And(x => x.community_id == id);
-
-            var result = await db0.Community_News.AsExpandable()
-                .OrderByDescending(x => x.community_id)
-                .Where(predicate)
-                .ToListAsync();
-
-            //var r = new ResultInfo<Matter>();
-            //r.result = true;
-            //r.data = result;
-            return Ok(result);
-        }
     }
     #region Parm
 

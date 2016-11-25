@@ -96,10 +96,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>C591613_Tylyna.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DB0\Community.cs">
-      <DependentUpon>C591613_Tylyna.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\Community_News.cs">
+    <Compile Include="DB0\Customer.cs">
       <DependentUpon>C591613_Tylyna.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\C__MigrationHistory.cs">
@@ -153,7 +150,6 @@
     <Compile Include="Models\PurchaseDetail.cs" />
     <Compile Include="Models\ProductDetail.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Matter.cs" />
     <Compile Include="Models\ProductKind.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
