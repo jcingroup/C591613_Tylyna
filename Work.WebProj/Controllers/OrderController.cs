@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using ProcCore.Business.DB0;
 using System;
 using System.Linq;
+using DotWeb.CommSetup;
+using ProcCore.Business.LogicConect;
 
 namespace DotWeb.Controllers
 {
@@ -22,10 +24,10 @@ namespace DotWeb.Controllers
         // 填寫訂單資料
         public ActionResult Step1_order()
         {
-            Purchase md = new Purchase();
+            OrderInfo md = new OrderInfo();
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
-            if (Session["ShoppingCart"] != null)
-                mds = (List<PurchaseDetail>)Session["ShoppingCart"];
+            if (Session[this.CartSession] != null)
+                mds = (List<PurchaseDetail>)Session[this.CartSession];
 
             if (mds.Count() <= 0)//購物車內沒資料,無法連到確認訂單
             {
@@ -33,15 +35,36 @@ namespace DotWeb.Controllers
             }
             using (var db0 = getDB0())
             {
-                md = new Purchase()
-                {
-                    purchase_no=null,//後面再帶入
-                    customer_id=0,//後面再帶入
-                    pay_state=0,
-                    ship_state=0,
-                    Deatil=mds
-                };
 
+                int c_id = (this.isLogin) ? int.Parse(this.MemberId) : 0;
+                var item = (this.isLogin) ? db0.Customer.Where(x => x.customer_id == c_id).FirstOrDefault() : null;
+                foreach (var i in mds)
+                {
+                    var img = getImgFirst("ProductImg", i.product_id.ToString(), "600");
+                    i.img_src = img != null ? img.src_path : null;
+                }
+                var purchase = new Purchase()
+                {
+                    purchase_no = null,//後面再帶入
+                    pay_state = (int)IPayState.unpaid,
+                    ship_state = (int)IShipState.unshipped,
+                    total = mds.Sum(x => x.sub_total),
+                    ship_fee = 0,
+                    bank_charges = 0,
+                    Deatil = mds
+                };
+                if (item != null)
+                {//有登入預設帶入會員資料
+                    purchase.customer_id = item.customer_id;
+                    purchase.receive_email = item.email;
+                    purchase.receive_name = item.c_name;
+                    purchase.receive_tel = item.tel;
+                    purchase.receive_mobile = item.mobile;
+                    purchase.receive_zip = item.zip;
+                    purchase.receive_address = item.address;
+                }
+                md.ship = db0.Shipment.OrderByDescending(x => x.limit_money).ToList();
+                md.purchase = purchase;
             }
 
             return View(md);
@@ -61,6 +84,123 @@ namespace DotWeb.Controllers
         {
             return View();
         }
+
+        #region 訂單
+        [HttpPost]
+        public string setOrder(Purchase md)
+        {
+            ResultInfo r = new ResultInfo();
+            r.result = true;//預設
+            List<PurchaseDetail> mds = new List<PurchaseDetail>();
+            try
+            {
+                #region 加入會員
+                if (!this.isLogin)
+                {
+                    var customer = new Customer()
+                    {
+                        email = md.receive_email,
+                        c_pw = CommWebSetup.DEV_MemberPWD,
+                        c_name = md.receive_name,
+                        tel = md.receive_tel,
+                        mobile = md.receive_mobile,
+                        zip = md.receive_zip,
+                        address = md.receive_address
+                    };
+                    r = addCustomer(customer);
+                    if (r.result)
+                        md.customer_id = r.id;
+                }
+
+                #endregion
+                #region 送出訂單
+                if (r.result)
+                {
+                    using (var db0 = getDB0())
+                    {
+                        #region 有產品不存在或下架
+                        bool p_check = false; List<string> err = new List<string>();
+                        foreach (var d in md.Deatil)
+                        {
+                            bool d_check = db0.ProductDetail.Any(x => x.product_detail_id == d.product_detail_id & x.product_id == d.product_id &
+                                                                   x.Product.stock_state == (int)IStockState.on_store_shelves & x.stock_state == (int)IStockState.on_store_shelves &
+                                                                   !x.Product.i_Hide);
+                            if (d_check)
+                            {
+                                var item = db0.ProductDetail.Find(d.product_detail_id);
+                                d.p_d_sn = item.sn;//產品料號
+                                d.p_name = item.Product.product_name;//產品名稱
+                                d.p_d_pack_type = item.pack_type;//產品包裝
+                                d.price = item.price;//產品價格
+                                d.sub_total = item.price * d.qty;
+                            }
+                            else
+                            {
+                                p_check = true;
+                                err.Add(d.p_name);
+                            }
+                        }
+                        if (p_check)
+                        {//有產品不存在或下架
+                            r.result = false;
+                            r.message = string.Format(Resources.Res.Log_Err_AddCart_Exist, String.Join("、", err.ToArray()));
+                            return defJSON(r);
+                        }
+                        md.total = md.Deatil.Sum(x => x.sub_total) + md.ship_fee + md.bank_charges;
+                        #endregion
+                    }
+                    r = addPurchase(md);
+                    if (md.receive_email != null & r.result)
+                    {//寄送email
+                        var open = openLogic();
+                        OrderEmail emd = new OrderEmail()
+                        {
+                            purchase = md,
+                            isLogin = this.isLogin,
+                            AccountName = (string)open.getParmValue(ParmDefine.AccountName),
+                            AccountNumber = (string)open.getParmValue(ParmDefine.AccountNumber),
+                            BankCode = (string)open.getParmValue(ParmDefine.BankCode),
+                            BankName = (string)open.getParmValue(ParmDefine.BankName)
+                        };
+
+                        #region 信件發送
+                        string Body = getMailBody("../Email/Email_order", emd);//套用信件版面
+                        Boolean mail;
+
+                        #region 收信人及寄信人
+                        string sendMail = openLogic().getReceiveMails()[0];
+
+                        List<string> r_mails = openLogic().getReceiveMails().ToList();
+                        if (!r_mails.Any(x => x == md.receive_email)) { r_mails.Add(md.receive_name + ":" + md.receive_email); }
+                        #endregion
+
+                        mail = Mail_Send(sendMail, //寄信人
+                                        r_mails.ToArray(), //收信人
+                                        string.Format(CommWebSetup.MailTitle_Order, Resources.Res.System_FrontName), //信件標題
+                                        Body, //信件內容
+                                        true); //是否為html格式
+                        if (mail == false)
+                        {//送信失敗
+                            r.result = true;
+                            r.message = Resources.Res.Log_Err_SendMailFail;
+                            return defJSON(r);
+                        }
+                        #endregion
+
+                        r.message = Resources.Res.Log_Success_Order;
+                        Session.Remove(this.CartSession);
+                    }
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message;
+            }
+            return defJSON(r);
+        }
+        #endregion
         #region 購物車
         /// <summary>
         /// 取得購物車資料
@@ -74,8 +214,8 @@ namespace DotWeb.Controllers
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
             try
             {
-                if (Session["ShoppingCart"] != null)
-                    mds = (List<PurchaseDetail>)Session["ShoppingCart"];
+                if (Session[this.CartSession] != null)
+                    mds = (List<PurchaseDetail>)Session[this.CartSession];
 
                 foreach (var i in mds)
                 {
@@ -100,21 +240,21 @@ namespace DotWeb.Controllers
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
             try
             {
-                if (Session["ShoppingCart"] != null)
-                    mds = (List<PurchaseDetail>)Session["ShoppingCart"];
+                if (Session[this.CartSession] != null)
+                    mds = (List<PurchaseDetail>)Session[this.CartSession];
 
                 var del_item = mds.Where(x => x.product_detail_id == p_d_id).FirstOrDefault();
                 if (del_item != null)
                     mds.Remove(del_item);
 
-                if (Session["ShoppingCart"] == null || del_item == null)
+                if (Session[this.CartSession] == null || del_item == null)
                 {
                     r.result = false;
                     r.message = Resources.Res.Log_Err_Cart_ProductExist;
                 }
                 else
                 {//有抓到購物車及刪除資料才更新購物車內容
-                    Session["ShoppingCart"] = mds;
+                    Session[this.CartSession] = mds;
                     r.result = true;
                     r.id = mds.Count();
                 }
@@ -134,8 +274,8 @@ namespace DotWeb.Controllers
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
             try
             {
-                if (Session["ShoppingCart"] != null)
-                    mds = (List<PurchaseDetail>)Session["ShoppingCart"];
+                if (Session[this.CartSession] != null)
+                    mds = (List<PurchaseDetail>)Session[this.CartSession];
 
                 var item = mds.Where(x => x.product_detail_id == p.p_d_id).FirstOrDefault();
                 if (item != null)
@@ -144,14 +284,14 @@ namespace DotWeb.Controllers
                     item.sub_total = p.qty * item.price;
                 }
 
-                if (Session["ShoppingCart"] == null || item == null)
+                if (Session[this.CartSession] == null || item == null)
                 {
                     r.result = false;
                     r.message = Resources.Res.Log_Err_Cart_ProductExist;
                 }
                 else
                 {//有抓到購物車及修改資料才更新購物車內容
-                    Session["ShoppingCart"] = mds;
+                    Session[this.CartSession] = mds;
                     r.result = true;
                 }
             }
@@ -168,5 +308,22 @@ namespace DotWeb.Controllers
     {
         public int p_d_id { get; set; }
         public int qty { get; set; }
+    }
+    public class OrderInfo
+    {
+        public Purchase purchase { get; set; }
+        public IEnumerable<Shipment> ship { get; set; }
+    }
+    public class OrderEmail
+    {
+        //轉帳資訊
+        public string AccountName { get; set; }
+        public string AccountNumber { get; set; }
+        public string BankCode { get; set; }
+        public string BankName { get; set; }
+
+        public bool isLogin { get; set; }
+
+        public Purchase purchase { get; set; }
     }
 }

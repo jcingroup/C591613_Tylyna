@@ -167,7 +167,8 @@
         ship_state?: number;
         cancel_reason?: string;
         total?: number;
-        ship_fee?: number;
+        ship_fee?: number;//運費
+        bank_charges?: number;//手續費
         receive_email?: string;
         receive_name?: string;
         receive_tel?: string;

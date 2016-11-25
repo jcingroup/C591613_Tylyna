@@ -21,5 +21,7 @@
     add_dil: 'add_detail',
     del_dil: 'del_detail',
     update_dil: 'update_detail',
-    cancel_dil:'cancel_detail',
+    cancel_dil: 'cancel_detail',
+    //換頁
+    chg_oper_page:'change_operator_page'
 }

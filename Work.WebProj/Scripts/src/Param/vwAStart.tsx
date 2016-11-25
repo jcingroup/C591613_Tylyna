@@ -110,7 +110,7 @@ export class AStart extends React.Component<any, any>{
                                 </dl>
                                 {
                                     ship.map((item, i) => {
-                                        if (item.pay_type == PayType.Remit) {
+                                        if (item.pay_type == IPayType.Remit) {
                                             return <dl key={i} className="form-group row">
                                                 <dt className="col-xs-3 form-control-label text-xs-right">運費設定</dt>
                                                 <dd className="col-xs-9 form-inline">
@@ -148,7 +148,7 @@ export class AStart extends React.Component<any, any>{
                             <main className="w3-padding-medium m-t-1">
                                 {
                                     ship.map((item, i) => {
-                                        if (item.pay_type == PayType.CashOnDelivery) {
+                                        if (item.pay_type == IPayType.CashOnDelivery) {
                                             return <dl key={i} className="form-group row">
                                                 <dt className="col-xs-3 form-control-label text-xs-right">運費設定</dt>
                                                 <dd className="col-xs-9 form-inline">

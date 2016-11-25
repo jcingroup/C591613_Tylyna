@@ -12,24 +12,15 @@ namespace ProcCore.Business.DB0
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class News
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
-        {
-            this.Purchase = new HashSet<Purchase>();
-        }
-    
-        public int customer_id { get; set; }
-        public string email { get; set; }
-        public string c_pw { get; set; }
-        public string c_name { get; set; }
-        public Nullable<bool> gender { get; set; }
-        public string tel { get; set; }
-        public string mobile { get; set; }
-        public string zip { get; set; }
-        public string address { get; set; }
-        public Nullable<System.DateTime> birthday { get; set; }
+        public int news_id { get; set; }
+        public string news_title { get; set; }
+        public int news_category { get; set; }
+        public System.DateTime day { get; set; }
+        public string news_info { get; set; }
+        public string news_content { get; set; }
+        public int sort { get; set; }
         public bool i_Hide { get; set; }
         public string i_InsertUserID { get; set; }
         public Nullable<int> i_InsertDeptID { get; set; }
@@ -38,8 +29,5 @@ namespace ProcCore.Business.DB0
         public Nullable<int> i_UpdateDeptID { get; set; }
         public Nullable<System.DateTime> i_UpdateDateTime { get; set; }
         public string i_Lang { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Purchase> Purchase { get; set; }
     }
 }

@@ -353,7 +353,7 @@
     <value>此筆資料已結案!無法刪除!!</value>
   </data>
   <data name="Log_Err_AddCart_Exist" xml:space="preserve">
-    <value>此{0}不存在或補貨中,請重新選擇!謝謝~!</value>
+    <value>此產品:{0} 不存在或補貨中,請重新選擇!謝謝~!</value>
   </data>
   <data name="Log_Err_Cart_ProductExist" xml:space="preserve">
     <value>購物車內無此商品~!</value>
@@ -387,5 +387,11 @@
   </data>
   <data name="Log_Err_googleValideNotEquel" xml:space="preserve">
     <value>請驗證您不是自動程式。</value>
+  </data>
+  <data name="Log_Err_EmailExist" xml:space="preserve">
+    <value>此Email已被申請，不可使用。</value>
+  </data>
+  <data name="Log_Success_Order" xml:space="preserve">
+    <value>訂單已成功送出,請至您的 Email 收取訂單相關資料。</value>
   </data>
 </root>

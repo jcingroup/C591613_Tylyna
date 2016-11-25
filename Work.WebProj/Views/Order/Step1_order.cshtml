@@ -1,10 +1,13 @@
-﻿
+﻿@model DotWeb.Controllers.OrderInfo
 @{
     ViewBag.Title = "LITA Basket";
     ViewBag.BodyClass = "Cart";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 @section Scripts {
+    <script>
+        var json_data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    </script>
     <script src="~/Scripts/build/app/vendors.js?v=@CommWebSetup.CacheVer"></script>
     <script src="~/Scripts/build/font/order.js?v=@CommWebSetup.CacheVer"></script>
 }
@@ -57,10 +60,7 @@
     </table>
 </section>
 
--->
-
-
-<section class="m-b-32 text-left">
+    <section class="m-b-32 text-left">
     <h2 class="payment-title"><em>2</em>填寫購買資訊</h2>
     <form action="" class="payment-data">
         <dl class="row row-p-a">
@@ -108,8 +108,9 @@
         <footer class="submit">
             <a href="~/Order/Cart" class="float-l icon-navigate_before">修改訂單內容</a>
             @* 若要用 button
-            <button class="float-r btn font-lg btn-success">填寫完成，送出訂單 <i class="icon-navigate_next"></i></button> *@
+                <button class="float-r btn font-lg btn-success">填寫完成，送出訂單 <i class="icon-navigate_next"></i></button> *@
             <a href="~/Order/Step2_check" class="float-r btn font-lg btn-success">填寫完成，送出訂單 <i class="icon-navigate_next"></i></a>
         </footer>
     </form>
 </section>
+-->

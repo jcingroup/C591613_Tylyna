@@ -307,6 +307,7 @@
     <Compile Include="Controllers\Api\ProductDetailController.cs" />
     <Compile Include="Controllers\Api\ProductController.cs" />
     <Compile Include="Controllers\Api\ProductKindController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -634,6 +635,7 @@
     <Content Include="Views\User\user-nav.cshtml" />
     <Content Include="Views\News\list.cshtml" />
     <Content Include="Views\News\content.cshtml" />
+    <Content Include="Views\Email\Email_order.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -705,8 +707,11 @@
     <TypeScriptCompile Include="Scripts\src\font\Order\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\font\Order\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\font\Order\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\font\Order\pub.ts" />
     <TypeScriptCompile Include="Scripts\src\font\Order\store.ts" />
     <TypeScriptCompile Include="Scripts\src\font\Order\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\font\Order\vwCheck.tsx" />
+    <TypeScriptCompile Include="Scripts\src\font\Order\vwOrder.tsx" />
     <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\containers.ts" />
@@ -761,6 +766,7 @@
     <TypeScriptCompile Include="Scripts\src\tsx\m-users.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\w-comm.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\InputViewMode.ts" />
+    <TypeScriptCompile Include="Scripts\ts.d\enum\OrderOperatorType.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\PayType.d.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\SelectShowType.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\StockState.d.ts" />

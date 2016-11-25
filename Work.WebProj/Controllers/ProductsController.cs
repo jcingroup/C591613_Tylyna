@@ -107,8 +107,8 @@ namespace DotWeb.Controllers
                 using (var db0 = getDB0())
                 {
                     //確認該產品是否存在,是否在上架中
-                    bool p_check = db0.ProductDetail.Any(x => x.product_detail_id == md.product_detail_id & x.product_id == x.product_id &
-                                                              x.Product.stock_state == (int)StockState.on_store_shelves & x.stock_state == (int)StockState.on_store_shelves &
+                    bool p_check = db0.ProductDetail.Any(x => x.product_detail_id == md.product_detail_id & x.product_id == md.product_id &
+                                                              x.Product.stock_state == (int)IStockState.on_store_shelves & x.stock_state == (int)IStockState.on_store_shelves &
                                                               !x.Product.i_Hide);
 
                     if (p_check)
@@ -121,14 +121,14 @@ namespace DotWeb.Controllers
                         md.price = p_d.price;//產品價格
                         #endregion
 
-                        if (Session["ShoppingCart"] == null)
+                        if (Session[this.CartSession] == null)
                         {
                             mds = new List<PurchaseDetail>();
                             mds.Add(md);
                         }
                         else
                         {
-                            mds = (List<PurchaseDetail>)Session["ShoppingCart"];
+                            mds = (List<PurchaseDetail>)Session[this.CartSession];
                             //判斷產品是否已存在
                             var item = mds.Where(x => x.product_id == md.product_id & x.product_detail_id == md.product_detail_id).FirstOrDefault();
                             if (item != null)
@@ -142,7 +142,7 @@ namespace DotWeb.Controllers
                                 mds.Add(md);
                             }
                         }
-                        Session["ShoppingCart"] = mds;
+                        Session[this.CartSession] = mds;
                         r.result = true;
                         r.id = mds.Count();//購物車目前數量
                     }

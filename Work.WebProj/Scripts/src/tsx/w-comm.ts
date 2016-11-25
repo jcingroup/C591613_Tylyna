@@ -102,7 +102,8 @@ namespace MemberLogin {
             .then((data: LoginResult) => {
                 mask_off();
                 if (data.result) {
-                    document.location.href = data.url;
+                    //document.location.href = data.url;
+                    document.location.reload();
                 }
                 else {
                     $("#m_pwd").val("");

@@ -237,7 +237,7 @@ namespace DotWeb.Areas.Base.Controllers
 
             FormsAuthentication.SignOut();
             if (getLoginFlag == "Y")
-                return Redirect("~");
+                return Redirect(Request.UrlReferrer.ToString());//回上一頁面重整
             else
                 return Redirect("~/_SysAdm?t=" + DateTime.Now.Ticks);
 

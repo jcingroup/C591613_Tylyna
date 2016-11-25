@@ -2,7 +2,8 @@
 import Moment = require('moment');
 import {TagShowAndHide, InputNum} from '../../components';
 import {ac_type_comm} from '../../action_type';
-import {config, UIText, IHideTypeData, IStockStateData, IPackTypeData} from '../../ts-comm/def-data';
+import {IPackTypeData} from '../../ts-comm/def-data';
+import {fmt_money} from '../../ts-comm/comm-func';
 
 declare var id: number;
 
@@ -62,15 +63,15 @@ export class AStart extends React.Component<any, any>{
                                         return <tr key={i}>
                                             <td className="item">
                                                 {this.getPackName(detail.pack_type) }
-                                                <small className="block text-info">NT$ {detail.price}</small>
+                                                <small className="block text-info">NT$ {fmt_money(detail.price) }</small>
                                             </td>
                                             <td className="spec">
-                                                {detail.weight}g/包
+                                                {fmt_money(detail.weight) }g/包
                                             </td>
-                                            <TagShowAndHide TagName={TagName.Td} show={detail.stock_state === StockState.replenishment} colSpan={2} className="text-left" key={'d-' + i}>
+                                            <TagShowAndHide TagName={TagName.Td} show={detail.stock_state === IStockState.replenishment} colSpan={2} className="text-left" key={'d-' + i}>
                                                 <span className="label label-secondary font-lg">補貨中</span>
                                             </TagShowAndHide>
-                                            <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== StockState.replenishment} className="num"  key={'d-t-' + i}>
+                                            <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== IStockState.replenishment} className="num"  key={'d-t-' + i}>
                                                 <InputNum
                                                     inputClassName="form-element text-center"
                                                     inputViewMode={InputViewMode.edit}
@@ -80,7 +81,7 @@ export class AStart extends React.Component<any, any>{
                                                     min={1}
                                                     />
                                             </TagShowAndHide>
-                                            <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== StockState.replenishment} className="add-cart"  key={'d-b-' + i}>
+                                            <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== IStockState.replenishment} className="add-cart"  key={'d-b-' + i}>
                                                 <i className="icon-cart"></i>
                                                 <button className="btn" type="button" onClick={this.addProductToCart.bind(this, detail) }>ADD</button>
                                             </TagShowAndHide>
@@ -98,10 +99,10 @@ export class AStart extends React.Component<any, any>{
                         <dd dangerouslySetInnerHTML={{ __html: item.info }}>
                         </dd>
                         <dd className="btn-bar">
-                            <TagShowAndHide TagName={TagName.Span} show={item.stock_state === StockState.on_store_shelves}>
+                        <TagShowAndHide TagName={TagName.Span} show={item.stock_state === IStockState.on_store_shelves}>
                                 <a className="btn bg-danger" onClick={this.openDetailModal}>我要購買</a>
                             </TagShowAndHide>
-                            <TagShowAndHide TagName={TagName.Span} show={item.stock_state === StockState.replenishment}>
+                        <TagShowAndHide TagName={TagName.Span} show={item.stock_state === IStockState.replenishment}>
                                 {/* 後台設定補貨中時，上列連結隱藏，下列文字顯示 */}
                                 <span className="label label-secondary font-lg">補貨中</span>
                             </TagShowAndHide>

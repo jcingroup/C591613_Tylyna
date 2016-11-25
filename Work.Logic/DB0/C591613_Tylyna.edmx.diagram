@@ -27,13 +27,14 @@
         <AssociationConnector Association="C591613_TylynaModel.FK_Product_ProductKind" />
         <EntityTypeShape EntityType="C591613_TylynaModel.ProductDetail" Width="1.5" PointX="12.875" PointY="12.25" />
         <AssociationConnector Association="C591613_TylynaModel.FK_ProductDetail_Product" />
-        <EntityTypeShape EntityType="C591613_TylynaModel.Purchase" Width="1.5" PointX="12.875" PointY="16" />
         <EntityTypeShape EntityType="C591613_TylynaModel.PurchaseDetail" Width="1.5" PointX="15.125" PointY="14.5" />
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Product" />
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_ProductDetail" />
-        <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Purchase" />
         <EntityTypeShape EntityType="C591613_TylynaModel.Shipment" Width="1.5" PointX="0.75" PointY="11.75" />
-        <EntityTypeShape EntityType="C591613_TylynaModel.Customer" Width="1.5" PointX="10.625" PointY="17.125" />
+        <EntityTypeShape EntityType="C591613_TylynaModel.Purchase" Width="1.5" PointX="12.875" PointY="15.875" />
+        <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Purchase" />
+        <EntityTypeShape EntityType="C591613_TylynaModel.News" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="C591613_TylynaModel.Customer" Width="1.5" PointX="10.625" PointY="17.375" />
         <AssociationConnector Association="C591613_TylynaModel.FK_Purchase_Customer" />
       </Diagram>
     </edmx:Diagrams>

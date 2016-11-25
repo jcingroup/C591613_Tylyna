@@ -1,0 +1,299 @@
+﻿@model DotWeb.Controllers.OrderEmail
+@using ProcCore.Business.DB0
+@{
+    ViewBag.Title = "Email";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>【@Resources.Res.System_FrontName】訂單確認</title>
+    <style type="text/css">
+        body {
+            width: 100% !important;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+        }
+
+        * {
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .ExternalClass * {
+            line-height: 100%;
+        }
+
+        table td {
+            border-collapse: collapse;
+        }
+
+        *[class].wlf {
+            width: 600px;
+        }
+
+        *[class].w-280 {
+            width: 280px;
+        }
+
+        *[class].w-200 {
+            width: 200px;
+        }
+
+        *[class].w-150 {
+            width: 150px;
+        }
+
+        *[class].w-130 {
+            width: 130px;
+        }
+
+        *[class].w-120 {
+            width: 120px;
+        }
+
+        *[class].w-30 {
+            width: 30px;
+        }
+    </style>
+</head>
+<body style="font: .8em/140% '微軟正黑體', 'Microsoft JhengHei', Helvetica, sans-serif;">
+    <table width="100%" bgcolor="#ffffff" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed">
+        <tr>
+            <td>
+
+                <!--[if mso]><table width="600" border="0" cellspacing="0" cellpadding="0" align="center"><tr><td><![endif]-->
+
+                <table class="wlf full-width" width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="margin:0 auto;max-width:600px">
+                    <tr>
+                        <td>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="14%">&nbsp;</td>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td height="20">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                @* LOGO圖 230x91 *@
+                                                <td><a href="@CommWebSetup.DEV_WebUrl" target="_blank"><img src=@(CommWebSetup.DEV_WebUrl + "/Content/images/logo.gif") width="230" alt="" style="display:block;border:none;width:100%;max-width:230px;max-height:91px" /></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="30">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="14%">&nbsp;</td>
+                                </tr>
+                            </table>
+
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center" style="font-size:1px;line-height:1px"><img src="https://s3.amazonaws.com/rejoiner/generic/b/div.png" width="574" alt="1KOMO 萬客摩" style="display:block;width:100%;max-width:574px;max-height:8px" /></td>
+                                </tr>
+                                <tr>
+                                    <td height="25">&nbsp;</td>
+                                </tr>
+                            </table>
+
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="14%">&nbsp;</td>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td style="color:#000001;font-size:30px;font-weight:bold;line-height:34px">訂單確認－@Resources.Res.System_FrontName</td>
+                                            </tr>
+                                            @* <tr>
+                                                    <td style="color:#000001;font-size:18px;line-height:22px">小標題</td>
+                                                </tr> *@
+                                            <tr>
+                                                <td height="25">&nbsp;</td>
+                                            </tr>
+                                            @if (!Model.isLogin)
+                                            {
+                                                <tr>
+                                                    <td style="color:#E63F00;font-size:16px;line-height:24px">
+                                                        已成功加入會員！<br />
+                                                        登入帳號為Email,預設密碼為：@CommWebSetup.DEV_MemberPWD
+                                                    </td>
+                                                </tr>
+                                            }
+                                            <tr>
+                                                <td style="color:#6c6457;font-size:16px;line-height:24px">
+                                                    訂單編號：@Model.purchase.purchase_no<br>
+                                                    訂單日期：@Model.purchase.order_date.ToString("yyyy-MM-dd HH:mm")<br>
+                                                    收件人：@Model.purchase.receive_name<br>
+                                                    聯絡電話：@Model.purchase.receive_tel　手機：@Model.purchase.receive_mobile<br>
+                                                    收件地址：@(Model.purchase.receive_zip + Model.purchase.receive_address)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="25">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <!--[if mso]>
+                                                    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{cart_data.return_url}}" style="height:40px;v-text-anchor:middle;width:164px;" stroke="f" fillcolor="#767575">
+                                                      <w:anchorlock/>
+                                                      <center>
+                                                    <![endif]-->
+                                                    <a href=@(CommWebSetup.DEV_WebUrl+"/User/Receipt_list") target="_blank" style="background-color:#767575;color:#ffffff;display:inline-block;font-size:14px;font-weight:bold;line-height:40px;text-align:center;text-decoration:none;width:164px;-webkit-text-size-adjust:none">查詢訂單資訊</a>
+                                                    <!--[if mso]>
+                                                        </center>
+                                                      </v:rect>
+                                                    <![endif]-->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="14%">&nbsp;</td>
+                                </tr>
+                            </table>
+
+                            <table width="100%" bgcolor="#f8f8f8" border="0" cellspacing="0" cellpadding="0">
+
+                                @* 商品 *@
+                                <tr>
+                                    <td height="20">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="14%">&nbsp;</td>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            @foreach (var i in Model.purchase.Deatil)
+                                            {
+                                                <tr>
+                                                    <td style="color:#999;font-size:12px;line-height:14px">商品編號 @i.p_d_sn</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="color:#000001;font-size:14px;font-weight:bold;line-height:18px">
+                                                        @(i.p_name + " " + @CodeSheet.GetStateVal((int)i.p_d_pack_type, i_CodeName.Value, CodeSheet.pack_type))<br>
+                                                        數量：@i.qty　小計：NT$ @string.Format("{0:N0}", i.sub_total)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </table>
+                                    </td>
+                                    <td width="14%">&nbsp;</td>
+                                </tr>
+                                @* 商品 end *@
+
+
+                                @* 總計 *@
+                                <tr>
+                                    <td height="20">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="14%">&nbsp;</td>
+                                    <td style="color:#777879;font-size:18px;font-weight:bold;line-height:22px">
+                                        總計：NT$ @string.Format("{0:N0}", Model.purchase.total) (含運費、手續費)
+                                    </td>
+                                    <td width="14%">&nbsp;</td>
+                                </tr>
+                                @* 總計 end *@
+
+                                <tr>
+                                    <td height="20">&nbsp;</td>
+                                </tr>
+                            </table>
+
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td height="25">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="14%">&nbsp;</td>
+                                    <td style="font-size:18px;font-weight:bold;line-height:22px">
+                                        付款資訊 <span style="color:#777879;font-size:16px;line-height:22px">請於 3 日內完成付款</span>
+                                    </td>
+                                    <td width="14%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="20">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="14%">&nbsp;</td>
+                                    <td style="color:#777879;font-size:16px;line-height:24px">
+                                        轉帳金額：<strong style="color:#E60112">NT$ @string.Format("{0:N0}", Model.purchase.total)</strong><br>
+                                        轉帳銀行：<strong style="color:#E60112">@Model.BankName (代號: @Model.BankCode)</strong><br>
+                                        轉帳戶名：<strong style="color:#E60112">@Model.AccountName</strong>
+                                        轉帳帳號：<strong style="color:#E60112">@Model.AccountNumber</strong>
+                                    </td>
+                                    <td width="14%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="20">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="14%">&nbsp;</td>
+                                    <td>
+                                        <a href=@(CommWebSetup.DEV_WebUrl + "/Order/Reply?no=" + Model.purchase.purchase_no) target="_blank" style="background-color:#F15A24;color:#ffffff;display:inline-block;font-size:18px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;width:400px;-webkit-text-size-adjust:none;">付款後請按此回覆，以利對帳，謝謝</a>
+                                    </td>
+                                    <td width="14%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="60">&nbsp;</td>
+                                </tr>
+                            </table>
+
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center" style="font-size:1px;line-height:1px"><img src="https://s3.amazonaws.com/rejoiner/generic/b/div.png" width="574" alt="" style="display:block;width:100%;max-width:574px;max-height:8px" /></td>
+                                </tr>
+                                <tr>
+                                    <td height="30">&nbsp;</td>
+                                </tr>
+                            </table>
+
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="5%">&nbsp;</td>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td align="center" style="color:#000001;font-size:24px;font-weight:bold;line-height:28px">
+                                                    TEL: (03) 4275-832　Mobile: (09) 79-777-270
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="15" style="font-size:1px;line-height:1px">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="color:#666666;font-family:Arial, sans-serif;font-size:11px;line-height:16px">Copyright &copy; 2015 @Resources.Res.System_FrontName All Rights Reserved</td>
+                                            </tr>
+                                            <tr>
+                                                <td height="5" style="font-size:1px;line-height:1px">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="color:#666666;font-family:Arial, sans-serif;font-size:11px;line-height:16px">320 桃園市中壢區復興路161號4樓</td>
+                                            </tr>
+                                            <tr>
+                                                <td height="5" style="font-size:1px;line-height:1px">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="5%">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <!--[if mso]></td></tr></table><![endif]-->
+
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

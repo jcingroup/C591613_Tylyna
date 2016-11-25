@@ -49,7 +49,7 @@ export function isValidJSONDate(value: string, userFormat) {
 
     return isDate(theDate, theFormat)
 }
-export function moneyFormat(n: number, g?: string): string {
+export function fmt_money(n: number, g?: string): string {
     /*
     Autohr:Ajoe
     Date:2015/12/09

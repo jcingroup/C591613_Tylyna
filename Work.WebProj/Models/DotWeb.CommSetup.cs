@@ -118,11 +118,18 @@ namespace DotWeb.CommSetup
                 return GetKeyValue("MailServer");
             }
         }
-        public static string MailTitle_VIP
+        public static string MailTitle_Order
         {
             get
             {
-                return GetKeyValue("MailTitle_VIP");
+                return GetKeyValue("MailTitle_Order");
+            }
+        }
+        public static string DEV_WebUrl
+        {//email用
+            get
+            {
+                return GetKeyValue("DEV_WebUrl");
             }
         }
         public static string[] MailToList

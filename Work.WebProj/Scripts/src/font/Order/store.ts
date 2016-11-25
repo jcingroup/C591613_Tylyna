@@ -2,24 +2,48 @@
 import { combineReducers } from 'redux'
 import {ac_type_comm} from '../../action_type';
 
-const grid = (state: Array<server.PurchaseDetail> = [], action): Array<server.PurchaseDetail> => {
+let init_f: server.Purchase = {
+    Deatil: []
+};
+const detail = 'Deatil';
+const field = (state: server.Purchase = init_f, action) => {
     switch (action.type) {
         case ac_type_comm.load:
-            return action.items;
-        case ac_type_comm.chg_grid_val:
-            let struct = {
-                [action.i]: {
-                    [action.name]: { $set: action.value }
-                }
+            return action.item;
+        case ac_type_comm.chg_fld_val:
+            let f_struct_1 = {
+                [action.name]: { $set: action.value }
             };
-            let n_state = update(state, struct);
-            return n_state;
+            let n_state_1 = update(state, f_struct_1);
+            return n_state_1;
+        default:
+            return state
+    }
+}
+
+const ship = (state: Array<server.Shipment> = [], action) => {
+    switch (action.type) {
+        case ac_type_comm.load:
+            return action.ship;
+        default:
+            return state
+    }
+}
+
+//操作頁面
+export const oper_page = (state = OrderOperatorType.Order, action): OrderOperatorType => {
+    switch (action.type) {
+        case ac_type_comm.load:
+            return OrderOperatorType.Order;
+        case ac_type_comm.chg_oper_page:
+            return action.data;
         default:
             return state;
     }
 }
+
 export const combine = combineReducers({
-    grid
+    field, ship, oper_page
 })
 
 export default combine;

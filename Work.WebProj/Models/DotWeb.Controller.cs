@@ -708,6 +708,7 @@ namespace DotWeb.Controller
         //protected readonly string sessionMemberLoginString = "CestLaVie.loginMail";
         private readonly string sysUpFilePathTpl = "~/_Code/SysUpFiles/{0}.{1}/{2}/{3}/{4}";
         private string getImg_path_tpl = "~/_Code/SysUpFiles/{0}/{1}/{2}/{3}";
+        protected string CartSession = "ShoppingCart";
         protected WebInfo wi;
         protected string MemberId;
         protected Boolean isLogin;//判斷會員是否登入
@@ -977,46 +978,7 @@ namespace DotWeb.Controller
             }
             return r;
         }
-        /// <summary>
-        /// 取得前台每頁左選單內容
-        /// </summary>
-        public void ajax_GetSidebarData()
-        {
-            //List<L1> l1 = new List<L1>();
-            //using (var db = getDB0())
-            //{
-            //    l1 = db.ProductCategory_l1.Where(x => !x.i_Hide).OrderByDescending(x => x.sort)
-            //                    .Select(x => new L1()
-            //                    {
-            //                        l1_id = x.product_category_l1_id,
-            //                        l1_name = x.category_l1_name
-            //                    }).ToList();
-            //    foreach (var item in l1)
-            //    {
-            //        item.l2_list = db.ProductCategory_l2.Where(x => !x.i_Hide & x.product_category_l1_id == item.l1_id).OrderByDescending(x => x.sort)
-            //                            .Select(x => new L2()
-            //                            {
-            //                                l2_id = x.product_category_l2_id,
-            //                                l2_name = x.category_l2_name
-            //                            }).ToList();
-            //    }
 
-            //}
-            //ViewBag.Sidebar = l1;
-        }
-        /// <summary>
-        /// 取得萬客摩關於我們資料
-        /// </summary>
-        public void ajax_GetAboutUsData()
-        {
-            string AboutUs = string.Empty;
-            using (var db = getDB0())
-            {
-                var open = openLogic();
-                AboutUs = RemoveHTMLTag((string)open.getParmValue(ParmDefine.AboutUs));
-            }
-            ViewBag.AboutUs = AboutUs;
-        }
         #region 前台抓取圖片
         public string[] GetImgs(string id, string file_kind, string category1, string category2, string size)
         {
@@ -1241,6 +1203,82 @@ namespace DotWeb.Controller
             }
 
             return result;
+        }
+        #endregion
+
+        #region 會員相關
+        public ResultInfo addCustomer(Customer md)
+        {
+            ResultInfo r = new ResultInfo();
+            try
+            {
+                using (var db0 = getDB0())
+                {
+                    bool check_email = db0.Customer.Any(x => x.email == md.email);
+                    if (check_email)
+                    {
+                        r.result = false;
+                        r.message = Resources.Res.Log_Err_EmailExist;
+                        return r;
+                    }
+                    using (TransactionScope tx = new TransactionScope())
+                    {
+                        md.customer_id = GetNewId(CodeTable.Customer);
+                        md.i_InsertDateTime = DateTime.Now;
+                        md.i_Lang = "zh-TW";
+
+                        db0.Customer.Add(md);
+
+                        db0.SaveChanges();
+                        tx.Complete();
+                        r.result = true;
+                        r.id = md.customer_id;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.ToString();
+            }
+            return r;
+        }
+        public ResultInfo addPurchase(Purchase md)
+        {
+            ResultInfo r = new ResultInfo();
+            try
+            {
+                using (var db0 = getDB0())
+                {
+                    using (TransactionScope tx = new TransactionScope())
+                    {
+                        md.purchase_no = "P" + DateTime.Now.ToString("yyyyMMdd") + GetNewId(CodeTable.Purchase);//訂單編號
+                        md.order_date = DateTime.Now;//訂購日期
+                        md.pay_state = (int)IPayState.unpaid;//付款狀態
+                        md.ship_state = (int)IShipState.unshipped;//出貨狀態
+
+                        foreach (var i in md.Deatil)
+                        {
+                            i.purchase_no = md.purchase_no;
+                            i.purchase_detail_id = GetNewId(CodeTable.PurchaseDetail);
+                        }
+
+                        db0.Purchase.Add(md);
+                        db0.PurchaseDetail.AddRange(md.Deatil);
+
+                        db0.SaveChanges();
+                        tx.Complete();
+                        r.result = true;
+                        r.no = md.purchase_no;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.ToString();
+            }
+            return r;
         }
         #endregion
 

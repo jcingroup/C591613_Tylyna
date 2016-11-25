@@ -7,10 +7,12 @@ import * as createLogger from 'redux-logger';
 
 import {AStartView} from './containers';
 import Reducers from './store';
-import { callLoad} from './actions';
+import { setData} from './actions';
+import { Init_Data} from './pub';
 
+declare var json_data: Init_Data;
 const store = createStore(Reducers, applyMiddleware(thunkMiddleware));
 
 var dom = document.getElementById('page_content');
 render(<Provider store={store}><AStartView /></Provider>, dom);
-store.dispatch(callLoad());
+store.dispatch(setData(json_data));

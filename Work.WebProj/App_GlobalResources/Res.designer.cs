@@ -556,7 +556,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 此{0}不存在或補貨中,請重新選擇!謝謝~! 的當地語系化字串。
+        ///   查詢類似 此產品:{0} 不存在或補貨中,請重新選擇!謝謝~! 的當地語系化字串。
         /// </summary>
         internal static string Log_Err_AddCart_Exist {
             get {
@@ -606,6 +606,15 @@ namespace Resources {
         internal static string Log_Err_Delete_NotFind {
             get {
                 return ResourceManager.GetString("Log_Err_Delete_NotFind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 此Email已被申請，不可使用。 的當地語系化字串。
+        /// </summary>
+        internal static string Log_Err_EmailExist {
+            get {
+                return ResourceManager.GetString("Log_Err_EmailExist", resourceCulture);
             }
         }
         
@@ -786,6 +795,15 @@ namespace Resources {
         internal static string Log_Err_Stock_NotEnough {
             get {
                 return ResourceManager.GetString("Log_Err_Stock_NotEnough", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 訂單已成功送出,請至您的 Email 收取訂單相關資料。 的當地語系化字串。
+        /// </summary>
+        internal static string Log_Success_Order {
+            get {
+                return ResourceManager.GetString("Log_Success_Order", resourceCulture);
             }
         }
         

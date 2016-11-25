@@ -2,12 +2,14 @@
 import Moment = require('moment');
 import {TagShowAndHide, InputNum, PWButton} from '../../components';
 import {ac_type_comm} from '../../action_type';
-import {config, UIText, IHideTypeData, IStockStateData, IPackTypeData} from '../../ts-comm/def-data';
+import {UIText, IPackTypeData} from '../../ts-comm/def-data';
+import {fmt_money} from '../../ts-comm/comm-func';
 
 export class AStart extends React.Component<any, any>{
 
     constructor() {
         super();
+        this.goOrder = this.goOrder.bind(this);
         this.state = {
         };
     }
@@ -34,6 +36,9 @@ export class AStart extends React.Component<any, any>{
         let grid: Array<server.PurchaseDetail> = this.props.grid;
 
         this.props.chgProductQty(grid[i].product_detail_id, grid[i].qty);
+    }
+    goOrder() {
+        location.href = gb_approot + "Order/Step1_order";
     }
     render() {
         let out_html: JSX.Element = null;
@@ -75,8 +80,8 @@ export class AStart extends React.Component<any, any>{
                                             onBlur={this.chgProductQty.bind(this, i) }
                                             />
                                     </td>
-                                    <td>NT$ {item.price}</td>
-                                    <td><strong>NT$ {item.sub_total}</strong></td>
+                                    <td>NT$ {fmt_money(item.price) }</td>
+                                    <td><strong>NT$ {fmt_money(item.sub_total) }</strong></td>
                                     <td>
                                         <button className="font-xl text-danger icon-trash-can2" type="button" title="刪除此項商品" onClick={this.delProduct.bind(this, item.product_detail_id) }></button>
                                     </td>
@@ -87,14 +92,15 @@ export class AStart extends React.Component<any, any>{
                     <tfoot>
                         <tr>
                             <td colSpan="6" className="text-right">
-                                總計：<strong className="text-danger">NT$ {grid.sum(x => x.sub_total) }</strong> (未含運費)
+                                總計：<strong className="text-danger">NT$ {fmt_money(grid.sum(x => x.sub_total)) }</strong> (未含運費)
                             </td>
                         </tr>
                     </tfoot>
                 </table>
                 <footer className="submit">
                     <a href={gb_approot + "Products"} className="float-l icon-navigate_before">繼續選購</a>
-                    <a href={gb_approot + "Order/Step1_order"} className="float-r btn font-lg btn-success" disabled={grid.length <= 0}>確定結帳 <i className="icon-navigate_next"></i></a>
+                    <PWButton className="float-r btn font-lg btn-success" iconClassName="icon-navigate_next"
+                        enable={grid.length > 0} onClick={this.goOrder}>確定結帳</PWButton>
                 </footer>
             </div>
             );

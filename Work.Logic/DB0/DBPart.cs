@@ -7,6 +7,8 @@ using System.Data.Entity.Validation;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
+
 namespace ProcCore.Business.DB0
 {
 
@@ -21,33 +23,64 @@ namespace ProcCore.Business.DB0
         view = 0,
         edit = 1
     }
-    public enum StockState
+    public enum IStockState
     {//產品狀況
         on_store_shelves = 1,//上架中
         replenishment = -1//補貨中
+    }
+    public enum IPayState
+    {//付款狀態
+        cancel_order = -1,//取消訂單
+        unpaid = 0,//待付款
+        paid = 1//已付款
+    }
+    public enum IShipState
+    {//出貨狀態
+        cancel_order = -1,//取消訂單
+        unshipped = 0,//待出貨
+        shipped = 1//已出貨
     }
     #region set CodeSheet
 
     public static class CodeSheet
     {
-        public static List<i_Code> sales_rank = new List<i_Code>()
+        public static List<i_Code> pack_type = new List<i_Code>()
         {
-            new i_Code{ Code = 1, Value = "共享會員", LangCode = "wait" },
-            new i_Code{ Code = 2, Value = "經理人", LangCode = "progress" },
-            new i_Code{ Code = 3, Value = "營運中心", LangCode = "finish" },
-            new i_Code{ Code = 4, Value = "管理處", LangCode = "pause" }
+            new i_Code{ Code = 1, Value = "袋裝咖啡豆", LangCode = "wait" },
+            new i_Code{ Code = 2, Value = "5入濾掛式包", LangCode = "progress" },
+            new i_Code{ Code = 3, Value = "10入濾掛式包", LangCode = "finish" }
         };
-
-        public static string GetStateVal(int code, List<i_Code> data)
+        public static string GetStateVal(int code, i_CodeName propName, List<i_Code> data)
         {
             string Val = string.Empty;
+            string name = Enum.GetName(typeof(i_CodeName), propName);
             foreach (var item in data)
             {
                 if (item.Code == code)
-                    Val = item.Value;
+                    Val = GetPropValue(item, name).ToString();
             }
             return Val;
         }
+        public static Object GetPropValue(this Object obj, String name)
+        {
+            foreach (String part in name.Split('.'))
+            {
+                if (obj == null) { return null; }
+
+                Type type = obj.GetType();
+                PropertyInfo info = type.GetProperty(part);
+                if (info == null) { return null; }
+
+                obj = info.GetValue(obj, null);
+            }
+            return obj;
+        }
+    }
+    public enum i_CodeName
+    {
+        Code,
+        LangCode,
+        Value
     }
     public class i_Code
     {
