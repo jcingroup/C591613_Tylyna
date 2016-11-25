@@ -355,7 +355,7 @@ namespace DotWeb.Areas.Base.Controllers
 #if DEBUG
             getLoginResult.vildate = true;
 #else
-            #region Google驗證(目前無使用換成數字驗證碼)
+            #region Google驗證
             if (!ModelState.IsValid)
             {
                 getLoginResult.result = false;
@@ -395,7 +395,7 @@ namespace DotWeb.Areas.Base.Controllers
                     }
                     else
                     {
-                        var result = UserManager.PasswordHasher.VerifyHashedPassword(get_user.PasswordHash,model.password);
+                        var result = UserManager.PasswordHasher.VerifyHashedPassword(get_user.PasswordHash, model.password);
                         if (result != PasswordVerificationResult.Success)
                         {
                             getLoginResult.result = false;
@@ -436,6 +436,98 @@ namespace DotWeb.Areas.Base.Controllers
 
                         getLoginResult.result = true;
                         string result_url = Url.Content(CommWebSetup.ManageDefCTR);
+
+                        getLoginResult.url = result_url;
+                        return defJSON(getLoginResult);
+                    }
+                    else
+                    {
+                        getLoginResult.result = false;
+                        getLoginResult.message = Resources.Res.Login_Err_Password;//帳號或密碼錯誤 請重新輸入
+                        return defJSON(getLoginResult);
+                    }
+
+
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                getLoginResult.result = false;
+                getLoginResult.message = ex.Message;
+                return defJSON(getLoginResult);
+            }
+
+        }
+        #endregion
+        #region 前台會員登入
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<string> member_Login(LoginViewModel model)
+        {
+            LoginResult getLoginResult = new LoginResult();
+
+            #region 驗證碼檢查程序
+
+#if DEBUG
+            getLoginResult.vildate = true;
+#else
+            #region Google驗證
+            if (!ModelState.IsValid)
+            {
+                getLoginResult.result = false;
+                getLoginResult.message = Resources.Res.Login_Err_Normal;
+                return defJSON(getLoginResult);
+            }
+            ValidateResponse Validate = ValidateCaptcha(model.validate);
+            getLoginResult.vildate = Validate.Success;
+            #endregion
+#endif
+            if (!getLoginResult.vildate)
+            {
+                //Session["CheckCode"] = Guid.NewGuid();//只要有錯先隨意產生唯一碼 以防暴力破解，新的CheckCode會在Validate產生。
+                getLoginResult.result = false;
+                getLoginResult.message = Resources.Res.Log_Err_googleValideNotEquel;
+                return defJSON(getLoginResult);
+            }
+            #endregion
+
+            try
+            {
+                #region 帳密碼檢查
+
+                using (var db0 = getDB0())
+                {
+                    var get_user = await db0.Customer.Where(x => x.email == model.account & x.c_pw == model.password).FirstOrDefaultAsync();
+
+                    if (get_user != null)
+                    {
+                        #region 前台_會員登入用cookie
+
+                        string userData = "Customers";
+                        string encode_userid = Server.UrlEncode(EncryptString.desEncryptBase64(get_user.customer_id.ToString()));//userid 加密
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, encode_userid, DateTime.Now, DateTime.Now.AddMinutes(180), false, userData, FormsAuthentication.FormsCookiePath);
+
+                        string encTicket = FormsAuthentication.Encrypt(ticket);
+                        Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+
+                        var cookie_loginid = new HttpCookie(CommWebSetup.LoginId, encode_userid);
+                        cookie_loginid.HttpOnly = true;
+                        Response.Cookies.Add(cookie_loginid);
+
+                        //LoginType //N:管理者登錄 Y:一般會員登錄
+                        var cookie_login_type = new HttpCookie(CommWebSetup.LoginType, Server.UrlEncode(EncryptString.desEncryptBase64("Y")));
+                        cookie_login_type.HttpOnly = true;
+                        Response.Cookies.Add(cookie_login_type);
+
+                        #endregion
+                        #region 後台_會員登入用cookie
+                        Session["CheckCode"] = "jcin";
+
+                        #endregion
+
+                        getLoginResult.result = true;
+                        string result_url = Url.Content(CommWebSetup.MemberDefCTR);
 
                         getLoginResult.url = result_url;
                         return defJSON(getLoginResult);

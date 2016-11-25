@@ -18,6 +18,7 @@ module.exports = {
         "../font/productdetail": path.resolve(__dirname, 'Scripts/src/font/ProductDetail/app.js'),
         "../font/shoppingcart": path.resolve(__dirname, 'Scripts/src/font/ShoppingCart/app.js'),
         "../font/order": path.resolve(__dirname, 'Scripts/src/font/Order/app.js'),
+        "w-comm": path.resolve(__dirname, 'Scripts/src/tsx/w-comm.js'),
 
         vendors: ['jquery', 'react', 'react-dom', 'redux', 'react-redux', 'redux-thunk', 'react-addons-update', 'moment',
             path.resolve(__dirname, 'Scripts/src/ts-comm/comm-run')

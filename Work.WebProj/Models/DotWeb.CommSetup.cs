@@ -37,6 +37,13 @@ namespace DotWeb.CommSetup
                 return System.Configuration.ConfigurationManager.AppSettings["ManageDefCTR"];
             }
         }
+        public static string MemberDefCTR
+        {
+            get
+            {
+                return System.Configuration.ConfigurationManager.AppSettings["MemberDefCTR"];
+            }
+        }
         public static string ManageTabletCTR
         {
             get

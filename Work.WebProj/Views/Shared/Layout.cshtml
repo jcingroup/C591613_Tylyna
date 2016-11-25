@@ -31,7 +31,7 @@
         <button onclick="document.getElementById('login').style.display='none'" class="btn-close icon-cross"></button>
         <div class="modal-content animate-top">
 
-            <form id="tab-1" action="" class="tab-content">
+            <form id="MLogin" class="tab-content">
                 <header class="">會員登入</header>
                 <div class="input-group">
                     <label class="input-group-addon icon-person" data-title="帳號"></label>
@@ -41,7 +41,9 @@
                     <label class="input-group-addon icon-lock2" data-title="密碼"></label>
                     <input class="form-element" type="password" id="m_pwd" required placeholder="請輸入密碼">
                 </div>
-                <button class="btn" onclick="location.href='@Url.Content("~/User/Account")'">登入</button>
+                <div id="Validate" class="margin-bottom"></div>
+
+                <button class="btn" type="submit">登入</button>
                 <a href="#tab-2" class="js-tab">忘記密碼</a>
             </form>
 
@@ -63,15 +65,21 @@
                     @Resources.Res.System_FrontName
                 </h1>
                 <nav class="top-nav">
-                    @* 登入前顯示如下 *@
-                    <button class="icon-user" onclick="document.getElementById('login').style.display='block'">會員登入</button>
-                    @* 登入後顯示如下 *@
-                    @* WELCOME, XXX
-                        <ul class="list-inline font-sm">
-                            <li><a href="~/User">[會員中心]</a></li>
-                            <li><a href="~/User/Receipt_list">[查看訂單]</a></li>
-                            <li><a href="">[登出]</a></li>
-                        </ul> *@
+                    @if ((bool)ViewBag.IsLogin)
+                    {
+                        <span>
+                            WELCOME, @ViewBag.MName
+                            <ul class="list-inline font-sm">
+                                <li><a href="~/User">[會員中心]</a></li>
+                                <li><a href="~/User/Receipt_list">[查看訂單]</a></li>
+                                <li><a href="~/Base/Login/Logout">[登出]</a></li>
+                            </ul>
+                        </span>
+                    }
+                    else
+                    {
+                        <button class="icon-user" id="Btn_Mlogin">會員登入</button>
+                    }
 
                     <a class="icon-cart" href="~/Order/Cart">購物車<i class="cart-num" id="cart-num">@ViewBag.P_Count</i></a>
                     @* <a href="">Contact Us</a> *@
@@ -127,9 +135,13 @@
         <a href="#header" class="goTop"><i class="icon-arrow_upward"></i>BACK TO TOP</a>
     </footer>
 
-    <script src="//code.jquery.com/jquery-latest.min.js"></script>
-    <script src="~/Content/js/common.js"></script>
-    <script src="~/Content/js/tab.js"></script>
+    @*<script src="//code.jquery.com/jquery-latest.min.js"></script>
+        <script src="~/Content/js/common.js"></script>
+        <script src="~/Content/js/tab.js"></script>*@
+    <script src="~/Scripts/googleReCAPTCHA.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit'></script>
+    <script src="~/Scripts/build/app/vendors.js?v=@CommWebSetup.CacheVer"></script>
+    <script src="~/Scripts/build/app/w-comm.js?v=@CommWebSetup.CacheVer"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

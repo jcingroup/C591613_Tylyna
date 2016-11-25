@@ -4,6 +4,7 @@ using DotWeb.Controller;
 
 namespace DotWeb.Controllers
 {
+    [MyAuthorizeForC(Roles = "Customers")]
     public class UserController : WebUserController
     {
         public ActionResult Index()

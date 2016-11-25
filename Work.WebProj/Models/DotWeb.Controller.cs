@@ -75,12 +75,11 @@ namespace DotWeb.Controller
             return connection;
         }
     }
-    [Authorize]
+    [Authorize(Roles = "Managers,Admins")]
     public abstract class AdminController : SourceController
     {
         protected string UserId; //指的是Sales登錄帳號
         protected string LoginUserFlag = string.Empty;//N:管理端登錄 Y:用戶端登錄
-        protected int UserRank;//Sales位階
         protected string aspUserId;
         protected int departmentId;
         protected int defPageSize = 0;
@@ -711,7 +710,8 @@ namespace DotWeb.Controller
         private string getImg_path_tpl = "~/_Code/SysUpFiles/{0}/{1}/{2}/{3}";
         protected WebInfo wi;
         protected string MemberId;
-        protected Boolean isLogin;
+        protected Boolean isLogin;//判斷會員是否登入
+        protected string LoginUserFlag = string.Empty;//N:管理端登錄 Y:用戶端登錄
 
         protected WebUserController()
         {
@@ -730,17 +730,33 @@ namespace DotWeb.Controller
             Log.SetupBasePath = System.Web.HttpContext.Current.Server.MapPath("~\\_Code\\Log\\");
             Log.Enabled = true;
 
-            var getMemberIdCookie = Request.Cookies[CommWebSetup.WebCookiesId + ".member_id"];
-            var getMemberName = Request.Cookies[CommWebSetup.WebCookiesId + ".member_name"];
-            MemberId = getMemberIdCookie == null ? null : EncryptString.desDecryptBase64(Server.UrlDecode(getMemberIdCookie.Value));
+            var getLoginTypeCookie = Request.Cookies[CommWebSetup.LoginType];
+            LoginUserFlag = getLoginTypeCookie == null ? string.Empty : EncryptString.desDecryptBase64(Server.UrlDecode(getLoginTypeCookie.Value));
+
+            var getLoginIdCookie = Request.Cookies[CommWebSetup.LoginId];
+            MemberId = getLoginIdCookie == null ? string.Empty : EncryptString.desDecryptBase64(Server.UrlDecode(getLoginIdCookie.Value));
+
+
             try
             {
                 var db = getDB0();
+                isLogin = false;
+                ViewBag.MName = string.Empty;
+
+                if (LoginUserFlag == "Y" & MemberId != null & MemberId != "")
+                {//會員有登入
+                    var m_item = db.Customer.Find(int.Parse(MemberId));
+                    isLogin = true;
+                    ViewBag.MName = m_item.c_name;
+                }
+
                 var Async = db.SaveChangesAsync();
                 Async.Wait();
 
                 ViewBag.VisitCount = visitCount;
                 ViewBag.IsFirstPage = false; //是否為首頁，請在首頁的Action此值設為True
+                ViewBag.IsLogin = isLogin;
+
                 #region 購物車
                 ViewBag.P_Count = 0;
                 if (Session["ShoppingCart"] != null)
@@ -1321,6 +1337,35 @@ namespace DotWeb.Controller
             public string link_path { get; set; }
         }
 
+    }
+    //會員登入用驗證
+    public class MyAuthorizeForC : AuthorizeAttribute
+    {
+
+        public override void OnAuthorization(AuthorizationContext filterContext)
+        {
+
+            bool skipAuthorization = filterContext.
+                                                    ActionDescriptor.
+                                                    IsDefined(typeof(AllowAnonymousAttribute), true)
+                                                    || filterContext.ActionDescriptor.
+                                                     ControllerDescriptor.
+                                                    IsDefined(typeof(AllowAnonymousAttribute), true);
+
+            if (skipAuthorization)
+            {
+                return;
+            }
+
+            if (this.AuthorizeCore(filterContext.HttpContext))
+            {
+                base.OnAuthorization(filterContext);
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~");
+            }
+        }
     }
     #endregion
 
