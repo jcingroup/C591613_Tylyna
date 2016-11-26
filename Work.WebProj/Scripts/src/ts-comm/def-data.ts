@@ -524,3 +524,8 @@ export const IPackTypeData: Array<server.OptionTemplate> = [
     { val: 2, Lname: '5入濾掛式包', className: 'w3-tag label-success w3-round' },
     { val: 3, Lname: '10入濾掛式包', className: 'w3-tag label-success w3-round' }
 ];
+
+export const IPayTypeData: Array<server.OptionTemplate> = [
+    { val: 1, Lname: '轉帳匯款', className: 'w3-tag label-success w3-round' },
+    { val: 2, Lname: '貨到付款', className: 'w3-tag label-success w3-round' }
+];

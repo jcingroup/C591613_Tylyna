@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using DotWeb.CommSetup;
 using ProcCore.Business.LogicConect;
+using ProcCore;
 
 namespace DotWeb.Controllers
 {
@@ -100,7 +101,7 @@ namespace DotWeb.Controllers
                     var customer = new Customer()
                     {
                         email = md.receive_email,
-                        c_pw = CommWebSetup.DEV_MemberPWD,
+                        c_pw = Server.UrlEncode(EncryptString.desEncryptBase64(CommWebSetup.DEV_MemberPWD)),
                         c_name = md.receive_name,
                         tel = md.receive_tel,
                         mobile = md.receive_mobile,

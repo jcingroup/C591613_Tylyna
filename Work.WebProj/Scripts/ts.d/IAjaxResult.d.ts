@@ -11,6 +11,7 @@ interface IResultBase {
     data: any;
     infoType: InfoType;
     id: number;
+    no: string;
 }
 
 interface IResultData<T> extends IResultBase {

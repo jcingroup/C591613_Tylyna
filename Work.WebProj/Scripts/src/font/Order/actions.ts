@@ -37,8 +37,9 @@ export const callSumbit = (md: server.Purchase) => {
             .then((data: IResultData<server.PurchaseDetail>) => {
                 mask_off();
                 if (data.result) {
-                    //dispatch(callLoad());
-                    alert(data.message);
+                    dispatch(setInputValue(ac_type_comm.chg_fld_val, "purchase_no", data.no));
+                    dispatch(chgOperPage(OrderOperatorType.Finish));
+                    //alert(data.message);
                 } else {
                     alert(data.message);
                 }

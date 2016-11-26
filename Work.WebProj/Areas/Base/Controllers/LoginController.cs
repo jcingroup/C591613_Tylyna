@@ -498,7 +498,8 @@ namespace DotWeb.Areas.Base.Controllers
 
                 using (var db0 = getDB0())
                 {
-                    var get_user = await db0.Customer.Where(x => x.email == model.account & x.c_pw == model.password).FirstOrDefaultAsync();
+                    string pw = Server.UrlEncode(EncryptString.desEncryptBase64(model.password));
+                    var get_user = await db0.Customer.Where(x => x.email == model.account & x.c_pw == pw).FirstOrDefaultAsync();
 
                     if (get_user != null)
                     {
