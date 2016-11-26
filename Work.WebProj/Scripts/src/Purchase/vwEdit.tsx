@@ -66,6 +66,13 @@ export class Edit extends React.Component<any, any>{
                     <h3 className="h3">
                         {gb_caption}<small className="sub"><i className="fa-angle-double-right"></i> {UIText.edit}</small>
                     </h3>
+                    <div className="alert alert-warning">
+                        有變更<strong>取消訂單</strong>或<strong>出貨狀態</strong> 要按下下方的
+                        <button type="button" className="btn btn-primary btn-sm">
+                            <i className="fa-check"></i> {UIText.save}
+                        </button>
+                        按鈕後才算完成修改
+                    </div>
                     <fieldset>
                         <legend className="h4">訂單明細資料</legend>
                         <section className="form-group row">
