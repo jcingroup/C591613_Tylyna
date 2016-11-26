@@ -71,10 +71,10 @@ namespace DotWeb.Controllers
             return View(md);
         }
         // 下訂完成
-        public ActionResult Step2_check()
-        {
-            return View();
-        }
+        //public ActionResult Step2_check()
+        //{
+        //    return View();
+        //}
         // 已付款通知
         public ActionResult Reply()
         {

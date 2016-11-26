@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 //view
 import {AStart} from './vwAStart';
 
-import { callLoad, setRowInputValue, delProduct, chgProductQty} from './actions'
+import {setRowInputValue, delProduct, chgProductQty} from './actions'
 
 const m1ToProps = (state, ownProps) => {
     return {
@@ -14,7 +14,6 @@ const m1ToProps = (state, ownProps) => {
 
 const m1Dispatch = (dispatch, ownProps) => {
     let s = bindActionCreators({
-        callLoad,
         setRowInputValue,
         delProduct,
         chgProductQty

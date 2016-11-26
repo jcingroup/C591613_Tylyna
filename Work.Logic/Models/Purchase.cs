@@ -9,10 +9,15 @@ namespace ProcCore.Business.DB0
     public partial class Purchase
     {
         public IEnumerable<PurchaseDetail> Deatil { get; set; }
+        public string customer_name { get; set; }
+        public bool cancel_order { get; set; }
         private class PurchaseMetadata
         {
             [JsonIgnore()]
             public virtual ICollection<PurchaseDetail> PurchaseDetail { get; set; }
+
+            [JsonIgnore()]
+            public virtual Customer Customer { get; set; }
         }
     }
 }

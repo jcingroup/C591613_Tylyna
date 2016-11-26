@@ -14,6 +14,7 @@ module.exports = {
         m_productkind: path.resolve(__dirname, 'Scripts/src/ProductKind/app.js'),
         m_product: path.resolve(__dirname, 'Scripts/src/Product/app.js'),
         m_param: path.resolve(__dirname, 'Scripts/src/Param/app.js'),
+        m_purchase: path.resolve(__dirname, 'Scripts/src/Purchase/app.js'),
         //前台 頁面
         "../font/productdetail": path.resolve(__dirname, 'Scripts/src/font/ProductDetail/app.js'),
         "../font/shoppingcart": path.resolve(__dirname, 'Scripts/src/font/ShoppingCart/app.js'),

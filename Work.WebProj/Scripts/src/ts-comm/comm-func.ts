@@ -338,3 +338,18 @@ export function isNumeric(n): boolean {
     //return !isNaN(parseFloat(n)) && isFinite(n) && m >= 0; //正能正整數
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
+export function htmlbr(val: any, g?: string): string {
+    /*
+    Autohr:Ajoe
+    Date:2016/11/26
+    Description:把斷行符號換成html<br />
+    */
+    if (val == undefined || val == null)
+        return '';
+
+    let glue = (typeof g == 'string' && g != null && g != undefined) ? g : '<br />';// 決定分隔符號,不是br也可以
+
+    return val.replace(/(?:\r\n|\r|\n)/g, glue);
+
+}

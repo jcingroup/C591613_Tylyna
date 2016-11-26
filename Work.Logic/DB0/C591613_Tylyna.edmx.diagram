@@ -31,12 +31,12 @@
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Product" />
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_ProductDetail" />
         <EntityTypeShape EntityType="C591613_TylynaModel.Shipment" Width="1.5" PointX="0.75" PointY="11.75" />
-        <EntityTypeShape EntityType="C591613_TylynaModel.Purchase" Width="1.5" PointX="12.875" PointY="15.875" />
-        <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Purchase" />
         <EntityTypeShape EntityType="C591613_TylynaModel.News" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="C591613_TylynaModel.Customer" Width="1.5" PointX="10.625" PointY="17.375" />
+        <EntityTypeShape EntityType="C591613_TylynaModel.Purchase" Width="1.5" PointX="12.875" PointY="16.875" />
         <AssociationConnector Association="C591613_TylynaModel.FK_Purchase_Customer" />
-      </Diagram>
+        <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Purchase" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -32,7 +32,8 @@ namespace ProcCore.Business.DB0
     {//付款狀態
         cancel_order = -1,//取消訂單
         unpaid = 0,//待付款
-        paid = 1//已付款
+        paid_uncheck = 1,//已付款,待確認
+        paid = 2//已付款
     }
     public enum IShipState
     {//出貨狀態

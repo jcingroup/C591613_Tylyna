@@ -5,5 +5,7 @@
     Span = 4,
     col = 5,
     dl = 6,
-    div = 7
+    div = 7,
+    table = 8,
+    Thead = 9
 }

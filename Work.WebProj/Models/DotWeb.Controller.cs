@@ -713,6 +713,7 @@ namespace DotWeb.Controller
         protected string MemberId;
         protected Boolean isLogin;//判斷會員是否登入
         protected string LoginUserFlag = string.Empty;//N:管理端登錄 Y:用戶端登錄
+        protected string roleId = string.Empty;//腳色權限
 
         protected WebUserController()
         {
@@ -731,26 +732,35 @@ namespace DotWeb.Controller
             Log.SetupBasePath = System.Web.HttpContext.Current.Server.MapPath("~\\_Code\\Log\\");
             Log.Enabled = true;
 
-            var getLoginTypeCookie = Request.Cookies[CommWebSetup.LoginType];
-            LoginUserFlag = getLoginTypeCookie == null ? string.Empty : EncryptString.desDecryptBase64(Server.UrlDecode(getLoginTypeCookie.Value));
+            #region 舊系統抓前台會員登入資料方式
+            //var getLoginTypeCookie = Request.Cookies[CommWebSetup.LoginType];
+            //LoginUserFlag = getLoginTypeCookie == null ? string.Empty : EncryptString.desDecryptBase64(Server.UrlDecode(getLoginTypeCookie.Value));
 
-            var getLoginIdCookie = Request.Cookies[CommWebSetup.LoginId];
-            MemberId = getLoginIdCookie == null ? string.Empty : EncryptString.desDecryptBase64(Server.UrlDecode(getLoginIdCookie.Value));
+            //var getLoginIdCookie = Request.Cookies[CommWebSetup.LoginId];
+            //MemberId = getLoginIdCookie == null ? string.Empty : EncryptString.desDecryptBase64(Server.UrlDecode(getLoginIdCookie.Value));
+            #endregion
 
-
+            var identity = User.Identity;
             try
             {
                 var db = getDB0();
                 isLogin = false;
                 ViewBag.MName = string.Empty;
+                if (identity.IsAuthenticated)
+                {//如果有登入
+                    var FormsIdentity = (FormsIdentity)identity;//轉型
+                    //取得權限
+                    var roles = FormsIdentity.Ticket.UserData.Split(',');
+                    roleId = roles.FirstOrDefault();
 
-                if (LoginUserFlag == "Y" & MemberId != null & MemberId != "")
-                {//會員有登入
-                    var m_item = db.Customer.Find(int.Parse(MemberId));
-                    isLogin = true;
-                    ViewBag.MName = m_item.c_name;
+                    if (roleId == "Customers")
+                    {//如果角色為客戶
+                        MemberId = EncryptString.desDecryptBase64(Server.UrlDecode(FormsIdentity.Ticket.Name));
+                        var m_item = db.Customer.Find(int.Parse(MemberId));
+                        isLogin = true;
+                        ViewBag.MName = m_item.c_name;
+                    }
                 }
-
                 var Async = db.SaveChangesAsync();
                 Async.Wait();
 

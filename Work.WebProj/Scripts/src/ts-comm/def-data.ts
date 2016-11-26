@@ -492,6 +492,7 @@ export const UIText = {
     modify: '修改',
     edit: '編輯',
     check: '查看 & 審核',
+    view: '檢視',
     delete: '刪除',
     print: '列印',
     return: '回上頁',
@@ -526,6 +527,29 @@ export const IPackTypeData: Array<server.OptionTemplate> = [
 ];
 
 export const IPayTypeData: Array<server.OptionTemplate> = [
-    { val: 1, Lname: '轉帳匯款', className: 'w3-tag label-success w3-round' },
-    { val: 2, Lname: '貨到付款', className: 'w3-tag label-success w3-round' }
+    { val: 1, Lname: '轉帳匯款', className: 'w3-tag label-primary w3-round' },
+    { val: 2, Lname: '貨到付款', className: 'w3-tag label-primary w3-round' }
+];
+
+export const IPayStateData: Array<server.OptionTemplate> = [
+    { val: -1, Lname: '取消訂單', className: 'w3-tag label-default w3-round' },
+    { val: 0, Lname: '待付款', className: 'w3-tag label-warning w3-round' },
+    { val: 1, Lname: '已付款待確認', className: 'w3-tag label-danger w3-round' },
+    { val: 2, Lname: '已付款', className: 'w3-tag label-info w3-round' }
+];
+
+export const IPayStateDataForRemit: Array<server.OptionTemplate> = [
+    { val: 1, Lname: '未確認', className: 'w3-tag label-warning w3-round' },//已付款待確認
+    { val: 2, Lname: '已確認款項', className: 'w3-tag label-success w3-round' }//已付款
+];
+
+export const IShipStateData: Array<server.OptionTemplate> = [
+    { val: -1, Lname: '取消訂單', className: 'w3-tag label-default w3-round' },
+    { val: 0, Lname: '待出貨', className: 'w3-tag label-danger w3-round' },
+    { val: 1, Lname: '已出貨', className: 'w3-tag label-success w3-round' }
+];
+
+export const IYesOrNoData: Array<server.OptionTemplate> = [
+    { val: false, Lname: '否', className: 'w3-tag label-danger w3-round' },
+    { val: true, Lname: '是', className: 'w3-tag label-default w3-round' }
 ];

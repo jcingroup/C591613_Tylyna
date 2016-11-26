@@ -23,10 +23,10 @@ namespace ProcCore.Business.DB0
         public string purchase_no { get; set; }
         public int customer_id { get; set; }
         public System.DateTime order_date { get; set; }
-        public Nullable<System.DateTime> payment_date { get; set; }
         public int pay_type { get; set; }
         public int pay_state { get; set; }
         public int ship_state { get; set; }
+        public Nullable<System.DateTime> ship_date { get; set; }
         public string cancel_reason { get; set; }
         public double total { get; set; }
         public double ship_fee { get; set; }
@@ -43,8 +43,8 @@ namespace ProcCore.Business.DB0
         public Nullable<double> remit_money { get; set; }
         public string remit_memo { get; set; }
     
+        public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseDetail> PurchaseDetail { get; set; }
-        public virtual Customer Customer { get; set; }
     }
 }

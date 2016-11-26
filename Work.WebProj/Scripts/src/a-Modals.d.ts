@@ -161,7 +161,7 @@
         purchase_no?: string;
         customer_id?: number;
         order_date?: Date;
-        payment_date?: Date;
+        ship_date?: Date;
         pay_type?: number;
         pay_state?: number;
         ship_state?: number;
@@ -183,6 +183,8 @@
         PurchaseDetail?: Array<server.PurchaseDetail>;
 
         Deatil?: Array<server.PurchaseDetail>;
+        customer_name?: string;
+        cancel_order?: boolean;
     }
 
     interface PurchaseDetail {

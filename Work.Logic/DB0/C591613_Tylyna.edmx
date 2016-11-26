@@ -264,10 +264,10 @@
           <Property Name="purchase_no" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="customer_id" Type="int" Nullable="false" />
           <Property Name="order_date" Type="datetime" Nullable="false" />
-          <Property Name="payment_date" Type="datetime" />
           <Property Name="pay_type" Type="int" Nullable="false" />
           <Property Name="pay_state" Type="int" Nullable="false" />
           <Property Name="ship_state" Type="int" Nullable="false" />
+          <Property Name="ship_date" Type="datetime" />
           <Property Name="cancel_reason" Type="nvarchar" MaxLength="64" />
           <Property Name="total" Type="float" Nullable="false" />
           <Property Name="ship_fee" Type="float" Nullable="false" />
@@ -778,16 +778,16 @@
             <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
           </AssociationSet>
           <EntitySet Name="Shipment" EntityType="C591613_TylynaModel.Shipment" />
-          <EntitySet Name="Purchase" EntityType="C591613_TylynaModel.Purchase" />
-          <AssociationSet Name="FK_PurchaseDetail_Purchase" Association="C591613_TylynaModel.FK_PurchaseDetail_Purchase">
-            <End Role="Purchase" EntitySet="Purchase" />
-            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
-          </AssociationSet>
           <EntitySet Name="News" EntityType="C591613_TylynaModel.News" />
           <EntitySet Name="Customer" EntityType="C591613_TylynaModel.Customer" />
+          <EntitySet Name="Purchase" EntityType="C591613_TylynaModel.Purchase" />
           <AssociationSet Name="FK_Purchase_Customer" Association="C591613_TylynaModel.FK_Purchase_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetail_Purchase" Association="C591613_TylynaModel.FK_PurchaseDetail_Purchase">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProductKind">
@@ -920,47 +920,6 @@
           <Property Name="shipment_fee" Type="Int32" Nullable="false" />
           <Property Name="bank_charges" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Purchase">
-          <Key>
-            <PropertyRef Name="purchase_no" />
-          </Key>
-          <Property Name="purchase_no" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="customer_id" Type="Int32" Nullable="false" />
-          <Property Name="order_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="payment_date" Type="DateTime" Precision="3" />
-          <Property Name="pay_type" Type="Int32" Nullable="false" />
-          <Property Name="pay_state" Type="Int32" Nullable="false" />
-          <Property Name="ship_state" Type="Int32" Nullable="false" />
-          <Property Name="cancel_reason" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="total" Type="Double" Nullable="false" />
-          <Property Name="ship_fee" Type="Double" Nullable="false" />
-          <Property Name="bank_charges" Type="Double" Nullable="false" />
-          <Property Name="receive_email" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="receive_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="receive_tel" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="receive_mobile" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="receive_zip" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="receive_address" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="receive_memo" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="remit_no" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="remit_date" Type="DateTime" Precision="3" />
-          <Property Name="remit_money" Type="Double" />
-          <Property Name="remit_memo" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PurchaseDetail" Relationship="C591613_TylynaModel.FK_PurchaseDetail_Purchase" FromRole="Purchase" ToRole="PurchaseDetail" />
-          <NavigationProperty Name="Customer" Relationship="C591613_TylynaModel.FK_Purchase_Customer" FromRole="Purchase" ToRole="Customer" />
-        </EntityType>
-        <Association Name="FK_PurchaseDetail_Purchase">
-          <End Type="C591613_TylynaModel.Purchase" Role="Purchase" Multiplicity="1" />
-          <End Type="C591613_TylynaModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Purchase">
-              <PropertyRef Name="purchase_no" />
-            </Principal>
-            <Dependent Role="PurchaseDetail">
-              <PropertyRef Name="purchase_no" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="news_id" />
@@ -1005,6 +964,35 @@
           <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Purchase" Relationship="C591613_TylynaModel.FK_Purchase_Customer" FromRole="Customer" ToRole="Purchase" />
         </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="purchase_no" />
+          </Key>
+          <Property Name="purchase_no" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="order_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pay_type" Type="Int32" Nullable="false" />
+          <Property Name="pay_state" Type="Int32" Nullable="false" />
+          <Property Name="ship_state" Type="Int32" Nullable="false" />
+          <Property Name="ship_date" Type="DateTime" Precision="3" />
+          <Property Name="cancel_reason" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="total" Type="Double" Nullable="false" />
+          <Property Name="ship_fee" Type="Double" Nullable="false" />
+          <Property Name="bank_charges" Type="Double" Nullable="false" />
+          <Property Name="receive_email" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="receive_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="receive_tel" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="receive_mobile" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="receive_zip" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="receive_address" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="receive_memo" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="remit_no" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="remit_date" Type="DateTime" Precision="3" />
+          <Property Name="remit_money" Type="Double" />
+          <Property Name="remit_memo" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="C591613_TylynaModel.FK_Purchase_Customer" FromRole="Purchase" ToRole="Customer" />
+          <NavigationProperty Name="PurchaseDetail" Relationship="C591613_TylynaModel.FK_PurchaseDetail_Purchase" FromRole="Purchase" ToRole="PurchaseDetail" />
+        </EntityType>
         <Association Name="FK_Purchase_Customer">
           <End Type="C591613_TylynaModel.Customer" Role="Customer" Multiplicity="1" />
           <End Type="C591613_TylynaModel.Purchase" Role="Purchase" Multiplicity="*" />
@@ -1014,6 +1002,18 @@
             </Principal>
             <Dependent Role="Purchase">
               <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetail_Purchase">
+          <End Type="C591613_TylynaModel.Purchase" Role="Purchase" Multiplicity="1" />
+          <End Type="C591613_TylynaModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="purchase_no" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="purchase_no" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1272,34 +1272,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Purchase">
-            <EntityTypeMapping TypeName="C591613_TylynaModel.Purchase">
-              <MappingFragment StoreEntitySet="Purchase">
-                <ScalarProperty Name="remit_memo" ColumnName="remit_memo" />
-                <ScalarProperty Name="remit_money" ColumnName="remit_money" />
-                <ScalarProperty Name="remit_date" ColumnName="remit_date" />
-                <ScalarProperty Name="remit_no" ColumnName="remit_no" />
-                <ScalarProperty Name="receive_memo" ColumnName="receive_memo" />
-                <ScalarProperty Name="receive_address" ColumnName="receive_address" />
-                <ScalarProperty Name="receive_zip" ColumnName="receive_zip" />
-                <ScalarProperty Name="receive_mobile" ColumnName="receive_mobile" />
-                <ScalarProperty Name="receive_tel" ColumnName="receive_tel" />
-                <ScalarProperty Name="receive_name" ColumnName="receive_name" />
-                <ScalarProperty Name="receive_email" ColumnName="receive_email" />
-                <ScalarProperty Name="bank_charges" ColumnName="bank_charges" />
-                <ScalarProperty Name="ship_fee" ColumnName="ship_fee" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="cancel_reason" ColumnName="cancel_reason" />
-                <ScalarProperty Name="ship_state" ColumnName="ship_state" />
-                <ScalarProperty Name="pay_state" ColumnName="pay_state" />
-                <ScalarProperty Name="pay_type" ColumnName="pay_type" />
-                <ScalarProperty Name="payment_date" ColumnName="payment_date" />
-                <ScalarProperty Name="order_date" ColumnName="order_date" />
-                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
-                <ScalarProperty Name="purchase_no" ColumnName="purchase_no" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="C591613_TylynaModel.News">
               <MappingFragment StoreEntitySet="News">
@@ -1342,6 +1314,34 @@
                 <ScalarProperty Name="c_pw" ColumnName="c_pw" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchase">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.Purchase">
+              <MappingFragment StoreEntitySet="Purchase">
+                <ScalarProperty Name="remit_memo" ColumnName="remit_memo" />
+                <ScalarProperty Name="remit_money" ColumnName="remit_money" />
+                <ScalarProperty Name="remit_date" ColumnName="remit_date" />
+                <ScalarProperty Name="remit_no" ColumnName="remit_no" />
+                <ScalarProperty Name="receive_memo" ColumnName="receive_memo" />
+                <ScalarProperty Name="receive_address" ColumnName="receive_address" />
+                <ScalarProperty Name="receive_zip" ColumnName="receive_zip" />
+                <ScalarProperty Name="receive_mobile" ColumnName="receive_mobile" />
+                <ScalarProperty Name="receive_tel" ColumnName="receive_tel" />
+                <ScalarProperty Name="receive_name" ColumnName="receive_name" />
+                <ScalarProperty Name="receive_email" ColumnName="receive_email" />
+                <ScalarProperty Name="bank_charges" ColumnName="bank_charges" />
+                <ScalarProperty Name="ship_fee" ColumnName="ship_fee" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="cancel_reason" ColumnName="cancel_reason" />
+                <ScalarProperty Name="ship_date" ColumnName="ship_date" />
+                <ScalarProperty Name="ship_state" ColumnName="ship_state" />
+                <ScalarProperty Name="pay_state" ColumnName="pay_state" />
+                <ScalarProperty Name="pay_type" ColumnName="pay_type" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="purchase_no" ColumnName="purchase_no" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

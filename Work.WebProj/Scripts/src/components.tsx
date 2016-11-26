@@ -645,7 +645,7 @@ export class RadioBox extends React.Component<RadioBoxProps, any>{
         if (this.props.inputViewMode == InputViewMode.edit) {
             out_html =
                 (
-                    <div className={this.props.wrapperClassName}>
+                    <span className={this.props.wrapperClassName}>
                         {
                             this.props.radioList.map((item, i) => {
                                 return <label className={this.props.labelClassName} key={this.props.name + '-' + i}>
@@ -665,7 +665,7 @@ export class RadioBox extends React.Component<RadioBoxProps, any>{
                             })
                         }
 
-                    </div>
+                    </span>
                 );
         }
 
@@ -737,6 +737,19 @@ export class TagShowAndHide extends React.Component<{ show: boolean, className?:
                     <div style={pp.style} className={pp.className}>
                         {pp.children}
                     </div>
+                );
+            } else if (pp.TagName === TagName.table) {
+                out_html = (
+                    <table style={pp.style} className={pp.className}>
+                        {pp.children}
+                    </table>
+                );
+            }
+            else if (pp.TagName === TagName.Thead) {
+                out_html = (
+                    <thead style={pp.style} className={pp.className}>
+                        {pp.children}
+                    </thead>
                 );
             }
         }

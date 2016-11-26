@@ -4,7 +4,7 @@ import Moment = require('moment');
 import {TagShowAndHide, InputNum, PWButton} from '../../components';
 import {ac_type_comm} from '../../action_type';
 import {UIText, IPackTypeData, IPayTypeData} from '../../ts-comm/def-data';
-import {fmt_money, makeInputValue} from '../../ts-comm/comm-func';
+import {fmt_money, makeInputValue, htmlbr} from '../../ts-comm/comm-func';
 
 interface CheckState {
     Account?: string,
@@ -93,7 +93,10 @@ export class Check extends React.Component<any, CheckState>{
                         <li><small>聯絡電話</small>{field.receive_tel} <small className="m-l-24">手機</small>{field.receive_mobile}</li>
                         <li><small>收件地址</small>{field.receive_zip + field.receive_address}</li>
                         <li><small>付款方式</small> {this.getName(IPayTypeData, field.pay_type) }</li>
-                        <li><small>備註</small>{field.receive_memo}</li>
+                        <li>
+                            <small>備註</small>
+                            <span dangerouslySetInnerHTML={{ __html: htmlbr(field.receive_memo) } }></span>
+                        </li>
                     </ul>
                     <p className="icon-error">
                         請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於匯款後填寫
