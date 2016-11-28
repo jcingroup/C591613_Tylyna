@@ -4,8 +4,17 @@
     ViewBag.BodyClass = "Cart";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
+@section Scripts {
+    <script>
+        var no = '@Request.QueryString["no"]';
+    </script>
+    <script src="~/Scripts/build/font/remitcheck.js?v=@CommWebSetup.CacheVer"></script>
+}
 
-<header class="text-left font-xxl m-b-48 underline">
+<div id="page_content"></div>
+
+<!--
+    <header class="text-left font-xxl m-b-48 underline">
     已付款通知
     <small class="block">請填寫付款資料以利確認訂單，謝謝</small>
 </header>
@@ -26,9 +35,9 @@
             <input type="date" class="form-element" placeholder="必填" required>
         </dd>
         @* <dt class="col-2">* 匯款時間</dt>
-        <dd class="col-4">
-            <input type="time" class="form-element" placeholder="必填" required>
-        </dd> *@
+            <dd class="col-4">
+                <input type="time" class="form-element" placeholder="必填" required>
+            </dd> *@
         <dt class="col-2">匯款金額</dt>
         <dd class="col-4">
             <input type="number" min="0" class="form-element">
@@ -42,7 +51,9 @@
     </dl>
     <footer class="submit">
         @* 使用 button ，<a>為暫放
-        <button class="float-r btn font-lg btn-success">送出 <i class="icon-navigate_next"></i></button> *@
+            <button class="float-r btn font-lg btn-success">送出 <i class="icon-navigate_next"></i></button> *@
         <a href="~/Order/Finish" class="float-r btn font-lg btn-success">送出 <i class="icon-navigate_next"></i></a>
     </footer>
 </form>
+
+-->

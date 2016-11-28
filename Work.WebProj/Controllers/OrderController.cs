@@ -165,30 +165,18 @@ namespace DotWeb.Controllers
                         };
 
                         #region 信件發送
-                        string Body = getMailBody("../Email/Email_order", emd);//套用信件版面
-                        Boolean mail;
-
-                        #region 收信人及寄信人
-                        string sendMail = openLogic().getReceiveMails()[0];
-
-                        List<string> r_mails = openLogic().getReceiveMails().ToList();
-                        if (!r_mails.Any(x => x == md.receive_email)) { r_mails.Add(md.receive_name + ":" + md.receive_email); }
+                        ResultInfo sendmail = (new EmailController()).sendOrderMail(emd);
                         #endregion
-
-                        mail = Mail_Send(sendMail, //寄信人
-                                        r_mails.ToArray(), //收信人
-                                        string.Format(CommWebSetup.MailTitle_Order, Resources.Res.System_FrontName), //信件標題
-                                        Body, //信件內容
-                                        true); //是否為html格式
-                        if (mail == false)
+                        if (!sendmail.result)
                         {//送信失敗
                             r.result = true;
-                            r.message = Resources.Res.Log_Err_SendMailFail;
-                            return defJSON(r);
+                            r.message = sendmail.message;
                         }
-                        #endregion
+                        else
+                        {
+                            r.message = Resources.Res.Log_Success_Order;
+                        }
 
-                        r.message = Resources.Res.Log_Success_Order;
                         Session.Remove(this.CartSession);
                     }
                 }
@@ -314,17 +302,5 @@ namespace DotWeb.Controllers
     {
         public Purchase purchase { get; set; }
         public IEnumerable<Shipment> ship { get; set; }
-    }
-    public class OrderEmail
-    {
-        //轉帳資訊
-        public string AccountName { get; set; }
-        public string AccountNumber { get; set; }
-        public string BankCode { get; set; }
-        public string BankName { get; set; }
-
-        public bool isLogin { get; set; }
-
-        public Purchase purchase { get; set; }
     }
 }

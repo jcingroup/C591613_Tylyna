@@ -74,6 +74,7 @@ namespace DotWeb.Controller
             SqlConnection connection = new SqlConnection(connectionstring);
             return connection;
         }
+        protected ControllerContext newContext { get; set; }
     }
     [Authorize(Roles = "Managers,Admins")]
     public abstract class AdminController : SourceController
@@ -1088,6 +1089,20 @@ namespace DotWeb.Controller
             return sr.ToHtmlString;
         }
 
+        public string getMailBody(string EmailView, object md,ControllerContext ctrcontext)
+        {
+            ViewResult resultView = View(EmailView, md);
+
+            StringResult sr = new StringResult();
+            sr.ViewName = resultView.ViewName;
+            sr.MasterName = resultView.MasterName;
+            sr.ViewData = resultView.ViewData;
+            sr.TempData = resultView.TempData;
+            sr.ExecuteResult(ctrcontext);
+
+            return sr.ToHtmlString;
+        }
+
         public bool Mail_Send(string MailFrom, string[] MailTos, string MailSub, string MailBody, bool isBodyHtml)
         {
             try
@@ -1175,7 +1190,7 @@ namespace DotWeb.Controller
             var client = new WebClient();
             var reply =
                 client.DownloadString(
-                    string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", "6LeAwSETAAAAAGeW6ToGJ6GLPtHaibI1c1-jqYiW", response));
+                    string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", "6LdJLA0UAAAAANx9cwt1f_NmlA6H29LH79nOE6-I", response));
 
             var captchaResponse = JsonConvert.DeserializeObject<CaptchaResponse>(reply);
 
@@ -1262,7 +1277,8 @@ namespace DotWeb.Controller
                 {
                     using (TransactionScope tx = new TransactionScope())
                     {
-                        md.purchase_no = "P" + DateTime.Now.ToString("yyyyMMdd") + GetNewId(CodeTable.Purchase);//訂單編號
+                        string no = GetNewId(CodeTable.Purchase).ToString();
+                        md.purchase_no = "P" + DateTime.Now.ToString("yyyyMMdd") + no.PadLeft(3, '0');//訂單編號
                         md.order_date = DateTime.Now;//訂購日期
                         md.pay_state = (int)IPayState.unpaid;//付款狀態
                         md.ship_state = (int)IShipState.unshipped;//出貨狀態

@@ -763,7 +763,25 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 此筆訂單編號已付款，請重新檢查訂單編號! 的當地語系化字串。
+        ///   查詢類似 匯款金額不可少於訂單購買金額! 的當地語系化字串。
+        /// </summary>
+        internal static string Log_Err_PurchaseMoney {
+            get {
+                return ResourceManager.GetString("Log_Err_PurchaseMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 此筆訂單編號付款方式非轉帳付款不須對帳確認，請重新檢查訂單編號! 的當地語系化字串。
+        /// </summary>
+        internal static string Log_Err_PurchaseNoRemit {
+            get {
+                return ResourceManager.GetString("Log_Err_PurchaseNoRemit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 此筆訂單編號已付款或已取消訂單，請重新檢查訂單編號! 的當地語系化字串。
         /// </summary>
         internal static string Log_Err_PurchaseRepeat {
             get {
@@ -813,6 +831,24 @@ namespace Resources {
         internal static string Log_Success_SendMail {
             get {
                 return ResourceManager.GetString("Log_Success_SendMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 【{0}】訂單確認 的當地語系化字串。
+        /// </summary>
+        internal static string MailTitle_Order {
+            get {
+                return ResourceManager.GetString("MailTitle_Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 【{0}】客戶已付款通知 的當地語系化字串。
+        /// </summary>
+        internal static string MailTitle_Reply {
+            get {
+                return ResourceManager.GetString("MailTitle_Reply", resourceCulture);
             }
         }
         

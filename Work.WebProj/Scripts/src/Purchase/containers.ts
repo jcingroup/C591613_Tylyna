@@ -12,13 +12,14 @@ import { callGridLoad, callUpdateItem, callSubmit,
 const m1ToProps = (state, ownProps) => {
     return {
         edit_type: state.edit_type,
-        init_data: state.init_data,
         page_operator: state.page_operator,
         search: state.search,
         grid: state.grid,
         field: state.field,
         params: state.params,
-        is_edit: state.is_edit
+        //暫不使用
+        is_edit: state.is_edit,
+        init_data: state.init_data,
     }
 }
 

@@ -137,7 +137,7 @@ const edit_type = (state = IEditType.none, action: Redux.Action): IEditType => {
     }
 }
 
-// 判斷是否有欄位在編輯中...
+// 判斷是否有欄位在編輯中...//暫不使用
 export const is_edit = (state = false, action): boolean => {
     switch (action.type) {
         case ac_type_comm.get_dil_data:

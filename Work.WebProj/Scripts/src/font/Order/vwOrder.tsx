@@ -246,9 +246,10 @@ export class Order extends React.Component<any, any>{
                         <footer className="submit">
                             <a href={gb_approot + "Order/Cart"} className="float-l icon-navigate_before">繼續選購</a>
 
-                            <PWButton className="float-r btn font-lg btn-success"
-                                iconClassName="icon-navigate_next" type="submit"
-                                enable={true}>填寫完成，送出訂單</PWButton>
+                            <PWButton
+                                className="float-r btn font-lg btn-success"
+                                type="submit"
+                                enable={true}>填寫完成，送出訂單 <i className="icon-navigate_next"></i></PWButton>
                         </footer>
                     </div>
                 </section>

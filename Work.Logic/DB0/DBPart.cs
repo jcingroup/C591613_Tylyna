@@ -28,6 +28,11 @@ namespace ProcCore.Business.DB0
         on_store_shelves = 1,//上架中
         replenishment = -1//補貨中
     }
+    public enum IPayType
+    {//付款方式
+        Remit = 1,//轉帳付款
+        CashOnDelivery = 2//貨到付款
+    }
     public enum IPayState
     {//付款狀態
         cancel_order = -1,//取消訂單

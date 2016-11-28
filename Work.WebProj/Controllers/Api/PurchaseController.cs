@@ -13,6 +13,7 @@ using LinqKit;
 using System.Data.Entity.Validation;
 using System.Data.Entity.Infrastructure;
 using System.Linq.Dynamic;
+using DotWeb.Controllers;
 
 namespace DotWeb.Api
 {
@@ -258,41 +259,113 @@ namespace DotWeb.Api
             }
         }
 
-        [Route("updateShipState")]
-        [HttpPost]
-        public async Task<IHttpActionResult> updateShipState([FromBody]ShipStateParma param)
+        #region 前台-已付款通知
+        [Route("getRemitData")]
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> getRemitData(string no)
         {
-            ResultInfo rAjaxResult = new ResultInfo();
+            ResultInfo<Purchase> r = new ResultInfo<Purchase>();
             try
             {
                 db0 = getDB0();
-                item = await db0.Purchase.FindAsync(param.id);
-
-                if (param.state == (int)IShipState.shipped)
+                if (!db0.Purchase.Any(x => x.purchase_no == no))
                 {
-                    item.ship_state = (int)IShipState.shipped;
-                    item.ship_date = DateTime.Now;
-                }
-                else if (param.state == (int)IShipState.unshipped)
-                {
-                    item.ship_state = (int)IShipState.unshipped;
-                    item.ship_date = null;
-                }
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_PurchaseExist;
 
-                await db0.SaveChangesAsync();
-                rAjaxResult.result = true;
+                }
+                else
+                {
+                    item = await db0.Purchase.FindAsync(no);
+
+                    var data = new Purchase()
+                    {
+                        purchase_no = no,
+                        remit_money = item.total
+                    };
+
+                    r.data = data;
+                    r.result = true;
+                }
             }
             catch (Exception ex)
             {
-                rAjaxResult.result = false;
-                rAjaxResult.message = ex.ToString();
+                r.result = false;
+                r.message = ex.ToString();
             }
             finally
             {
                 db0.Dispose();
             }
-            return Ok(rAjaxResult);
+            return Ok(r);
         }
+        [Route("upRemitData")]
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IHttpActionResult> upRemitData([FromBody]Purchase md)
+        {
+            ResultInfo<Purchase> r = new ResultInfo<Purchase>();
+            string no = md.purchase_no;
+            try
+            {
+                db0 = getDB0();
+                if (!db0.Purchase.Any(x => x.purchase_no == no))
+                {//沒有這筆訂單編號
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_PurchaseExist;
+                }
+                else if (db0.Purchase.Any(x => x.purchase_no == no & x.pay_type != (int)IPayType.Remit))
+                {//此筆訂單非轉帳付款不須對帳確認
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_PurchaseNoRemit;
+                }
+                else if (db0.Purchase.Any(x => x.purchase_no == no & (x.pay_state == (int)IPayState.paid || x.pay_state == (int)IPayState.cancel_order)))
+                {//有此筆訂單,但 已確認付款 or 已取消訂單
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_PurchaseRepeat;
+                }
+                else
+                {
+                    item = await db0.Purchase.FindAsync(no);
+                    if (item.total > md.remit_money)
+                    {//匯款金額不正確
+                        r.result = false;
+                        r.message = Resources.Res.Log_Err_PurchaseMoney;
+                    }
+                    else
+                    {
+                        item.remit_no = md.remit_no;
+                        item.remit_date = md.remit_date;
+                        item.remit_money = md.remit_money;
+                        item.remit_memo = md.remit_memo;
+                        item.pay_state = (int)IPayState.paid_uncheck;
+
+                        await db0.SaveChangesAsync();
+                        r.result = true;
+
+                        RemitEmail emd = new RemitEmail()
+                        {
+                            no = md.purchase_no,
+                            remit_day = md.remit_date
+                        };
+
+                        ResultInfo sendmail = (new EmailController()).sendRemitMail(emd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.ToString();
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+            return Ok(r);
+        }
+        #endregion
 
         public class putBodyParam
         {

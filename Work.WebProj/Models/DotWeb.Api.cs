@@ -38,15 +38,17 @@ namespace DotWeb.Api
         {
             base.Initialize(controllerContext);
 
-            var identity = (System.Web.Security.FormsIdentity)User.Identity; //一定要有值 無值為系統出問題
+            var identity = User.Identity; //一定要有值 無值為系統出問題
             #region 判斷是管理端、用戶端登入
             var getLoginUserFlag = controllerContext.Request.Headers.GetCookies(CommWebSetup.LoginType).SingleOrDefault();
             LoginUserFlag = getLoginUserFlag == null ? "" :
                 EncryptString.desDecryptBase64(getLoginUserFlag[CommWebSetup.LoginType].Value);
             #endregion
-            if (identity != null & LoginUserFlag == "N")
+            if (identity.IsAuthenticated & LoginUserFlag == "N")
             {
-                aspUserId = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(identity.Ticket.Name));//userid
+                var FormsIdentity = (System.Web.Security.FormsIdentity)User.Identity; //一定要有值 無值為系統出問題
+
+                aspUserId = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(FormsIdentity.Ticket.Name));//userid
                 ApplicationUser aspnet_user = UserManager.FindById(aspUserId);
                 UserId = aspnet_user.Id;
                 departmentId = aspnet_user.department_id;

@@ -665,6 +665,7 @@
     <Content Include="Views\News\list.cshtml" />
     <Content Include="Views\News\content.cshtml" />
     <Content Include="Views\Email\Email_order.cshtml" />
+    <Content Include="Views\Email\Email_paymentreply.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -741,6 +742,14 @@
     <TypeScriptCompile Include="Scripts\src\font\Order\vwAStart.tsx" />
     <TypeScriptCompile Include="Scripts\src\font\Order\vwCheck.tsx" />
     <TypeScriptCompile Include="Scripts\src\font\Order\vwOrder.tsx" />
+    <TypeScriptCompile Include="Scripts\src\font\RemitCheck\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\font\RemitCheck\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\font\RemitCheck\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\font\RemitCheck\pub.ts" />
+    <TypeScriptCompile Include="Scripts\src\font\RemitCheck\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\font\RemitCheck\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\font\RemitCheck\vwCheck.tsx" />
+    <TypeScriptCompile Include="Scripts\src\font\RemitCheck\vwFinish.tsx" />
     <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\font\ShoppingCart\containers.ts" />
@@ -830,6 +839,7 @@
     <TypeScriptCompile Include="Scripts\typings\moment\moment-node.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\moment\moment.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-bootstrap\react-bootstrap.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\react-datetime\react-datetime.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-fileupload.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-lazyload.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-load-mask.d.ts" />
