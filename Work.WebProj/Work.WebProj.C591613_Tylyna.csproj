@@ -55,6 +55,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Core.Dll\CKFinder.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML, Version=0.80.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.80.1\lib\net40-client\ClosedXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -205,6 +213,7 @@
     <Compile Include="Areas\Active\Controllers\ProductDataController.cs" />
     <Compile Include="Areas\Active\Controllers\SysDemoController.cs" />
     <Compile Include="Areas\Base\Controllers\DocController.cs" />
+    <Compile Include="Areas\Base\Controllers\ExcelReportController.cs" />
     <Compile Include="Areas\Base\Controllers\LoginController.cs" />
     <Content Include="app_modules\comm-cmpt\package.js" />
     <Content Include="app_modules\comm-func\package.js" />
@@ -610,6 +619,21 @@
     <Content Include="ckeditor\config.js" />
     <Content Include="ckeditor\contents.css" />
     <Content Include="ckeditor\styles.js" />
+    <Content Include="Scripts\build\app\m_change_password.js" />
+    <Content Include="Scripts\build\app\m_login.js" />
+    <Content Include="Scripts\build\app\m_menu.js" />
+    <Content Include="Scripts\build\app\m_menu_set.js" />
+    <Content Include="Scripts\build\app\m_param.js" />
+    <Content Include="Scripts\build\app\m_product.js" />
+    <Content Include="Scripts\build\app\m_productkind.js" />
+    <Content Include="Scripts\build\app\m_purchase.js" />
+    <Content Include="Scripts\build\app\m_roles.js" />
+    <Content Include="Scripts\build\app\m_users.js" />
+    <Content Include="Scripts\build\app\vendors.js" />
+    <Content Include="Scripts\build\app\w-comm.js" />
+    <Content Include="Scripts\build\font\order.js" />
+    <Content Include="Scripts\build\font\productdetail.js" />
+    <Content Include="Scripts\build\font\shoppingcart.js" />
     <Content Include="Scripts\cdn\bootstrap\collapse.js" />
     <Content Include="Scripts\cdn\bootstrap\util.js" />
     <Content Include="Scripts\cdn\jquery-1.10.2.min.js" />
@@ -846,8 +870,6 @@
     <Folder Include="Areas\Base\Views\Shared\" />
     <Folder Include="Content\sass-sys\vendor\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Scripts\build\app\" />
-    <Folder Include="Scripts\build\font\" />
     <Folder Include="_Code\CReport\" />
   </ItemGroup>
   <ItemGroup>

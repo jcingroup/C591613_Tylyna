@@ -2,7 +2,7 @@
 import Moment = require('moment');
 import {config, UIText, IHideTypeData} from '../ts-comm/def-data';
 import {InputText, SelectText, PWButton} from '../components';
-import {Search_Data, Init_Data} from './pub';
+import {Search_Data, Init_Data, IOrderStateData, IOrderState} from './pub';
 import {ac_type_comm} from '../action_type';
 import {MntV} from '../ts-comm/comm-func';
 
@@ -40,6 +40,17 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
         let params = this.props.search;
         params['page'] = this.props.page_operator.page;
         params[name] = value;
+
+        this.props.callGridLoad(params);
+    }
+    chgType(type: number, type_val: number) {
+        this.props.setInputValue(ac_type_comm.chg_sch_val, "type", type);
+        this.props.setInputValue(ac_type_comm.chg_sch_val, "type_val", type_val);
+
+        let params = this.props.search;
+        params['page'] = this.props.page_operator.page;
+        params["type"] = type;
+        params["type_val"] = type_val;
 
         this.props.callGridLoad(params);
     }
@@ -86,6 +97,18 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
                                         onChange={this.chgDate.bind(this, 'pay_date') }
                                         className="form-control form-control-sm" />
                                 </div>
+                            </div>
+                            <div className="form-inline">
+                                <label className="text-sm">訂單狀態</label>
+                                {
+                                    IOrderStateData.map((item, i) => {
+                                        let css_str: string = (search.type === item.type && search.type_val === item.val) ? "btn-primary" : "";
+                                        return <span key={i}>
+                                            <button className={"btn btn-sm " + css_str} onClick={this.chgType.bind(this, item.type, item.val) }>{item.name}</button> {}
+                                        </span>;
+                                    })
+                                }
+                                <button className="btn btn-success btn-sm pull-xs-right"><i className="fa-print"></i> 列印</button>
                             </div>
                         </div>
                     </div>

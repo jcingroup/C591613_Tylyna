@@ -54,6 +54,18 @@ namespace DotWeb.Api
                 predicate = predicate.And(x => x.remit_date >= q.pay_date & q.pay_date <= x.remit_date);
             }
 
+            if (q.type != null)
+            {
+                if (q.type == 1)
+                {//pay_state
+                    predicate = predicate.And(x => x.pay_state == q.type_val);
+                }
+                else if (q.type == 2)
+                {//ship_state
+                    predicate = predicate.And(x => x.ship_state == q.type_val);
+                }
+            }
+
             int page = (q.page == null ? 1 : (int)q.page);
             var result = db0.Purchase.AsExpandable().Where(predicate);
             var resultCount = await result.CountAsync();
@@ -292,6 +304,8 @@ namespace DotWeb.Api
             public string keyword { set; get; }
             public DateTime? order_date { get; set; }
             public DateTime? pay_date { get; set; }
+            public int? type { get; set; }
+            public int? type_val { get; set; }
         }
         public class delParam
         {

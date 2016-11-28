@@ -6,7 +6,9 @@ import {Init_Params, Search_Data, Init_Data} from './pub';
 let searchData: Search_Data = {
     keyword: '',
     order_date: null,
-    pay_date: null
+    pay_date: null,
+    type: null,
+    type_val: null
 };
 
 export const search = (state = searchData, action) => {
