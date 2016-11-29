@@ -666,6 +666,7 @@
     <Content Include="Views\News\content.cshtml" />
     <Content Include="Views\Email\Email_order.cshtml" />
     <Content Include="Views\Email\Email_paymentreply.cshtml" />
+    <Content Include="Views\Email\Email_ship.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

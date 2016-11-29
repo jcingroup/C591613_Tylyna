@@ -40,7 +40,21 @@ namespace DotWeb.Controllers
 
         public ActionResult Reply()
         {//已付款通知
-            return View("Email_paymentreply");
+            RemitEmail emd = new RemitEmail()
+            {
+                no = "p123",
+                day = DateTime.Now
+            };
+            return View("Email_paymentreply", emd);
+        }
+        public ActionResult Ship()
+        {//出貨通知
+            RemitEmail emd = new RemitEmail()
+            {
+                no = "p123",
+                day = DateTime.Now
+            };
+            return View("Email_ship", emd);
         }
 
         #region email寄送程式
@@ -138,7 +152,7 @@ namespace DotWeb.Controllers
         public string AccountNumber { get; set; }
         public string BankCode { get; set; }
         public string BankName { get; set; }
-
+        //會員是否有登入
         public bool isLogin { get; set; }
 
         public Purchase purchase { get; set; }
@@ -146,6 +160,6 @@ namespace DotWeb.Controllers
     public class RemitEmail
     {
         public string no { get; set; }
-        public DateTime? remit_day { get; set; }
+        public DateTime? day { get; set; }
     }
 }

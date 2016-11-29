@@ -347,7 +347,7 @@ namespace DotWeb.Api
                         RemitEmail emd = new RemitEmail()
                         {
                             no = md.purchase_no,
-                            remit_day = md.remit_date
+                            day = md.remit_date
                         };
 
                         ResultInfo sendmail = (new EmailController()).sendRemitMail(emd);

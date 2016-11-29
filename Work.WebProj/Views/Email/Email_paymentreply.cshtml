@@ -92,7 +92,7 @@
 
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td align="center" style="font-size:1px;line-height:1px"><img src="https://s3.amazonaws.com/rejoiner/generic/b/div.png" width="574" alt="1KOMO 萬客摩" style="display:block;width:100%;max-width:574px;max-height:8px" /></td>
+                                    <td align="center" style="font-size:1px;line-height:1px"><img src="https://s3.amazonaws.com/rejoiner/generic/b/div.png" width="574" alt="@Resources.Res.System_FrontName" style="display:block;width:100%;max-width:574px;max-height:8px" /></td>
                                 </tr>
                                 <tr>
                                     <td height="25">&nbsp;</td>
@@ -114,7 +114,7 @@
                                                 <td height="25">&nbsp;</td>
                                             </tr>
                                             <td style="color:#6c6457;font-weight:bold;font-size:16px;line-height:22px">
-                                                訂單 <span style="color:#000001; font-weight:bold">@Model.no</span> 已於 <span style="color:#000001; font-weight:bold">@(((DateTime)Model.remit_day).ToString("yyyy/MM/dd"))</span>約<span style="color:#000001; font-weight:bold">@(((DateTime)Model.remit_day).ToString("HH:mm"))</span> 付款！<br>
+                                                訂單 <span style="color:#000001; font-weight:bold">@Model.no</span> 已於 <span style="color:#000001; font-weight:bold">@(((DateTime)Model.day).ToString("yyyy/MM/dd"))</span>約<span style="color:#000001; font-weight:bold">@(((DateTime)Model.day).ToString("HH:mm"))</span> 付款！<br>
                                                 請盡速核對帳款後，至<a href=@(CommWebSetup.DEV_WebUrl + "/_sysadm") style="color:#F15A24; text-decoration:none">系統後台</a>更新訂單狀態，謝謝！
                                             </td>
                                             <tr>
