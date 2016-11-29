@@ -1,8 +1,8 @@
 ﻿import React = require('react');
 import Moment = require('moment');
-import {config, UIText, IHideTypeData} from '../ts-comm/def-data';
-import {InputText, SelectText, PWButton} from '../components';
-import {Search_Data, Init_Data, IOrderStateData, IOrderState} from './pub';
+import {config, UIText} from '../ts-comm/def-data';
+import {InputText, PWButton} from '../components';
+import {Search_Data} from './pub';
 import {ac_type_comm} from '../action_type';
 import {MntV} from '../ts-comm/comm-func';
 
@@ -11,24 +11,25 @@ import "react-datepicker/dist/react-datepicker.css";
 
 interface GridSearchProps {
     search: Search_Data,
-    init_data: Init_Data,
-    page_operator: server.PageInfo,
     setInputValue: Function,
     callGridLoad: Function
 }
-
-export class GridSearch extends React.Component<GridSearchProps, any>{
+interface GridSearchState {
+    icon?: Array<{ class: string, icon: string }>
+}
+export class GridSearch extends React.Component<GridSearchProps, GridSearchState>{
 
     constructor() {
         super();
         this.state = {
+            icon: [{ class: "btn btn-sm btn-warning", icon: "fa-exclamation-circle" },
+                { class: "btn btn-sm btn-success", icon: "fa-check" }]
         };
     }
     chgShVal(name: string, value: any, e: React.SyntheticEvent) {
         this.props.setInputValue(ac_type_comm.chg_sch_val, name, value);
 
         let params = this.props.search;
-        params['page'] = this.props.page_operator.page;
         params[name] = value;
 
         this.props.callGridLoad(params);
@@ -38,19 +39,7 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
         this.props.setInputValue(ac_type_comm.chg_sch_val, name, value);
 
         let params = this.props.search;
-        params['page'] = this.props.page_operator.page;
         params[name] = value;
-
-        this.props.callGridLoad(params);
-    }
-    chgType(type: number, type_val: number) {
-        this.props.setInputValue(ac_type_comm.chg_sch_val, "type", type);
-        this.props.setInputValue(ac_type_comm.chg_sch_val, "type_val", type_val);
-
-        let params = this.props.search;
-        params['page'] = this.props.page_operator.page;
-        params["type"] = type;
-        params["type_val"] = type_val;
 
         this.props.callGridLoad(params);
     }
@@ -58,8 +47,8 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
         let out_html: JSX.Element = null;
         let pp = this.props;
         let search = pp.search;
-        let mnt_order_day = MntV(search.order_date);
-        let mnt_pay_day = MntV(search.pay_date);
+        let mnt_order_start = MntV(search.order_start);
+        let mnt_order_end = MntV(search.order_end);
         out_html =
             (
                 <div className="table-responsive">
@@ -79,35 +68,24 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
                                         placeholder="請輸入關鍵字..."
                                         /> { }
                                     <label className="text-sm">下單日期</label>
-                                    <DatePicker selected={mnt_order_day}
+                                    <DatePicker selected={mnt_order_start}
                                         dateFormat={config.dateFT}
                                         isClearable={true}
                                         required={false}
                                         locale="zh-TW"
                                         showYearDropdown
-                                        onChange={this.chgDate.bind(this, 'order_date') }
+                                        onChange={this.chgDate.bind(this, 'order_start') }
                                         className="form-control form-control-sm" />
-                                    <label className="text-sm">付款日期</label>
-                                    <DatePicker selected={mnt_pay_day}
+                                    <label className="text-sm">~</label>
+                                    <DatePicker selected={mnt_order_end}
                                         dateFormat={config.dateFT}
                                         isClearable={true}
                                         required={false}
                                         locale="zh-TW"
                                         showYearDropdown
-                                        onChange={this.chgDate.bind(this, 'pay_date') }
-                                        className="form-control form-control-sm" />
+                                        onChange={this.chgDate.bind(this, 'order_end') }
+                                        className="form-control form-control-sm" /> { }
                                 </div>
-                            </div>
-                            <div className="form-inline">
-                                <label className="text-sm">訂單狀態</label>
-                                {
-                                    IOrderStateData.map((item, i) => {
-                                        let css_str: string = (search.type === item.type && search.type_val === item.val) ? "btn-primary" : "";
-                                        return <span key={i}>
-                                            <button className={"btn btn-sm " + css_str} onClick={this.chgType.bind(this, item.type, item.val) }>{item.name}</button> {}
-                                        </span>;
-                                    })
-                                }
                                 <PWButton className="btn btn-success btn-sm pull-xs-right"
                                     iconClassName="fa-print">{UIText.print}</PWButton>
                             </div>

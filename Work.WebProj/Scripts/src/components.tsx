@@ -204,7 +204,7 @@ export class InputNum extends React.Component<InputNumProps, InputNumState>{
             this.setState({ show_value: '', prv_value: '' })
             pp.onChange('', e);
         } else {
-            if (pp.min != undefined && pp.min != null && pp.value != '' && pp.value < pp.min) {
+            if (pp.min != undefined && pp.min != null && pp.value.toString() != '' && pp.value < pp.min) {
                 this.setState({ show_value: '', prv_value: '' })
                 pp.onChange('', e);
             }

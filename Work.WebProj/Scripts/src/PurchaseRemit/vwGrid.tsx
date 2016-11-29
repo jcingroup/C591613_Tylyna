@@ -42,7 +42,7 @@ export class Grid extends React.Component<any, any>{
                     </h3>
                     <div className="alert alert-warning p-a-1">
                         請至 <a href={this.state.Reply} className="btn btn-sm btn-primary" target="_blank">已付款通知頁面</a> 新增或填寫付款資訊<br />
-                        下方僅列「付款方式」為轉帳匯款且「付款狀態」為<span className="w3-tag label-danger w3-round">已付款待確認</span>或<span className="w3-tag label-success w3-round">已付款</span>的資料
+                        下方僅列「付款方式」為『轉帳匯款』且「付款狀態」為<span className="w3-tag label-danger w3-round">已付款待確認</span>或<span className="w3-tag label-success w3-round">已付款</span>的資料
                     </div>
                     <GridSearch search={pp.search} page_operator={pp.page_operator} RemitCheck={pp.RemitCheck}
                         setInputValue={this.props.setInputValue}

@@ -161,7 +161,8 @@ namespace DotWeb.Api
                         mail = md.receive_email
                     };
                     ResultInfo sendmail = (new EmailController()).sendShipMail(emd);
-                    if (!sendmail.result) {
+                    if (!sendmail.result)
+                    {
                         rAjaxResult.hasData = sendmail.result;//暫時放hasdata
                         rAjaxResult.message = sendmail.message;
                     }
@@ -507,6 +508,157 @@ namespace DotWeb.Api
             return Ok(r);
         }
         #endregion
+        #region 後台-訂單未出貨統計
+        [Route("getShipList")]
+        [HttpGet]
+        public async Task<IHttpActionResult> getShipList([FromUri]ShipParam q)
+        {
+            #region 連接BusinessLogicLibary資料庫並取得資料
+            ResultInfo<List<ShipData>> r = new ResultInfo<List<ShipData>>();
+            try
+            {
+                db0 = getDB0();
+                var predicate = PredicateBuilder.True<PurchaseDetail>();
+
+                predicate = predicate.And(x => x.Purchase.ship_state == (int)IShipState.unshipped &
+                ((x.Purchase.pay_type == (int)IPayType.Remit & x.Purchase.pay_state == (int)IPayState.paid) || (x.Purchase.pay_type == (int)IPayType.CashOnDelivery)));
+
+                if (q.keyword != null)
+                    predicate = predicate.And(x => x.purchase_no.Contains(q.keyword) ||
+                                                   x.Purchase.receive_name.Contains(q.keyword) ||
+                                                   x.p_name.Contains(q.keyword));
+
+
+                if (q.order_start != null & q.order_end != null)
+                {
+                    DateTime start = (DateTime)q.order_start;
+                    DateTime end = ((DateTime)q.order_end).AddDays(1);
+
+                    predicate = predicate.And(x => x.Purchase.order_date >= start & x.Purchase.order_date <= end);
+                }
+
+                var result = db0.PurchaseDetail.AsExpandable().Where(predicate);
+
+                var resultItems = await result
+                    .GroupBy(x => x.p_name)
+                    .Select(x => new ShipData()
+                    {
+                        p_name = x.Key,
+                        Detail = x.Select(y => new ShipPD()
+                        {
+                            purchase_no = y.purchase_no,
+                            purchase_detail_id = y.purchase_detail_id,//訂單明細-編號
+                            product_detail_id = y.product_detail_id,//產品明細-編號
+                            p_d_pack_type = y.p_d_pack_type,//產品包裝
+                            order_date = y.Purchase.order_date,//下單日期
+                            receive_name = y.Purchase.receive_name,//購買人
+                            weight = y.ProductDetail.weight,//重量
+                            qty = y.qty//數量
+                        }).ToList()
+                    })
+                    .ToListAsync();
+
+                r.result = true;
+                r.data = resultItems;
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.ToString();
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+            return Ok(r);
+
+            #endregion
+        }
+        [Route("getShipDetail")]
+        [HttpGet]
+        public async Task<IHttpActionResult> getShipDetail([FromUri]ShipParam q)
+        {
+            #region 連接BusinessLogicLibary資料庫並取得資料
+            try
+            {
+                db0 = getDB0();
+                var predicate = PredicateBuilder.True<PurchaseDetail>();
+
+                predicate = predicate.And(x => x.Purchase.ship_state == (int)IShipState.unshipped &
+                ((x.Purchase.pay_type == (int)IPayType.Remit & x.Purchase.pay_state == (int)IPayState.paid) || (x.Purchase.pay_type == (int)IPayType.CashOnDelivery)));
+
+                if (q.keyword != null)
+                    predicate = predicate.And(x => x.purchase_no.Contains(q.keyword) ||
+                                                   x.Purchase.receive_name.Contains(q.keyword) ||
+                                                   x.p_name.Contains(q.keyword));
+
+
+                if (q.order_start != null & q.order_end != null)
+                {
+                    DateTime start = (DateTime)q.order_start;
+                    DateTime end = ((DateTime)q.order_end).AddDays(1);
+
+                    predicate = predicate.And(x => x.Purchase.order_date >= start & x.Purchase.order_date <= end);
+                }
+                //不管怎樣依名子抓
+                predicate = predicate.And(x => x.p_name == q.p_name);
+                var result = db0.PurchaseDetail.AsExpandable().Where(predicate)
+                    .Select(y => new ShipPD()
+                    {
+                        purchase_no = y.purchase_no,
+                        purchase_detail_id = y.purchase_detail_id,//訂單明細-編號
+                        product_detail_id = y.product_detail_id,//產品明細-編號
+                        p_d_pack_type = y.p_d_pack_type,//產品包裝
+                        order_date = y.Purchase.order_date,//下單日期
+                        receive_name = y.Purchase.receive_name,//購買人
+                        weight = y.ProductDetail.weight,//重量
+                        qty = y.qty//數量
+                    });
+
+                IQueryable<ShipPD> resultOrderItems = null;
+
+                if (q.field != null)
+                {
+                    if (q.sort == "asc")
+                        resultOrderItems = result.OrderBy(q.field);
+
+                    if (q.sort == "desc")
+                        resultOrderItems = result.OrderBy(q.field + " descending");
+                }
+                else
+                {
+                    resultOrderItems = result.OrderBy(x => x.purchase_no);
+                }
+                ShipData data = new ShipData()
+                {
+                    p_name = q.p_name,
+                    Detail = await resultOrderItems.ToListAsync(),
+                    field = q.field,
+                    sort = q.sort
+                };
+
+                return Ok(new
+                {
+                    result = true,
+                    data = data
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new
+                {
+                    result = false,
+                    message = ex.ToString()
+                });
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+
+            #endregion
+        }
+        #endregion
 
         public class putBodyParam
         {
@@ -538,5 +690,33 @@ namespace DotWeb.Api
             public int state { get; set; }
             public List<string> arr { get; set; }
         }
+
+        public class ShipParam : QueryBase
+        {
+            public string keyword { get; set; }
+            public DateTime? order_start { get; set; }
+            public DateTime? order_end { get; set; }
+            public string p_name { get; set; }
+        }
+        #region ship model
+        public class ShipData
+        {
+            public string p_name { get; set; }
+            public IEnumerable<ShipPD> Detail { get; set; }
+            public string field { get; set; }
+            public string sort { get; set; }
+        }
+        public class ShipPD
+        {
+            public string purchase_no { get; set; }
+            public int purchase_detail_id { get; set; }//訂單明細-編號
+            public int product_detail_id { get; set; }//產品明細-編號
+            public int? p_d_pack_type { get; set; }//產品包裝
+            public DateTime order_date { get; set; }//下單日期
+            public string receive_name { get; set; }//購買人
+            public double weight { get; set; }//重量
+            public int qty { get; set; }//數量
+        }
+        #endregion
     }
 }

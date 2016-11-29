@@ -34,7 +34,10 @@ export class AStart extends React.Component<any, any>{
     }
     chgProductQty(i) {
         let grid: Array<server.PurchaseDetail> = this.props.grid;
-
+        if (grid[i].qty < 1) {
+            alert(`產品編號:${grid[i].p_d_sn}數量不可小於1!`);
+            return;
+        }
         this.props.chgProductQty(grid[i].product_detail_id, grid[i].qty);
     }
     goOrder() {
