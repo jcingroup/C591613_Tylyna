@@ -627,12 +627,15 @@
     <Content Include="Scripts\build\app\m_product.js" />
     <Content Include="Scripts\build\app\m_productkind.js" />
     <Content Include="Scripts\build\app\m_purchase.js" />
+    <Content Include="Scripts\build\app\m_purchaseremit.js" />
+    <Content Include="Scripts\build\app\m_purchaseship.js" />
     <Content Include="Scripts\build\app\m_roles.js" />
     <Content Include="Scripts\build\app\m_users.js" />
     <Content Include="Scripts\build\app\vendors.js" />
     <Content Include="Scripts\build\app\w-comm.js" />
     <Content Include="Scripts\build\font\order.js" />
     <Content Include="Scripts\build\font\productdetail.js" />
+    <Content Include="Scripts\build\font\remitcheck.js" />
     <Content Include="Scripts\build\font\shoppingcart.js" />
     <Content Include="Scripts\cdn\bootstrap\collapse.js" />
     <Content Include="Scripts\cdn\bootstrap\util.js" />
