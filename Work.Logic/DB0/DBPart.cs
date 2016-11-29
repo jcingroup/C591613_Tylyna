@@ -56,6 +56,25 @@ namespace ProcCore.Business.DB0
             new i_Code{ Code = 2, Value = "5入濾掛式包", LangCode = "progress" },
             new i_Code{ Code = 3, Value = "10入濾掛式包", LangCode = "finish" }
         };
+        public static List<i_Code> IPayTypeData = new List<i_Code>()
+        {
+            new i_Code{ Code = 1, Value = "轉帳匯款", LangCode = "wait" },
+            new i_Code{ Code = 2, Value = "貨到付款", LangCode = "progress" }
+        };
+        public static List<i_Code> IPayStateData = new List<i_Code>()
+        {
+            new i_Code{ Code = -1, Value = "取消訂單", LangCode = "wait" },
+            new i_Code{ Code = 0, Value = "待付款", LangCode = "progress" },
+            new i_Code{ Code = 1, Value = "已付款待確認", LangCode = "progress" },
+            new i_Code{ Code = 2, Value = "已付款", LangCode = "progress" }
+        };
+        public static List<i_Code> IShipStateData = new List<i_Code>()
+        {
+            new i_Code{ Code = -1, Value = "取消訂單", LangCode = "wait" },
+            new i_Code{ Code = 0, Value = "待出貨", LangCode = "progress" },
+            new i_Code{ Code = 1, Value = "已出貨", LangCode = "progress" }
+        };
+
         public static string GetStateVal(int code, i_CodeName propName, List<i_Code> data)
         {
             string Val = string.Empty;

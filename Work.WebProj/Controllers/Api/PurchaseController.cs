@@ -46,13 +46,18 @@ namespace DotWeb.Api
 
             if (q.order_date != null)
             {
-                DateTime o_date = (DateTime)q.order_date;
-                predicate = predicate.And(x => x.order_date >= o_date & o_date <= x.order_date);
+                DateTime start = (DateTime)q.order_date;
+                DateTime end = ((DateTime)q.order_date).AddDays(1);
+
+                predicate = predicate.And(x => x.order_date >= start & x.order_date < end);
             }
 
             if (q.pay_date != null)
             {
-                predicate = predicate.And(x => x.remit_date >= q.pay_date & q.pay_date <= x.remit_date);
+                DateTime start = (DateTime)q.pay_date;
+                DateTime end = ((DateTime)q.pay_date).AddDays(1);
+
+                predicate = predicate.And(x => x.remit_date >= start & x.remit_date < end);
             }
 
             if (q.type != null)
@@ -408,7 +413,7 @@ namespace DotWeb.Api
                 DateTime start = (DateTime)q.pay_start;
                 DateTime end = ((DateTime)q.pay_end).AddDays(1);
 
-                predicate = predicate.And(x => x.remit_date >= start & x.remit_date <= end);
+                predicate = predicate.And(x => x.remit_date >= start & x.remit_date < end);
             }
 
             int page = (q.page == null ? 1 : (int)q.page);
@@ -441,7 +446,8 @@ namespace DotWeb.Api
                     x.customer_id,
                     x.order_date,
                     x.remit_date,//轉帳日期
-                    x.receive_name,
+                    x.receive_name,//收件人
+                    customer_name = x.Customer.c_name,//購買人
                     x.pay_type,//付款方式
                     x.pay_state,//付款狀態
                     x.ship_state,//出貨狀態
@@ -551,7 +557,8 @@ namespace DotWeb.Api
                             product_detail_id = y.product_detail_id,//產品明細-編號
                             p_d_pack_type = y.p_d_pack_type,//產品包裝
                             order_date = y.Purchase.order_date,//下單日期
-                            receive_name = y.Purchase.receive_name,//購買人
+                            receive_name = y.Purchase.receive_name,//收件人
+                            customer_name = y.Purchase.Customer.c_name,//購買人
                             weight = y.ProductDetail.weight,//重量
                             qty = y.qty//數量
                         }).ToList()
@@ -610,7 +617,8 @@ namespace DotWeb.Api
                         product_detail_id = y.product_detail_id,//產品明細-編號
                         p_d_pack_type = y.p_d_pack_type,//產品包裝
                         order_date = y.Purchase.order_date,//下單日期
-                        receive_name = y.Purchase.receive_name,//購買人
+                        receive_name = y.Purchase.receive_name,//收件人
+                        customer_name = y.Purchase.Customer.c_name,//購買人
                         weight = y.ProductDetail.weight,//重量
                         qty = y.qty//數量
                     });
@@ -713,7 +721,8 @@ namespace DotWeb.Api
             public int product_detail_id { get; set; }//產品明細-編號
             public int? p_d_pack_type { get; set; }//產品包裝
             public DateTime order_date { get; set; }//下單日期
-            public string receive_name { get; set; }//購買人
+            public string receive_name { get; set; }//收件人
+            public string customer_name { get; set; }//購買人
             public double weight { get; set; }//重量
             public int qty { get; set; }//數量
         }

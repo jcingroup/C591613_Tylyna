@@ -1,10 +1,11 @@
-﻿import React = require('react');
+﻿import $ = require('jquery');
+import React = require('react');
 import Moment = require('moment');
 import {config, UIText, IHideTypeData} from '../ts-comm/def-data';
 import {InputText, SelectText, PWButton} from '../components';
 import {Search_Data, Init_Data, IOrderStateData, IOrderState} from './pub';
 import {ac_type_comm} from '../action_type';
-import {MntV} from '../ts-comm/comm-func';
+import {MntV, uniqid, ifrmDown} from '../ts-comm/comm-func';
 
 import DatePicker = require('react-datepicker');
 import "react-datepicker/dist/react-datepicker.css";
@@ -21,6 +22,7 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
 
     constructor() {
         super();
+        this.dwExcel = this.dwExcel.bind(this);
         this.state = {
         };
     }
@@ -53,6 +55,18 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
         params["type_val"] = type_val;
 
         this.props.callGridLoad(params);
+    }
+    dwExcel(e: React.SyntheticEvent) {
+        e.preventDefault();
+        let url_pm = '';
+        let pm = {
+            tid: uniqid()
+        };
+        $.extend(pm, this.props.search);
+        url_pm = $.param(pm);
+
+        let src = gb_approot + "Base/ExcelReport/Excel_Purchase?" + url_pm;
+        ifrmDown(src);
     }
     render() {
         let out_html: JSX.Element = null;
@@ -109,7 +123,7 @@ export class GridSearch extends React.Component<GridSearchProps, any>{
                                     })
                                 }
                                 <PWButton className="btn btn-success btn-sm pull-xs-right"
-                                    iconClassName="fa-print">{UIText.print}</PWButton>
+                                iconClassName="fa-print" enable={true} onClick={this.dwExcel}> {UIText.print}</PWButton>
                             </div>
                         </div>
                     </div>

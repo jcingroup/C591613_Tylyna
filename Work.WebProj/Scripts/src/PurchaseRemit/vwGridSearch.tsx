@@ -99,6 +99,7 @@ export class GridSearch extends React.Component<GridSearchProps, GridSearchState
                                         isClearable={true}
                                         required={false}
                                         locale="zh-TW"
+                                        minDate={mnt_pay_start}
                                         showYearDropdown
                                         onChange={this.chgDate.bind(this, 'pay_end') }
                                         className="form-control form-control-sm" /> { }

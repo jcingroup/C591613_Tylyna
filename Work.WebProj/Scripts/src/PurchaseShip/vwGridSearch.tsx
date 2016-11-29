@@ -83,11 +83,12 @@ export class GridSearch extends React.Component<GridSearchProps, GridSearchState
                                         required={false}
                                         locale="zh-TW"
                                         showYearDropdown
+                                        minDate={mnt_order_start}
                                         onChange={this.chgDate.bind(this, 'order_end') }
                                         className="form-control form-control-sm" /> { }
                                 </div>
                                 <PWButton className="btn btn-success btn-sm pull-xs-right"
-                                    iconClassName="fa-print">{UIText.print}</PWButton>
+                                    iconClassName="fa-print"> {UIText.print}</PWButton>
                             </div>
                         </div>
                     </div>

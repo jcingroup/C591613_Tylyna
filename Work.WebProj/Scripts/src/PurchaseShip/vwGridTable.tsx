@@ -113,7 +113,7 @@ export class GridTable extends React.Component<any, any>{
                                                 <td><a href={this.state.Order + "?no=" + detail.purchase_no}>{detail.purchase_no}</a></td>
                                                 <td>{this.getName(IPackTypeData, detail.p_d_pack_type) }</td>
                                                 <td className="text-xs-center">{Moment(detail.order_date).format(config.dateFT) }</td>
-                                                <td className="text-xs-center">{detail.receive_name}</td>
+                                                <td className="text-xs-center">{detail.customer_name}</td>
                                                 <td className="text-xs-right">{fmt_money(detail.weight) }</td>
                                                 <td className="text-xs-center">{fmt_money(detail.qty) }</td>
                                             </tr>;

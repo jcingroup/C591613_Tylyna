@@ -17,7 +17,8 @@ export interface ShipPD {
     product_detail_id?: number;//產品明細-編號
     p_d_pack_type?: number;//產品包裝
     order_date?: any;//下單日期
-    receive_name?: string;//購買人
+    receive_name?: string;//收件人
+    customer_name?: string;//購買人
     weight?: number;//重量
     qty?: number;//數量
 }

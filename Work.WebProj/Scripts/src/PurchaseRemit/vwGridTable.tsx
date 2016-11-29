@@ -117,7 +117,7 @@ export class GridTable extends React.Component<any, any>{
                                     </label>
                                 </td>
                                 <td><a href={this.state.Order + "?no=" + item.purchase_no}>{item.purchase_no}</a></td>
-                                <td className="text-xs-center">{item.receive_name}</td>
+                                <td className="text-xs-center">{item.customer_name}</td>
                                 <td className="text-xs-center">{item.remit_no}</td>
                                 <td className="text-xs-center">{item.remit_money}</td>
                                 <td className="text-xs-center">{(item.remit_date != null && item.remit_date != undefined) ? Moment(item.remit_date).format(config.dateTime) : "" }</td>
