@@ -142,6 +142,47 @@ namespace DotWeb.Controllers
             return r;
         }
 
+        /// <summary>
+        /// 出貨通知
+        /// </summary>
+        /// <param name="no"></param>
+        /// <param name="remit_day"></param>
+        /// <returns></returns>
+        public ResultInfo sendShipMail(ShipEmail md)
+        {
+            ResultInfo r = new ResultInfo();
+            try
+            {
+                #region 信件發送
+                string Body = getMailBody("../Email/Email_ship", md, newContext);//套用信件版面
+                Boolean mail;
+
+                #region 收信人及寄信人
+                string sendMail = openLogic().getReceiveMails()[0];
+                List<string> r_mails = openLogic().getReceiveMails().ToList();
+                if (!r_mails.Any(x => x == md.mail)) { r_mails.Add(md.name + ":" + md.mail); }
+                #endregion
+
+                mail = Mail_Send(sendMail, //寄信人
+                                r_mails.ToArray(), //收信人
+                                string.Format(Resources.Res.MailTitle_Ship, Resources.Res.System_FrontName), //信件標題
+                                Body, //信件內容
+                                true); //是否為html格式
+                if (mail == false)
+                {//送信失敗
+                    r.result = true;
+                    r.message = Resources.Res.Log_Err_SendMailFail;
+                    return r;
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message;
+            }
+            return r;
+        }
         #endregion
     }
     public class OrderEmail
@@ -160,5 +201,10 @@ namespace DotWeb.Controllers
     {
         public string no { get; set; }
         public DateTime? day { get; set; }
+    }
+    public class ShipEmail : RemitEmail
+    {
+        public string name { get; set; }
+        public string mail { get; set; }
     }
 }

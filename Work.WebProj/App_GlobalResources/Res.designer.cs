@@ -853,6 +853,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   查詢類似 【{0}】商品出貨通知 的當地語系化字串。
+        /// </summary>
+        internal static string MailTitle_Ship {
+            get {
+                return ResourceManager.GetString("MailTitle_Ship", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 下一頁 的當地語系化字串。
         /// </summary>
         internal static string NextPage {

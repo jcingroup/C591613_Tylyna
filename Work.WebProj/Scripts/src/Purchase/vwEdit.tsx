@@ -49,7 +49,15 @@ export class Edit extends React.Component<any, any>{
         e.preventDefault();
         let field: server.Product = this.props.field;
         let pp = this.props;
+        let $btn = $(document.activeElement);
+        let btn_name = $btn.attr("name");
 
+        if (btn_name == "btn-2") {
+            if (!confirm("確定寄送出貨通知信?")) {
+                return;
+            }
+            field.is_mail = true;
+        }
 
         this.props.callSubmit(pp.params.no, field, pp.edit_type);
         return;
@@ -289,9 +297,12 @@ export class Edit extends React.Component<any, any>{
 
                     <div className="form-action">
                         <PWButton iconClassName="fa-check" className="btn btn-primary btn-sm col-xs-offset-1"
-                            title={UIText.save} enable={true} type="submit" >{UIText.save}</PWButton> { }
+                            title={UIText.save} enable={true} type="submit" name="btn-1" > {UIText.save}</PWButton> { }
+                        <PWButton iconClassName="fa-envelope" className="btn btn-success btn-sm"
+                            title={UIText.save} enable={true} name="btn-2"
+                            hidden={field.ship_state != IShipState.shipped} type="submit" > {UIText.save}, 並寄送出貨通知</PWButton> { }
                         <PWButton iconClassName="fa-times" className="btn btn-secondary btn-sm"
-                            title={UIText.save} enable={true} onClick={this.props.callGridLoad.bind(this, null) } >{UIText.return}</PWButton>
+                            title={UIText.save} enable={true} onClick={this.props.callGridLoad.bind(this, null) } > {UIText.return}</PWButton>
                     </div>
 
                 </form>

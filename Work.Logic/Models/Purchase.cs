@@ -11,6 +11,7 @@ namespace ProcCore.Business.DB0
         public IEnumerable<PurchaseDetail> Deatil { get; set; }
         public string customer_name { get; set; }
         public bool cancel_order { get; set; }
+        public bool is_mail { get; set; }
         private class PurchaseMetadata
         {
             [JsonIgnore()]

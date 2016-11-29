@@ -58,6 +58,8 @@ export const callSubmit = (id, md: server.Purchase, edit_type: IEditType) => {
                 .then((data: IResultData<server.Purchase>) => {
                     if (data.result) {
                         tosMessage(null, UIText.fi_update, 1);
+                        if (!data.hasData)
+                            alert(data.message);
                         //dispatch(callGridLoad(null));
                     } else {
                         alert(data.message);

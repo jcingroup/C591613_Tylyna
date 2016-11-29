@@ -130,7 +130,8 @@ namespace DotWeb.Api
                 item = await db0.Purchase.FindAsync(param.id);
                 var md = param.md;
 
-                #region 出貨狀態
+                #region 更新狀態
+                //出貨狀態
                 if (md.ship_state == (int)IShipState.shipped)
                 {
                     item.ship_state = (int)IShipState.shipped;
@@ -141,7 +142,7 @@ namespace DotWeb.Api
                     item.ship_state = (int)IShipState.unshipped;
                     item.ship_date = null;
                 }
-
+                //取消
                 if (md.cancel_order == true)
                 {
                     item.pay_state = (int)IPayState.cancel_order;
@@ -149,6 +150,22 @@ namespace DotWeb.Api
                     item.cancel_reason = md.cancel_reason;
                 }
                 #endregion
+
+                if (md.is_mail)
+                {
+                    ShipEmail emd = new ShipEmail()
+                    {
+                        no = md.purchase_no,
+                        day = md.ship_date,
+                        name = md.receive_name,
+                        mail = md.receive_email
+                    };
+                    ResultInfo sendmail = (new EmailController()).sendShipMail(emd);
+                    if (!sendmail.result) {
+                        rAjaxResult.hasData = sendmail.result;//暫時放hasdata
+                        rAjaxResult.message = sendmail.message;
+                    }
+                }
 
                 //db0.Entry(md).State = EntityState.Modified;
 
