@@ -272,7 +272,7 @@ namespace DotWeb.Api
                 if (!db0.Purchase.Any(x => x.purchase_no == no))
                 {
                     r.result = false;
-                    r.message = Resources.Res.Log_Err_PurchaseExist;
+                    r.message = string.Format(Resources.Res.Log_Err_PurchaseExist, no);
 
                 }
                 else
@@ -313,12 +313,12 @@ namespace DotWeb.Api
                 if (!db0.Purchase.Any(x => x.purchase_no == no))
                 {//沒有這筆訂單編號
                     r.result = false;
-                    r.message = Resources.Res.Log_Err_PurchaseExist;
+                    r.message = string.Format(Resources.Res.Log_Err_PurchaseExist, no);
                 }
                 else if (db0.Purchase.Any(x => x.purchase_no == no & x.pay_type != (int)IPayType.Remit))
                 {//此筆訂單非轉帳付款不須對帳確認
                     r.result = false;
-                    r.message = Resources.Res.Log_Err_PurchaseNoRemit;
+                    r.message = string.Format(Resources.Res.Log_Err_PurchaseNoRemit, no);
                 }
                 else if (db0.Purchase.Any(x => x.purchase_no == no & (x.pay_state == (int)IPayState.paid || x.pay_state == (int)IPayState.cancel_order)))
                 {//有此筆訂單,但 已確認付款 or 已取消訂單
@@ -448,6 +448,47 @@ namespace DotWeb.Api
 
             #endregion
         }
+        [Route("upRemitState")]
+        [HttpPost]
+        public async Task<IHttpActionResult> upRemitState([FromBody]upRemitStateParma md)
+        {
+            ResultInfo<Purchase> r = new ResultInfo<Purchase>();
+            try
+            {
+                using (var db0 = getDB0())
+                {
+                    foreach (var no in md.arr)
+                    {
+                        if (!db0.Purchase.Any(x => x.purchase_no == no))
+                        {//沒有這筆訂單編號
+                            r.result = false;
+                            r.message = string.Format(Resources.Res.Log_Err_PurchaseExist, no);
+                            return Ok(r);
+                        }
+                        else if (db0.Purchase.Any(x => x.purchase_no == no & x.pay_type != (int)IPayType.Remit))
+                        {//此筆訂單非轉帳付款不須對帳確認
+                            r.result = false;
+                            r.message = string.Format(Resources.Res.Log_Err_PurchaseNoRemit, no);
+                            return Ok(r);
+                        }
+                        else
+                        {
+                            item = await db0.Purchase.FindAsync(no);
+                            if (md.state == (int)IPayState.paid_uncheck || md.state == (int)IPayState.paid)//狀態為paid、paid_uncheck才能更新
+                                item.pay_state = md.state;
+                        }
+                    }
+                    await db0.SaveChangesAsync();
+                    r.result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.ToString();
+            }
+            return Ok(r);
+        }
         #endregion
 
         public class putBodyParam
@@ -475,10 +516,10 @@ namespace DotWeb.Api
             public string id { get; set; }
         }
 
-        public class ShipStateParma
+        public class upRemitStateParma
         {
-            public string id { get; set; }
             public int state { get; set; }
+            public List<string> arr { get; set; }
         }
     }
 }

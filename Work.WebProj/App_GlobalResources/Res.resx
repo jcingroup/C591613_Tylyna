@@ -359,7 +359,7 @@
     <value>購物車內無此商品~!</value>
   </data>
   <data name="Log_Err_PurchaseExist" xml:space="preserve">
-    <value>此筆訂單編號不存在，請重新檢查訂單編號!</value>
+    <value>此筆訂單編號:{0}不存在，請重新檢查訂單編號!</value>
   </data>
   <data name="Log_Err_PurchaseRepeat" xml:space="preserve">
     <value>此筆訂單編號已付款或已取消訂單，請重新檢查訂單編號!</value>
@@ -404,6 +404,6 @@
     <value>【{0}】客戶已付款通知</value>
   </data>
   <data name="Log_Err_PurchaseNoRemit" xml:space="preserve">
-    <value>此筆訂單編號付款方式非轉帳付款不須對帳確認，請重新檢查訂單編號!</value>
+    <value>此筆訂單編號:{0}付款方式非轉帳付款不須對帳確認，請重新檢查訂單編號!</value>
   </data>
 </root>

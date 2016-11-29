@@ -5,7 +5,8 @@ import {config, UIText, IPayStateDataForRemit} from '../ts-comm/def-data';
 import {PWButton, RadioBox} from '../components';
 import { OrderButton } from '../ts-comm/OrderButton';
 import {ac_type_comm} from '../action_type';
-import {Init_Params, Search_Data} from './pub';
+import {Search_Data} from './pub';
+import {clone} from '../ts-comm/comm-func';
 
 
 export class GridTable extends React.Component<any, any>{
@@ -28,10 +29,23 @@ export class GridTable extends React.Component<any, any>{
 
         this.props.callGridLoad(parms);
     }
+    chgCheck(e: React.SyntheticEvent) {
+        let input: HTMLInputElement = e.target as HTMLInputElement;
+        let arr: Array<string> = clone(this.props.RemitCheck);
+
+        if (input.checked) {
+            arr.push(input.value);
+        } else {
+            let remove_index: number = arr.indexOf(input.value);
+            arr.splice(remove_index, 1);
+        }
+        this.props.setRemitCheck(arr);
+    }
     render() {
         let out_html: JSX.Element = null;
         let pp = this.props;
         let grid: Array<server.Purchase> = pp.grid;
+        let RemitCheck: Array<String> = pp.RemitCheck;
 
         out_html =
             (
@@ -96,8 +110,11 @@ export class GridTable extends React.Component<any, any>{
                         {grid.map((item, i) => {
                             return <tr key={i}>
                                 <td className="text-xs-center">
-                                    <PWButton iconClassName="fa-search-plus" className="btn btn-link btn-lg"
-                                        title={UIText.modify} enable={true} />
+                                    <label className="c-input c-checkbox">
+                                        <input type="checkbox" value={item.purchase_no} onChange={this.chgCheck.bind(this) }
+                                            checked={RemitCheck.indexOf(item.purchase_no) >= 0 }/>
+                                        <span className="c-indicator"></span>
+                                    </label>
                                 </td>
                                 <td><a href={this.state.Order + "?no=" + item.purchase_no}>{item.purchase_no}</a></td>
                                 <td className="text-xs-center">{item.receive_name}</td>

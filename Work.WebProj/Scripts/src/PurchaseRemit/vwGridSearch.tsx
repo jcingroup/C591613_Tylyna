@@ -2,7 +2,7 @@
 import Moment = require('moment');
 import {config, UIText, IPayStateDataForRemit} from '../ts-comm/def-data';
 import {InputText, SelectText, PWButton} from '../components';
-import {Search_Data, Init_Data} from './pub';
+import {Search_Data} from './pub';
 import {ac_type_comm} from '../action_type';
 import {MntV} from '../ts-comm/comm-func';
 
@@ -11,10 +11,11 @@ import "react-datepicker/dist/react-datepicker.css";
 
 interface GridSearchProps {
     search: Search_Data,
-    init_data: Init_Data,
+    RemitCheck: Array<string>
     page_operator: server.PageInfo,
     setInputValue: Function,
-    callGridLoad: Function
+    callGridLoad: Function,
+    updateRemitState: Function
 }
 interface GridSearchState {
     icon?: Array<{ class: string, icon: string }>
@@ -25,7 +26,7 @@ export class GridSearch extends React.Component<GridSearchProps, GridSearchState
         super();
         this.state = {
             icon: [{ class: "btn btn-sm btn-warning", icon: "fa-exclamation-circle" },
-                { class: "btn btn-sm btn-success", icon: "fa-check" }]       
+                { class: "btn btn-sm btn-success", icon: "fa-check" }]
         };
     }
     chgShVal(name: string, value: any, e: React.SyntheticEvent) {
@@ -46,6 +47,18 @@ export class GridSearch extends React.Component<GridSearchProps, GridSearchState
         params[name] = value;
 
         this.props.callGridLoad(params);
+    }
+    upRemitState(name: string, val: any, e) {
+        let arr: Array<string> = this.props.RemitCheck;
+        let info_str: string = `確定更新訂單\n${arr.join("、")}\n狀態為「${name}」?`;
+        if (arr.length <= 0) {
+            alert("未選取訂單!");
+            return;
+        }
+        if (!confirm(info_str)) {
+            return;
+        }
+        this.props.updateRemitState(val, arr);
     }
     render() {
         let out_html: JSX.Element = null;
@@ -108,7 +121,8 @@ export class GridSearch extends React.Component<GridSearchProps, GridSearchState
                                     IPayStateDataForRemit.map((item, i) => {
                                         return <span key={i}>
                                             <PWButton className={this.state.icon[i].class}
-                                                iconClassName={this.state.icon[i].icon} enable={true}> {item.Lname}</PWButton> { }
+                                                iconClassName={this.state.icon[i].icon} enable={true}
+                                                onClick={this.upRemitState.bind(this, item.Lname, item.val) }> {item.Lname}</PWButton> { }
                                         </span>;
                                     })
                                 }

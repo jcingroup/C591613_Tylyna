@@ -754,7 +754,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 此筆訂單編號不存在，請重新檢查訂單編號! 的當地語系化字串。
+        ///   查詢類似 此筆訂單編號:{0}不存在，請重新檢查訂單編號! 的當地語系化字串。
         /// </summary>
         internal static string Log_Err_PurchaseExist {
             get {
@@ -772,7 +772,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 此筆訂單編號付款方式非轉帳付款不須對帳確認，請重新檢查訂單編號! 的當地語系化字串。
+        ///   查詢類似 此筆訂單編號:{0}付款方式非轉帳付款不須對帳確認，請重新檢查訂單編號! 的當地語系化字串。
         /// </summary>
         internal static string Log_Err_PurchaseNoRemit {
             get {

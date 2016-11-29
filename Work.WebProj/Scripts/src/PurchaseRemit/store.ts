@@ -1,7 +1,7 @@
 ﻿import update = require('react-addons-update');
 import { combineReducers } from 'redux'
-import {ac_type_comm} from '../action_type';
-import {Init_Params, Search_Data, Init_Data} from './pub';
+import {ac_type_comm, remit_type} from '../action_type';
+import {Search_Data} from './pub';
 
 let searchData: Search_Data = {
     keyword: null
@@ -50,13 +50,9 @@ export const page_operator = (state = page_operator_state, action) => {
     }
 }
 
-//暫不使用
-let init: Init_Data = {
-
-};
-const init_data = (state: Init_Data = init, action): Init_Data => {
+export const RemitCheck = (state: Array<string> = [], action) => {
     switch (action.type) {
-        case ac_type_comm.get_init:
+        case remit_type.chg_remit_list:
             return action.data;
         default:
             return state
@@ -64,7 +60,7 @@ const init_data = (state: Init_Data = init, action): Init_Data => {
 }
 
 export const combine = combineReducers({
-    grid, page_operator, search, init_data,
+    grid, page_operator, search, RemitCheck
 })
 
 export default combine;

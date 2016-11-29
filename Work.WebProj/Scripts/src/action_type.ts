@@ -23,5 +23,9 @@
     update_dil: 'update_detail',
     cancel_dil: 'cancel_detail',
     //換頁
-    chg_oper_page:'change_operator_page'
+    chg_oper_page: 'change_operator_page'
+}
+
+export const remit_type = {
+    chg_remit_list: 'change_remit_list'
 }

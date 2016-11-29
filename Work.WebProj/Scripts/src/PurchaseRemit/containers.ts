@@ -6,21 +6,21 @@ import {AStart} from './vwAStart';
 import {GridTable} from './vwGridTable';
 
 
-import { callGridLoad, callSubmit,
-    setInputValue} from './actions'
+import { callGridLoad, updateRemitState,
+    setInputValue, setRemitCheck} from './actions'
 
 const m1ToProps = (state, ownProps) => {
     return {
         page_operator: state.page_operator,
         search: state.search,
         grid: state.grid,
-        init_data: state.init_data,
+        RemitCheck: state.RemitCheck
     }
 }
 
 const m1Dispatch = (dispatch, ownProps) => {
     let s = bindActionCreators({
-        callGridLoad, callSubmit,
+        callGridLoad, updateRemitState,
         setInputValue
     }, dispatch);
 
@@ -33,13 +33,14 @@ const GridTableToProps = (state, ownProps) => {
     return {
         page_operator: state.page_operator,
         search: state.search,
-        grid: state.grid
+        grid: state.grid,
+        RemitCheck: state.RemitCheck
     }
 }
 
 const GridTableDispatch = (dispatch, ownProps) => {
     let s = bindActionCreators({
-        callGridLoad
+        callGridLoad, setRemitCheck
     }, dispatch);
 
     return s;

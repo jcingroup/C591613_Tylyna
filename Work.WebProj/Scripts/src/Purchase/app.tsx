@@ -15,7 +15,7 @@ const store = createStore(Reducers, applyMiddleware(thunkMiddleware));
 
 var dom = document.getElementById('page_content');
 render(<Provider store={store}><AStartView /></Provider>, dom);
-if (no != null) {
+if (no != "") {
     store.dispatch(callUpdateItem(no));
 } else {
     store.dispatch(callGridLoad(null));

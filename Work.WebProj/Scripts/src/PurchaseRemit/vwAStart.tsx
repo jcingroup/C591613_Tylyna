@@ -10,9 +10,6 @@ export class AStart extends React.Component<any, any>{
         super();
         this.state = {};
     }
-    componentWillMount() {
-        //this.props.getInitData();
-    }
     render() {
         let out_html: JSX.Element = null;
         let out_main_view = <Grid {...this.props} />;
