@@ -218,33 +218,35 @@ export class Edit extends React.Component<any, any>{
                             </TagShowAndHide>
                         </caption>
                         {/* 付款狀態 為 已付款待確認:1、已付款:2 才顯示*/}
-                        <TagShowAndHide TagName={TagName.Thead} show={field.pay_state > 0}>
-                            <tr>
+                        <thead>
+                            <TagShowAndHide TagName={TagName.Tr} show={field.pay_state > 0}>
                                 <th className="text-xs-center">核對帳款</th>
                                 <th className="text-xs-center">匯款帳號後5碼</th>
                                 <th className="text-xs-center">匯款時間</th>
                                 <th className="text-xs-center">匯款金額</th>
-                            </tr>
-                        </TagShowAndHide>
-                        <TagShowAndHide TagName={TagName.Tr} show={field.pay_state > 0}>
-                            <td rowSpan="2" className="text-xs-center">
-                                <RadioBox
-                                    inputViewMode={InputViewMode.view}
-                                    name={"pay_state-R"}
-                                    id={"pay_state-R"}
-                                    value={field.pay_state}
-                                    radioList={IPayStateDataForRemit}
-                                    />
-                            </td>
-                            <td>{field.remit_no}</td>
-                            <td>{Moment(field.remit_date).format(config.dateTime) }</td>
-                            <td>{fmt_money(field.remit_money) }</td>
-                        </TagShowAndHide>
-                        <TagShowAndHide TagName={TagName.Tr} show={field.pay_state > 0}>
-                            <td colSpan="3">
-                                備註：<div dangerouslySetInnerHTML={{ __html: htmlbr(field.remit_memo) } }></div>
-                            </td>
-                        </TagShowAndHide>
+                            </TagShowAndHide>
+                        </thead>
+                        <tbody>
+                            <TagShowAndHide TagName={TagName.Tr} show={field.pay_state > 0}>
+                                <td rowSpan="2" className="text-xs-center">
+                                    <RadioBox
+                                        inputViewMode={InputViewMode.view}
+                                        name={"pay_state-R"}
+                                        id={"pay_state-R"}
+                                        value={field.pay_state}
+                                        radioList={IPayStateDataForRemit}
+                                        />
+                                </td>
+                                <td>{field.remit_no}</td>
+                                <td>{Moment(field.remit_date).format(config.dateTime) }</td>
+                                <td>{fmt_money(field.remit_money) }</td>
+                            </TagShowAndHide>
+                            <TagShowAndHide TagName={TagName.Tr} show={field.pay_state > 0}>
+                                <td colSpan="3">
+                                    備註：<div dangerouslySetInnerHTML={{ __html: htmlbr(field.remit_memo) } }></div>
+                                </td>
+                            </TagShowAndHide>
+                        </tbody>
                     </TagShowAndHide>
 
                     <table className="table table-sm table-bordered table-striped table-hover m-t-2">

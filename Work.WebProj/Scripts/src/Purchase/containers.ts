@@ -18,14 +18,13 @@ const m1ToProps = (state, ownProps) => {
         field: state.field,
         params: state.params,
         //暫不使用
-        is_edit: state.is_edit,
         init_data: state.init_data,
     }
 }
 
 const m1Dispatch = (dispatch, ownProps) => {
     let s = bindActionCreators({
-        callGridLoad, callSubmit,
+        callGridLoad, callSubmit, callUpdateItem,
         setInputValue,
         editState,
     }, dispatch);
