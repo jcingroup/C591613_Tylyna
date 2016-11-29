@@ -9,7 +9,8 @@ const apiPath: string = gb_approot + 'api/Purchase';
 export const callGridLoad = (search: any) => {
     return dispatch => {
         mask_show(UIText.mk_loading);
-        return fetchGet(apiPath, search)
+        let pm = search == null ? { keyword: null } : search;
+        return fetchGet(apiPath + '/getRemitList', pm)
             .then((data) => {
                 mask_off();
                 dispatch(getGridItem(data));
@@ -17,15 +18,17 @@ export const callGridLoad = (search: any) => {
             .catch((reason) => { mask_off(); })
     }
 }
-export const callUpdateItem = (no) => {
+
+export const updateShip = (id: string, state: number) => {
     return dispatch => {
-        let pm = { no: no };
-        mask_show(UIText.mk_loading);
-        return fetchGet(apiPath, pm)
-            .then((data: IResultData<server.ProductKind>) => {
+        let pm = { id: id, state: state };
+
+        mask_show(UIText.mk_updating);
+        return fetchPost(apiPath + '/updateShipState', pm)
+            .then((data: IResultData<server.Purchase>) => {
                 mask_off();
                 if (data.result) {
-                    dispatch(editState(ac_type_comm.update, no, data.data));
+                    tosMessage(null, UIText.fi_update, 1);
                 } else {
                     alert(data.message);
                 }
@@ -45,7 +48,7 @@ export const callSubmit = (id, md: server.Purchase, edit_type: IEditType) => {
                     mask_off();
                     if (data.result) {
                         tosMessage(null, UIText.fi_insert, 1);
-                        dispatch(callUpdateItem(data.id));
+                        //dispatch(callUpdateItem(data.id));
                     } else {
                         alert(data.message);
                     }
@@ -67,25 +70,8 @@ export const callSubmit = (id, md: server.Purchase, edit_type: IEditType) => {
         }
     }
 }
-//export const callDelete = (id: number | string, params) => {
 
-//    return dispatch => {
-//        mask_show(UIText.mk_updating);
-//        return fetchDelete(apiPath, { id: id })
-//            .then((data: IResultData<server.Product>) => {
-//                mask_off();
-//                if (data.result) {
-//                    tosMessage(null, UIText.fi_delete, 1);
-//                    dispatch(callGridLoad(params));
-//                } else {
-//                    alert(data.message);
-//                }
-//            })
-//            .catch((reason) => { mask_off(); })
-//    }
-//}
 //ajax--
-
 
 
 const getGridItem = (data) => {
@@ -115,12 +101,5 @@ export const setInputValue = (type, name, value) => {
         type: type,
         name,
         value
-    }
-}
-export const editState = (type, no, data) => {
-    return {
-        type: type,
-        no,
-        data
     }
 }

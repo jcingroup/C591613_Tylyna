@@ -786,6 +786,15 @@
     <TypeScriptCompile Include="Scripts\src\ProductKind\vwGrid.tsx" />
     <TypeScriptCompile Include="Scripts\src\ProductKind\vwGridSearch.tsx" />
     <TypeScriptCompile Include="Scripts\src\ProductKind\vwGridTable.tsx" />
+    <TypeScriptCompile Include="Scripts\src\PurchaseRemit\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\PurchaseRemit\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\PurchaseRemit\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\PurchaseRemit\pub.ts" />
+    <TypeScriptCompile Include="Scripts\src\PurchaseRemit\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\PurchaseRemit\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\PurchaseRemit\vwGrid.tsx" />
+    <TypeScriptCompile Include="Scripts\src\PurchaseRemit\vwGridSearch.tsx" />
+    <TypeScriptCompile Include="Scripts\src\PurchaseRemit\vwGridTable.tsx" />
     <TypeScriptCompile Include="Scripts\src\Purchase\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\Purchase\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\Purchase\containers.ts" />

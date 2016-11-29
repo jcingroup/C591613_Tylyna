@@ -37,7 +37,6 @@ namespace DotWeb.Controllers
             };
             return View("Email_order", emd);
         }
-
         public ActionResult Reply()
         {//已付款通知
             RemitEmail emd = new RemitEmail()

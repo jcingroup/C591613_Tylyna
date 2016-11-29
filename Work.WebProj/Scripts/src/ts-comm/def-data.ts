@@ -535,7 +535,7 @@ export const IPayStateData: Array<server.OptionTemplate> = [
     { val: -1, Lname: '取消訂單', className: 'w3-tag label-default w3-round' },
     { val: 0, Lname: '待付款', className: 'w3-tag label-warning w3-round' },
     { val: 1, Lname: '已付款待確認', className: 'w3-tag label-danger w3-round' },
-    { val: 2, Lname: '已付款', className: 'w3-tag label-info w3-round' }
+    { val: 2, Lname: '已付款', className: 'w3-tag label-success w3-round' }
 ];
 
 export const IPayStateDataForRemit: Array<server.OptionTemplate> = [

@@ -366,6 +366,89 @@ namespace DotWeb.Api
             return Ok(r);
         }
         #endregion
+        #region 後台-已付款通知
+        [Route("getRemitList")]
+        [HttpGet]
+        public async Task<IHttpActionResult> getRemitList([FromUri]RemitParam q)
+        {
+            #region 連接BusinessLogicLibary資料庫並取得資料
+
+            db0 = getDB0();
+            var predicate = PredicateBuilder.True<Purchase>();
+            //只顯示轉帳付款,且付款狀態為 已付款待確認、已付款
+            predicate = predicate.And(x => x.pay_type == (int)IPayType.Remit & x.pay_state >= (int)IPayState.paid_uncheck);
+
+            if (q.keyword != null)
+                predicate = predicate.And(x => x.purchase_no.Contains(q.keyword) ||
+                                               x.receive_name.Contains(q.keyword));
+
+            if (q.state != null)
+                predicate = predicate.And(x => x.pay_state == q.state);
+
+            if (q.pay_start != null & q.pay_end != null)
+            {
+                DateTime start = (DateTime)q.pay_start;
+                DateTime end = ((DateTime)q.pay_end).AddDays(1);
+
+                predicate = predicate.And(x => x.remit_date >= start & x.remit_date <= end);
+            }
+
+            int page = (q.page == null ? 1 : (int)q.page);
+            var result = db0.Purchase.AsExpandable().Where(predicate);
+            var resultCount = await result.CountAsync();
+
+            IQueryable<Purchase> resultOrderItems = null;
+
+            if (q.field != null)
+            {
+                if (q.sort == "asc")
+                    resultOrderItems = result.OrderBy(q.field);
+
+                if (q.sort == "desc")
+                    resultOrderItems = result.OrderBy(q.field + " descending");
+            }
+            else
+            {
+                resultOrderItems = result.OrderBy(x => x.purchase_no);
+            }
+
+            int startRecord = PageCount.PageInfo(page, defPageSize, resultCount);
+            var resultItems = await
+                resultOrderItems
+                .Skip(startRecord)
+                .Take(defPageSize)
+                .Select(x => new
+                {
+                    x.purchase_no,
+                    x.customer_id,
+                    x.order_date,
+                    x.remit_date,//轉帳日期
+                    x.receive_name,
+                    x.pay_type,//付款方式
+                    x.pay_state,//付款狀態
+                    x.ship_state,//出貨狀態
+                    x.remit_no,//付款帳號後五碼
+                    x.remit_money//轉帳金額
+                })
+                .ToListAsync();
+
+            db0.Dispose();
+
+            return Ok(new
+            {
+                rows = resultItems,
+                total = PageCount.TotalPage,
+                page = PageCount.Page,
+                records = PageCount.RecordCount,
+                startcount = PageCount.StartCount,
+                endcount = PageCount.EndCount,
+                field = q.field,
+                sort = q.sort
+            });
+
+            #endregion
+        }
+        #endregion
 
         public class putBodyParam
         {
@@ -379,6 +462,13 @@ namespace DotWeb.Api
             public DateTime? pay_date { get; set; }
             public int? type { get; set; }
             public int? type_val { get; set; }
+        }
+        public class RemitParam : QueryBase
+        {
+            public string keyword { set; get; }
+            public DateTime? pay_start { get; set; }
+            public DateTime? pay_end { get; set; }
+            public int? state { get; set; }
         }
         public class delParam
         {
