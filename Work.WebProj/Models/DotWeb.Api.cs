@@ -29,9 +29,8 @@ namespace DotWeb.Api
         protected int defPageSize = 10;
         protected string aspUserId;
         protected int departmentId;
-        protected int? community_id;
         protected string UserId;
-        protected string LoginUserFlag = string.Empty;
+        protected string LoginUserFlag = string.Empty;//N:管理端登錄 Y:用戶端登錄
         protected IEnumerable<string> UserRoles;
         protected C591613_TylynaEntities db0;
         protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
@@ -44,15 +43,24 @@ namespace DotWeb.Api
             LoginUserFlag = getLoginUserFlag == null ? "" :
                 EncryptString.desDecryptBase64(getLoginUserFlag[CommWebSetup.LoginType].Value);
             #endregion
-            if (identity.IsAuthenticated & LoginUserFlag == "N")
+            if (identity.IsAuthenticated)
             {
                 var FormsIdentity = (System.Web.Security.FormsIdentity)User.Identity; //一定要有值 無值為系統出問題
-
-                aspUserId = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(FormsIdentity.Ticket.Name));//userid
-                ApplicationUser aspnet_user = UserManager.FindById(aspUserId);
-                UserId = aspnet_user.Id;
-                departmentId = aspnet_user.department_id;
-                UserRoles = aspnet_user.Roles.Select(x => x.RoleId);
+                var id = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(FormsIdentity.Ticket.Name));//userid
+                if (LoginUserFlag == "N")
+                {//管理端登入
+                    aspUserId = id;
+                    ApplicationUser aspnet_user = UserManager.FindById(aspUserId);
+                    UserId = aspnet_user.Id;
+                    departmentId = aspnet_user.department_id;
+                    UserRoles = aspnet_user.Roles.Select(x => x.RoleId);
+                }
+                else if (LoginUserFlag == "Y")
+                {
+                    UserId = id;
+                    //取得權限
+                    UserRoles = FormsIdentity.Ticket.UserData.Split(',');
+                }
             }
         }
         protected virtual string getRecMessage(string MsgId)
