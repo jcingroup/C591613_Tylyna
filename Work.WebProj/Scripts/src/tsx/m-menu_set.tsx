@@ -6,6 +6,8 @@ import ReactBootstrap = require("react-bootstrap");
 import CommCmpt = require('comm-cmpt');
 import CommFunc = require('comm-func');
 import DT = require('dt');
+import {RadioBox} from '../components';
+import {IMenuParentsData, IUsedData} from '../ts-comm/def-data';
 
 namespace MenuSet {
     interface Rows {
@@ -48,18 +50,18 @@ namespace MenuSet {
         render() {
             let StateForGird = CommCmpt.StateForGird;
             return <tr>
-                       <td className="text-xs-center"><CommCmpt.GridCheckDel iKey={this.props.ikey} chd={this.props.itemData.check_del} delCheck={this.delCheck} /></td>
-                       <td className="text-xs-center"><CommCmpt.GridButtonModify modify={this.modify} /></td>
-                       <td>{this.props.itemData.menu_id}</td>
-                       <td>{this.props.itemData.parent_menu_id}</td>
-                       <td>{this.props.itemData.menu_name}</td>
-                       <td>{this.props.itemData.area}</td>
-                       <td>{this.props.itemData.controller}</td>
-                       <td>{this.props.itemData.action}</td>
-                       <td>{this.props.itemData.icon_class}</td>
-                       <td>{this.props.itemData.sort}</td>
-                       <td>{this.props.itemData.is_folder ? <span className="label label-success">父選單</span> : <span className="label label-primary">子選單</span>}</td>
-                </tr>;
+                <td className="text-xs-center"><CommCmpt.GridCheckDel iKey={this.props.ikey} chd={this.props.itemData.check_del} delCheck={this.delCheck} /></td>
+                <td className="text-xs-center"><CommCmpt.GridButtonModify modify={this.modify} /></td>
+                <td>{this.props.itemData.menu_id}</td>
+                <td>{this.props.itemData.parent_menu_id}</td>
+                <td>{this.props.itemData.menu_name}</td>
+                <td>{this.props.itemData.area}</td>
+                <td>{this.props.itemData.controller}</td>
+                <td>{this.props.itemData.action}</td>
+                <td>{this.props.itemData.icon_class}</td>
+                <td>{this.props.itemData.sort}</td>
+                <td>{this.props.itemData.is_folder ? <span className="label label-success">父選單</span> : <span className="label label-primary">子選單</span>}</td>
+            </tr>;
 
         }
     }
@@ -255,6 +257,11 @@ namespace MenuSet {
         changeFDValue(name: string, e: React.SyntheticEvent) {
             this.setInputValue(this.props.fdName, name, e);
         }
+        chgFDVal(name: string, value: any, e: React.SyntheticEvent) {//For Radio
+            let obj = this.state[this.props.fdName];
+            obj[name] = value;
+            this.setState({ fieldData: obj });
+        }
         changeGDValue(name: string, e: React.SyntheticEvent) {
             this.setInputValue(this.props.gdName, name, e);
         }
@@ -289,82 +296,82 @@ namespace MenuSet {
                 outHtml =
                     (
                         <div>
-                    <h3 className="h3">
-                        {this.props.caption}
-                    </h3>
-                    <form onSubmit={this.handleSearch}>
-                        <div className="table-responsive">
-                            <div className="table-header">
-                                <div className="table-filter">
-                                    <div className="form-inline">
-                                        <div className="form-group">
-                                            <label className="sr-only">選單名稱</label> { }
-                                            <input type="text" className="form-control form-control-sm"
-                                                onChange={this.changeGDValue.bind(this, 'keyword') }
-                                                value={searchData.keyword}
-                                                placeholder="選單名稱" /> { }
-                                            <label className="sr-only">型態</label> { }
-                                            <select className="form-control form-control-sm"
-                                                onChange={this.changeGDValue.bind(this, 'is_folder') }
-                                                value={searchData.is_folder} >
-                                                <option value="">全部型態</option>
-                                                <option value="true">父選單</option>
-                                                <option value="false">子選單</option>
-                                                </select> { }
-                                            <button className="btn btn-sm btn-primary" type="submit"><i className="fa-search"></i> 搜尋</button>
+                            <h3 className="h3">
+                                {this.props.caption}
+                            </h3>
+                            <form onSubmit={this.handleSearch}>
+                                <div className="table-responsive">
+                                    <div className="table-header">
+                                        <div className="table-filter">
+                                            <div className="form-inline">
+                                                <div className="form-group">
+                                                    <label className="sr-only">選單名稱</label> { }
+                                                    <input type="text" className="form-control form-control-sm"
+                                                        onChange={this.changeGDValue.bind(this, 'keyword') }
+                                                        value={searchData.keyword}
+                                                        placeholder="選單名稱" /> { }
+                                                    <label className="sr-only">型態</label> { }
+                                                    <select className="form-control form-control-sm"
+                                                        onChange={this.changeGDValue.bind(this, 'is_folder') }
+                                                        value={searchData.is_folder} >
+                                                        <option value="">全部型態</option>
+                                                        <option value="true">父選單</option>
+                                                        <option value="false">子選單</option>
+                                                    </select> { }
+                                                    <button className="btn btn-sm btn-primary" type="submit"><i className="fa-search"></i> 搜尋</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <table className="table table-sm table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style={{ "width": "6%" }} className="text-xs-center">
+                                                    <label className="c-input c-checkbox">
+                                                        <input type="checkbox" checked={this.state.checkAll} onChange={this.checkAll} />
+                                                        <span className="c-indicator"></span>
+                                                        全選
+                                                    </label>
+                                                </th>
+                                                <th style={{ "width": "6%" }} className="text-xs-center">修改</th>
+                                                <th style={{ "width": "6%" }}>編號</th>
+                                                <th style={{ "width": "14%" }}>對應父選單</th>
+                                                <th style={{ "width": "14%" }}>選單名稱</th>
+                                                <th style={{ "width": "10%" }}>area</th>
+                                                <th style={{ "width": "10%" }}>controller</th>
+                                                <th style={{ "width": "10%" }}>action</th>
+                                                <th style={{ "width": "10%" }}>icon_class</th>
+                                                <th style={{ "width": "6%" }}>排序</th>
+                                                <th style={{ "width": "8%" }}>選單狀態</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                this.state.gridData.rows.map(
+                                                    (itemData, i) =>
+                                                        <GridRow key={i}
+                                                            ikey={i}
+                                                            primKey={itemData.menu_id}
+                                                            itemData={itemData}
+                                                            delCheck={this.delCheck}
+                                                            updateType={this.updateType} />
+                                                )
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
-                            <table className="table table-sm table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style={{"width" : "6%"}} className="text-xs-center">
-                                            <label className="c-input c-checkbox">
-                                                <input type="checkbox" checked={this.state.checkAll} onChange={this.checkAll} />
-                                                <span className="c-indicator"></span>
-                                                全選
-                                            </label>
-                                        </th>
-                                        <th style={{"width" : "6%"}} className="text-xs-center">修改</th>
-                                        <th style={{"width" : "6%"}}>編號</th>
-                                        <th style={{"width" : "14%"}}>對應父選單</th>
-                                        <th style={{"width" : "14%"}}>選單名稱</th>
-                                        <th style={{"width" : "10%"}}>area</th>
-                                        <th style={{"width" : "10%"}}>controller</th>
-                                        <th style={{"width" : "10%"}}>action</th>
-                                        <th style={{"width" : "10%"}}>icon_class</th>
-                                        <th style={{"width" : "6%"}}>排序</th>
-                                        <th style={{"width" : "8%"}}>選單狀態</th>
-                                        </tr>
-                                    </thead>
-                                <tbody>
-                                    {
-                                    this.state.gridData.rows.map(
-                                        (itemData, i) =>
-                                            <GridRow key={i}
-                                                ikey={i}
-                                                primKey={itemData.menu_id}
-                                                itemData={itemData}
-                                                delCheck={this.delCheck}
-                                                updateType={this.updateType} />
-                                    )
-                                    }
-                                    </tbody>
-                                </table>
-                            </div>
-                    <GridNavPage
-                        startCount={this.state.gridData.startcount}
-                        endCount={this.state.gridData.endcount}
-                        recordCount={this.state.gridData.records}
-                        totalPage={this.state.gridData.total}
-                        nowPage={this.state.gridData.page}
-                        queryGridData={this.queryGridData}
-                        insertType={this.insertType}
-                        deleteSubmit={this.deleteSubmit}
-                        />
-                        </form>
-                            </div>
+                                <GridNavPage
+                                    startCount={this.state.gridData.startcount}
+                                    endCount={this.state.gridData.endcount}
+                                    recordCount={this.state.gridData.records}
+                                    totalPage={this.state.gridData.total}
+                                    nowPage={this.state.gridData.page}
+                                    queryGridData={this.queryGridData}
+                                    insertType={this.insertType}
+                                    deleteSubmit={this.deleteSubmit}
+                                    />
+                            </form>
+                        </div>
                     );
             }
             else if (this.state.edit_type == 1 || this.state.edit_type == 2) {
@@ -374,166 +381,156 @@ namespace MenuSet {
 
                 outHtml = (
                     <div>
-        <h3 className="h3"> {this.props.caption} <small className="sub"><i className="fa-angle-double-right"></i> 資料維護</small></h3>
-        <form className="form form-sm" onSubmit={this.handleSubmit}>
+                        <h3 className="h3"> {this.props.caption} <small className="sub"><i className="fa-angle-double-right"></i> 資料維護</small></h3>
+                        <form className="form form-sm" onSubmit={this.handleSubmit}>
 
-                    <div className="form-group row">
-                        <label className="col-xs-2 form-control-label text-xs-right">編號</label>
-                        <div className="col-xs-4">
-                            <input type="number"
-                                className="form-control"
-                                value={fieldData.menu_id}
-                                onChange={this.changeFDValue.bind(this, 'menu_id') }
-                                placeholder="系統自動產生"
-                                disabled={true} />
-                            </div>
-                        </div>
-                    <div className="form-group row">
-                        <label className="col-xs-2 form-control-label text-xs-right"><small className="text-danger">*</small> 父選單</label>
-                        <div className="col-xs-4">
-                            <select className="form-control"
-                                value={fieldData.parent_menu_id}
-                                onChange={this.changeFDValue.bind(this, 'parent_menu_id') }>
-                            <option value="0">無</option>
-                            {
-                            this.state.folder.map(function (itemData, i) {
-                                return <option key={i} value={itemData.val}>{itemData.Lname}</option>;
-                            })
-                            }
-                                </select>
-                            </div>
-                        
-                        </div>
-                    <div className="form-group row">
-                        <label className="col-xs-2 form-control-label text-xs-right"><small className="text-danger">*</small> 選單名稱</label>
-                        <div className="col-xs-4">
-                            <input type="text"
-                                className="form-control"
-                                value={fieldData.menu_name}
-                                onChange={this.changeFDValue.bind(this, 'menu_name') }
-                                maxLength={128}
-                                required />
-                            </div>
-                        </div>
-                    <div className="form-group row">
-                        <label className="col-xs-2 form-control-label text-xs-right">area</label>
-                        <div className="col-xs-4">
-                            <input type="text"
-                                className="form-control"
-                                value={fieldData.area}
-                                onChange={this.changeFDValue.bind(this, 'area') }
-                                maxLength={64} />
-                            </div>
-                        </div>
-                    <div className="form-group row">
-                        <label className="col-xs-2 form-control-label text-xs-right">controller</label>
-                        <div className="col-xs-4">
-                            <input type="text"
-                                className="form-control"
-                                value={fieldData.controller}
-                                onChange={this.changeFDValue.bind(this, 'controller') }
-                                maxLength={16} />
-                            </div>
-                        </div>
-                    <div className="form-group row">
-                        <label className="col-xs-2 form-control-label text-xs-right">action</label>
-                        <div className="col-xs-4">
-                            <input type="text"
-                                className="form-control"
-                                value={fieldData.action}
-                                onChange={this.changeFDValue.bind(this, 'action') }
-                                maxLength={16} />
-                            </div>
-                        </div>
-                    <div className="form-group row">
-                        <label className="col-xs-2 form-control-label text-xs-right">icon_class</label>
-                        <div className="col-xs-4">
-                            <input type="text"
-                                className="form-control"
-                                value={fieldData.icon_class}
-                                onChange={this.changeFDValue.bind(this, 'icon_class') }
-                                maxLength={128} />
-                            </div>
-                        </div>
-            <div className="form-group row">
-                <label className="col-xs-2 form-control-label text-xs-right">排序</label>
-                <div className="col-xs-4">
-                    <input type="number" className="form-control" onChange={this.changeFDValue.bind(this, 'sort') } value={fieldData.sort} required />
-                    <small className="text-muted">由小到大排序</small>
-                </div>
-            </div>
-            <div className="form-group row">
-                <label className="col-xs-2 form-control-label text-xs-right">選單狀態</label>
-                <div className="col-xs-4">
-                   <label className="radio-inline">
-                            <input type="radio"
-                                name="is_folder"
-                                value={true}
-                                checked={fieldData.is_folder === true}
-                                onChange={this.changeFDValue.bind(this, 'is_folder') }
-                                />
-                            <span>父選單</span>
-                           </label>
-                   <label className="radio-inline">
-                            <input type="radio"
-                                name="is_folder"
-                                value={false}
-                                checked={fieldData.is_folder === false}
-                                onChange={this.changeFDValue.bind(this, 'is_folder') }
-                                />
-                            <span>子選單</span>
-                           </label>
-                    </div>
-                </div>
-            <div className="form-group row">
-                <label className="col-xs-2 form-control-label text-xs-right">使用狀態</label>
-                <div className="col-xs-4">
-                       <label className="radio-inline">
-                            <input type="radio"
-                                name="is_use"
-                                value={true}
-                                checked={fieldData.is_use === true}
-                                onChange={this.changeFDValue.bind(this, 'is_use') }
-                                />
-                            <span>使用中</span>
-                        </label>
-                       <label className="radio-inline">
-                            <input type="radio"
-                                name="is_use"
-                                value={false}
-                                checked={fieldData.is_use === false}
-                                onChange={this.changeFDValue.bind(this, 'is_use') }
-                                />
-                            <span>未使用</span>
-                           </label>
-                    </div>
-                </div>
-                    <div className="form-group row">
-                        <label className="col-xs-2 form-control-label text-xs-right">可檢視角色</label>
-                        <div className="col-xs-10">
-                        {
-                        fieldData.role_array.map((itemData, i) =>
-                            <div className="checkbox" key={itemData.role_id}>
-                                    <label>
-                                        <input type="checkbox"
-                                            checked={itemData.role_use}
-                                            onChange={this.setRolesCheck.bind(this, i) }
-                                            />
-                                        {itemData.role_name}
-                                        </label>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right">編號</label>
+                                <div className="col-xs-4">
+                                    <input type="number"
+                                        className="form-control"
+                                        value={fieldData.menu_id}
+                                        onChange={this.changeFDValue.bind(this, 'menu_id') }
+                                        placeholder="系統自動產生"
+                                        disabled={true} />
                                 </div>
-                        ) }
                             </div>
-                        </div>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right"><small className="text-danger">*</small> 父選單</label>
+                                <div className="col-xs-4">
+                                    <select className="form-control"
+                                        value={fieldData.parent_menu_id}
+                                        onChange={this.changeFDValue.bind(this, 'parent_menu_id') }>
+                                        <option value="0">無</option>
+                                        {
+                                            this.state.folder.map(function (itemData, i) {
+                                                return <option key={i} value={itemData.val}>{itemData.Lname}</option>;
+                                            })
+                                        }
+                                    </select>
+                                </div>
 
-            <div className="form-action">
-                <div className="col-xs-offset-2">
-                    <button type="submit" className="btn btn-sm btn-primary"><i className="fa-check"></i> 儲存</button> { }
-                    <button type="button" onClick={this.noneType} className="btn btn-sm btn-secondary"><i className="fa-times"></i> 回前頁</button>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right"><small className="text-danger">*</small> 選單名稱</label>
+                                <div className="col-xs-4">
+                                    <input type="text"
+                                        className="form-control"
+                                        value={fieldData.menu_name}
+                                        onChange={this.changeFDValue.bind(this, 'menu_name') }
+                                        maxLength={128}
+                                        required />
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right">area</label>
+                                <div className="col-xs-4">
+                                    <input type="text"
+                                        className="form-control"
+                                        value={fieldData.area}
+                                        onChange={this.changeFDValue.bind(this, 'area') }
+                                        maxLength={64} />
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right">controller</label>
+                                <div className="col-xs-4">
+                                    <input type="text"
+                                        className="form-control"
+                                        value={fieldData.controller}
+                                        onChange={this.changeFDValue.bind(this, 'controller') }
+                                        maxLength={16} />
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right">action</label>
+                                <div className="col-xs-4">
+                                    <input type="text"
+                                        className="form-control"
+                                        value={fieldData.action}
+                                        onChange={this.changeFDValue.bind(this, 'action') }
+                                        maxLength={16} />
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right">icon_class</label>
+                                <div className="col-xs-4">
+                                    <input type="text"
+                                        className="form-control"
+                                        value={fieldData.icon_class}
+                                        onChange={this.changeFDValue.bind(this, 'icon_class') }
+                                        maxLength={128} />
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right">排序</label>
+                                <div className="col-xs-4">
+                                    <input type="number" className="form-control" onChange={this.changeFDValue.bind(this, 'sort') } value={fieldData.sort} required />
+                                    <small className="text-muted">由小到大排序</small>
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right">選單狀態</label>
+                                <div className="col-xs-4">
+                                    <RadioBox
+                                        wrapperClassName="radio-group-stacked"
+                                        inputViewMode={InputViewMode.edit}
+                                        name="is_folder"
+                                        id="is_folder"
+                                        value={fieldData.is_folder}
+                                        onChange= {this.chgFDVal.bind(this, 'is_folder') }
+                                        required={true}
+                                        labelClassName="c-input c-radio"
+                                        spanClassName="c-indicator"
+                                        textClassName="text-sm"
+                                        radioList={IMenuParentsData}
+                                        />
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right">使用狀態</label>
+                                <div className="col-xs-4">
+                                    <RadioBox
+                                        wrapperClassName="radio-group-stacked"
+                                        inputViewMode={InputViewMode.edit}
+                                        name="is_use"
+                                        id="is_use"
+                                        value={fieldData.is_use}
+                                        onChange= {this.chgFDVal.bind(this, 'is_use') }
+                                        required={true}
+                                        labelClassName="c-input c-radio"
+                                        spanClassName="c-indicator"
+                                        textClassName="text-sm"
+                                        radioList={IUsedData}
+                                        />
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-xs-2 form-control-label text-xs-right">可檢視角色</label>
+                                <div className="col-xs-10">
+                                    {
+                                        fieldData.role_array.map((itemData, i) =>
+                                            <div className="checkbox" key={itemData.role_id}>
+                                                <label>
+                                                    <input type="checkbox"
+                                                        checked={itemData.role_use}
+                                                        onChange={this.setRolesCheck.bind(this, i) }
+                                                        />
+                                                    {itemData.role_name}
+                                                </label>
+                                            </div>
+                                        ) }
+                                </div>
+                            </div>
+
+                            <div className="form-action">
+                                <div className="col-xs-offset-2">
+                                    <button type="submit" className="btn btn-sm btn-primary"><i className="fa-check"></i> 儲存</button> { }
+                                    <button type="button" onClick={this.noneType} className="btn btn-sm btn-secondary"><i className="fa-times"></i> 回前頁</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-        </form>
-                        </div>
                 );
             }
 

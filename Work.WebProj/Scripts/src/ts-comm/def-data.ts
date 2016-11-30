@@ -510,6 +510,16 @@ export const UIText = {
     option_blank: '請選擇',
     delete_sure: '確定是否刪除?',
 }
+//menu set 使用
+export const IMenuParentsData: Array<server.OptionTemplate> = [
+    { val: true, Lname: '父選單', className: 'w3-tag label-success w3-round' },
+    { val: false, Lname: '子選單', className: 'w3-tag label-default w3-round' }
+];
+export const IUsedData: Array<server.OptionTemplate> = [
+    { val: true, Lname: '使用中', className: 'w3-tag label-success w3-round' },
+    { val: false, Lname: '未使用', className: 'w3-tag label-default w3-round' }
+];
+//
 
 export const IHideTypeData: Array<server.OptionTemplate> = [
     { val: false, Lname: '顯示', className: 'w3-tag label-success w3-round' },
