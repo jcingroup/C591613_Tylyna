@@ -22,6 +22,8 @@ module.exports = {
         "../front/shoppingcart": path.resolve(__dirname, 'Scripts/src/front/ShoppingCart/app.js'),
         "../front/order": path.resolve(__dirname, 'Scripts/src/front/Order/app.js'),
         "../front/remitcheck": path.resolve(__dirname, 'Scripts/src/front/RemitCheck/app.js'),
+        "../front/receiptlist": path.resolve(__dirname, 'Scripts/src/front/ReceiptList/app.js'),
+        "../front/receiptcontent": path.resolve(__dirname, 'Scripts/src/front/ReceiptContent/app.js'),
         "w-comm": path.resolve(__dirname, 'Scripts/src/tsx/w-comm.js'),
 
         vendors: ['jquery', 'react', 'react-dom', 'redux', 'react-redux', 'redux-thunk', 'react-addons-update', 'moment',

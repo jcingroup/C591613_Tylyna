@@ -91,7 +91,7 @@ export class AStart extends React.Component<any, any>{
                             </tbody>
                         </table>
                         <footer className="submit text-left">
-                            <a href="/Order/Cart" className="btn font-lg bg-success">我要結帳 <i className="icon-navigate_next"></i></a>
+                            <a href={gb_approot + "Order/Cart"} className="btn font-lg bg-success">我要結帳 <i className="icon-navigate_next"></i></a>
                         </footer>
                     </form>
                 </div>
@@ -102,10 +102,10 @@ export class AStart extends React.Component<any, any>{
                         <dd dangerouslySetInnerHTML={{ __html: item.info }}>
                         </dd>
                         <dd className="btn-bar">
-                        <TagShowAndHide TagName={TagName.Span} show={item.stock_state === IStockState.on_store_shelves}>
+                            <TagShowAndHide TagName={TagName.Span} show={item.stock_state === IStockState.on_store_shelves}>
                                 <a className="btn bg-danger" onClick={this.openDetailModal}>我要購買</a>
                             </TagShowAndHide>
-                        <TagShowAndHide TagName={TagName.Span} show={item.stock_state === IStockState.replenishment}>
+                            <TagShowAndHide TagName={TagName.Span} show={item.stock_state === IStockState.replenishment}>
                                 {/* 後台設定補貨中時，上列連結隱藏，下列文字顯示 */}
                                 <span className="label label-secondary font-lg">補貨中</span>
                             </TagShowAndHide>

@@ -421,7 +421,7 @@ namespace DotWeb.Api
 
     #region 泛型控制器擴充
 
-    [System.Web.Http.Authorize]
+    [System.Web.Http.Authorize(Roles = "Managers,Admins")]
     public abstract class ajaxApi<M, Q> : BaseApiController
         where M : new()
         where Q : QueryBase
@@ -431,7 +431,7 @@ namespace DotWeb.Api
         protected M item;
     }
 
-    [System.Web.Http.Authorize]
+    [System.Web.Http.Authorize(Roles = "Managers,Admins")]
     public abstract class ajaxApi<M> : BaseApiController
     where M : new()
     {
@@ -441,10 +441,16 @@ namespace DotWeb.Api
     }
 
 
-    [System.Web.Http.Authorize]
+    [System.Web.Http.Authorize(Roles = "Managers,Admins")]
     public abstract class ajaxBaseApi : BaseApiController
     {
 
     }
+    //All Roles
+    [System.Web.Http.Authorize]
+    public abstract class ajaxAllBaseApi : BaseApiController
+    {
+    }
+
     #endregion
 }

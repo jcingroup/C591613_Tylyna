@@ -22,8 +22,12 @@ namespace DotWeb.Controllers
             return View();
         }
         // 會員訂單詳細資料
-        public ActionResult Receipt_content()
+        public ActionResult Receipt_content(string no)
         {
+            if (no == null)
+            {
+                return Redirect("~/User/Receipt_list");
+            }
             return View();
         }
     }
