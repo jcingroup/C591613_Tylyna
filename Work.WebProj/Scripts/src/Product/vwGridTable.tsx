@@ -75,7 +75,7 @@ export class GridTable extends React.Component<any, any>{
                                     now_field={pp.page_operator.field}
                                     setSort={this.setSort} />
                             </th>
-                            <th>
+                            <th className="text-xs-center">
                                 <OrderButton
                                     title="排序"
                                     field={'sort'}

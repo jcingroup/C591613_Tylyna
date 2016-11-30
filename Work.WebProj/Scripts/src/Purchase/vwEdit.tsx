@@ -79,8 +79,8 @@ export class Edit extends React.Component<any, any>{
                     <h3 className="h3">
                         {gb_caption}<small className="sub"><i className="fa-angle-double-right"></i> {UIText.edit}</small>
                     </h3>
-                    <div className="alert alert-warning">
-                        有變更<strong>取消訂單</strong>或<strong>出貨狀態</strong> 要按下下方的
+                    <div className="alert alert-warning text-sm">
+                        有變更 <strong className="w3-tag w3-red">取消訂單</strong> 或 <strong className="w3-tag w3-red">出貨狀態</strong> 要按下下方的
                         <button type="button" className="btn btn-primary btn-sm">
                             <i className="fa-check"></i> {UIText.save}
                         </button>
@@ -90,31 +90,31 @@ export class Edit extends React.Component<any, any>{
                         <legend className="h4">訂單明細資料</legend>
                         <section className="form-group row">
                             <label className="col-xs-1 form-control-label text-xs-right">
-                                <span className="text-danger">*</span> 訂單編號
+                                訂單編號
                             </label>
-                            <div className="col-xs-4">{field.purchase_no}</div>
-                            <label className="col-xs-2 form-control-label text-xs-right">
-                                <span className="text-danger">*</span> 購買人
+                            <div className="col-xs-2">{field.purchase_no}</div>
+
+                            <label className="col-xs-1 form-control-label text-xs-right">
+                                購買人
                             </label>
-                            <div className="col-xs-4">{field.customer_name}</div>
+                            <div className="col-xs-2">{field.customer_name}</div>
+
+                            <label className="col-xs-1 form-control-label text-xs-right">
+                                總金額
+                            </label>
+                            <div className="col-xs-3">NT${fmt_money(field.total) }</div>
                         </section>
 
                         <section className="form-group row">
                             <label className="col-xs-1 form-control-label text-xs-right">
-                                <span className="text-danger">*</span> 總金額
+                                下單日期
                             </label>
-                            <div className="col-xs-4">NT${fmt_money(field.total) }</div>
-                            <label className="col-xs-2 form-control-label text-xs-right">
-                                <span className="text-danger">*</span> 下單日期
-                            </label>
-                            <div className="col-xs-4">{Moment(field.order_date).format(config.dateFT) }</div>
-                        </section>
+                            <div className="col-xs-2">{Moment(field.order_date).format(config.dateFT) }</div>
 
-                        <section className="form-group row">
                             <label className="col-xs-1 form-control-label text-xs-right">
-                                <span className="text-danger">*</span> 付款方式
+                                付款方式
                             </label>
-                            <div className="col-xs-4">
+                            <div className="col-xs-2">
                                 <RadioBox
                                     inputViewMode={InputViewMode.view}
                                     name={"pay_type"}
@@ -123,19 +123,20 @@ export class Edit extends React.Component<any, any>{
                                     radioList={IPayTypeData}
                                     />
                             </div>
-                            <label className="col-xs-2 form-control-label text-xs-right">
-                                <span className="text-danger">*</span> 出貨日期
+
+                            <label className="col-xs-1 form-control-label text-xs-right">
+                                出貨日期
                             </label>
-                            <div className="col-xs-4">
+                            <div className="col-xs-3">
                                 {(field.ship_date != null && field.ship_date != undefined) ? Moment(field.ship_date).format(config.dateFT) : "" }
                             </div>
                         </section>
 
                         <section className="form-group row">
                             <label className="col-xs-1 form-control-label text-xs-right">
-                                <span className="text-danger">*</span> 付款狀態
+                                付款狀態
                             </label>
-                            <div className="col-xs-4">
+                            <div className="col-xs-2">
                                 <RadioBox
                                     inputViewMode={InputViewMode.view}
                                     name={"pay_state"}
@@ -144,10 +145,11 @@ export class Edit extends React.Component<any, any>{
                                     radioList={IPayStateData}
                                     />
                             </div>
-                            <label className="col-xs-2 form-control-label text-xs-right">
+
+                            <label className="col-xs-1 form-control-label text-xs-right">
                                 <span className="text-danger">*</span> 出貨狀態
                             </label>
-                            <div className="col-xs-4">
+                            <div className="col-xs-2">
                                 <TagShowAndHide TagName={TagName.Span} show={field.ship_state >= 0}>
                                     <PWButton
                                         className={"btn btn-sm margin-4 " + (field.ship_state === IShipState.unshipped ? "btn-danger" : "") }
@@ -166,13 +168,11 @@ export class Edit extends React.Component<any, any>{
                                     取消訂單
                                 </TagShowAndHide>
                             </div>
-                        </section>
 
-                        <section className="form-group row">
                             <label className="col-xs-1 form-control-label text-xs-right">
                                 <span className="text-danger">*</span> 取消訂單
                             </label>
-                            <div className="col-xs-4 form-inline">
+                            <div className="col-xs-5 form-inline">
                                 <RadioBox
                                     inputViewMode={this.keep_field.cancel_order == true ? InputViewMode.view : InputViewMode.edit}
                                     name={"cancel_order"}
@@ -267,8 +267,8 @@ export class Edit extends React.Component<any, any>{
                         <thead>
                             <tr>
                                 <th className="text-xs-center">項次</th>
-                                <th className="text-xs-center">料號</th>
-                                <th className="text-xs-center">品名</th>
+                                <th>料號</th>
+                                <th>品名</th>
                                 <th className="text-xs-center">單價</th>
                                 <th className="text-xs-center">數量</th>
                                 <th className="text-xs-center">小計</th>
@@ -280,7 +280,7 @@ export class Edit extends React.Component<any, any>{
                                     return <tr key={i}>
                                         <td className="text-xs-center">{i + 1}</td>
                                         <td>{item.p_d_sn}</td>
-                                        <td className="text-xs-left">
+                                        <td>
                                             {item.p_name} {this.getName(IPackTypeData, item.p_d_pack_type) }
                                         </td>
                                         <td className="text-xs-center">{fmt_money(item.price) }</td>

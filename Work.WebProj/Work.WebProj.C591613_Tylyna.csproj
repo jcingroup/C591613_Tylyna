@@ -270,6 +270,7 @@
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
     <Compile Include="Areas\Base\Controllers\UsersController.cs" />
     <Compile Include="Areas\Base\BaseAreaRegistration.cs" />
+    <Content Include="ckeditor\configMin.js" />
     <Content Include="ckeditor\inlineConfig.js" />
     <Content Include="ckfinder\ckfinder.js" />
     <Content Include="ckfinder\ckfinder_v1.js" />
@@ -365,12 +366,14 @@
     </Compile>
     <Content Include="Areas\Base\Views\Menu\Main.cshtml" />
     <Content Include="Content\css\admin.css" />
+    <Content Include="Content\css\editor.css" />
     <Content Include="Content\css\grid.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\page.css" />
     <Content Include="Content\css\sys.css" />
     <Content Include="Content\css\vendor\fontAwesome\font-awesome.css" />
     <Content Include="Content\css\vendor\icomoon.css" />
+    <Content Include="Content\css\vendor\swiper.min.css" />
     <Content Include="Content\css\vendor\toastr.css" />
     <Content Include="Content\css\vendor\typeahead.css" />
     <Content Include="Content\css\vendor\w3.css" />
@@ -386,6 +389,7 @@
     <Content Include="Content\images\icon-social.gif" />
     <Content Include="Content\images\icon-topnav.gif" />
     <Content Include="Content\images\Index\banner.jpg" />
+    <Content Include="Content\images\Index\banner2.jpg" />
     <Content Include="Content\images\Index\FB-banner.gif" />
     <Content Include="Content\images\Index\jumbo.jpg" />
     <Content Include="Content\images\Index\mainBg.gif" />
@@ -413,6 +417,10 @@
     <Content Include="Content\images\Products\sort.png" />
     <Content Include="Content\images\Products\sort2.png" />
     <Content Include="Content\images\Products\sort3.png" />
+    <Content Include="Content\images\Quality\pic.jpg" />
+    <Content Include="Content\images\Quality\pic2.jpg" />
+    <Content Include="Content\images\Quality\pic2_2.jpg" />
+    <Content Include="Content\images\Quality\pic3.jpg" />
     <Content Include="Content\images\Quality\sort.png" />
     <Content Include="Content\images\Quality\sort2.png" />
     <Content Include="Content\images\Quality\sort3.png" />
@@ -613,6 +621,7 @@
     <Content Include="Content\sass-sys\_admin\_layout.scss" />
     <Content Include="Content\sass-sys\_admin\_module.scss" />
     <Content Include="Content\sass-sys\_admin\_var.scss" />
+    <Content Include="Content\sass\editor.scss" />
     <None Include="index.html" />
     <Content Include="ckeditor\build-config.js" />
     <Content Include="ckeditor\ckeditor.js" />

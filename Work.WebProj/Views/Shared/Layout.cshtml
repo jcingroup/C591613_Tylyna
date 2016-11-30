@@ -97,18 +97,7 @@
             </div><!-- wrap //-->
         </header>
 
-        @if (ViewBag.IsFirstPage)
-        {
-            <div id="banner" class="swiper-container">
-                <ul class="swiper-wrapper">
-                    <li class="swiper-slide"><img src="~/Content/images/Index/banner.jpg"></li>
-                </ul>
-            </div>
-        }
-        else
-        {
-            @* <div id="banner"><h1>@ViewBag.Title</h1></div> *@
-        }
+        @RenderSection("Banner", required: false)
 
         <main id="main">
             @RenderBody()

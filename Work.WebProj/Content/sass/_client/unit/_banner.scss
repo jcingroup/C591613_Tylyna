@@ -4,16 +4,12 @@ $banner-img: append($menu-item, 'Account');
 
 #banner {
     position: relative;
+    z-index: z(banner);
 
     @if $index {
-        // 1280 x 418
-        img {
-            width: 100%;
-
-            @include mq(wider) {
-                max-width: 1200px;
-            }
-        }
+        // 1280 x 420
+        img { width: 100%; }
+        @include mq(wider) { max-width: 1200px; }
     }
 
     // @include el(after) {
