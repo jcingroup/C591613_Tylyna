@@ -6,8 +6,27 @@
 }
 
 @section css {
-
+    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
 }
+@section scripts {
+    <script src="~/Content/js/swiper/swiper.min.js"></script>
+    <script>
+        var swiper = new Swiper('#banner', {
+            autoplay: 5000,
+            speed: 1000,
+            autoplayDisableOnInteraction: false
+        });
+    </script>
+}
+@section Banner {
+    <div id="banner" class="swiper-container">
+        <ul class="swiper-wrapper list-unstyled">
+            <li class="swiper-slide"><img src="~/Content/images/Index/banner.jpg"></li>
+            <li class="swiper-slide"><img src="~/Content/images/Index/banner2.jpg"></li>
+        </ul>
+    </div>
+}
+
 
 @* 廣告Banner *@
 @* <section class="wrap jumbo">

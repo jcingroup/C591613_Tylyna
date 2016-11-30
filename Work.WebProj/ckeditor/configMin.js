@@ -9,21 +9,16 @@ CKEDITOR.editorConfig = function (config) {
     config.skin = 'bootstrapck';
     config.height = 285;
     config.language = 'zh';
-    // config.uiColor = '#AADC6E';
-    config.extraPlugins = 'youtube';
-    //config.extraAllowedContent = 'ul(*);';
     config.contentsCss = ['../../Content/css/editor.css?v='+n];
     config.toolbar = [
         {
             name: "basicstyles",
-            items: ["FontSize", "Bold", "Underline", "Strike", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "-", "RemoveFormat"]
+            items: ["FontSize", "Bold", "Underline", "Strike", "-", "RemoveFormat"]
         },
         { name: "colors", items: ["TextColor", "BGColor"] },
-        { name: "paragraph", items: ["NumberedList", "BulletedList", "-", "Outdent", "Indent"] },
-        // { name: "styles", items: ["Styles", "Format"] },
+        { name: "paragraph", items: ["NumberedList", "BulletedList"] },
         { name: "styles", items: ["Styles"] },
         { name: "links", items: ["Link", "Unlink"] },
-        { name: 'insert', items: ['Image', 'Youtube', 'Table', 'Smiley', 'Iframe'] },'/',
         {
             name: "clipboard",
             items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "Undo", "Redo"]
@@ -32,10 +27,10 @@ CKEDITOR.editorConfig = function (config) {
         { name: "tools", items: ["Maximize", "-"] },
         { name: "editing" }
     ];
-    config.filebrowserBrowseUrl = "../../ckfinder/ckfinder.html";
-    config.filebrowserImageBrowseUrl = "../../ckfinder/ckfinder.html?type=Images";
-    config.filebrowserImageUploadUrl = "../../ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images";
-    config.autoUpdateElement = true;
+    // config.filebrowserBrowseUrl = "../../ckfinder/ckfinder.html";
+    // config.filebrowserImageBrowseUrl = "../../ckfinder/ckfinder.html?type=Images";
+    // config.filebrowserImageUploadUrl = "../../ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images";
+    // config.autoUpdateElement = true;
 
     //不要轉換htmltag
     config.allowedContent = true;
@@ -44,16 +39,7 @@ CKEDITOR.editorConfig = function (config) {
 };
 
 CKEDITOR.stylesSet.add('default', [
-    // Block Styles
-    { name: '標題1', element: 'h2' },
-    { name: '標題2', element: 'h3' },
-    { name: '標題3', element: 'h4' },
-    { name: '標題4', element: 'h5' },
-    { name: '標題5', element: 'h6' },
-
     // Object Styles
     { name: '數字列表-無數字', element: 'ol', attributes: { 'class': 'list-unstyled' } },
     { name: '圖標列表-無圖標', element: 'ul', attributes: { 'class': 'list-unstyled' } },
-    { name: '表格-有框線', element: 'table', attributes: { 'class': 'table-bordered' } },
-    // { name: '表格-強調內容', element: 'td', attributes: { 'class': 'item' } },
 ]);

@@ -38,8 +38,8 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
     }
     keep_detail: Array<server.ProductDetail> = [];
     componentDidMount() {
-        CKEDITOR.replace('info', { customConfig: '../ckeditor/inlineConfig.js' });
-        CKEDITOR.replace('more_info', { customConfig: '../ckeditor/inlineConfig.js' });
+        CKEDITOR.replace('info', { customConfig: '../ckeditor/ConfigMin.js?v2' });
+        CKEDITOR.replace('more_info', { customConfig: '../ckeditor/Config.js?v2' });
     }
     chgVal(name: string, value: any, e: React.SyntheticEvent) {
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);
@@ -245,7 +245,7 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
                                     url_list={gb_approot + 'Active/ProductData/axFList'}
                                     url_delete={gb_approot + 'Active/ProductData/axFDelete'}
                                     url_sort={gb_approot + 'Active/ProductData/axFSort'} />
-                                <small className="text-muted">可上傳 1 張照片，檔案大小不可超過 5000 KB</small>
+                                <small className="text-muted">可上傳 1 張照片，圖片尺寸：寬度 500 px(高度不限)，檔案大小不可超過 450 KB</small>
                             </dd>
                         </dl>
                     </section>
@@ -269,8 +269,8 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
                         <thead>
                             <tr>
                                 <th className="text-xs-center">編輯</th>
-                                <th className="text-xs-center">料號</th>
-                                <th className="text-xs-center">包裝</th>
+                                <th>料號</th>
+                                <th>包裝</th>
                                 <th className="text-xs-center">重量(總計) (g) </th>
                                 <th className="text-xs-center">單價</th>
                                 <th className="text-xs-center">狀態</th>

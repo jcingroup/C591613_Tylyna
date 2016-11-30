@@ -569,7 +569,7 @@ input:not([type]), [type="text"], [type="password"], [type="date"], [type="datet
 #header {
   background: #fff url(../images/headerBg.gif) repeat-x 0 100px;
   height: 165px;
-  z-index: 1;
+  z-index: 2;
   box-shadow: 0 10px 0 rgba(221, 171, 90, 0.6); }
   #header .wrap {
     position: relative; }
@@ -729,12 +729,13 @@ input:not([type]), [type="text"], [type="password"], [type="date"], [type="datet
     font-size: 1.16667em; }
 
 #banner {
-  position: relative; }
+  position: relative;
+  z-index: 1; }
   #banner img {
     width: 100%; }
-    @media (min-width: 87.5em) {
-      #banner img {
-        max-width: 1200px; } }
+  @media (min-width: 87.5em) {
+    #banner {
+      max-width: 1200px; } }
 
 button {
   border: none; }
@@ -1530,4 +1531,4 @@ section:not(:last-child) {
 
 iframe {
   width: 100%;
-  height: 600px; }
+  height: 560px; }

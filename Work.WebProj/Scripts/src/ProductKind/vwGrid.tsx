@@ -55,7 +55,7 @@ export class Grid extends React.Component<any, any>{
             (
                 <div>
                     <div className="alert alert-warning">
-                        <strong>前台顯示</strong> 依排序由大到小排序
+                        <strong>前台顯示排序：</strong> 數字愈大愈前面
                     </div>
                     <GridSearch search={pp.search} page_operator={pp.page_operator}
                         setInputValue={this.props.setInputValue}
