@@ -374,6 +374,7 @@
     <Content Include="Content\css\sys.css" />
     <Content Include="Content\css\vendor\fontAwesome\font-awesome.css" />
     <Content Include="Content\css\vendor\icomoon.css" />
+    <Content Include="Content\css\vendor\jquery.loadmask.css" />
     <Content Include="Content\css\vendor\swiper.min.css" />
     <Content Include="Content\css\vendor\toastr.css" />
     <Content Include="Content\css\vendor\typeahead.css" />

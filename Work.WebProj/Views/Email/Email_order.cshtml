@@ -102,11 +102,11 @@
 
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                     <td>
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <td style="color:#000001;font-size:30px;font-weight:bold;line-height:34px">訂單確認－@Resources.Res.System_FrontName</td>
+                                                <td style="color:#000001;font-size:30px;font-weight:bold;line-height:34px"><small>@Resources.Res.System_FrontName</small> 訂單確認</td>
                                             </tr>
                                             @* <tr>
                                                     <td style="color:#000001;font-size:18px;line-height:22px">小標題</td>
@@ -119,10 +119,13 @@
                                                 <tr>
                                                     <td style="color:#E63F00;font-size:16px;line-height:24px">
                                                         已成功加入會員！<br />
-                                                        登入帳號為Email,預設密碼為：@CommWebSetup.DEV_MemberPWD
+                                                        登入帳號為Email, 預設密碼為：@CommWebSetup.DEV_MemberPWD
                                                     </td>
                                                 </tr>
                                             }
+                                            <tr>
+                                                <td height="10">&nbsp;</td>
+                                            </tr>
                                             <tr>
                                                 <td style="color:#6c6457;font-size:16px;line-height:24px">
                                                     訂單編號：@Model.purchase.purchase_no<br>
@@ -154,7 +157,7 @@
                                             </tr>
                                         </table>
                                     </td>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                 </tr>
                             </table>
 
@@ -165,7 +168,7 @@
                                     <td height="20">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                     <td>
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             @foreach (var i in Model.purchase.Deatil)
@@ -174,29 +177,29 @@
                                                     <td style="color:#999;font-size:12px;line-height:14px">商品編號 @i.p_d_sn</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="color:#000001;font-size:14px;font-weight:bold;line-height:18px">
+                                                    <td style="color:#000001;font-size:14px;font-weight:bold;line-height:22px">
                                                         @(i.p_name + " " + @CodeSheet.GetStateVal((int)i.p_d_pack_type, i_CodeName.Value, CodeSheet.pack_type))<br>
-                                                        數量：@i.qty　小計：NT$ @string.Format("{0:N0}", i.sub_total)
+                                                        數量：@i.qty　小計：NT1 @string.Format("{0:N0}", i.sub_total)
                                                     </td>
                                                 </tr>
                                             }
                                         </table>
                                     </td>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                 </tr>
                                 @* 商品 end *@
 
 
                                 @* 總計 *@
                                 <tr>
-                                    <td height="20">&nbsp;</td>
+                                    <td style="border-bottom:1px solid #ccc; padding-bottom:20px">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td width="14%">&nbsp;</td>
-                                    <td style="color:#777879;font-size:18px;font-weight:bold;line-height:22px">
+                                    <td width="10%">&nbsp;</td>
+                                    <td style="color:#555;font-size:17px;font-weight:bold;line-height:22px">
                                         總計：NT$ @string.Format("{0:N0}", Model.purchase.total) (含運費、手續費)
                                     </td>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                 </tr>
                                 @* 總計 end *@
 
@@ -210,34 +213,34 @@
                                     <td height="25">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                     <td style="font-size:18px;font-weight:bold;line-height:22px">
                                         付款資訊 <span style="color:#777879;font-size:16px;line-height:22px">請於 3 日內完成付款</span>
                                     </td>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td height="20">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                     <td style="color:#777879;font-size:16px;line-height:24px">
                                         轉帳金額：<strong style="color:#E60112">NT$ @string.Format("{0:N0}", Model.purchase.total)</strong><br>
                                         轉帳銀行：<strong style="color:#E60112">@Model.BankName (代號: @Model.BankCode)</strong><br>
-                                        轉帳戶名：<strong style="color:#E60112">@Model.AccountName</strong>
+                                        轉帳戶名：<strong style="color:#E60112">@Model.AccountName</strong>　
                                         轉帳帳號：<strong style="color:#E60112">@Model.AccountNumber</strong>
                                     </td>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td height="20">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                     <td>
                                         <a href=@(CommWebSetup.DEV_WebUrl + "/Order/Reply?no=" + Model.purchase.purchase_no) target="_blank" style="background-color:#F15A24;color:#ffffff;display:inline-block;font-size:18px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;width:400px;-webkit-text-size-adjust:none;">付款後請按此回覆，以利對帳，謝謝</a>
                                     </td>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td height="60">&nbsp;</td>

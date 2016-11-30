@@ -5,7 +5,7 @@
     ViewBag.IsFirstPage = true;
 }
 @section IncludeCSS{
-
+    <link rel="stylesheet" href="~/Content/css/vendor/jquery.loadmask.css">
 }
 @section IncludeScript{
      <script>
@@ -19,7 +19,7 @@
     <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit'></script>
     <script src="~/Scripts/build/app/vendors.js?v=@CommWebSetup.CacheVer"></script>
     <script src="~/Scripts/build/app/m_login.js?v=@CommWebSetup.CacheVer"></script>
-    <script src="~/Scripts/cdn/jquery.loadmask.min.js"></script> 
+    <script src="~/Scripts/cdn/jquery.loadmask.min.js"></script>
 
     // Google reCaptcha 驗證工具
     @*<script src='https://www.google.com/recaptcha/api.js'></script>*@
@@ -29,7 +29,7 @@
     <span class="name text-danger">@Resources.Res.System_Name</span>Web Manager
 </h1>
 <p class="copyright text-primary">@Html.Lang("copyright")</p>
- <div class="login-box" id="login-box"></div> 
+ <div class="login-box" id="login-box"></div>
 
 @*<div class="login-box">
 
