@@ -28,11 +28,11 @@
 <body class="@ViewBag.BodyClass">
     @* 登入畫面 *@
     <div id="login" class="modal">
-        <button onclick="document.getElementById('login').style.display='none'" class="btn-close icon-cross"></button>
         <div class="modal-content animate-top">
+            <button onclick="document.getElementById('login').style.display='none'" class="btn-close icon-cross"></button>
 
             <form id="MLogin" class="tab-content">
-                <header class="">會員登入</header>
+                <header>會員登入</header>
                 <div class="input-group">
                     <label class="input-group-addon icon-person" data-title="帳號"></label>
                     <input class="form-element" type="email" id="m_act" required placeholder="請輸入帳號(E-mail地址)">
@@ -41,15 +41,16 @@
                     <label class="input-group-addon icon-lock2" data-title="密碼"></label>
                     <input class="form-element" type="password" id="m_pwd" required placeholder="請輸入密碼">
                 </div>
-                <div id="Validate" class="margin-bottom"></div>
+
+                <div id="Validate" class="m-b-32"></div>
 
                 <button class="btn" type="submit">登入</button>
                 <a href="#tab-2" class="js-tab">忘記密碼</a>
             </form>
 
             <form id="tab-2" action="" class="tab-content">
-                <header class="">忘記密碼</header>
-                <div class="input-group">
+                <header>忘記密碼</header>
+                <div class="input-group m-b-32">
                     <label class="input-group-addon icon-paper-plane" data-title="E-mail"></label>
                     <input class="form-element" type="email" id="m_act" required placeholder="請輸入E-mail地址">
                 </div>

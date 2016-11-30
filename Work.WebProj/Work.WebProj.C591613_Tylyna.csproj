@@ -671,6 +671,9 @@
     <Content Include="Views\Email\Email_paymentreply.cshtml" />
     <Content Include="Views\Email\Email_ship.cshtml" />
     <Content Include="Views\Email\Email_forgot.cshtml" />
+    <Content Include="Views\Home\Quality2.cshtml" />
+    <Content Include="Views\Home\Quality3.cshtml" />
+    <Content Include="Views\Home\Quality-nav.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
