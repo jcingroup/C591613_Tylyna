@@ -7,11 +7,12 @@ import * as createLogger from 'redux-logger';
 
 import {AStartView} from './containers';
 import Reducers from './store';
-import { callGridLoad} from './actions';
+import { callItem} from './actions';
 
 const store = createStore(Reducers, applyMiddleware(thunkMiddleware));
 
+declare var no: string;
 var dom = document.getElementById('page_content');
 render(<Provider store={store}><AStartView /></Provider>, dom);
-store.dispatch(callGridLoad(null));
+store.dispatch(callItem(no));
 

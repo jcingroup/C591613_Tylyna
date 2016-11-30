@@ -700,6 +700,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   查詢類似 未登入系統，無法檢視資料! 的當地語系化字串。
+        /// </summary>
+        internal static string Log_Err_NoLogin {
+            get {
+                return ResourceManager.GetString("Log_Err_NoLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 系統無此使用者。 的當地語系化字串。
         /// </summary>
         internal static string Log_Err_NoThisUser {

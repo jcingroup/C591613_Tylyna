@@ -8,15 +8,15 @@ import { Search_Data} from './pub';
 
 //ajax--
 const apiPath: string = gb_approot + 'api/FrontUser';
-export const callGridLoad = (search: any) => {
+
+export const callItem = (no: string) => {
     return dispatch => {
-        mask_show(UIText.mk_loading);
-        let pm = search == null ? { state: null } : search;
-        return fetchGet(apiPath + '/getReceiptList', pm)
+        mask_show(UIText.mk_updating);
+        return fetchGet(apiPath + '/getReceiptItem', { no: no })
             .then((data: IResultData<server.Purchase>) => {
                 mask_off();
                 if (data.result) {
-                    dispatch(getGridItem(data.data));
+                    dispatch(getFieldData(data.data));
                 } else {
                     alert(data.message);
                 }
@@ -25,10 +25,10 @@ export const callGridLoad = (search: any) => {
     }
 }
 //ajax--
-const getGridItem = (data) => {
+const getFieldData = (data) => {
     return {
         type: ac_type_comm.load,
-        items: data
+        data
     }
 }
 
@@ -39,4 +39,5 @@ export const setInputValue = (type, name, value) => {
         value
     }
 }
+
 

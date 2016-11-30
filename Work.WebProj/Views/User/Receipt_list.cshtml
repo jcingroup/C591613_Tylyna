@@ -8,7 +8,13 @@
 
 @Html.Partial("user-nav")
 
-<table class="receipt-list full bg-white">
+@section Scripts {
+    <script src="~/Scripts/build/front/receiptlist.js?v=@CommWebSetup.CacheVer"></script>
+}
+
+<div id="page_content"></div>
+<!--
+   <table class="receipt-list full bg-white">
     <caption class="text-right p-b-12">
         訂單狀態：
         @* 點選後，下方清單會顯示那筆資料 *@
@@ -42,4 +48,6 @@
         <td>2</td>
         <td>已出貨</td>
     </tr>
-</table>
+</table> 
+
+-->

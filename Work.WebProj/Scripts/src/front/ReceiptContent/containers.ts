@@ -4,19 +4,17 @@ import {bindActionCreators} from 'redux';
 //view
 import {AStart} from './vwAStart';
 
-import { callGridLoad, setInputValue } from './actions'
+import { callItem, setInputValue } from './actions'
 
 const m1ToProps = (state, ownProps) => {
     return {
-        grid: state.grid,
-        search: state.search
+        field: state.field
     }
 }
 
 const m1Dispatch = (dispatch, ownProps) => {
     let s = bindActionCreators({
-        callGridLoad,
-        setInputValue
+        callItem
     }, dispatch);
 
     return s;
