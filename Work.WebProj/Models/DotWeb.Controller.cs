@@ -1278,7 +1278,7 @@ namespace DotWeb.Controller
                     using (TransactionScope tx = new TransactionScope())
                     {
                         string no = GetNewId(CodeTable.Purchase).ToString();
-                        md.purchase_no = "P" + DateTime.Now.ToString("yyyyMMdd") + no.PadLeft(3, '0');//訂單編號
+                        md.purchase_no = "P" + DateTime.Now.ToString("yyyyMMdd") + no.PadLeft(4, '0');//訂單編號
                         md.order_date = DateTime.Now;//訂購日期
                         md.pay_state = (int)IPayState.unpaid;//付款狀態
                         md.ship_state = (int)IShipState.unshipped;//出貨狀態

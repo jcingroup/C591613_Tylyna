@@ -55,6 +55,10 @@ namespace DotWeb.Controllers
             };
             return View("Email_ship", emd);
         }
+        public ActionResult Forgot()
+        {//忘記密碼
+            return View("Email_forgot");
+        }
 
         #region email寄送程式
         /// <summary>
