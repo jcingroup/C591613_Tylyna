@@ -68,7 +68,7 @@ namespace DotWeb.Api
                             x.purchase_no,
                             x.purchase_detail_id,
                             x.Purchase.order_date,
-                            x.p_d_pack_type,
+                            x.p_d_pack_name,
                             x.p_name,
                             x.qty,
                             x.Purchase.pay_type,

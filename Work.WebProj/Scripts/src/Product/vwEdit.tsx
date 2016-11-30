@@ -30,6 +30,7 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
 
     constructor() {
         super();
+        this.goList = this.goList.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             tab: [{ id: 'tab1', name: '產品簡介', class: 'js-tab active' },
@@ -54,7 +55,7 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
             product_detail_id: 0,
             product_id: params.id,
             sn: null,
-            pack_type: IPackTypeData[0].val,
+            pack_name: null,
             weight: 0,
             price: 0,
             stock_state: IStockStateData[0].val,
@@ -123,12 +124,23 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
         e.preventDefault();
         let field: server.Product = this.props.field;
         let pp = this.props;
+        if (this.props.is_edit) {
+            alert("規格明細未編輯完成，請按下確認符號!");
+            return;
+        }
 
         field.info = CKEDITOR.instances['info'].getData();
         field.more_info = CKEDITOR.instances['more_info'].getData();
 
         this.props.callSubmit(pp.params.id, field, pp.edit_type);
         return;
+    }
+    goList() {
+        if (this.props.is_edit) {
+            alert("規格明細未編輯完成，請按下確認符號!");
+            return;
+        }
+        this.props.callGridLoad(null);
     }
     render() {
         let out_html: JSX.Element = null;
@@ -245,7 +257,7 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
                                     url_list={gb_approot + 'Active/ProductData/axFList'}
                                     url_delete={gb_approot + 'Active/ProductData/axFDelete'}
                                     url_sort={gb_approot + 'Active/ProductData/axFSort'} />
-                                <small className="text-muted">可上傳 1 張照片，圖片尺寸：寬度 500 px(高度不限)，檔案大小不可超過 450 KB</small>
+                                <small className="text-muted">可上傳 1 張照片，圖片尺寸：寬度 500 px(高度不限) ，檔案大小不可超過 450 KB</small>
                             </dd>
                         </dl>
                     </section>
@@ -303,15 +315,15 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
                                                 />
                                         </td>
                                         <td>
-                                            <SelectText
+                                            <InputText
+                                                type="text"
                                                 inputClassName="form-control"
                                                 inputViewMode={item.view_mode}
-                                                id={'pack_type-' + i}
-                                                value={item.pack_type}
-                                                onChange= {this.chgDetailVal.bind(this, i, 'pack_type') }
+                                                value={item.pack_name}
+                                                onChange= {this.chgDetailVal.bind(this, i, 'pack_name') }
                                                 required={true}
-                                                is_blank={false}
-                                                options={IPackTypeData}
+                                                maxLength={64}
+                                                placeholder="請輸入包裝..."
                                                 />
                                         </td>
                                         <td className="text-xs-center">
@@ -400,7 +412,7 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
                         <PWButton iconClassName="fa-check" className="btn btn-primary btn-sm col-xs-offset-1"
                             title={UIText.save} enable={true} type="submit" >{UIText.save}</PWButton> { }
                         <PWButton iconClassName="fa-times" className="btn btn-secondary btn-sm"
-                            title={UIText.save} enable={true} onClick={this.props.callGridLoad.bind(this, null) } >{UIText.return}</PWButton>
+                            title={UIText.save} enable={true} onClick={this.goList} >{ UIText.return }</PWButton>
                     </div>
 
                 </form>

@@ -30,7 +30,7 @@ namespace DotWeb.Api
                         product_id = x.product_id,
                         product_detail_id = x.product_detail_id,
                         sn = x.sn,//料號
-                        pack_type = x.pack_type,//包裝
+                        pack_name = x.pack_name,//包裝
                         weight = x.weight,//重量
                         price = x.price,//單價
                         stock_state = x.stock_state,//狀態 上架/缺貨中
@@ -88,7 +88,7 @@ namespace DotWeb.Api
                     x.product_id,
                     x.product_kind_id,
                     kind_name = x.ProductKind.kind_name,
-                    Pack = x.ProductDetail.Select(y => y.pack_type).ToList(),
+                    Pack = x.ProductDetail.Select(y => y.pack_name).ToList(),
                     x.product_name,
                     x.sort,
                     x.i_Hide

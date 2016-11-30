@@ -43,7 +43,7 @@ export class AStart extends React.Component<any, any>{
             price: detail.price,
             sub_total: detail.qty * detail.price,
             p_d_sn: detail.sn,
-            p_d_pack_type: detail.pack_type,
+            p_d_pack_name: detail.pack_name,
             p_name: item.product_name
         };
         this.props.addCart(md);
@@ -62,7 +62,7 @@ export class AStart extends React.Component<any, any>{
                                     item.Deatil.map((detail, i) => {
                                         return <tr key={i}>
                                             <td className="item">
-                                                {this.getPackName(detail.pack_type) }
+                                                {detail.pack_name}
                                                 <small className="block text-info">NT$ {fmt_money(detail.price) }</small>
                                             </td>
                                             <td className="spec">

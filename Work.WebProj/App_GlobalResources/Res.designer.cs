@@ -610,6 +610,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   查詢類似 此筆規格明細與已有訂單使用，無法刪除! 的當地語系化字串。
+        /// </summary>
+        internal static string Log_Err_Delete_Used {
+            get {
+                return ResourceManager.GetString("Log_Err_Delete_Used", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 此Email已被申請，不可使用。 的當地語系化字串。
         /// </summary>
         internal static string Log_Err_EmailExist {

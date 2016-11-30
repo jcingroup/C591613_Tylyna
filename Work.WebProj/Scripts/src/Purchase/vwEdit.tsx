@@ -281,7 +281,7 @@ export class Edit extends React.Component<any, any>{
                                         <td className="text-xs-center">{i + 1}</td>
                                         <td>{item.p_d_sn}</td>
                                         <td>
-                                            {item.p_name} {this.getName(IPackTypeData, item.p_d_pack_type) }
+                                            {item.p_name} {item.p_d_pack_name }
                                         </td>
                                         <td className="text-xs-center">{fmt_money(item.price) }</td>
                                         <td className="text-xs-center">{item.qty}</td>

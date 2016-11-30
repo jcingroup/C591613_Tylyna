@@ -29,12 +29,6 @@ export class GridTable extends React.Component<any, any>{
 
         this.props.callDetailLoad(i, parms);
     }
-    getName(arr: Array<server.OptionTemplate>, val: number): string {
-        let res: string = "";
-        let item = arr.find(x => x.val === parseInt(val.toString()));
-        res = (item != null && item != undefined) ? item.Lname : res;
-        return res;
-    }
     render() {
         let out_html: JSX.Element = null;
         let pp = this.props;
@@ -67,7 +61,7 @@ export class GridTable extends React.Component<any, any>{
                                         <th>
                                             <OrderButton
                                                 title="產品包裝"
-                                                field={'p_d_pack_type'}
+                                                field={'p_d_pack_name'}
                                                 sort={item.sort}
                                                 now_field={item.field}
                                                 setSort={this.setSort.bind(this, i) } />
@@ -111,7 +105,7 @@ export class GridTable extends React.Component<any, any>{
                                         item.Detail.map((detail, j) => {
                                             return <tr key={i + "-" + j}>
                                                 <td><a href={this.state.Order + "?no=" + detail.purchase_no}>{detail.purchase_no}</a></td>
-                                                <td>{this.getName(IPackTypeData, detail.p_d_pack_type) }</td>
+                                                <td>{detail.p_d_pack_name}</td>
                                                 <td className="text-xs-center">{Moment(detail.order_date).format(config.dateFT) }</td>
                                                 <td className="text-xs-center">{detail.customer_name}</td>
                                                 <td className="text-xs-right">{fmt_money(detail.weight) }</td>

@@ -412,4 +412,7 @@
   <data name="Log_Err_NoLogin" xml:space="preserve">
     <value>未登入系統，無法檢視資料!</value>
   </data>
+  <data name="Log_Err_Delete_Used" xml:space="preserve">
+    <value>此筆規格明細與已有訂單使用，無法刪除!</value>
+  </data>
 </root>

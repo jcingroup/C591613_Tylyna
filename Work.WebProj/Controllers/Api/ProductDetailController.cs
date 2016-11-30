@@ -42,7 +42,7 @@ namespace DotWeb.Api
                     product_id = x.product_id,
                     product_detail_id = x.product_detail_id,
                     sn = x.sn,//料號
-                    pack_type = x.pack_type,//包裝
+                    pack_name = x.pack_name,//包裝
                     weight = x.weight,//重量
                     price = x.price,//單價
                     stock_state = x.stock_state,//狀態 上架/缺貨中
@@ -132,6 +132,14 @@ namespace DotWeb.Api
                 r = new ResultInfo<ProductDetail>();
 
                 item = await db0.ProductDetail.FindAsync(param.id);
+
+                if (db0.PurchaseDetail.Any(x => x.product_detail_id == param.id))
+                {
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_Delete_Used;
+                    return Ok(r);
+                }
+
                 if (item != null)
                 {
                     db0.ProductDetail.Remove(item);

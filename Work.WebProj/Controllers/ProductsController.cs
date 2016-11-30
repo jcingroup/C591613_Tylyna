@@ -68,7 +68,7 @@ namespace DotWeb.Controllers
                          product_id = x.product_id,
                          product_detail_id = x.product_detail_id,
                          sn = x.sn,//料號
-                         pack_type = x.pack_type,//包裝
+                         pack_name = x.pack_name,//包裝
                          weight = x.weight,//重量
                          price = x.price,//單價
                          stock_state = x.stock_state,//狀態 上架/缺貨中
@@ -117,7 +117,7 @@ namespace DotWeb.Controllers
                         var p_d = db0.ProductDetail.Find(md.product_detail_id);
                         md.p_d_sn = p_d.sn;//產品料號
                         md.p_name = p_d.Product.product_name;//產品名稱
-                        md.p_d_pack_type = p_d.pack_type;//產品包裝
+                        md.p_d_pack_name = p_d.pack_name;//產品包裝
                         md.price = p_d.price;//產品價格
                         #endregion
 

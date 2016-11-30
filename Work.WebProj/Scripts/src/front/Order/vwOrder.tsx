@@ -87,7 +87,7 @@ export class Order extends React.Component<any, any>{
                                         <td className="text-left">
                                             產品編號: {item.p_d_sn}
                                             <h5>{item.p_name}</h5>
-                                            規格型號: {this.getPackName(item.p_d_pack_type) } <a href={p_url} className="text-success m-l-16">查看產品介紹</a>
+                                            規格型號: {item.p_d_pack_name } <a href={p_url} className="text-success m-l-16">查看產品介紹</a>
                                         </td>
                                         <td>{fmt_money(item.qty) }</td>
                                         <td>NT$ {fmt_money(item.price) }</td>

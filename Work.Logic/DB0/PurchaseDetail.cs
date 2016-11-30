@@ -23,7 +23,7 @@ namespace ProcCore.Business.DB0
         public double sub_total { get; set; }
         public string p_d_sn { get; set; }
         public string p_name { get; set; }
-        public Nullable<int> p_d_pack_type { get; set; }
+        public string p_d_pack_name { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual ProductDetail ProductDetail { get; set; }

@@ -131,7 +131,7 @@ export class GridTable extends React.Component<any, any>{
                                 <td>
                                     {
                                         item.Deatil.map((detail, j) => {
-                                            return <div key={j}>{detail.p_d_sn} {detail.p_name} {this.getName(IPackTypeData, detail.p_d_pack_type) } </div>;
+                                            return <div key={j}>{detail.p_d_sn} {detail.p_name} {detail.p_d_pack_name } </div>;
                                         })
                                     }
                                 </td>

@@ -70,7 +70,7 @@ export class AStart extends React.Component<any, any>{
                                     <td className="text-left">
                                         產品編號: {item.p_d_sn}
                                         <h5>{item.p_name}</h5>
-                                        規格型號: {this.getPackName(item.p_d_pack_type) }
+                                        規格型號: {item.p_d_pack_name }
                                     </td>
                                     <td>
                                         <InputNum

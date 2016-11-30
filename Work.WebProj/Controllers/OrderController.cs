@@ -131,7 +131,7 @@ namespace DotWeb.Controllers
                                 var item = db0.ProductDetail.Find(d.product_detail_id);
                                 d.p_d_sn = item.sn;//產品料號
                                 d.p_name = item.Product.product_name;//產品名稱
-                                d.p_d_pack_type = item.pack_type;//產品包裝
+                                d.p_d_pack_name = item.pack_name;//產品包裝
                                 d.price = item.price;//產品價格
                                 d.sub_total = item.price * d.qty;
                             }

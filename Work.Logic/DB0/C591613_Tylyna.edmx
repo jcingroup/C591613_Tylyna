@@ -236,7 +236,7 @@
           <Property Name="product_detail_id" Type="int" Nullable="false" />
           <Property Name="product_id" Type="int" Nullable="false" />
           <Property Name="sn" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="pack_type" Type="int" Nullable="false" />
+          <Property Name="pack_name" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="weight" Type="float" Nullable="false" />
           <Property Name="price" Type="float" Nullable="false" />
           <Property Name="stock_state" Type="int" Nullable="false" />
@@ -297,7 +297,7 @@
           <Property Name="sub_total" Type="float" Nullable="false" />
           <Property Name="p_d_sn" Type="nvarchar" MaxLength="64" />
           <Property Name="p_name" Type="nvarchar" MaxLength="64" />
-          <Property Name="p_d_pack_type" Type="int" />
+          <Property Name="p_d_pack_name" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <EntityType Name="Shipment">
           <Key>
@@ -763,20 +763,6 @@
             <End Role="ProductKind" EntitySet="ProductKind" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <EntitySet Name="ProductDetail" EntityType="C591613_TylynaModel.ProductDetail" />
-          <AssociationSet Name="FK_ProductDetail_Product" Association="C591613_TylynaModel.FK_ProductDetail_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductDetail" EntitySet="ProductDetail" />
-          </AssociationSet>
-          <EntitySet Name="PurchaseDetail" EntityType="C591613_TylynaModel.PurchaseDetail" />
-          <AssociationSet Name="FK_PurchaseDetail_Product" Association="C591613_TylynaModel.FK_PurchaseDetail_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseDetail_ProductDetail" Association="C591613_TylynaModel.FK_PurchaseDetail_ProductDetail">
-            <End Role="ProductDetail" EntitySet="ProductDetail" />
-            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
-          </AssociationSet>
           <EntitySet Name="Shipment" EntityType="C591613_TylynaModel.Shipment" />
           <EntitySet Name="News" EntityType="C591613_TylynaModel.News" />
           <EntitySet Name="Customer" EntityType="C591613_TylynaModel.Customer" />
@@ -784,6 +770,20 @@
           <AssociationSet Name="FK_Purchase_Customer" Association="C591613_TylynaModel.FK_Purchase_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <EntitySet Name="ProductDetail" EntityType="C591613_TylynaModel.ProductDetail" />
+          <EntitySet Name="PurchaseDetail" EntityType="C591613_TylynaModel.PurchaseDetail" />
+          <AssociationSet Name="FK_ProductDetail_Product" Association="C591613_TylynaModel.FK_ProductDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetail_Product" Association="C591613_TylynaModel.FK_PurchaseDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetail_ProductDetail" Association="C591613_TylynaModel.FK_PurchaseDetail_ProductDetail">
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_PurchaseDetail_Purchase" Association="C591613_TylynaModel.FK_PurchaseDetail_Purchase">
             <End Role="Purchase" EntitySet="Purchase" />
@@ -839,74 +839,6 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="product_kind_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ProductDetail">
-          <Key>
-            <PropertyRef Name="product_detail_id" />
-          </Key>
-          <Property Name="product_detail_id" Type="Int32" Nullable="false" />
-          <Property Name="product_id" Type="Int32" Nullable="false" />
-          <Property Name="sn" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="pack_type" Type="Int32" Nullable="false" />
-          <Property Name="weight" Type="Double" Nullable="false" />
-          <Property Name="price" Type="Double" Nullable="false" />
-          <Property Name="stock_state" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="C591613_TylynaModel.FK_ProductDetail_Product" FromRole="ProductDetail" ToRole="Product" />
-          <NavigationProperty Name="PurchaseDetail" Relationship="C591613_TylynaModel.FK_PurchaseDetail_ProductDetail" FromRole="ProductDetail" ToRole="PurchaseDetail" />
-        </EntityType>
-        <Association Name="FK_ProductDetail_Product">
-          <End Type="C591613_TylynaModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="C591613_TylynaModel.ProductDetail" Role="ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PurchaseDetail">
-          <Key>
-            <PropertyRef Name="purchase_detail_id" />
-          </Key>
-          <Property Name="purchase_detail_id" Type="Int32" Nullable="false" />
-          <Property Name="purchase_no" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="product_id" Type="Int32" Nullable="false" />
-          <Property Name="product_detail_id" Type="Int32" Nullable="false" />
-          <Property Name="qty" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Double" Nullable="false" />
-          <Property Name="sub_total" Type="Double" Nullable="false" />
-          <Property Name="p_d_sn" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="p_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="p_d_pack_type" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="C591613_TylynaModel.FK_PurchaseDetail_Product" FromRole="PurchaseDetail" ToRole="Product" />
-          <NavigationProperty Name="ProductDetail" Relationship="C591613_TylynaModel.FK_PurchaseDetail_ProductDetail" FromRole="PurchaseDetail" ToRole="ProductDetail" />
-          <NavigationProperty Name="Purchase" Relationship="C591613_TylynaModel.FK_PurchaseDetail_Purchase" FromRole="PurchaseDetail" ToRole="Purchase" />
-        </EntityType>
-        <Association Name="FK_PurchaseDetail_Product">
-          <End Type="C591613_TylynaModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="C591613_TylynaModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="PurchaseDetail">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseDetail_ProductDetail">
-          <End Type="C591613_TylynaModel.ProductDetail" Role="ProductDetail" Multiplicity="1" />
-          <End Type="C591613_TylynaModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductDetail">
-              <PropertyRef Name="product_detail_id" />
-            </Principal>
-            <Dependent Role="PurchaseDetail">
-              <PropertyRef Name="product_detail_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1002,6 +934,74 @@
             </Principal>
             <Dependent Role="Purchase">
               <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductDetail">
+          <Key>
+            <PropertyRef Name="product_detail_id" />
+          </Key>
+          <Property Name="product_detail_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="sn" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="pack_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="weight" Type="Double" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="stock_state" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="C591613_TylynaModel.FK_ProductDetail_Product" FromRole="ProductDetail" ToRole="Product" />
+          <NavigationProperty Name="PurchaseDetail" Relationship="C591613_TylynaModel.FK_PurchaseDetail_ProductDetail" FromRole="ProductDetail" ToRole="PurchaseDetail" />
+        </EntityType>
+        <EntityType Name="PurchaseDetail">
+          <Key>
+            <PropertyRef Name="purchase_detail_id" />
+          </Key>
+          <Property Name="purchase_detail_id" Type="Int32" Nullable="false" />
+          <Property Name="purchase_no" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="product_detail_id" Type="Int32" Nullable="false" />
+          <Property Name="qty" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="sub_total" Type="Double" Nullable="false" />
+          <Property Name="p_d_sn" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="p_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="p_d_pack_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="C591613_TylynaModel.FK_PurchaseDetail_Product" FromRole="PurchaseDetail" ToRole="Product" />
+          <NavigationProperty Name="ProductDetail" Relationship="C591613_TylynaModel.FK_PurchaseDetail_ProductDetail" FromRole="PurchaseDetail" ToRole="ProductDetail" />
+          <NavigationProperty Name="Purchase" Relationship="C591613_TylynaModel.FK_PurchaseDetail_Purchase" FromRole="PurchaseDetail" ToRole="Purchase" />
+        </EntityType>
+        <Association Name="FK_ProductDetail_Product">
+          <End Type="C591613_TylynaModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="C591613_TylynaModel.ProductDetail" Role="ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetail_Product">
+          <End Type="C591613_TylynaModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="C591613_TylynaModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetail_ProductDetail">
+          <End Type="C591613_TylynaModel.ProductDetail" Role="ProductDetail" Multiplicity="1" />
+          <End Type="C591613_TylynaModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDetail">
+              <PropertyRef Name="product_detail_id" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="product_detail_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1232,35 +1232,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductDetail">
-            <EntityTypeMapping TypeName="C591613_TylynaModel.ProductDetail">
-              <MappingFragment StoreEntitySet="ProductDetail">
-                <ScalarProperty Name="stock_state" ColumnName="stock_state" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="weight" ColumnName="weight" />
-                <ScalarProperty Name="pack_type" ColumnName="pack_type" />
-                <ScalarProperty Name="sn" ColumnName="sn" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="product_detail_id" ColumnName="product_detail_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseDetail">
-            <EntityTypeMapping TypeName="C591613_TylynaModel.PurchaseDetail">
-              <MappingFragment StoreEntitySet="PurchaseDetail">
-                <ScalarProperty Name="p_d_pack_type" ColumnName="p_d_pack_type" />
-                <ScalarProperty Name="p_name" ColumnName="p_name" />
-                <ScalarProperty Name="p_d_sn" ColumnName="p_d_sn" />
-                <ScalarProperty Name="sub_total" ColumnName="sub_total" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="qty" ColumnName="qty" />
-                <ScalarProperty Name="product_detail_id" ColumnName="product_detail_id" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="purchase_no" ColumnName="purchase_no" />
-                <ScalarProperty Name="purchase_detail_id" ColumnName="purchase_detail_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Shipment">
             <EntityTypeMapping TypeName="C591613_TylynaModel.Shipment">
               <MappingFragment StoreEntitySet="Shipment">
@@ -1342,6 +1313,35 @@
                 <ScalarProperty Name="order_date" ColumnName="order_date" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
                 <ScalarProperty Name="purchase_no" ColumnName="purchase_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetail">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.ProductDetail">
+              <MappingFragment StoreEntitySet="ProductDetail">
+                <ScalarProperty Name="stock_state" ColumnName="stock_state" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="pack_name" ColumnName="pack_name" />
+                <ScalarProperty Name="sn" ColumnName="sn" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="product_detail_id" ColumnName="product_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseDetail">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.PurchaseDetail">
+              <MappingFragment StoreEntitySet="PurchaseDetail">
+                <ScalarProperty Name="p_d_pack_name" ColumnName="p_d_pack_name" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="p_d_sn" ColumnName="p_d_sn" />
+                <ScalarProperty Name="sub_total" ColumnName="sub_total" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="product_detail_id" ColumnName="product_detail_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="purchase_no" ColumnName="purchase_no" />
+                <ScalarProperty Name="purchase_detail_id" ColumnName="purchase_detail_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

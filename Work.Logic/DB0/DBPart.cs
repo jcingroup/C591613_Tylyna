@@ -134,7 +134,7 @@ namespace ProcCore.Business.DB0
         public int product_detail_id { get; set; }
         public int product_id { get; set; }
         public string sn { get; set; }
-        public int pack_type { get; set; }
+        public string pack_name { get; set; }
         public double weight { get; set; }
         public double price { get; set; }
         public int stock_state { get; set; }

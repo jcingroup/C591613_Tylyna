@@ -75,7 +75,7 @@ export class AStart extends React.Component<any, any>{
                                 <td>
                                     <a href={gb_approot+"User/Receipt_content?no="+item.purchase_no} className="text-success">{item.purchase_no}</a>
                                 </td>
-                                <td className="text-left">{item.p_name}-{this.getName(IPackTypeData, item.p_d_pack_type) } </td>
+                                <td className="text-left">{item.p_name}-{item.p_d_pack_name } </td>
                                 <td>{fmt_money(item.qty) }</td>
                                 <td>{this.getName(IPayTypeData, item.pay_type) }</td>
                                 <td>{this.getName(IPayStateData, item.pay_state) }</td>

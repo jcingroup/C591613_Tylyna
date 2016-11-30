@@ -148,7 +148,7 @@
         product_detail_id?: number;
         product_id?: number;
         sn?: string;
-        pack_type?: number;
+        pack_name?: string;
         weight?: number;
         price?: number;
         stock_state?: number;
@@ -198,7 +198,7 @@
         sub_total?: number;
         p_d_sn?: string;
         p_name?: string;
-        p_d_pack_type?: number;
+        p_d_pack_name?: string;
         Product?: server.Product;
         ProductDetail?: server.ProductDetail;
         Purchase?: server.Purchase;

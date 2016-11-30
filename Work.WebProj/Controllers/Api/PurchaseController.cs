@@ -88,7 +88,7 @@ namespace DotWeb.Api
             }
             else
             {
-                resultOrderItems = result.OrderBy(x => x.purchase_no);
+                resultOrderItems = result.OrderByDescending(x => x.order_date);
             }
 
             int startRecord = PageCount.PageInfo(page, defPageSize, resultCount);
@@ -555,7 +555,7 @@ namespace DotWeb.Api
                             purchase_no = y.purchase_no,
                             purchase_detail_id = y.purchase_detail_id,//訂單明細-編號
                             product_detail_id = y.product_detail_id,//產品明細-編號
-                            p_d_pack_type = y.p_d_pack_type,//產品包裝
+                            p_d_pack_name = y.p_d_pack_name,//產品包裝
                             order_date = y.Purchase.order_date,//下單日期
                             receive_name = y.Purchase.receive_name,//收件人
                             customer_name = y.Purchase.Customer.c_name,//購買人
@@ -615,7 +615,7 @@ namespace DotWeb.Api
                         purchase_no = y.purchase_no,
                         purchase_detail_id = y.purchase_detail_id,//訂單明細-編號
                         product_detail_id = y.product_detail_id,//產品明細-編號
-                        p_d_pack_type = y.p_d_pack_type,//產品包裝
+                        p_d_pack_name = y.p_d_pack_name,//產品包裝
                         order_date = y.Purchase.order_date,//下單日期
                         receive_name = y.Purchase.receive_name,//收件人
                         customer_name = y.Purchase.Customer.c_name,//購買人
@@ -719,7 +719,7 @@ namespace DotWeb.Api
             public string purchase_no { get; set; }
             public int purchase_detail_id { get; set; }//訂單明細-編號
             public int product_detail_id { get; set; }//產品明細-編號
-            public int? p_d_pack_type { get; set; }//產品包裝
+            public string p_d_pack_name { get; set; }//產品包裝
             public DateTime order_date { get; set; }//下單日期
             public string receive_name { get; set; }//收件人
             public string customer_name { get; set; }//購買人

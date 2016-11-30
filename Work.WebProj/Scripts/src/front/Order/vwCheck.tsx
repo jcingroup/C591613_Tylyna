@@ -65,7 +65,7 @@ export class Check extends React.Component<any, CheckState>{
                                         <td className="text-left">
                                             產品編號: {item.p_d_sn}
                                             <h5>{item.p_name}</h5>
-                                            規格型號: {this.getName(IPackTypeData, item.p_d_pack_type) }
+                                            規格型號: {item.p_d_pack_name }
                                         </td>
                                         <td>{fmt_money(item.qty) }</td>
                                         <td>NT$ {fmt_money(item.price) }</td>

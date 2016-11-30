@@ -186,7 +186,7 @@ namespace DotWeb.Areas.Base.Controllers
                     sheet.Cell(row_index, 3).Value = index;
                     sheet.Cell(row_index, 4).Value = detail.p_d_sn;
                     sheet.Cell(row_index, 5).Value = detail.p_name;
-                    sheet.Cell(row_index, 6).Value = CodeSheet.GetStateVal((int)detail.p_d_pack_type, i_CodeName.Value, CodeSheet.pack_type);
+                    sheet.Cell(row_index, 6).Value = detail.p_d_pack_name;
                     sheet.Cell(row_index, 7).Value = detail.price;
                     sheet.Cell(row_index, 8).Value = detail.qty;
                     sheet.Cell(row_index, 9).Value = detail.sub_total;
@@ -273,7 +273,7 @@ namespace DotWeb.Areas.Base.Controllers
                             purchase_no = y.purchase_no,
                             purchase_detail_id = y.purchase_detail_id,//訂單明細-編號
                             product_detail_id = y.product_detail_id,//產品明細-編號
-                            p_d_pack_type = y.p_d_pack_type,//產品包裝
+                            p_d_pack_name = y.p_d_pack_name,//產品包裝
                             order_date = y.Purchase.order_date,//下單日期
                             receive_name = y.Purchase.receive_name,//收件人
                             customer_name = y.Purchase.Customer.c_name,//購買人
@@ -317,7 +317,7 @@ namespace DotWeb.Areas.Base.Controllers
                     foreach (var j in i.Detail)
                     {
                         sheet.Cell(row_index, 1).Value = j.purchase_no;//訂單編號
-                        sheet.Cell(row_index, 2).Value = CodeSheet.GetStateVal((int)j.p_d_pack_type, i_CodeName.Value, CodeSheet.pack_type);//訂單編號
+                        sheet.Cell(row_index, 2).Value = j.p_d_pack_name;//訂單編號
                         sheet.Cell(row_index, 3).Value = j.weight;//咖啡豆重量
                         sheet.Cell(row_index, col_index).Value = j.qty;//數量
                         row_index++;
