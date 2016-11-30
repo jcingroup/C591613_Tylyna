@@ -1,43 +1,35 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var $ = require('jquery');
-var React = require('react');
-var ReactDOM = require('react-dom');
-var update = require('react-addons-update');
-var Moment = require('moment');
-var CommCmpt = require('comm-cmpt');
-var CommFunc = require('comm-func');
-var dt = require('dt');
-var DatePicker = require('react-datepicker');
+const $ = require('jquery');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const update = require('react-addons-update');
+const Moment = require('moment');
+const CommCmpt = require('comm-cmpt');
+const CommFunc = require('comm-func');
+const dt = require('dt');
+const DatePicker = require('react-datepicker');
 require("react-datepicker/dist/react-datepicker.css");
 var News;
 (function (News) {
-    var GridRow = (function (_super) {
-        __extends(GridRow, _super);
-        function GridRow() {
-            _super.call(this);
+    class GridRow extends React.Component {
+        constructor() {
+            super();
             this.modify = this.modify.bind(this);
         }
-        GridRow.prototype.modify = function () {
+        modify() {
             this.props.updateType(this.props.primKey);
-        };
-        GridRow.prototype.render = function () {
-            var state = [];
+        }
+        render() {
+            let state = [];
             state['A'] = React.createElement("span", {className: "label label-success"}, "顯示");
             state['C'] = React.createElement("span", {className: "label label-danger"}, "關閉");
             return React.createElement("tr", null, React.createElement("td", {className: "text-xs-center"}, React.createElement(CommCmpt.GridButtonDel, {removeItemSubmit: this.props.removeItemSubmit, primKey: this.props.primKey})), React.createElement("td", {className: "text-xs-center"}, React.createElement(CommCmpt.GridButtonModify, {modify: this.modify})), React.createElement("td", null, this.props.itemData.community_name), React.createElement("td", null, this.props.itemData.title), React.createElement("td", null, Moment(this.props.itemData.start_date).format(dt.dateFT)), React.createElement("td", null, Moment(this.props.itemData.end_date).format(dt.dateFT)), React.createElement("td", null, state[this.props.itemData.state]));
-        };
-        GridRow.defaultProps = {};
-        return GridRow;
-    }(React.Component));
-    var GirdForm = (function (_super) {
-        __extends(GirdForm, _super);
-        function GirdForm() {
-            _super.call(this);
+        }
+    }
+    GridRow.defaultProps = {};
+    class GirdForm extends React.Component {
+        constructor() {
+            super();
             this.updateType = this.updateType.bind(this);
             this.noneType = this.noneType.bind(this);
             this.queryGridData = this.queryGridData.bind(this);
@@ -59,22 +51,21 @@ var News;
                 editPrimKey: null
             };
         }
-        GirdForm.prototype.componentDidMount = function () {
-            var _this = this;
+        componentDidMount() {
             CommFunc.jqGet(gb_approot + 'Api/GetAction/GetOptionsCommunity', {})
-                .done(function (data) {
-                _this.setState({ options_community: data });
+                .done((data) => {
+                this.setState({ options_community: data });
             });
             this.queryGridData(1);
-        };
-        GirdForm.prototype.componentDidUpdate = function (prevProps, prevState) {
+        }
+        componentDidUpdate(prevProps, prevState) {
             if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
                 CKEDITOR.replace('news_content', { customConfig: '../ckeditor/inlineConfig.js' });
             }
-        };
-        GirdForm.prototype.componentWillUnmount = function () {
-        };
-        GirdForm.prototype.gridData = function (page) {
+        }
+        componentWillUnmount() {
+        }
+        gridData(page) {
             var parms = {
                 page: 0
             };
@@ -86,43 +77,41 @@ var News;
             }
             $.extend(parms, this.state.searchData);
             return CommFunc.jqGet(this.props.apiPath, parms);
-        };
-        GirdForm.prototype.queryGridData = function (page) {
-            var _this = this;
+        }
+        queryGridData(page) {
             this.gridData(page)
-                .done(function (data, textStatus, jqXHRdata) {
+                .done((data, textStatus, jqXHRdata) => {
                 if (data.records == 0) {
                     CommFunc.tosMessage(null, '無任何資料', 2);
                 }
-                _this.setState({ gridData: data });
+                this.setState({ gridData: data });
             })
-                .fail(function (jqXHR, textStatus, errorThrown) {
+                .fail((jqXHR, textStatus, errorThrown) => {
                 CommFunc.showAjaxError(errorThrown);
             });
-        };
-        GirdForm.prototype.handleSubmit = function (e) {
-            var _this = this;
+        }
+        handleSubmit(e) {
             e.preventDefault();
             this.state.fieldData.context = CKEDITOR.instances['news_content'].getData();
             if (this.state.edit_type == 1) {
                 CommFunc.jqPost(this.props.apiPath, this.state.fieldData)
-                    .done(function (data, textStatus, jqXHRdata) {
+                    .done((data, textStatus, jqXHRdata) => {
                     if (data.result) {
                         CommFunc.tosMessage(null, '新增完成', 1);
-                        _this.updateType(data.id);
+                        this.updateType(data.id);
                     }
                     else {
                         alert(data.message);
                     }
                 })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
+                    .fail((jqXHR, textStatus, errorThrown) => {
                     CommFunc.showAjaxError(errorThrown);
                 });
             }
             else if (this.state.edit_type == 2) {
                 var packData = { id: this.state.editPrimKey, md: this.state.fieldData };
                 CommFunc.jqPut(this.props.apiPath, packData)
-                    .done(function (data, textStatus, jqXHRdata) {
+                    .done((data, textStatus, jqXHRdata) => {
                     if (data.result) {
                         CommFunc.tosMessage(null, '修改完成', 1);
                     }
@@ -130,14 +119,14 @@ var News;
                         alert(data.message);
                     }
                 })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
+                    .fail((jqXHR, textStatus, errorThrown) => {
                     CommFunc.showAjaxError(errorThrown);
                 });
             }
             ;
             return;
-        };
-        GirdForm.prototype.deleteSubmit = function () {
+        }
+        deleteSubmit() {
             if (!confirm('確定是否刪除?')) {
                 return;
             }
@@ -164,8 +153,8 @@ var News;
                 .fail(function (jqXHR, textStatus, errorThrown) {
                 CommFunc.showAjaxError(errorThrown);
             });
-        };
-        GirdForm.prototype.removeItemSubmit = function (primKey) {
+        }
+        removeItemSubmit(primKey) {
             if (!confirm('確定是否刪除?')) {
                 return;
             }
@@ -182,26 +171,26 @@ var News;
                 .fail(function (jqXHR, textStatus, errorThrown) {
                 CommFunc.showAjaxError(errorThrown);
             });
-        };
-        GirdForm.prototype.handleSearch = function (e) {
+        }
+        handleSearch(e) {
             e.preventDefault();
             this.queryGridData(0);
             return;
-        };
-        GirdForm.prototype.delCheck = function (i, chd) {
-            var newState = this.state;
+        }
+        delCheck(i, chd) {
+            let newState = this.state;
             this.state.gridData.rows[i].check_del = !chd;
             this.setState(newState);
-        };
-        GirdForm.prototype.checkAll = function () {
-            var newState = this.state;
+        }
+        checkAll() {
+            let newState = this.state;
             newState.checkAll = !newState.checkAll;
             for (var prop in this.state.gridData.rows) {
                 this.state.gridData.rows[prop].check_del = newState.checkAll;
             }
             this.setState(newState);
-        };
-        GirdForm.prototype.insertType = function () {
+        }
+        insertType() {
             this.setState({
                 edit_type: 1,
                 fieldData: {
@@ -210,41 +199,39 @@ var News;
                     community_id: community_id
                 }
             });
-        };
-        GirdForm.prototype.updateType = function (id) {
-            var _this = this;
+        }
+        updateType(id) {
             var idPack = { id: id };
             CommFunc.jqGet(this.props.apiPath, idPack)
-                .done(function (data, textStatus, jqXHRdata) {
-                _this.setState({
+                .done((data, textStatus, jqXHRdata) => {
+                this.setState({
                     edit_type: 2,
                     fieldData: data.data,
                     editPrimKey: id
                 });
             })
-                .fail(function (jqXHR, textStatus, errorThrown) {
+                .fail((jqXHR, textStatus, errorThrown) => {
                 CommFunc.showAjaxError(errorThrown);
             });
-        };
-        GirdForm.prototype.noneType = function () {
-            var _this = this;
+        }
+        noneType() {
             this.gridData(0)
-                .done(function (data, textStatus, jqXHRdata) {
-                _this.setState({ edit_type: 0, gridData: data, editPrimKey: null });
+                .done((data, textStatus, jqXHRdata) => {
+                this.setState({ edit_type: 0, gridData: data, editPrimKey: null });
             })
-                .fail(function (jqXHR, textStatus, errorThrown) {
+                .fail((jqXHR, textStatus, errorThrown) => {
                 CommFunc.showAjaxError(errorThrown);
             });
-        };
-        GirdForm.prototype.changeFDValue = function (name, e) {
+        }
+        changeFDValue(name, e) {
             this.setEventValue(this.props.fdName, name, e);
-        };
-        GirdForm.prototype.changeGDValue = function (name, e) {
+        }
+        changeGDValue(name, e) {
             this.setEventValue(this.props.gdName, name, e);
-        };
-        GirdForm.prototype.setEventValue = function (collentName, name, e) {
-            var input = e.target;
-            var value;
+        }
+        setEventValue(collentName, name, e) {
+            let input = e.target;
+            let value;
             if (input.value == 'true') {
                 value = true;
             }
@@ -254,31 +241,25 @@ var News;
             else {
                 value = input.value;
             }
-            var objForUpdate = (_a = {},
-                _a[collentName] = (_b = {},
-                    _b[name] = { $set: value },
-                    _b
-                ),
-                _a
-            );
+            var objForUpdate = {
+                [collentName]: {
+                    [name]: { $set: value }
+                }
+            };
             var newState = update(this.state, objForUpdate);
             this.setState(newState);
-            var _a, _b;
-        };
-        GirdForm.prototype.setInputValue = function (collentName, name, v) {
-            var objForUpdate = (_a = {},
-                _a[collentName] = (_b = {},
-                    _b[name] = { $set: v },
-                    _b
-                ),
-                _a
-            );
+        }
+        setInputValue(collentName, name, v) {
+            var objForUpdate = {
+                [collentName]: {
+                    [name]: { $set: v }
+                }
+            };
             var newState = update(this.state, objForUpdate);
             this.setState(newState);
-            var _a, _b;
-        };
-        GirdForm.prototype.setInputValueMuti = function (collentName, name, v) {
-            var objForUpdate = (_a = {}, _a[collentName] = {}, _a);
+        }
+        setInputValueMuti(collentName, name, v) {
+            var objForUpdate = { [collentName]: {} };
             for (var i in name) {
                 var item = name[i];
                 var value = v[i];
@@ -286,40 +267,33 @@ var News;
             }
             var newState = update(this.state, objForUpdate);
             this.setState(newState);
-            var _a;
-        };
-        GirdForm.prototype.setChangeDate = function (collentName, name, date) {
+        }
+        setChangeDate(collentName, name, date) {
             var v = date == null ? null : date.format();
-            var objForUpdate = (_a = {},
-                _a[collentName] = (_b = {},
-                    _b[name] = {
+            var objForUpdate = {
+                [collentName]: {
+                    [name]: {
                         $set: v
-                    },
-                    _b
-                ),
-                _a
-            );
+                    }
+                }
+            };
             var newState = update(this.state, objForUpdate);
             this.setState(newState);
-            var _a, _b;
-        };
-        GirdForm.prototype.render = function () {
-            var _this = this;
+        }
+        render() {
             var outHtml = null;
             var GridNavPage = CommCmpt.GridNavPage;
             if (this.state.edit_type == 0) {
                 var search = this.state.searchData;
                 outHtml =
-                    (React.createElement("div", null, React.createElement("ul", {className: "breadcrumb"}, React.createElement("li", null, React.createElement("i", {className: "fa-caret-right"}), " ", this.props.menuName), React.createElement("li", null, React.createElement("i", {className: "fa-angle-right"}), " ", this.props.caption)), React.createElement("h3", {className: "h3"}, this.props.caption), React.createElement("form", {onSubmit: this.handleSearch}, React.createElement("div", {className: "table-responsive"}, React.createElement("div", {className: "table-header"}, React.createElement("div", {className: "table-filter"}, React.createElement("div", {className: "form-inline"}, React.createElement("div", {className: "form-group"}, React.createElement("label", {className: "sr-only"}, "搜尋商家名稱"), " ", React.createElement("input", {type: "text", className: "form-control form-control-sm", onChange: this.changeGDValue.bind(this, 'keyword'), value: this.state.searchData.keyword, placeholder: "商家名稱"}), " ", React.createElement("button", {className: "btn btn-sm btn-primary", type: "submit"}, React.createElement("i", {className: "fa-search"}), " 搜尋"))))), React.createElement("table", {className: "table table-sm table-bordered table-striped"}, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", {style: { "width": "7%" }, className: "text-xs-center"}, "刪除"), React.createElement("th", {style: { "width": "7%" }, className: "text-xs-center"}, "修改"), React.createElement("th", {style: { "width": "20%" }}, "商家名稱"), React.createElement("th", {style: { "width": "30%" }}, "標題"), React.createElement("th", {style: { "width": "13%" }}, "啟始日期"), React.createElement("th", {style: { "width": "13%" }}, "結束日期"), React.createElement("th", {style: { "width": "10%" }}, "狀態"))), React.createElement("tbody", null, this.state.gridData.rows.map(function (itemData, i) {
-                        return React.createElement(GridRow, {key: i, primKey: itemData.community_news_id, itemData: itemData, removeItemSubmit: _this.removeItemSubmit, updateType: _this.updateType});
-                    })))), React.createElement(GridNavPage, {startCount: this.state.gridData.startcount, endCount: this.state.gridData.endcount, recordCount: this.state.gridData.records, totalPage: this.state.gridData.total, nowPage: this.state.gridData.page, queryGridData: this.queryGridData, insertType: this.insertType, deleteSubmit: this.deleteSubmit, showDelete: false}))));
+                    (React.createElement("div", null, React.createElement("ul", {className: "breadcrumb"}, React.createElement("li", null, React.createElement("i", {className: "fa-caret-right"}), " ", this.props.menuName), React.createElement("li", null, React.createElement("i", {className: "fa-angle-right"}), " ", this.props.caption)), React.createElement("h3", {className: "h3"}, this.props.caption), React.createElement("form", {onSubmit: this.handleSearch}, React.createElement("div", {className: "table-responsive"}, React.createElement("div", {className: "table-header"}, React.createElement("div", {className: "table-filter"}, React.createElement("div", {className: "form-inline"}, React.createElement("div", {className: "form-group"}, React.createElement("label", {className: "sr-only"}, "搜尋商家名稱"), " ", React.createElement("input", {type: "text", className: "form-control form-control-sm", onChange: this.changeGDValue.bind(this, 'keyword'), value: this.state.searchData.keyword, placeholder: "商家名稱"}), " ", React.createElement("button", {className: "btn btn-sm btn-primary", type: "submit"}, React.createElement("i", {className: "fa-search"}), " 搜尋"))))), React.createElement("table", {className: "table table-sm table-bordered table-striped"}, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", {style: { "width": "7%" }, className: "text-xs-center"}, "刪除"), React.createElement("th", {style: { "width": "7%" }, className: "text-xs-center"}, "修改"), React.createElement("th", {style: { "width": "20%" }}, "商家名稱"), React.createElement("th", {style: { "width": "30%" }}, "標題"), React.createElement("th", {style: { "width": "13%" }}, "啟始日期"), React.createElement("th", {style: { "width": "13%" }}, "結束日期"), React.createElement("th", {style: { "width": "10%" }}, "狀態"))), React.createElement("tbody", null, this.state.gridData.rows.map((itemData, i) => React.createElement(GridRow, {key: i, primKey: itemData.community_news_id, itemData: itemData, removeItemSubmit: this.removeItemSubmit, updateType: this.updateType}))))), React.createElement(GridNavPage, {startCount: this.state.gridData.startcount, endCount: this.state.gridData.endcount, recordCount: this.state.gridData.records, totalPage: this.state.gridData.total, nowPage: this.state.gridData.page, queryGridData: this.queryGridData, insertType: this.insertType, deleteSubmit: this.deleteSubmit, showDelete: false}))));
             }
             else if (this.state.edit_type == 1 || this.state.edit_type == 2) {
-                var field = this.state.fieldData;
-                var mnt_start_date = CommFunc.MntV(field.start_date);
-                var mnt_end_date = CommFunc.MntV(field.end_date);
-                var end_date_disabled = mnt_start_date == null ? true : false;
-                var fldState = {
+                let field = this.state.fieldData;
+                let mnt_start_date = CommFunc.MntV(field.start_date);
+                let mnt_end_date = CommFunc.MntV(field.end_date);
+                let end_date_disabled = mnt_start_date == null ? true : false;
+                let fldState = {
                     label: field.state == 'A' ?
                         React.createElement("label", {className: "col-xs-1 form-control-label text-xs-right"}, "狀態") :
                         React.createElement("label", {className: "col-xs-1 form-control-label text-xs-right"}, "狀態"),
@@ -332,14 +306,13 @@ var News;
                 })))), React.createElement("div", {className: "form-group row"}, React.createElement("label", {className: "col-xs-1 form-control-label text-xs-right"}, React.createElement("small", {className: "text-danger"}, "*"), " 刊登時間"), React.createElement("div", {className: "col-xs-4"}, React.createElement("div", {className: "input-group input-group-sm"}, React.createElement("span", {className: "input-group-addon"}, "起"), React.createElement(DatePicker, {selected: mnt_start_date, dateFormat: dt.dateFT, isClearable: true, required: true, locale: "zh-TW", showYearDropdown: true, minDate: Moment(), onChange: this.setChangeDate.bind(this, this.props.fdName, 'start_date'), className: "form-control"}))), React.createElement("div", {className: "col-xs-4"}, React.createElement("div", {className: "input-group input-group-sm"}, React.createElement("span", {className: "input-group-addon"}, "迄"), React.createElement(DatePicker, {selected: mnt_end_date, dateFormat: dt.dateFT, isClearable: true, required: true, locale: "zh-TW", showYearDropdown: true, onChange: this.setChangeDate.bind(this, this.props.fdName, 'end_date'), className: "form-control", minDate: mnt_start_date, disabled: end_date_disabled})))), React.createElement("div", {className: "form-group row"}, fldState.label, React.createElement("div", {className: "col-xs-4"}, React.createElement("select", {className: "form-control", required: true, value: field.state, onChange: this.changeFDValue.bind(this, 'state')}, React.createElement("option", {value: "A"}, "顯示"), React.createElement("option", {value: "C"}, "關閉"))), fldState.tip), React.createElement("div", {className: "form-group row"}, React.createElement("label", {className: "col-xs-1 form-control-label text-xs-right"}, "內容"), React.createElement("div", {className: "col-xs-8"}, React.createElement("textarea", {type: "date", className: "form-control", id: "news_content", name: "news_content", value: field.context, onChange: this.changeFDValue.bind(this, 'context')}))), React.createElement("div", {className: "form-action"}, React.createElement("div", {className: "col-xs-offset-1"}, React.createElement("button", {type: "submit", className: "btn btn-sm btn-primary"}, React.createElement("i", {className: "fa-check"}), " 儲存"), " ", React.createElement("button", {type: "button", className: "btn btn-sm btn-secondary", onClick: this.noneType}, React.createElement("i", {className: "fa-times"}), " 回前頁"))))));
             }
             return outHtml;
-        };
-        GirdForm.defaultProps = {
-            fdName: 'fieldData',
-            gdName: 'searchData',
-            apiPath: gb_approot + 'api/CommunityNews'
-        };
-        return GirdForm;
-    }(React.Component));
+        }
+    }
+    GirdForm.defaultProps = {
+        fdName: 'fieldData',
+        gdName: 'searchData',
+        apiPath: gb_approot + 'api/CommunityNews'
+    };
     News.GirdForm = GirdForm;
 })(News || (News = {}));
 var dom = document.getElementById('page_content');

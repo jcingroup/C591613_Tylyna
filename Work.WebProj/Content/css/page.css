@@ -260,7 +260,7 @@ a {
 img {
   vertical-align: middle; }
 
-.font-sp, .foot-contact span, .foot-contact dd, #banner h1, .sub-navImg span, .products-intro dt {
+.font-sp, .foot-contact span, .foot-contact dd, .sub-navImg span, .products-intro dt {
   font-family: "Fenix", serif; }
 
 h1, h2, h3, h4, h5, h6 {
@@ -804,24 +804,7 @@ th {
     font-size: 1.16667em; }
 
 #banner {
-  position: relative;
-  height: 350px;
-  overflow: hidden;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-image: url(../images/banner_Products.jpg); }
-  #banner h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background: url(../images/titleBg.png) center center no-repeat;
-    background-color: rgba(255, 255, 255, 0.35);
-    line-height: 102px;
-    width: 450px;
-    letter-spacing: 2px; }
+  position: relative; }
 
 button {
   border: none; }
@@ -950,7 +933,6 @@ em.label {
   padding-top: 100px;
   background-color: black;
   background-color: rgba(0, 0, 0, 0.45);
-  position: relative;
   position: fixed;
   top: 0;
   left: 0;
@@ -959,16 +941,14 @@ em.label {
 
 .btn-close {
   position: absolute;
-  top: 1%;
-  right: 1%;
-  font-size: 3.125em;
-  color: #fff;
+  color: #DDAB5A;
   background: none; }
   .btn-close:hover, .btn-close:focus {
     color: #EDE363;
     cursor: pointer; }
 
 .modal-content {
+  position: relative;
   margin: auto;
   background-color: #fff;
   width: 80%; }
@@ -1020,10 +1000,19 @@ em.label {
     transform: scale(1); } }
 #login header {
   letter-spacing: 2px; }
+#login .btn-close {
+  font-size: 2.5em;
+  right: 1%;
+  top: 1%; }
 #login .btn {
   border-radius: 2px; }
   #login .btn:hover, #login .btn:active {
     background: #d39e00; }
+
+#detail .btn-close {
+  font-size: 2em;
+  right: -3px;
+  top: -5px; }
 
 .collapse-title {
   cursor: pointer;
@@ -1722,10 +1711,8 @@ figure {
     border-color: #b98b00; }
 
 .kind-list {
-  margin: 0 0 0 25px;
+  margin: 30px 0 30px 25px;
   overflow: visible; }
-  .kind-list:not(:nth-of-type(-4n+1)) {
-    margin-top: 75px; }
   .kind-list img {
     border-radius: 6px;
     max-width: 278px;
@@ -1750,7 +1737,7 @@ figure {
 .products-intro .btn {
   cursor: pointer; }
 
-.products-pic {
+.products-pic img {
   max-width: 100%; }
 
 .shopping-list {

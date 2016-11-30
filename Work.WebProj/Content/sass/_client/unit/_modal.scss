@@ -11,7 +11,6 @@ $modal-min-width: 320px;
     padding-top: $modal-top;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, .45);
-    position: relative;
 
     @include fixed(left 0 top 0);
     @include size(100%);
@@ -23,9 +22,8 @@ $modal-min-width: 320px;
     }
 }
 .btn-close {
-    @include absolute(top 1% right 1%);
-    font-size: em(50);
-    color: $white;
+    position: absolute;
+    color: $brand-secondary;
     background: none;
 
     &:hover, &:focus {
@@ -34,6 +32,7 @@ $modal-min-width: 320px;
     }
 }
 .modal-content {
+    position: relative;
     margin: auto;
     background-color: #fff;
     width: 80%;
@@ -78,10 +77,20 @@ $modal-min-width: 320px;
         @extend .font-xxl, .m-b-24;
         letter-spacing: 2px;
     }
+    .btn-close {
+        font-size: em(40);
+        right: 1%; top: 1%;
+    }
     .btn {
         @extend .p-x-32, .p-y-12, .m-r-12;
         border-radius: 2px;
 
         &:hover, &:active { background: darken($amber,10); }
+    }
+}
+#detail {
+    .btn-close {
+        font-size: em(32);
+        right: -3px; top: -5px;
     }
 }

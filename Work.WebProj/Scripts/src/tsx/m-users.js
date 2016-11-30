@@ -1,43 +1,35 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var $ = require('jquery');
-var React = require('react');
-var ReactDOM = require('react-dom');
-var CommCmpt = require('comm-cmpt');
-var CommFunc = require('comm-func');
+const $ = require('jquery');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const CommCmpt = require('comm-cmpt');
+const CommFunc = require('comm-func');
 var Users;
 (function (Users) {
-    var GridRow = (function (_super) {
-        __extends(GridRow, _super);
-        function GridRow() {
-            _super.call(this);
+    class GridRow extends React.Component {
+        constructor() {
+            super();
             this.delCheck = this.delCheck.bind(this);
             this.modify = this.modify.bind(this);
         }
-        GridRow.prototype.delCheck = function (i, chd) {
+        delCheck(i, chd) {
             this.props.delCheck(i, chd);
-        };
-        GridRow.prototype.modify = function () {
+        }
+        modify() {
             this.props.updateType(this.props.primKey);
-        };
-        GridRow.prototype.render = function () {
+        }
+        render() {
             return React.createElement("tr", null, React.createElement("td", {className: "text-xs-center"}, React.createElement(CommCmpt.GridCheckDel, {iKey: this.props.ikey, chd: this.props.itemData.check_del, delCheck: this.delCheck})), React.createElement("td", {className: "text-xs-center"}, React.createElement(CommCmpt.GridButtonModify, {modify: this.modify})), React.createElement("td", null, this.props.itemData.UserName), React.createElement("td", null, this.props.itemData.user_name_c), React.createElement("td", null, this.props.itemData.Email));
-        };
-        GridRow.defaultProps = {
-            fdName: 'fieldData',
-            gdName: 'searchData',
-            apiPathName: gb_approot + 'api/Users'
-        };
-        return GridRow;
-    }(React.Component));
-    var GridForm = (function (_super) {
-        __extends(GridForm, _super);
-        function GridForm() {
-            _super.call(this);
+        }
+    }
+    GridRow.defaultProps = {
+        fdName: 'fieldData',
+        gdName: 'searchData',
+        apiPathName: gb_approot + 'api/Users'
+    };
+    class GridForm extends React.Component {
+        constructor() {
+            super();
             this.updateType = this.updateType.bind(this);
             this.noneType = this.noneType.bind(this);
             this.queryGridData = this.queryGridData.bind(this);
@@ -58,10 +50,10 @@ var Users;
                 edit_type: 0
             };
         }
-        GridForm.prototype.componentDidMount = function () {
+        componentDidMount() {
             this.queryGridData(1);
-        };
-        GridForm.prototype.gridData = function (page) {
+        }
+        gridData(page) {
             var parms = {
                 page: 0
             };
@@ -73,38 +65,36 @@ var Users;
             }
             $.extend(parms, this.state.searchData);
             return CommFunc.jqGet(this.props.apiPath, parms);
-        };
-        GridForm.prototype.queryGridData = function (page) {
-            var _this = this;
+        }
+        queryGridData(page) {
             this.gridData(page)
-                .done(function (data, textStatus, jqXHRdata) {
-                _this.setState({ gridData: data });
+                .done((data, textStatus, jqXHRdata) => {
+                this.setState({ gridData: data });
             })
-                .fail(function (jqXHR, textStatus, errorThrown) {
+                .fail((jqXHR, textStatus, errorThrown) => {
                 CommFunc.showAjaxError(errorThrown);
             });
-        };
-        GridForm.prototype.handleSubmit = function (e) {
-            var _this = this;
+        }
+        handleSubmit(e) {
             e.preventDefault();
             if (this.state.edit_type == 1) {
                 CommFunc.jqPost(this.props.apiPath, this.state.fieldData)
-                    .done(function (data, textStatus, jqXHRdata) {
+                    .done((data, textStatus, jqXHRdata) => {
                     if (data.result) {
                         CommFunc.tosMessage(null, '新增完成', 1);
-                        _this.updateType(data.ID);
+                        this.updateType(data.ID);
                     }
                     else {
                         alert(data.message);
                     }
                 })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
+                    .fail((jqXHR, textStatus, errorThrown) => {
                     CommFunc.showAjaxError(errorThrown);
                 });
             }
             else if (this.state.edit_type == 2) {
                 CommFunc.jqPut(this.props.apiPath, this.state.fieldData)
-                    .done(function (data, textStatus, jqXHRdata) {
+                    .done((data, textStatus, jqXHRdata) => {
                     if (data.result) {
                         CommFunc.tosMessage(null, '修改完成', 1);
                     }
@@ -112,16 +102,16 @@ var Users;
                         alert(data.message);
                     }
                 })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
+                    .fail((jqXHR, textStatus, errorThrown) => {
                     CommFunc.showAjaxError(errorThrown);
                 });
             }
             ;
             return;
-        };
-        GridForm.prototype.handleOnBlur = function (date) {
-        };
-        GridForm.prototype.deleteSubmit = function () {
+        }
+        handleOnBlur(date) {
+        }
+        deleteSubmit() {
             if (!confirm('確定是否刪除?')) {
                 return;
             }
@@ -148,39 +138,38 @@ var Users;
                 .fail(function (jqXHR, textStatus, errorThrown) {
                 CommFunc.showAjaxError(errorThrown);
             });
-        };
-        GridForm.prototype.handleSearch = function (e) {
+        }
+        handleSearch(e) {
             e.preventDefault();
             this.queryGridData(0);
             return;
-        };
-        GridForm.prototype.delCheck = function (i, chd) {
-            var newState = this.state;
+        }
+        delCheck(i, chd) {
+            let newState = this.state;
             this.state.gridData.rows[i].check_del = !chd;
             this.setState(newState);
-        };
-        GridForm.prototype.checkAll = function () {
-            var newState = this.state;
+        }
+        checkAll() {
+            let newState = this.state;
             newState.checkAll = !newState.checkAll;
             for (var prop in this.state.gridData.rows) {
                 this.state.gridData.rows[prop].check_del = newState.checkAll;
             }
             this.setState(newState);
-        };
-        GridForm.prototype.insertType = function () {
+        }
+        insertType() {
             this.setState({ edit_type: 1, fieldData: { role_array: [] } });
-        };
-        GridForm.prototype.updateType = function (id) {
-            var _this = this;
+        }
+        updateType(id) {
             CommFunc.jqGet(this.props.apiPath, { id: id })
-                .done(function (data, textStatus, jqXHRdata) {
-                _this.setState({ edit_type: 2, fieldData: data.data });
+                .done((data, textStatus, jqXHRdata) => {
+                this.setState({ edit_type: 2, fieldData: data.data });
             })
-                .fail(function (jqXHR, textStatus, errorThrown) {
+                .fail((jqXHR, textStatus, errorThrown) => {
                 CommFunc.showAjaxError(errorThrown);
             });
-        };
-        GridForm.prototype.noneType = function () {
+        }
+        noneType() {
             this.gridData(0)
                 .done(function (data, textStatus, jqXHRdata) {
                 this.setState({ edit_type: 0, gridData: data });
@@ -188,16 +177,16 @@ var Users;
                 .fail(function (jqXHR, textStatus, errorThrown) {
                 CommFunc.showAjaxError(errorThrown);
             });
-        };
-        GridForm.prototype.changeFDValue = function (name, e) {
+        }
+        changeFDValue(name, e) {
             this.setInputValue(this.props.fdName, name, e);
-        };
-        GridForm.prototype.changeGDValue = function (name, e) {
+        }
+        changeGDValue(name, e) {
             this.setInputValue(this.props.gdName, name, e);
-        };
-        GridForm.prototype.setInputValue = function (collentName, name, e) {
-            var input = e.target;
-            var obj = this.state[collentName];
+        }
+        setInputValue(collentName, name, e) {
+            let input = e.target;
+            let obj = this.state[collentName];
             console.log(name);
             if (input.value == 'true') {
                 obj[name] = true;
@@ -209,42 +198,38 @@ var Users;
                 obj[name] = input.value;
             }
             this.setState({ fieldData: obj });
-        };
-        GridForm.prototype.setRolesCheck = function (index, e) {
+        }
+        setRolesCheck(index, e) {
             var obj = this.state[this.props.fdName];
             var roleObj = obj['role_array'];
             var item = roleObj[index];
             item.role_use = !item.role_use;
             this.setState({ fieldData: obj });
-        };
-        GridForm.prototype.render = function () {
-            var _this = this;
+        }
+        render() {
             var outHtml = null;
             if (this.state.edit_type == 0) {
-                var searchData = this.state.searchData;
-                var GridNavPage = CommCmpt.GridNavPage;
+                let searchData = this.state.searchData;
+                let GridNavPage = CommCmpt.GridNavPage;
                 outHtml =
-                    (React.createElement("div", null, React.createElement("ul", {className: "breadcrumb"}, React.createElement("li", null, React.createElement("i", {className: "fa-caret-right"}), " ", this.props.menuName), React.createElement("li", null, React.createElement("i", {className: "fa-angle-right"}), " ", this.props.caption)), React.createElement("h3", {className: "h3"}, this.props.caption), React.createElement("form", {onSubmit: this.handleSearch}, React.createElement("div", {className: "table-responsive"}, React.createElement("div", {className: "table-header"}, React.createElement("div", {className: "table-filter"}, React.createElement("div", {className: "form-inline"}, React.createElement("div", {className: "form-group"}, React.createElement("label", {className: "sr-only"}, "使用者名稱"), " ", React.createElement("input", {type: "text", className: "form-control form-control-sm", onChange: this.changeGDValue.bind(this, 'UserName'), placeholder: "使用者名稱"}), " ", React.createElement("button", {className: "btn btn-sm btn-primary", type: "submit"}, React.createElement("i", {className: "fa-search"}), " 搜尋"))))), React.createElement("table", {className: "table table-sm table-bordered table-striped"}, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", {style: { "width": "7%" }, className: "text-xs-center"}, React.createElement("label", {className: "c-input c-checkbox"}, React.createElement("input", {type: "checkbox", checked: this.state.checkAll, onChange: this.checkAll}), React.createElement("span", {className: "c-indicator"}), "全選")), React.createElement("th", {style: { "width": "7%" }, className: "text-xs-center"}, "修改"), React.createElement("th", {style: { "width": "15%" }}, "UserName"), React.createElement("th", {style: { "width": "15%" }}, "簡稱"), React.createElement("th", {style: { "width": "56%" }}, "Email"))), React.createElement("tbody", null, this.state.gridData.rows.map(function (itemData, i) {
-                        return React.createElement(GridRow, {key: i, ikey: i, primKey: itemData.Id, itemData: itemData, delCheck: _this.delCheck, updateType: _this.updateType});
-                    })))), React.createElement(GridNavPage, {startCount: this.state.gridData.startcount, endCount: this.state.gridData.endcount, recordCount: this.state.gridData.records, totalPage: this.state.gridData.total, nowPage: this.state.gridData.page, queryGridData: this.queryGridData, insertType: this.insertType, deleteSubmit: this.deleteSubmit}))));
+                    (React.createElement("div", null, React.createElement("ul", {className: "breadcrumb"}, React.createElement("li", null, React.createElement("i", {className: "fa-caret-right"}), " ", this.props.menuName), React.createElement("li", null, React.createElement("i", {className: "fa-angle-right"}), " ", this.props.caption)), React.createElement("h3", {className: "h3"}, this.props.caption), React.createElement("form", {onSubmit: this.handleSearch}, React.createElement("div", {className: "table-responsive"}, React.createElement("div", {className: "table-header"}, React.createElement("div", {className: "table-filter"}, React.createElement("div", {className: "form-inline"}, React.createElement("div", {className: "form-group"}, React.createElement("label", {className: "sr-only"}, "使用者名稱"), " ", React.createElement("input", {type: "text", className: "form-control form-control-sm", onChange: this.changeGDValue.bind(this, 'UserName'), placeholder: "使用者名稱"}), " ", React.createElement("button", {className: "btn btn-sm btn-primary", type: "submit"}, React.createElement("i", {className: "fa-search"}), " 搜尋"))))), React.createElement("table", {className: "table table-sm table-bordered table-striped"}, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", {style: { "width": "7%" }, className: "text-xs-center"}, React.createElement("label", {className: "c-input c-checkbox"}, React.createElement("input", {type: "checkbox", checked: this.state.checkAll, onChange: this.checkAll}), React.createElement("span", {className: "c-indicator"}), "全選")), React.createElement("th", {style: { "width": "7%" }, className: "text-xs-center"}, "修改"), React.createElement("th", {style: { "width": "15%" }}, "UserName"), React.createElement("th", {style: { "width": "15%" }}, "簡稱"), React.createElement("th", {style: { "width": "56%" }}, "Email"))), React.createElement("tbody", null, this.state.gridData.rows.map((itemData, i) => React.createElement(GridRow, {key: i, ikey: i, primKey: itemData.Id, itemData: itemData, delCheck: this.delCheck, updateType: this.updateType}))))), React.createElement(GridNavPage, {startCount: this.state.gridData.startcount, endCount: this.state.gridData.endcount, recordCount: this.state.gridData.records, totalPage: this.state.gridData.total, nowPage: this.state.gridData.page, queryGridData: this.queryGridData, insertType: this.insertType, deleteSubmit: this.deleteSubmit}))));
             }
             else if (this.state.edit_type == 1 || this.state.edit_type == 2) {
-                var fieldData = this.state.fieldData;
+                let fieldData = this.state.fieldData;
                 console.log('role_array', fieldData.role_array);
-                outHtml = (React.createElement("div", null, React.createElement("ul", {className: "breadcrumb"}, React.createElement("li", null, React.createElement("i", {className: "fa-caret-right"}), " ", this.props.menuName), React.createElement("li", null, React.createElement("i", {className: "fa-angle-right"}), " ", this.props.caption), React.createElement("li", null, React.createElement("i", {className: "fa-angle-right"}), " ", "資料維護")), React.createElement("h3", {className: "h3"}, " ", this.props.caption, " ", React.createElement("small", {className: "sub"}, React.createElement("i", {className: "fa-angle-double-right"}), " 資料維護")), React.createElement("form", {className: "form form-sm", onSubmit: this.handleSubmit}, React.createElement("div", {className: "form-group row"}, React.createElement("label", {className: "col-xs-1 form-control-label text-xs-right"}, React.createElement("small", {className: "text-danger"}, "*"), " 登錄帳號"), React.createElement("div", {className: "col-xs-7"}, React.createElement("input", {type: "text", className: "form-control", onChange: this.changeFDValue.bind(this, 'UserName'), value: fieldData.UserName, maxLength: 16, disabled: this.state.edit_type == 2, required: true}))), React.createElement("div", {className: "form-group row"}, React.createElement("label", {className: "col-xs-1 form-control-label text-xs-right"}, React.createElement("small", {className: "text-danger"}, "*"), " 中文名稱"), React.createElement("div", {className: "col-xs-7"}, React.createElement("input", {type: "text", className: "form-control", onChange: this.changeFDValue.bind(this, 'user_name_c'), value: fieldData.user_name_c, maxLength: 32, required: true}))), React.createElement("div", {className: "form-group row"}, React.createElement("label", {className: "col-xs-1 form-control-label text-xs-right"}, "角色"), React.createElement("div", {className: "col-xs-7"}, fieldData.role_array.map(function (item, i) {
-                    var out_check = React.createElement("div", {className: "checkbox", key: item.role_id}, React.createElement("label", null, React.createElement("input", {type: "checkbox", checked: item.role_use, onChange: _this.setRolesCheck.bind(_this, i)}), item.role_name));
+                outHtml = (React.createElement("div", null, React.createElement("ul", {className: "breadcrumb"}, React.createElement("li", null, React.createElement("i", {className: "fa-caret-right"}), " ", this.props.menuName), React.createElement("li", null, React.createElement("i", {className: "fa-angle-right"}), " ", this.props.caption), React.createElement("li", null, React.createElement("i", {className: "fa-angle-right"}), " ", "資料維護")), React.createElement("h3", {className: "h3"}, " ", this.props.caption, " ", React.createElement("small", {className: "sub"}, React.createElement("i", {className: "fa-angle-double-right"}), " 資料維護")), React.createElement("form", {className: "form form-sm", onSubmit: this.handleSubmit}, React.createElement("div", {className: "form-group row"}, React.createElement("label", {className: "col-xs-1 form-control-label text-xs-right"}, React.createElement("small", {className: "text-danger"}, "*"), " 登錄帳號"), React.createElement("div", {className: "col-xs-7"}, React.createElement("input", {type: "text", className: "form-control", onChange: this.changeFDValue.bind(this, 'UserName'), value: fieldData.UserName, maxLength: 16, disabled: this.state.edit_type == 2, required: true}))), React.createElement("div", {className: "form-group row"}, React.createElement("label", {className: "col-xs-1 form-control-label text-xs-right"}, React.createElement("small", {className: "text-danger"}, "*"), " 中文名稱"), React.createElement("div", {className: "col-xs-7"}, React.createElement("input", {type: "text", className: "form-control", onChange: this.changeFDValue.bind(this, 'user_name_c'), value: fieldData.user_name_c, maxLength: 32, required: true}))), React.createElement("div", {className: "form-group row"}, React.createElement("label", {className: "col-xs-1 form-control-label text-xs-right"}, "角色"), React.createElement("div", {className: "col-xs-7"}, fieldData.role_array.map((item, i) => {
+                    var out_check = React.createElement("div", {className: "checkbox", key: item.role_id}, React.createElement("label", null, React.createElement("input", {type: "checkbox", checked: item.role_use, onChange: this.setRolesCheck.bind(this, i)}), item.role_name));
                     return out_check;
                 }))), React.createElement("div", {className: "form-action"}, React.createElement("div", {className: "col-xs-offset-1"}, React.createElement("button", {type: "submit", className: "btn btn-sm btn-primary"}, React.createElement("i", {className: "fa-check"}), " 儲存"), " ", React.createElement("button", {type: "button", onClick: this.noneType, className: "btn btn-sm btn-secondary"}, React.createElement("i", {className: "fa-times"}), " 回前頁"))))));
             }
             return outHtml;
-        };
-        GridForm.defaultProps = {
-            fdName: 'fieldData',
-            gdName: 'searchData',
-            apiPath: gb_approot + 'api/Users'
-        };
-        return GridForm;
-    }(React.Component));
+        }
+    }
+    GridForm.defaultProps = {
+        fdName: 'fieldData',
+        gdName: 'searchData',
+        apiPath: gb_approot + 'api/Users'
+    };
     Users.GridForm = GridForm;
 })(Users || (Users = {}));
 var dom = document.getElementById('page_content');

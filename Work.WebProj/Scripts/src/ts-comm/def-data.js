@@ -509,6 +509,14 @@ exports.UIText = {
     option_blank: '請選擇',
     delete_sure: '確定是否刪除?',
 };
+exports.IMenuParentsData = [
+    { val: true, Lname: '父選單', className: 'w3-tag label-success w3-round' },
+    { val: false, Lname: '子選單', className: 'w3-tag label-default w3-round' }
+];
+exports.IUsedData = [
+    { val: true, Lname: '使用中', className: 'w3-tag label-success w3-round' },
+    { val: false, Lname: '未使用', className: 'w3-tag label-default w3-round' }
+];
 exports.IHideTypeData = [
     { val: false, Lname: '顯示', className: 'w3-tag label-success w3-round' },
     { val: true, Lname: '隱藏', className: 'w3-tag label-default w3-round' }

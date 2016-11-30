@@ -1,7 +1,7 @@
 "use strict";
-var $ = require('jquery');
-var toastr = require('toastr');
-var Moment = require('moment');
+const $ = require('jquery');
+const toastr = require('toastr');
+const Moment = require('moment');
 function uniqid() {
     var newDate = new Date();
     return newDate.getTime();
@@ -39,13 +39,19 @@ function isValidJSONDate(value, userFormat) {
     };
     return isDate(theDate, theFormat);
 }
-function moneyFormat(n) {
-    var s = n.toString();
-    return s.replace(/./g, function (c, i, a) {
-        return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
-    });
+exports.isValidJSONDate = isValidJSONDate;
+function fmt_money(n, g) {
+    if (n == undefined || n == null)
+        return '';
+    let glue = (typeof g == 'string' && g != null && g != undefined) ? g : ',';
+    let digits = n.toString().split('.');
+    let pattern = /(-?\d+)(\d{3})/;
+    while (pattern.test(digits[0])) {
+        digits[0] = digits[0].replace(pattern, "$1" + glue + "$2");
+    }
+    return digits.join(".");
 }
-exports.moneyFormat = moneyFormat;
+exports.fmt_money = fmt_money;
 function obj_prop_date(obj) {
     for (var prop in obj) {
         if (obj.hasOwnProperty(prop)) {
@@ -119,46 +125,6 @@ function showAjaxError(data) {
     console.log(data);
 }
 exports.showAjaxError = showAjaxError;
-exports.jqGet = function jqGet(url, data) {
-    return $.ajax({
-        type: "GET",
-        url: url,
-        data: data,
-        dataType: 'json',
-        cache: false
-    });
-};
-function jqPost(url, data) {
-    return $.ajax({
-        type: "POST",
-        url: url,
-        data: data,
-        dataType: 'json',
-        cache: false
-    });
-}
-exports.jqPost = jqPost;
-function jqPut(url, data) {
-    return $.ajax({
-        type: "PUT",
-        url: url,
-        data: data,
-        dataType: 'json',
-        cache: false
-    });
-}
-exports.jqPut = jqPut;
-;
-function jqDelete(url, data) {
-    return $.ajax({
-        type: "DELETE",
-        url: url,
-        data: data,
-        dataType: 'json',
-        cache: false
-    });
-}
-exports.jqDelete = jqDelete;
 function tosMessage(title, message, type) {
     if (type == 0)
         toastr.info(message, title);
@@ -283,7 +249,7 @@ exports.Ajax = {
         if (!this.xhr) {
             this.xhr = new XMLHttpRequest();
         }
-        var self = this.xhr;
+        let self = this.xhr;
         self.onreadystatechange = function () {
             if (self.readyState === 4 && self.status === 200) {
                 var response = JSON.parse(self.responseText);
@@ -303,3 +269,40 @@ exports.Ajax = {
         self.send();
     },
 };
+function makeInputValue(e) {
+    let input = e.target;
+    let value;
+    if (input.value == 'true') {
+        value = true;
+    }
+    else if (input.value == 'false') {
+        value = false;
+    }
+    else {
+        value = input.value;
+    }
+    return value;
+}
+exports.makeInputValue = makeInputValue;
+function ifrmDown(download_src) {
+    $('#file_down').remove();
+    var item = $(this).attr('item');
+    var src = src;
+    var encSrc = download_src;
+    var ifram = $('<iframe id="file_down" style="display:none">');
+    ifram.attr('src', encSrc);
+    $(document.body).append(ifram);
+}
+exports.ifrmDown = ifrmDown;
+function isNumeric(n) {
+    let m = parseFloat(n);
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+exports.isNumeric = isNumeric;
+function htmlbr(val, g) {
+    if (val == undefined || val == null)
+        return '';
+    let glue = (typeof g == 'string' && g != null && g != undefined) ? g : '<br />';
+    return val.replace(/(?:\r\n|\r|\n)/g, glue);
+}
+exports.htmlbr = htmlbr;

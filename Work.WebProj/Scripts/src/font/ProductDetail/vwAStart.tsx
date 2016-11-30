@@ -54,8 +54,8 @@ export class AStart extends React.Component<any, any>{
         out_html =
             (<div>
                 <div id="detail" className="modal">
-                    <button className="btn-close icon-cross" onClick={this.closeDetailModal}></button>
                     <form className="modal-content animate-zoom">
+                        <button className="btn-close icon-cross" onClick={this.closeDetailModal}></button>
                         <table className="shopping-list">
                             <tbody>
                                 {
@@ -90,6 +90,9 @@ export class AStart extends React.Component<any, any>{
                                 }
                             </tbody>
                         </table>
+                        <footer className="submit text-left">
+                            <a href="/Order/Cart" className="btn font-lg bg-success">我要結帳 <i className="icon-navigate_next"></i></a>
+                        </footer>
                     </form>
                 </div>
 
