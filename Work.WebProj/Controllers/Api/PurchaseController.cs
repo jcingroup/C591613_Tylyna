@@ -137,7 +137,7 @@ namespace DotWeb.Api
 
                 #region 更新狀態
                 //出貨狀態
-                if (md.ship_state == (int)IShipState.shipped)
+                if (md.ship_state == (int)IShipState.shipped & item.ship_state != (int)IShipState.shipped)
                 {
                     item.ship_state = (int)IShipState.shipped;
                     item.ship_date = DateTime.Now;
