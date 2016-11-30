@@ -414,7 +414,7 @@ namespace DotWeb.Areas.Base.Controllers
 
                         string userData = get_user_roles_name.FirstOrDefault();
                         string encode_userid = Server.UrlEncode(EncryptString.desEncryptBase64(get_user.Id));//userid 加密
-                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, encode_userid, DateTime.Now, DateTime.Now.AddMinutes(180), false, userData, FormsAuthentication.FormsCookiePath);
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, encode_userid, DateTime.Now, DateTime.Now.AddMinutes(300), false, userData, FormsAuthentication.FormsCookiePath);
 
                         string encTicket = FormsAuthentication.Encrypt(ticket);
                         Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
@@ -507,7 +507,7 @@ namespace DotWeb.Areas.Base.Controllers
 
                         string userData = "Customers";
                         string encode_userid = Server.UrlEncode(EncryptString.desEncryptBase64(get_user.customer_id.ToString()));//userid 加密
-                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, encode_userid, DateTime.Now, DateTime.Now.AddMinutes(180), false, userData, FormsAuthentication.FormsCookiePath);
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, encode_userid, DateTime.Now, DateTime.Now.AddMinutes(300), false, userData, FormsAuthentication.FormsCookiePath);
 
                         string encTicket = FormsAuthentication.Encrypt(ticket);
                         Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));

@@ -1,10 +1,11 @@
-﻿import React = require('react');
+﻿import $ = require('jquery');
+import React = require('react');
 import Moment = require('moment');
 import {config, UIText} from '../ts-comm/def-data';
 import {InputText, PWButton} from '../components';
 import {Search_Data} from './pub';
 import {ac_type_comm} from '../action_type';
-import {MntV} from '../ts-comm/comm-func';
+import {MntV, uniqid, ifrmDown} from '../ts-comm/comm-func';
 
 import DatePicker = require('react-datepicker');
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,16 +15,13 @@ interface GridSearchProps {
     setInputValue: Function,
     callGridLoad: Function
 }
-interface GridSearchState {
-    icon?: Array<{ class: string, icon: string }>
-}
-export class GridSearch extends React.Component<GridSearchProps, GridSearchState>{
+
+export class GridSearch extends React.Component<GridSearchProps, any>{
 
     constructor() {
         super();
+        this.dwExcel = this.dwExcel.bind(this);
         this.state = {
-            icon: [{ class: "btn btn-sm btn-warning", icon: "fa-exclamation-circle" },
-                { class: "btn btn-sm btn-success", icon: "fa-check" }]
         };
     }
     chgShVal(name: string, value: any, e: React.SyntheticEvent) {
@@ -42,6 +40,18 @@ export class GridSearch extends React.Component<GridSearchProps, GridSearchState
         params[name] = value;
 
         this.props.callGridLoad(params);
+    }
+    dwExcel(e: React.SyntheticEvent) {
+        e.preventDefault();
+        let url_pm = '';
+        let pm = {
+            tid: uniqid()
+        };
+        $.extend(pm, this.props.search);
+        url_pm = $.param(pm);
+
+        let src = gb_approot + "Base/ExcelReport/Excel_Ship?" + url_pm;
+        ifrmDown(src);
     }
     render() {
         let out_html: JSX.Element = null;
@@ -88,7 +98,7 @@ export class GridSearch extends React.Component<GridSearchProps, GridSearchState
                                         className="form-control form-control-sm" /> { }
                                 </div>
                                 <PWButton className="btn btn-success btn-sm pull-xs-right"
-                                    iconClassName="fa-print"> {UIText.print}</PWButton>
+                                iconClassName="fa-print" enable={true} onClick={this.dwExcel}> {UIText.print}</PWButton>
                             </div>
                         </div>
                     </div>

@@ -200,6 +200,150 @@ namespace DotWeb.Areas.Base.Controllers
             sheet.ColumnsUsed().AdjustToContents();//自動調整寬度
         }
         #endregion
+        #region 訂單未出貨統計
+        [HttpGet]
+        public FileResult Excel_Ship(Api.PurchaseController.ShipParam q)
+        {
+            var outputStream = stmShip(q);
+            string setFileName = "訂單未出貨統計-" + Guid.NewGuid().ToString() + ".xlsx";
+
+            return File(outputStream, "application/vnd.ms-excel", setFileName);
+        }
+        private MemoryStream stmShip(Api.PurchaseController.ShipParam q)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            try
+            {
+                db0 = getDB0();
+
+                XLWorkbook excel = new XLWorkbook();
+                IXLWorksheet getSheet = excel.Worksheets.Add("訂單未出貨統計");
+
+                #region 取得資料
+                var items = getShipData(q);
+                #endregion
+
+
+                #region Excel Handle
+                makeShip(items, getSheet);
+                #endregion
+
+                excel.SaveAs(outputStream);
+                outputStream.Position = 0;
+                excel.Dispose();
+                return outputStream;
+            }
+            catch (Exception ex)
+            {
+                //logger.Error(ex);
+                return null;
+            }
+        }
+        private List<Api.PurchaseController.ShipData> getShipData(Api.PurchaseController.ShipParam q)
+        {
+            List<Api.PurchaseController.ShipData> res = new List<Api.PurchaseController.ShipData>();
+            using (var db0 = getDB0())
+            {
+                #region getdata
+                var predicate = PredicateBuilder.True<PurchaseDetail>();
+
+                predicate = predicate.And(x => x.Purchase.ship_state == (int)IShipState.unshipped &
+                ((x.Purchase.pay_type == (int)IPayType.Remit & x.Purchase.pay_state == (int)IPayState.paid) || (x.Purchase.pay_type == (int)IPayType.CashOnDelivery)));
+
+                if (q.keyword != null)
+                    predicate = predicate.And(x => x.purchase_no.Contains(q.keyword) ||
+                                                   x.Purchase.receive_name.Contains(q.keyword) ||
+                                                   x.p_name.Contains(q.keyword));
+
+
+                if (q.order_start != null & q.order_end != null)
+                {
+                    DateTime start = (DateTime)q.order_start;
+                    DateTime end = ((DateTime)q.order_end).AddDays(1);
+
+                    predicate = predicate.And(x => x.Purchase.order_date >= start & x.Purchase.order_date <= end);
+                }
+                res = db0.PurchaseDetail.AsExpandable().Where(predicate)
+                    .GroupBy(x => x.p_name)
+                    .Select(x => new Api.PurchaseController.ShipData()
+                    {
+                        p_name = x.Key,
+                        Detail = x.Select(y => new Api.PurchaseController.ShipPD()
+                        {
+                            purchase_no = y.purchase_no,
+                            purchase_detail_id = y.purchase_detail_id,//訂單明細-編號
+                            product_detail_id = y.product_detail_id,//產品明細-編號
+                            p_d_pack_type = y.p_d_pack_type,//產品包裝
+                            order_date = y.Purchase.order_date,//下單日期
+                            receive_name = y.Purchase.receive_name,//收件人
+                            customer_name = y.Purchase.Customer.c_name,//購買人
+                            weight = y.ProductDetail.weight,//重量
+                            qty = y.qty//數量
+                        }).ToList()
+                    })
+                    .ToList();
+                #endregion
+            }
+            return res;
+        }
+        private void makeShip(List<Api.PurchaseController.ShipData> data, IXLWorksheet sheet)
+        {
+
+
+            int row_index = 2;
+            #region 產品名稱
+            sheet.Cell(row_index, 3).Value = "咖啡豆重量";
+            List<string> p_name = data.Select(x => x.p_name).ToList();
+            int col_index = 4;
+            foreach (var i in p_name)
+            {
+                sheet.Cell(row_index, col_index).Value = i;
+                sheet.Cell(row_index, col_index).Style.Font.Bold = true;
+                sheet.Cell(row_index, col_index).Style.Font.FontColor = XLColor.FromArgb(153, 51, 0);
+                col_index++;
+            }
+            sheet.Cell(1, 2).Value = "訂單未出貨統計";
+            sheet.Range(1, 2, 1, col_index).Merge();
+            setFontColorAndBg(sheet, 1, 2, XLColor.White, XLColor.FromArgb(156, 101, 0));
+            int col_end = col_index;
+            row_index++;
+            #endregion
+            col_index = 4;
+            foreach (var i in data)
+            {
+                string name = sheet.Cell(2, col_index).GetValue<string>();
+                if (i.p_name == name)
+                {
+                    foreach (var j in i.Detail)
+                    {
+                        sheet.Cell(row_index, 1).Value = j.purchase_no;//訂單編號
+                        sheet.Cell(row_index, 2).Value = CodeSheet.GetStateVal((int)j.p_d_pack_type, i_CodeName.Value, CodeSheet.pack_type);//訂單編號
+                        sheet.Cell(row_index, 3).Value = j.weight;//咖啡豆重量
+                        sheet.Cell(row_index, col_index).Value = j.qty;//數量
+                        row_index++;
+                    }
+                    col_index++;
+                }
+            }
+            #region 下方加總
+            sheet.Cell(row_index, 2).Value = "未出貨統計(g)";
+            sheet.Range(row_index, 2, row_index, 3).Merge();
+            setFontColorAndBg(sheet, row_index, 2, XLColor.FromArgb(153, 51, 0), XLColor.FromArgb(255, 235, 156));
+            for (var i = 4; i < col_end; i++)
+            {
+                sheet.Cell(row_index, i).FormulaA1 = string.Format("SUMPRODUCT(C{0}:C{1},{2}{0}:{2}{1})", 3, row_index - 1, Convert.ToChar(64 + i));
+                sheet.Cell(row_index, i).Style.Font.FontColor = XLColor.FromArgb(156, 101, 0);
+                sheet.Cell(row_index, i).Style.Fill.BackgroundColor = XLColor.FromArgb(255, 235, 156);
+            }
+            sheet.Cell(row_index, col_end).FormulaA1 = string.Format("SUM({0}{1}:{2}{1})", Convert.ToChar(64 + 4), row_index, Convert.ToChar(63 + col_end));
+            sheet.Cell(row_index, col_end).Style.Font.FontColor = XLColor.FromArgb(156, 101, 0);
+            sheet.Cell(row_index, col_end).Style.Fill.BackgroundColor = XLColor.FromArgb(255, 235, 156);
+            #endregion
+            sheet.Range(1,2, row_index, col_end).Style.Border.OutsideBorder= XLBorderStyleValues.Thick;
+            sheet.Range(1,2, row_index, col_end).Style.Border.InsideBorder= XLBorderStyleValues.Thin;
+            sheet.ColumnsUsed().AdjustToContents();//自動調整寬度
+        }
+        #endregion
 
         #region style
         public void setFontColorAndBg(IXLWorksheet sheet, int row, int column, XLColor font, XLColor bg)
