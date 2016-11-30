@@ -13,11 +13,15 @@ export class Edit extends React.Component<any, any>{
     constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.componentWillMount = this.componentWillMount.bind(this);
         this.state = {
             Reply: gb_approot + 'Active/OrderData/Remit'
         };
     }
     keep_field: server.Purchase = {};
+    componentWillMount() {
+        this.keep_field = clone(this.props.field);//載入時前先clone
+    }
     chgVal(name: string, value: any, e: React.SyntheticEvent) {
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);
     }
@@ -31,13 +35,8 @@ export class Edit extends React.Component<any, any>{
         this.props.setInputValue(ac_type_comm.chg_fld_val, "ship_state", val);
     }
     chgCancel(name: string, value: any, e: React.SyntheticEvent) {
-        if (!confirm("確定變更「取消訂單」?\n變更後狀態無法復原")) {
-            return;
-        }
-
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);
         if (value == 1) {
-            this.keep_field = clone(this.props.field);//變更前先clone
             this.props.setInputValue(ac_type_comm.chg_fld_val, "pay_state", IPayState.cancel_order);
             this.props.setInputValue(ac_type_comm.chg_fld_val, "ship_state", IPayState.cancel_order);
         } else if (value == 0) {
@@ -47,10 +46,16 @@ export class Edit extends React.Component<any, any>{
     }
     handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        let field: server.Product = this.props.field;
+        let field: server.Purchase = this.props.field;
         let pp = this.props;
         let $btn = $(document.activeElement);
         let btn_name = $btn.attr("name");
+
+        if (field.cancel_order && this.keep_field.cancel_order != field.cancel_order) {
+            if (!confirm("確定變更「取消訂單」?\n變更後狀態無法復原")) {
+                return;
+            }
+        }
 
         if (btn_name == "btn-2") {
             if (!confirm("確定寄送出貨通知信?")) {
@@ -169,7 +174,7 @@ export class Edit extends React.Component<any, any>{
                             </label>
                             <div className="col-xs-4 form-inline">
                                 <RadioBox
-                                    inputViewMode={field.cancel_order == true ? InputViewMode.view : InputViewMode.edit}
+                                    inputViewMode={this.keep_field.cancel_order == true ? InputViewMode.view : InputViewMode.edit}
                                     name={"cancel_order"}
                                     id={"cancel_order"}
                                     value={field.cancel_order}

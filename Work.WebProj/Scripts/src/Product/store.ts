@@ -138,6 +138,8 @@ const edit_type = (state = IEditType.none, action: Redux.Action): IEditType => {
 // 判斷是否有欄位在編輯中...
 export const is_edit = (state = false, action): boolean => {
     switch (action.type) {
+        case ac_type_comm.load:
+            return false;
         case ac_type_comm.get_dil_data:
             return false;
         case ac_type_comm.add_dil:

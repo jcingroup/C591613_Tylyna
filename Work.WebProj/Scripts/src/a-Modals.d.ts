@@ -143,7 +143,6 @@
         Deatil?: Array<server.ProductDetail>;
         Pack?: Array<number>;
         img_src?: string;
-        is_mail?: boolean;
     }
     interface ProductDetail extends BaseEntityTable {
         product_detail_id?: number;
@@ -186,6 +185,7 @@
         Deatil?: Array<server.PurchaseDetail>;
         customer_name?: string;
         cancel_order?: boolean;
+        is_mail?: boolean;
     }
 
     interface PurchaseDetail {
