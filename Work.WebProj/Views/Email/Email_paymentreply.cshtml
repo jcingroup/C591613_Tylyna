@@ -101,11 +101,11 @@
 
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                     <td>
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <td style="color:#000001;font-size:28px;font-weight:bold;line-height:34px">客戶已付款通知－@Resources.Res.System_FrontName</td>
+                                                <td style="color:#000001;font-size:28px;font-weight:bold;line-height:34px"><small>@Resources.Res.System_FrontName</small> 客戶已付款通知</td>
                                             </tr>
                                             @* <tr>
                                                     <td style="color:#000001;font-size:18px;line-height:22px">小標題</td>
@@ -114,15 +114,15 @@
                                                 <td height="25">&nbsp;</td>
                                             </tr>
                                             <td style="color:#6c6457;font-weight:bold;font-size:16px;line-height:22px">
-                                                訂單 <span style="color:#000001; font-weight:bold">@Model.no</span> 已於 <span style="color:#000001; font-weight:bold">@(((DateTime)Model.day).ToString("yyyy/MM/dd"))</span>約<span style="color:#000001; font-weight:bold">@(((DateTime)Model.day).ToString("HH:mm"))</span> 付款！<br>
-                                                請盡速核對帳款後，至<a href=@(CommWebSetup.DEV_WebUrl + "/_sysadm") style="color:#F15A24; text-decoration:none">系統後台</a>更新訂單狀態，謝謝！
+                                                <p>訂單 <span style="color:#000001; font-weight:bold">@Model.no</span> 已於 <span style="color:#000001; font-weight:bold">@(((DateTime)Model.day).ToString("yyyy/MM/dd"))</span>約<span style="color:#000001; font-weight:bold">@(((DateTime)Model.day).ToString("HH:mm"))</span> 付款！</p>
+                                                <p>請盡速核對帳款後，至<a href=@(CommWebSetup.DEV_WebUrl + "/_sysadm") style="color:#F15A24; text-decoration:none">系統後台</a>更新訂單狀態，謝謝！</p>
                                             </td>
                                             <tr>
                                                 <td height="50">&nbsp;</td>
                                             </tr>
                                         </table>
                                     </td>
-                                    <td width="14%">&nbsp;</td>
+                                    <td width="10%">&nbsp;</td>
                                 </tr>
                             </table>
 
