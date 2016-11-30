@@ -18,10 +18,10 @@ module.exports = {
         m_purchaseremit: path.resolve(__dirname, 'Scripts/src/PurchaseRemit/app.js'),
         m_purchaseship: path.resolve(__dirname, 'Scripts/src/PurchaseShip/app.js'),
         //前台 頁面
-        "../front/productdetail": path.resolve(__dirname, 'Scripts/src/font/ProductDetail/app.js'),
-        "../front/shoppingcart": path.resolve(__dirname, 'Scripts/src/font/ShoppingCart/app.js'),
-        "../front/order": path.resolve(__dirname, 'Scripts/src/font/Order/app.js'),
-        "../front/remitcheck": path.resolve(__dirname, 'Scripts/src/font/RemitCheck/app.js'),
+        "../front/productdetail": path.resolve(__dirname, 'Scripts/src/front/ProductDetail/app.js'),
+        "../front/shoppingcart": path.resolve(__dirname, 'Scripts/src/front/ShoppingCart/app.js'),
+        "../front/order": path.resolve(__dirname, 'Scripts/src/front/Order/app.js'),
+        "../front/remitcheck": path.resolve(__dirname, 'Scripts/src/front/RemitCheck/app.js'),
         "w-comm": path.resolve(__dirname, 'Scripts/src/tsx/w-comm.js'),
 
         vendors: ['jquery', 'react', 'react-dom', 'redux', 'react-redux', 'redux-thunk', 'react-addons-update', 'moment',
