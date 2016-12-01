@@ -366,7 +366,6 @@
       <DependentUpon>ValidateCode.ashx</DependentUpon>
     </Compile>
     <Content Include="Areas\Base\Views\Menu\Main.cshtml" />
-    <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\editor.css" />
     <Content Include="Content\css\grid.css" />
     <Content Include="Content\css\index.css" />
@@ -450,7 +449,6 @@
     <Content Include="Content\font\themify-icons\themify.eot" />
     <Content Include="Content\font\themify-icons\themify.ttf" />
     <Content Include="Content\font\themify-icons\themify.woff" />
-    <Content Include="Content\sass\admin.scss" />
     <Content Include="Content\sass\base\_basic.scss" />
     <Content Include="Content\sass\base\_form.scss" />
     <Content Include="Content\sass\base\_grid.scss" />
@@ -486,34 +484,6 @@
     <Content Include="Content\sass\vendor\_magnific.scss" />
     <Content Include="Content\sass\vendor\_normalize.scss" />
     <Content Include="Content\sass\vendor\_print.scss" />
-    <Content Include="Content\sass\_admin\module\_alerts.scss" />
-    <Content Include="Content\sass\_admin\module\_animate.scss" />
-    <Content Include="Content\sass\_admin\module\_breadcrumb.scss" />
-    <Content Include="Content\sass\_admin\module\_btn-group.scss" />
-    <Content Include="Content\sass\_admin\module\_btn.scss" />
-    <Content Include="Content\sass\_admin\module\_classes.scss" />
-    <Content Include="Content\sass\_admin\module\_collapse.scss" />
-    <Content Include="Content\sass\_admin\module\_dropdown.scss" />
-    <Content Include="Content\sass\_admin\module\_figure.scss" />
-    <Content Include="Content\sass\_admin\module\_goTop.scss" />
-    <Content Include="Content\sass\_admin\module\_hover.scss" />
-    <Content Include="Content\sass\_admin\module\_input-expand.scss" />
-    <Content Include="Content\sass\_admin\module\_input-file.scss" />
-    <Content Include="Content\sass\_admin\module\_input-group.scss" />
-    <Content Include="Content\sass\_admin\module\_label.scss" />
-    <Content Include="Content\sass\_admin\module\_list-group.scss" />
-    <Content Include="Content\sass\_admin\module\_list.scss" />
-    <Content Include="Content\sass\_admin\module\_loader.scss" />
-    <Content Include="Content\sass\_admin\module\_mobile-trigger.scss" />
-    <Content Include="Content\sass\_admin\module\_modal.scss" />
-    <Content Include="Content\sass\_admin\module\_nav.scss" />
-    <Content Include="Content\sass\_admin\module\_search.scss" />
-    <Content Include="Content\sass\_admin\module\_slider.scss" />
-    <Content Include="Content\sass\_admin\module\_tab.scss" />
-    <Content Include="Content\sass\_admin\module\_tooltip.scss" />
-    <Content Include="Content\sass\_admin\_color.scss" />
-    <Content Include="Content\sass\_admin\_layout.scss" />
-    <Content Include="Content\sass\_admin\_settings.scss" />
     <Content Include="Content\sass\_client\unit\_animate.scss" />
     <Content Include="Content\sass\_client\unit\_breadcrumb.scss" />
     <Content Include="Content\sass\_client\unit\_btn.scss" />

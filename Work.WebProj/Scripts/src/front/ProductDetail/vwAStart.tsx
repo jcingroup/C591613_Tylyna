@@ -55,7 +55,7 @@ export class AStart extends React.Component<any, any>{
             (<div>
                 <div id="detail" className="modal">
                     <form className="modal-content animate-zoom">
-                        <button className="btn-close icon-cross" onClick={this.closeDetailModal}></button>
+                        <button className="btn-close icon-cross" onClick={this.closeDetailModal} type="button"></button>
                         <table className="shopping-list">
                             <tbody>
                                 {

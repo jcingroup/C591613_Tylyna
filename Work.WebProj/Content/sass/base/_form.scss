@@ -148,6 +148,10 @@ body:not(:-moz-handler-blocked) fieldset {
     box-sizing: inherit;
     -webkit-appearance: none;
 }
+#{text-inputs(number)} {
+    // fix firefox的onabort or onblur bug
+    -moz-appearance: textfield;
+}
 
 output {
     display: inline-block;

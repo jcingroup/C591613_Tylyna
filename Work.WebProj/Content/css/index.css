@@ -395,6 +395,9 @@ body:not(:-moz-handler-blocked) fieldset {
   box-sizing: inherit;
   -webkit-appearance: none; }
 
+[type="number"] {
+  -moz-appearance: textfield; }
+
 output {
   display: inline-block; }
 
