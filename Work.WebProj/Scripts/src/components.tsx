@@ -226,7 +226,7 @@ export class InputNum extends React.Component<InputNumProps, InputNumState>{
                 (
                     <input
                         id={pp.id}
-                        type="text"
+                        type="number"
                         className={pp.inputClassName}
                         width={pp.width}
                         style={pp.style}
