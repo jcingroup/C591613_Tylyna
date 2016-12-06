@@ -391,6 +391,7 @@
     <Content Include="Content\images\icon-topnav.gif" />
     <Content Include="Content\images\Index\banner.jpg" />
     <Content Include="Content\images\Index\banner2.jpg" />
+    <Content Include="Content\images\Index\banner3.jpg" />
     <Content Include="Content\images\Index\FB-banner.gif" />
     <Content Include="Content\images\Index\jumbo.jpg" />
     <Content Include="Content\images\Index\mainBg.gif" />
