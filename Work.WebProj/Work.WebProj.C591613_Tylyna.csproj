@@ -617,6 +617,8 @@
     <Content Include="Scripts\build\app\w-comm.js" />
     <Content Include="Scripts\build\front\order.js" />
     <Content Include="Scripts\build\front\productdetail.js" />
+    <Content Include="Scripts\build\front\receiptcontent.js" />
+    <Content Include="Scripts\build\front\receiptlist.js" />
     <Content Include="Scripts\build\front\remitcheck.js" />
     <Content Include="Scripts\build\front\shoppingcart.js" />
     <Content Include="Scripts\cdn\bootstrap\collapse.js" />

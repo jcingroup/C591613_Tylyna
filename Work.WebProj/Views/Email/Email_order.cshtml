@@ -119,7 +119,7 @@
                                                 <tr>
                                                     <td style="color:#E63F00;font-size:16px;line-height:24px">
                                                         已成功加入會員！<br />
-                                                        登入帳號為Email, 預設密碼為：@CommWebSetup.DEV_MemberPWD
+                                                        登入帳號為Email, 預設密碼為手機
                                                     </td>
                                                 </tr>
                                             }
@@ -178,7 +178,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="color:#000001;font-size:14px;font-weight:bold;line-height:22px">
-                                                        @(i.p_name + " " + @CodeSheet.GetStateVal((int)i.p_d_pack_type, i_CodeName.Value, CodeSheet.pack_type))<br>
+                                                        @(i.p_name + " " + i.p_d_pack_name)<br>
                                                         數量：@i.qty　小計：NT1 @string.Format("{0:N0}", i.sub_total)
                                                     </td>
                                                 </tr>
