@@ -25,19 +25,20 @@ export class AStart extends React.Component<any, any>{
             (
                 <div>
                     <header className="text-left underline">
-                        <span className="font-xl text-danger">訂單編號：{field.purchase_no} </span>
-                        如有訂單等問題，請來電洽詢 0979-777-270 或 03-4275832
+                        如有訂單等問題，請來電洽詢 0979-777-270 或 03-4275832<br/>
+                        轉帳匯帳請於 <strong className="text-danger">5</strong> 日內付款，完成匯款後才成立此筆訂單
                         <a href={gb_approot+"User/Receipt_list"} className="font-lg float-r">回列表</a>
                     </header>
 
                     <table className="payment-list">
-                        <caption className="text-left p-a-8 bg-primary text-white">訂單明細</caption>
+                        <caption className="text-left p-a-8 bg-primary font-xl text-white">訂單編號：{field.purchase_no}</caption>
                         <thead>
                             <tr>
-                                <th colSpan="2">商品</th>
+                                <th></th>
+                                <th className="text-left">商品明細</th>
+                                <th className="text-right">單價</th>
                                 <th>數量</th>
-                                <th>單價</th>
-                                <th className="text-left">小計</th>
+                                <th className="text-right p-r-32" style={{ width: '135px' }}>小計</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,9 +55,9 @@ export class AStart extends React.Component<any, any>{
                                             <h5>{item.p_name}</h5>
                                             規格型號: {item.p_d_pack_name }
                                         </td>
+                                        <td className="text-right"><small>NT$</small> {fmt_money(item.price) }</td>
                                         <td>{fmt_money(item.qty) }</td>
-                                        <td>NT$ {fmt_money(item.price) }</td>
-                                        <td className="text-left">NT$ {fmt_money(item.sub_total) }</td>
+                                        <td className="text-right p-r-32"><small>NT$</small> {fmt_money(item.sub_total) }</td>
                                     </tr>;
                                 })
                             }
@@ -64,13 +65,18 @@ export class AStart extends React.Component<any, any>{
                         <tfoot>
                             <tr>
                                 <td colSpan="4" className="text-right">運費
-                                    <TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.CashOnDelivery}>、手續費</TagShowAndHide>
+                                    {/*<TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.CashOnDelivery}>、手續費</TagShowAndHide>*/}
                                 </td>
-                                <td className="text-left">NT$ {fmt_money(field.ship_fee + field.bank_charges) }</td>
+                                {/*<td className="text-left"><small>NT$</small> {fmt_money(field.ship_fee + field.bank_charges) }</td>*/}
+                                <td className="text-right p-r-32"><small>NT$</small> {fmt_money(field.ship_fee) }</td>
                             </tr>
+                            <TagShowAndHide TagName={TagName.Tr} show={field.pay_type == IPayType.CashOnDelivery}>
+                                <td colSpan={4} className="text-right">手續費</td>
+                                <td className="text-right p-r-32"><small>NT$</small> {fmt_money(field.bank_charges) }</td>
+                            </TagShowAndHide>
                             <tr>
                                 <td colSpan="4" className="text-right">總計</td>
-                                <td className="text-left text-danger">NT$ {fmt_money(field.total) }</td>
+                                <td className="text-right text-danger p-r-32"><small>NT$</small> {fmt_money(field.total) }</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -80,20 +86,30 @@ export class AStart extends React.Component<any, any>{
                         <tbody>
                             <tr>
                                 <th>收件人</th>
-                                <th>收件人電話</th>
-                                <th>收件地址</th>
-                                <th>出貨狀態</th>
+                                <th className="text-left">收件人電話</th>
+                                <th className="text-left">收件地址</th>
+                                <th className="text-left">出貨狀態</th>
                                 <th className="text-left">付款明細</th>
                             </tr>
                             <tr>
                                 <td>{field.receive_name}</td>
-                                <td>{field.receive_tel}</td>
-                                <td>{field.receive_zip + " " + field.receive_address}</td>
-                                <td>出貨時間：{(field.ship_date != null && field.ship_date != undefined) ? Moment(field.ship_date).format(config.dateFT) : "" }</td>
+                                <td className="text-left">{field.receive_tel}</td>
+                                <td className="text-left">{field.receive_zip + " " + field.receive_address}</td>
                                 <td className="text-left">
+                                    {/* 若末出貨時，顯示如下：
+                                        尚未出貨
+                                        已出貨時才顯示下方的出貨時間
+                                    */}
+                                    出貨時間：{(field.ship_date != null && field.ship_date != undefined) ? Moment(field.ship_date).format(config.dateFT) : "" }
+                                </td>
+                                <td className="text-left">
+                                    {/* 尚未轉帳匯款請顯示這段：
+                                        【待付款】，若付款完成請填寫 <a href="~/Order/Reply" class="btn btn-sm bg-danger">已付款通知</a> 或來電告知帳號後五碼
+                                        付款後才顯示下方的付款明細
+                                    */}
                                     <TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.Remit}>
                                     【轉帳匯款】日期：{(field.remit_date != null && field.remit_date != undefined) ? Moment(field.remit_date).format(config.dateFT) : "" } 帳號後5碼：{field.remit_no}
-                                    </TagShowAndHide>                   
+                                    </TagShowAndHide>
                                 </td>
                             </tr>
                         </tbody>

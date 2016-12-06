@@ -10,7 +10,7 @@
 
 @include make-grid-columns();
 
-.row-p-a {
+.row-x-0 {
     [class*="col"] {
         &:first-child { padding-left: 0; }
         &:last-child { padding-right: 0; }

@@ -85,25 +85,12 @@ $figure-inline-hack:           false;
 // table
 $table-border-color:           lighten($brand-secondary,15);
 $table-bordered:               true;
-// $table-align:                  false;
 $table-pd:                     4px 10px;
 $table-margin-bottom:          false;
-// $table-bg-accent:              lighten(#CAE4EF,5); // darken($muted,3)
-// $table-bg-hover:               $pale-yellow;
 $th-styled: (
    color: darken($brand-primary,10),
    background: lighten($brand-primary,52)
 );
-// $td-styled: (
-//     background: lighten(#EBEBEB,5)
-// );
-// $tfoot-styled:(
-//     background: $pale-yellow
-// );
-// $td-item-styled: (
-//     text-align: center,
-//     background: lighten(#B3E9F5,10)
-// );
 
 // form
 $input-border-focus:            darken($amber,5);

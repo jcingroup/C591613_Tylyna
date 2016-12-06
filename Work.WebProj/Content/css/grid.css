@@ -817,9 +817,9 @@
 
   .offset-xl-11 {
     margin-left: 91.66667%; } }
-.row-p-a [class*="col"]:first-child {
+.row-x-0 [class*="col"]:first-child {
   padding-left: 0; }
-.row-p-a [class*="col"]:last-child {
+.row-x-0 [class*="col"]:last-child {
   padding-right: 0; }
 
 .col-rest {

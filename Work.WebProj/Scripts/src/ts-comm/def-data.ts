@@ -542,9 +542,9 @@ export const IPayTypeData: Array<server.OptionTemplate> = [
 ];
 
 export const IPayStateData: Array<server.OptionTemplate> = [
-    { val: -1, Lname: '訂單取消', className: 'w3-tag label-default w3-round' },
+    { val: -1, Lname: '訂單已取消', className: 'w3-tag label-default w3-round' },
     { val: 0, Lname: '待付款', className: 'w3-tag label-warning w3-round' },
-    { val: 1, Lname: '已付款待確認', className: 'w3-tag label-danger w3-round' },
+    { val: 1, Lname: '付款待確認', className: 'w3-tag label-danger w3-round' },
     { val: 2, Lname: '確認收款', className: 'w3-tag label-success w3-round' }
 ];
 
@@ -554,8 +554,8 @@ export const IPayStateDataForRemit: Array<server.OptionTemplate> = [
 ];
 
 export const IShipStateData: Array<server.OptionTemplate> = [
-    { val: -1, Lname: '訂單取消', className: 'w3-tag label-default w3-round' },
-    { val: 0, Lname: '待出貨', className: 'w3-tag label-danger w3-round' },
+    { val: -1, Lname: '訂單已取消', className: 'w3-tag label-default w3-round' },
+    { val: 0, Lname: '尚未出貨', className: 'w3-tag label-danger w3-round' },
     { val: 1, Lname: '已出貨', className: 'w3-tag label-success w3-round' }
 ];
 

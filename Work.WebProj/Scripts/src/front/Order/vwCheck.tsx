@@ -99,8 +99,8 @@ export class Check extends React.Component<any, CheckState>{
                         </li>
                     </ul>
                     <p className="icon-error">
-                        請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於匯款後填寫
-                        <a href={this.state.Order + "?no=" + field.purchase_no} className="btn btn-sm bg-danger">已付款通知</a>
+                        請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於 <strong className="text-danger">5</strong> 日內付款完成，並填寫
+                        <a href={this.state.Order + "?no=" + field.purchase_no} className="btn btn-sm bg-danger m-x-4">已付款通知</a>
                         或來電告知帳號後五碼，完成訂購。
                     </p>
                     <footer className="submit">

@@ -43,25 +43,28 @@ export class AStart extends React.Component<any, any>{
         let grid: Array<ReceiptList> = this.props.grid;
 
         out_html =
-            (<table className="receipt-list full bg-white">
-                <caption className="text-right p-b-12">
-                    訂單狀態：
-                    <select onChange={this.chgShVal.bind(this, 'id') }>
-                        {
-                            IOrderStateData.map((item, i) => {
-                                if (item.id == search.id) {
-                                    return <option key={i} value={item.id} defaultValue={item.id}>{item.name}</option>
-                                } else {
-                                    return <option key={i} value={item.id}>{item.name}</option>
-                                }
-                            })
-                        }
-                    </select>
+            (<table className="full bg-white">
+                <caption className="row row-x-0 p-b-8">
+                    <h6 className="col-9 text-left m-t-8 m-b-0">轉帳匯帳請於 <strong className="text-danger">5</strong> 日內付款，完成匯款後才成立此筆訂單</h6>
+                    <p className="col-3 text-right">
+                        訂單狀態：
+                        <select onChange={this.chgShVal.bind(this, 'id') }>
+                            {
+                                IOrderStateData.map((item, i) => {
+                                    if (item.id == search.id) {
+                                        return <option key={i} value={item.id} defaultValue={item.id}>{item.name}</option>
+                                    } else {
+                                        return <option key={i} value={item.id}>{item.name}</option>
+                                    }
+                                })
+                            }
+                        </select>
+                    </p>
                 </caption>
                 <tbody>
                     <tr>
                         <th>訂購日期</th>
-                        <th>訂單編號</th>
+                        <th className="text-left">訂單編號</th>
                         <th className="text-left">商品名稱</th>
                         <th>數量</th>
                         <th>付款方式</th>
@@ -72,7 +75,7 @@ export class AStart extends React.Component<any, any>{
                         grid.map((item, i) => {
                             return <tr key={i}>
                                 <td>{Moment(item.order_date).format(config.dateFT) }</td>
-                                <td>
+                                <td className="text-left">
                                     <a href={gb_approot+"User/Receipt_content?no="+item.purchase_no} className="text-success">{item.purchase_no}</a>
                                 </td>
                                 <td className="text-left">{item.p_name}-{item.p_d_pack_name } </td>

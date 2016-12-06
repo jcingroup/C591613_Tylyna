@@ -68,10 +68,11 @@ export class Order extends React.Component<any, any>{
                     <table className="payment-list">
                         <thead>
                             <tr>
-                                <th colSpan="2">商品</th>
+                                <th></th>
+                                <th className="text-left">商品明細</th>
+                                <th className="text-right">單價</th>
                                 <th>數量</th>
-                                <th>單價</th>
-                                <th className="text-left">小計</th>
+                                <th className="text-right">小計</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,9 +90,9 @@ export class Order extends React.Component<any, any>{
                                             <h5>{item.p_name}</h5>
                                             規格型號: {item.p_d_pack_name } <a href={p_url} className="text-success m-l-16">查看產品介紹</a>
                                         </td>
+                                        <td className="text-right">NT$ {fmt_money(item.price) }</td>
                                         <td>{fmt_money(item.qty) }</td>
-                                        <td>NT$ {fmt_money(item.price) }</td>
-                                        <td className="text-left">NT$ {fmt_money(item.sub_total) }</td>
+                                        <td className="text-right">NT$ {fmt_money(item.sub_total) }</td>
                                     </tr>;
                                 })
                             }
@@ -125,11 +126,11 @@ export class Order extends React.Component<any, any>{
                                 <td className="text-right">運費
                                     <TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.CashOnDelivery}>、手續費</TagShowAndHide>
                                 </td>
-                                <td className="text-left">NT$ {fmt_money(field.ship_fee + field.bank_charges) }</td>
+                                <td className="text-right">NT$ {fmt_money(field.ship_fee + field.bank_charges) }</td>
                             </tr>
                             <tr>
                                 <td colSpan="4" className="text-right">總計</td>
-                                <td className="text-left text-danger">NT$ {fmt_money(field.total) }</td>
+                                <td className="text-right text-danger">NT$ {fmt_money(field.total) }</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -241,7 +242,7 @@ export class Order extends React.Component<any, any>{
                             </dd>
                         </dl>
                         <p className="icon-error">
-                            請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於匯款後填寫 <u>已付款通知</u> 或來電告知帳號後五碼，完成訂購。
+                            請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於 <strong className="text-danger">5</strong> 日內付款完成，並填寫 <u>已付款通知</u> 或來電告知帳號後五碼，完成訂購。
                         </p>
                         <footer className="submit">
                             <a href={gb_approot + "Order/Cart"} className="float-l icon-navigate_before">繼續選購</a>
