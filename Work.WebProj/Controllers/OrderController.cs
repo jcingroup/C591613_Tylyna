@@ -91,17 +91,51 @@ namespace DotWeb.Controllers
         public string setOrder(Purchase md)
         {
             ResultInfo r = new ResultInfo();
-            r.result = true;//預設
+            r.result = true; r.hasData = true;//預設
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
             try
             {
+                #region 送出訂單
+                using (var db0 = getDB0())
+                {
+                    #region 有產品不存在或下架
+                    bool p_check = false; List<string> err = new List<string>();
+                    foreach (var d in md.Deatil)
+                    {
+                        bool d_check = db0.ProductDetail.Any(x => x.product_detail_id == d.product_detail_id & x.product_id == d.product_id &
+                                                               x.Product.stock_state == (int)IStockState.on_store_shelves & x.stock_state == (int)IStockState.on_store_shelves &
+                                                               !x.Product.i_Hide);
+                        if (d_check)
+                        {
+                            var item = db0.ProductDetail.Find(d.product_detail_id);
+                            d.p_d_sn = item.sn;//產品料號
+                            d.p_name = item.Product.product_name;//產品名稱
+                            d.p_d_pack_name = item.pack_name;//產品包裝
+                            d.price = item.price;//產品價格
+                            d.sub_total = item.price * d.qty;
+                        }
+                        else
+                        {
+                            p_check = true;
+                            err.Add(d.p_name);
+                        }
+                    }
+                    if (p_check)
+                    {//有產品不存在或下架
+                        r.result = false;
+                        r.message = string.Format(Resources.Res.Log_Err_AddCart_Exist, String.Join("、", err.ToArray()));
+                        return defJSON(r);
+                    }
+                    md.total = md.Deatil.Sum(x => x.sub_total) + md.ship_fee + md.bank_charges;
+                    #endregion
+                }
                 #region 加入會員
                 if (!this.isLogin)
                 {
                     var customer = new Customer()
                     {
                         email = md.receive_email,
-                        c_pw = Server.UrlEncode(EncryptString.desEncryptBase64(CommWebSetup.DEV_MemberPWD)),
+                        c_pw = Server.UrlEncode(EncryptString.desEncryptBase64(md.receive_mobile)),//預設密碼改為手機
                         c_name = md.receive_name,
                         tel = md.receive_tel,
                         mobile = md.receive_mobile,
@@ -110,75 +144,48 @@ namespace DotWeb.Controllers
                     };
                     r = addCustomer(customer);
                     if (r.result)
+                    {
                         md.customer_id = r.id;
+                    }
+                    else
+                    {//會員註冊失敗
+                        r.result = false;
+                        r.message = r.message;
+                        return defJSON(r);
+                    }
+
                 }
 
                 #endregion
-                #region 送出訂單
-                if (r.result)
-                {
-                    using (var db0 = getDB0())
+                r = addPurchase(md);
+                if (md.receive_email != null & r.result)
+                {//寄送email
+                    var open = openLogic();
+                    OrderEmail emd = new OrderEmail()
                     {
-                        #region 有產品不存在或下架
-                        bool p_check = false; List<string> err = new List<string>();
-                        foreach (var d in md.Deatil)
-                        {
-                            bool d_check = db0.ProductDetail.Any(x => x.product_detail_id == d.product_detail_id & x.product_id == d.product_id &
-                                                                   x.Product.stock_state == (int)IStockState.on_store_shelves & x.stock_state == (int)IStockState.on_store_shelves &
-                                                                   !x.Product.i_Hide);
-                            if (d_check)
-                            {
-                                var item = db0.ProductDetail.Find(d.product_detail_id);
-                                d.p_d_sn = item.sn;//產品料號
-                                d.p_name = item.Product.product_name;//產品名稱
-                                d.p_d_pack_name = item.pack_name;//產品包裝
-                                d.price = item.price;//產品價格
-                                d.sub_total = item.price * d.qty;
-                            }
-                            else
-                            {
-                                p_check = true;
-                                err.Add(d.p_name);
-                            }
-                        }
-                        if (p_check)
-                        {//有產品不存在或下架
-                            r.result = false;
-                            r.message = string.Format(Resources.Res.Log_Err_AddCart_Exist, String.Join("、", err.ToArray()));
-                            return defJSON(r);
-                        }
-                        md.total = md.Deatil.Sum(x => x.sub_total) + md.ship_fee + md.bank_charges;
-                        #endregion
-                    }
-                    r = addPurchase(md);
-                    if (md.receive_email != null & r.result)
-                    {//寄送email
-                        var open = openLogic();
-                        OrderEmail emd = new OrderEmail()
-                        {
-                            purchase = md,
-                            isLogin = this.isLogin,
-                            AccountName = (string)open.getParmValue(ParmDefine.AccountName),
-                            AccountNumber = (string)open.getParmValue(ParmDefine.AccountNumber),
-                            BankCode = (string)open.getParmValue(ParmDefine.BankCode),
-                            BankName = (string)open.getParmValue(ParmDefine.BankName)
-                        };
+                        purchase = md,
+                        isLogin = this.isLogin,
+                        AccountName = (string)open.getParmValue(ParmDefine.AccountName),
+                        AccountNumber = (string)open.getParmValue(ParmDefine.AccountNumber),
+                        BankCode = (string)open.getParmValue(ParmDefine.BankCode),
+                        BankName = (string)open.getParmValue(ParmDefine.BankName)
+                    };
 
-                        #region 信件發送
-                        ResultInfo sendmail = (new EmailController()).sendOrderMail(emd);
-                        #endregion
-                        if (!sendmail.result)
-                        {//送信失敗
-                            r.result = true;
-                            r.message = sendmail.message;
-                        }
-                        else
-                        {
-                            r.message = Resources.Res.Log_Success_Order;
-                        }
-
-                        Session.Remove(this.CartSession);
+                    #region 信件發送
+                    ResultInfo sendmail = (new EmailController()).sendOrderMail(emd);
+                    #endregion
+                    if (!sendmail.result)
+                    {//送信失敗
+                        r.result = true;
+                        r.hasData = false;
+                        r.message = sendmail.message;
                     }
+                    else
+                    {
+                        r.message = Resources.Res.Log_Success_Order;
+                    }
+
+                    Session.Remove(this.CartSession);
                 }
                 #endregion
             }
