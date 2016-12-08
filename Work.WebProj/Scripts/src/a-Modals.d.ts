@@ -181,6 +181,7 @@
         remit_money?: number;
         remit_memo?: string;
         PurchaseDetail?: Array<server.PurchaseDetail>;
+        Customer?: server.Customer;
 
         Deatil?: Array<server.PurchaseDetail>;
         customer_name?: string;
@@ -204,5 +205,26 @@
         Purchase?: server.Purchase;
 
         img_src?: string;
+    }
+    interface Customer {
+        customer_id?: number;
+        email?: string;
+        c_pw?: string;
+        c_name?: string;
+        gender?: boolean;
+        tel?: string;
+        mobile?: string;
+        zip?: string;
+        address?: string;
+        birthday?: any;
+        i_Hide?: boolean;
+        i_InsertUserID?: string;
+        i_InsertDeptID?: number;
+        i_InsertDateTime?: Date;
+        i_UpdateUserID?: string;
+        i_UpdateDeptID?: number;
+        i_UpdateDateTime?: Date;
+        i_Lang?: string;
+        Purchase?: Array<server.Purchase>;
     }
 } 

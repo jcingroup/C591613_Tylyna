@@ -746,6 +746,12 @@
     <TypeScriptCompile Include="Scripts\src\front\ReceiptList\pub.ts" />
     <TypeScriptCompile Include="Scripts\src\front\ReceiptList\store.ts" />
     <TypeScriptCompile Include="Scripts\src\front\ReceiptList\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\front\UserAccount\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\front\UserAccount\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\front\UserAccount\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\front\UserAccount\pub.ts" />
+    <TypeScriptCompile Include="Scripts\src\front\UserAccount\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\front\UserAccount\vwAStart.tsx" />
     <TypeScriptCompile Include="Scripts\src\front\RemitCheck\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\front\RemitCheck\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\front\RemitCheck\containers.ts" />
