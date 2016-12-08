@@ -432,7 +432,7 @@ namespace DotWeb.Api
             }
             else
             {
-                resultOrderItems = result.OrderBy(x => x.purchase_no);
+                resultOrderItems = result.OrderByDescending(x => x.remit_date);
             }
 
             int startRecord = PageCount.PageInfo(page, defPageSize, resultCount);

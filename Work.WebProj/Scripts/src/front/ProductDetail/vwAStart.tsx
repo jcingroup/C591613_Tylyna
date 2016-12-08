@@ -69,7 +69,7 @@ export class AStart extends React.Component<any, any>{
                                                 {fmt_money(detail.weight) }g/包
                                             </td>
                                             <TagShowAndHide TagName={TagName.Td} show={detail.stock_state === IStockState.replenishment} colSpan={2} className="text-left" key={'d-' + i}>
-                                                <span className="label label-secondary font-lg">補貨中</span>
+                                                <span className="label label-secondary font-lg">訂單已滿</span>
                                             </TagShowAndHide>
                                             <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== IStockState.replenishment} className="num"  key={'d-t-' + i}>
                                                 <InputNum

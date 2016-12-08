@@ -1,7 +1,7 @@
 ﻿import React = require('react');
 import Moment = require('moment');
 import {PWButton, TagShowAndHide} from '../../components';
-import {config, UIText, IPackTypeData} from '../../ts-comm/def-data';
+import {config, UIText} from '../../ts-comm/def-data';
 import {fmt_money} from '../../ts-comm/comm-func';
 
 export class AStart extends React.Component<any, any>{
@@ -27,7 +27,7 @@ export class AStart extends React.Component<any, any>{
                     <header className="text-left underline">
                         如有訂單等問題，請來電洽詢 0979-777-270 或 03-4275832<br/>
                         轉帳匯帳請於 <strong className="text-danger">5</strong> 日內付款，完成匯款後才成立此筆訂單
-                        <a href={gb_approot+"User/Receipt_list"} className="font-lg float-r">回列表</a>
+                        <a href={gb_approot + "User/Receipt_list"} className="font-lg float-r">回列表</a>
                     </header>
 
                     <table className="payment-list">
@@ -46,7 +46,7 @@ export class AStart extends React.Component<any, any>{
                                 field.Deatil.map((item, i) => {
                                     return <tr key={i}>
                                         <td className="pic">
-                                            <a href={this.state.Product + "/Detail?id=" + item.product_id + "#main"} className="text-success">
+                                            <a href={gb_approot + "Products/Detail?id=" + item.product_id + "#main"} className="text-success">
                                                 <img src={item.img_src} alt={item.p_name} />
                                             </a>
                                         </td>
@@ -96,19 +96,14 @@ export class AStart extends React.Component<any, any>{
                                 <td className="text-left">{field.receive_tel}</td>
                                 <td className="text-left">{field.receive_zip + " " + field.receive_address}</td>
                                 <td className="text-left">
-                                    {/* 若末出貨時，顯示如下：
-                                        尚未出貨
-                                        已出貨時才顯示下方的出貨時間
-                                    */}
-                                    出貨時間：{(field.ship_date != null && field.ship_date != undefined) ? Moment(field.ship_date).format(config.dateFT) : "" }
+                                    {(field.ship_date != null && field.ship_date != undefined) ? "出貨時間：" + Moment(field.ship_date).format(config.dateFT) : "尚未出貨" }
                                 </td>
                                 <td className="text-left">
-                                    {/* 尚未轉帳匯款請顯示這段：
-                                        【待付款】，若付款完成請填寫 <a href="~/Order/Reply" class="btn btn-sm bg-danger">已付款通知</a> 或來電告知帳號後五碼
-                                        付款後才顯示下方的付款明細
-                                    */}
-                                    <TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.Remit}>
-                                    【轉帳匯款】日期：{(field.remit_date != null && field.remit_date != undefined) ? Moment(field.remit_date).format(config.dateFT) : "" } 帳號後5碼：{field.remit_no}
+                                    <TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.Remit && !(field.remit_date != null && field.remit_date != undefined) }>
+                                        【待付款】，若付款完成請填寫 <a href={gb_approot + "Order/Reply?no=" + field.purchase_no} className="btn btn-sm bg-danger">已付款通知</a> 或來電告知帳號後五碼
+                                    </TagShowAndHide>
+                                    <TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.Remit && (field.remit_date != null && field.remit_date != undefined) }>
+                                        【轉帳匯款】日期：{Moment(field.remit_date).format(config.dateFT) } 帳號後5碼：{field.remit_no}
                                     </TagShowAndHide>
                                 </td>
                             </tr>
