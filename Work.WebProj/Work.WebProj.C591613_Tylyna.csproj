@@ -616,6 +616,7 @@
     <Content Include="Scripts\build\front\receiptlist.js" />
     <Content Include="Scripts\build\front\remitcheck.js" />
     <Content Include="Scripts\build\front\shoppingcart.js" />
+    <Content Include="Scripts\build\front\useraccount.js" />
     <Content Include="Scripts\cdn\bootstrap\collapse.js" />
     <Content Include="Scripts\cdn\bootstrap\util.js" />
     <Content Include="Scripts\cdn\jquery-1.10.2.min.js" />

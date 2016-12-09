@@ -197,6 +197,14 @@ namespace DotWeb.Api
                 r = new ResultInfo<Product>();
 
                 item = await db0.Product.FindAsync(param.id);
+
+                if (db0.PurchaseDetail.Any(x => x.product_id == item.product_id))
+                {
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_Delete_Used;
+                    return Ok(r);
+                }
+
                 if (item != null)
                 {
                     db0.Product.Remove(item);
