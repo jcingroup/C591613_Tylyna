@@ -14,6 +14,8 @@ using System.Data.Entity.Validation;
 using System.Data.Entity.Infrastructure;
 using System.Linq.Dynamic;
 using DotWeb.Controllers;
+using ProcCore;
+using System.Web;
 
 namespace DotWeb.Api
 {
@@ -112,7 +114,7 @@ namespace DotWeb.Api
                 using (var db0 = getDB0())
                 {
                     int c_id = int.Parse(this.UserId);
-                    var item =await db0.Purchase.Where(x => x.customer_id == c_id & x.purchase_no == no).FirstOrDefaultAsync();
+                    var item = await db0.Purchase.Where(x => x.customer_id == c_id & x.purchase_no == no).FirstOrDefaultAsync();
 
                     if (item != null)
                     {
@@ -194,6 +196,90 @@ namespace DotWeb.Api
                 db0.Dispose();
             }
             return Ok(rAjaxResult);
+        }
+        [Route("chgEmail")]
+        [HttpPost]
+        public async Task<IHttpActionResult> chgEmail([FromBody]string email)
+        {
+            ResultInfo r = new ResultInfo();
+            try
+            {
+                db0 = getDB0();
+                int c_id = int.Parse(this.UserId);
+                var item = await db0.Customer.FindAsync(c_id);
+
+                if (db0.Customer.Any(x => x.email == email & x.customer_id != c_id))
+                {
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_EmailExist;
+                    return Ok(r);
+                }
+
+                item.email = email;
+
+                await db0.SaveChangesAsync();
+                r.result = true;
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.ToString();
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+            return Ok(r);
+        }
+
+        [Route("chgPW")]
+        [HttpPost]
+        public async Task<IHttpActionResult> chgPW([FromBody]ManageUserViewModel md)
+        {
+            ResultInfo r = new ResultInfo();
+            try
+            {
+                db0 = getDB0();
+                int c_id = int.Parse(this.UserId);
+                var item = await db0.Customer.FindAsync(c_id);
+
+                if (md.NewPassword != md.ConfirmPassword)
+                {//確認密碼和新密碼不一致
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_NewPasswordNotSure;
+                    return Ok(r);
+                }
+                if (md.NewPassword == md.OldPassword)
+                {//新密碼和舊密碼不可相同
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_NewPasswordSame;
+                    return Ok(r);
+                }
+                string old = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(md.OldPassword));
+                if (item.c_pw != old)
+                {//舊密碼輸入錯誤
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_Password;
+                    return Ok(r);
+                }
+
+
+                item.c_pw = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(md.NewPassword));
+
+                await db0.SaveChangesAsync();
+                r.result = true;
+                r.message = Resources.Res.Info_ChangePassword_Success;
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.ToString();
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+            return Ok(r);
         }
         #endregion
 

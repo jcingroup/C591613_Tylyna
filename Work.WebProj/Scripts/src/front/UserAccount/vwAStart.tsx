@@ -1,6 +1,7 @@
 ﻿import $ = require('jquery');
 import React = require('react');
 import Moment = require('moment');
+import update = require('react-addons-update');
 import {TagShowAndHide, InputText, PWButton} from '../../components';
 import {ac_type_comm, customer_type} from '../../action_type';
 import {fmt_money, makeInputValue, clone} from '../../ts-comm/comm-func';
@@ -11,7 +12,7 @@ import DatetimeInput = require("react-datetime");
 import 'react-datetime/css/react-datetime.css';
 
 
-let EditButton = ({view_mode, other, name, update, cancel}) => {
+let EditButton = ({view_mode, other, keyname, name, update, cancel}) => {
     if (view_mode === InputViewMode.view) {
         return (
             <span>
@@ -22,7 +23,7 @@ let EditButton = ({view_mode, other, name, update, cancel}) => {
         return (
             <span>
                 <PWButton className="btn font-sm bg-danger m-l-16" enable={true} hidden={true}>確定變更</PWButton>
-                <PWButton className="btn font-sm bg-danger m-l-16" enable={true} name="email" type="submit">確定變更</PWButton>
+                <PWButton className="btn font-sm bg-danger m-l-16" enable={true} name={keyname} type="submit">確定變更</PWButton>
                 <PWButton className="btn font-sm bg-muted m-l-16" enable={true} onClick={cancel}>取消</PWButton>
             </span>
         );
@@ -74,16 +75,22 @@ export class AStart extends React.Component<any, { pram?: PadParm }>{
     cancelPW() {
         this.props.chgViewMode(customer_type.pw_cancel);
     }
-    chgPW(name: string, e: React.SyntheticEvent) {
-        let value = makeInputValue(e);
+    chgPW(name: string, value: any, e: React.SyntheticEvent) {
+        var objForUpdate = {
+            pram: { [name]: { $set: value } }
+        };
+        var newState = update(this.state, objForUpdate);
+        this.setState(newState);
     }
     handleAccountSubmit(e: React.FormEvent) {
         e.preventDefault();
         var $btn = $(document.activeElement);
         let key: string = $btn.attr("name");
-        console.log(key);
-        //let field: server.Customer = this.props.field;
-        //this.props.callSumbit(field);
+        if (key == "email") {
+            this.props.callChgEmail(this.props.field.email);
+        } else if (key == "pw") {
+            this.props.callChgPW(this.state.pram);
+        }
         return;
     }
     //email&pw
@@ -118,6 +125,7 @@ export class AStart extends React.Component<any, { pram?: PadParm }>{
                                         <EditButton
                                             view_mode={pp.email_view_mode}
                                             other={pp.pw_view_mode}
+                                            keyname="email"
                                             name="變更信箱"
                                             update={this.updateEmail.bind(this) }
                                             cancel={this.cancelEmail.bind(this) }/>
@@ -128,30 +136,46 @@ export class AStart extends React.Component<any, { pram?: PadParm }>{
                                     <td>
                                         <TagShowAndHide TagName={TagName.Span} show={pp.pw_view_mode == InputViewMode.edit}>
                                             <InputText
-                                                type="email"
+                                                type="password"
                                                 value={pram.OldPassword}
                                                 inputViewMode={pp.pw_view_mode}
-                                                onChange={this.chgVal.bind(this, 'email') }
+                                                onChange={this.chgPW.bind(this, 'OldPassword') }
                                                 required={true}
                                                 maxLength={16}
-                                                patternString="^.{6,}$"
+                                                patternString="^.{6,16}$"
                                                 patternInfo="密碼長度至少六位以上"
                                                 placeholder="請輸入舊密碼"
-                                                />
+                                                /> { }
+                                            <InputText
+                                                type="password"
+                                                value={pram.NewPassword}
+                                                inputViewMode={pp.pw_view_mode}
+                                                onChange={this.chgPW.bind(this, 'NewPassword') }
+                                                required={true}
+                                                maxLength={16}
+                                                patternString="^.{6,16}$"
+                                                patternInfo="密碼長度至少六位以上"
+                                                placeholder="請輸入新密碼"
+                                                /> { }
+                                            <InputText
+                                                type="password"
+                                                value={pram.ConfirmPassword}
+                                                inputViewMode={pp.pw_view_mode}
+                                                onChange={this.chgPW.bind(this, 'ConfirmPassword') }
+                                                required={true}
+                                                maxLength={16}
+                                                patternString="^.{6,16}$"
+                                                patternInfo="密碼長度至少六位以上"
+                                                placeholder="再次輸入新密碼"
+                                                /> { }
                                         </TagShowAndHide>
                                         <EditButton
                                             view_mode={pp.pw_view_mode}
                                             other={pp.email_view_mode}
+                                            keyname="pw"
                                             name="變更密碼"
                                             update={this.updatePW.bind(this) }
                                             cancel={this.cancelPW.bind(this) }/>
-                                        {/* <button className="btn font-sm bg-danger">變更密碼</button>
-                                @* 按下變更後，上列mail隱藏，出現下列
-                                <input type="password" placeholder="請輸入舊密碼" />
-                                <input type="password" placeholder="請輸入新密碼" />
-                                <input type="password" placeholder="再次輸入新密碼" />
-                                <br />
-                                <button className="btn">儲存</button> */}
                                     </td>
                                 </tr>
                             </tbody>

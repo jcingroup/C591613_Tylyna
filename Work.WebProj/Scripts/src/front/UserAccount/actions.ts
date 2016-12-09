@@ -1,8 +1,9 @@
 ﻿import {fetchGet, fetchDelete, fetchPost, fetchPut} from '../../ts-comm/ajax';
-import {ac_type_comm} from '../../action_type';
+import {ac_type_comm, customer_type} from '../../action_type';
 import {UIText} from '../../ts-comm/def-data';
 import {tosMessage} from '../../ts-comm/comm-func';
 import { mask_show, mask_off} from '../../ts-comm/vwMaskLoading';
+import {PadParm}from './pub';
 
 import Moment = require('moment');
 import {config} from '../../ts-comm/def-data';
@@ -36,6 +37,38 @@ export const callSumbit = (md: server.Purchase) => {
                 mask_off();
                 if (data.result) {
                     tosMessage(null, UIText.fi_update, 1);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch((reason) => { mask_off(); })
+    }
+}
+export const callChgEmail = (email: string) => {
+    return dispatch => {
+        mask_show(UIText.mk_updating);
+        return fetchPost(apiPath + "/chgEmail", email)
+            .then((data: IResultData<server.Customer>) => {
+                mask_off();
+                if (data.result) {
+                    tosMessage(null, UIText.fi_update, 1);
+                    dispatch(chgViewMode(customer_type.email_cancel));
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch((reason) => { mask_off(); })
+    }
+}
+export const callChgPW = (md: PadParm) => {
+    return dispatch => {
+        mask_show(UIText.mk_updating);
+        return fetchPost(apiPath + "/chgPW", md)
+            .then((data: IResultData<PadParm>) => {
+                mask_off();
+                if (data.result) {
+                    tosMessage(null, data.message, 1);
+                    dispatch(chgViewMode(customer_type.pw_cancel));
                 } else {
                     alert(data.message);
                 }
