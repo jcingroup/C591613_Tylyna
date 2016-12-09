@@ -456,7 +456,7 @@ namespace DotWeb.Api
         {
             using (var db0 = getDB0())
             {
-                string dec_code = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(code));//解密
+                string dec_code = EncryptString.desDecryptBase64(code);//解密
                 var item = db0.TimeLinessCode.FirstOrDefault(x => x.Id == dec_code & !x.is_use);
                 bool res = item == null ? false : true;
 
@@ -472,7 +472,7 @@ namespace DotWeb.Api
                 {
                     try
                     {
-                        string dec_code = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(code));//解密
+                        string dec_code = EncryptString.desDecryptBase64(code);//解密
                         var item = db.TimeLinessCode.Find(dec_code);
 
                         item.is_use = true;

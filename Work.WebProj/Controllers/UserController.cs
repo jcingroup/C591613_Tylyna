@@ -3,6 +3,7 @@ using DotWeb.Controller;
 using System.Linq;
 using ProcCore;
 using System;
+using System.Web;
 
 namespace DotWeb.Controllers
 {
@@ -40,7 +41,16 @@ namespace DotWeb.Controllers
             using (var db0 = getDB0())
             {
                 bool check = false;
-                string dec_code = EncryptString.desDecryptBase64(Server.UrlDecode(code));//解密
+                string dec_code = string.Empty;
+                try
+                {
+                    dec_code = EncryptString.desDecryptBase64(code);
+                }
+                catch (Exception ex)
+                {
+                    string test = ex.ToString();
+                }
+
 
                 var item = db0.TimeLinessCode.FirstOrDefault(x => x.Id == dec_code);
 

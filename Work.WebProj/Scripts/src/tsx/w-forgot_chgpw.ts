@@ -47,7 +47,9 @@ namespace MemberChgPW {
             .then((data: LoginResult) => {
                 mask_off();
                 if (data.result) {
-                    tosMessage(null, data.message, 1);
+                    //tosMessage(null, data.message, 1);
+                    alert(data.message);
+                    document.location.href = "http://" + location.host;
                 } else {
                     alert(data.message);
                 }
