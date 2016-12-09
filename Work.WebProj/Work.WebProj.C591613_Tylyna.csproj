@@ -610,6 +610,7 @@
     <Content Include="Scripts\build\app\m_users.js" />
     <Content Include="Scripts\build\app\vendors.js" />
     <Content Include="Scripts\build\app\w-comm.js" />
+    <Content Include="Scripts\build\front\forgotchgpw.js" />
     <Content Include="Scripts\build\front\order.js" />
     <Content Include="Scripts\build\front\productdetail.js" />
     <Content Include="Scripts\build\front\receiptcontent.js" />
@@ -838,6 +839,7 @@
     <TypeScriptCompile Include="Scripts\src\tsx\m-menu.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-login.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-users.tsx" />
+    <TypeScriptCompile Include="Scripts\src\tsx\w-forgot_chgpw.ts" />
     <TypeScriptCompile Include="Scripts\src\tsx\w-comm.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\InputViewMode.ts" />
     <TypeScriptCompile Include="Scripts\ts.d\enum\OperatorType.d.ts" />

@@ -538,6 +538,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   查詢類似 錯誤!無效代碼! 的當地語系化字串。
+        /// </summary>
+        internal static string Login_Err_NotValidCode {
+            get {
+                return ResourceManager.GetString("Login_Err_NotValidCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 無法登錄!請重輸入帳號或密碼。 的當地語系化字串。
         /// </summary>
         internal static string Login_Err_Password {

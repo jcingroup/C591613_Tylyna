@@ -421,4 +421,7 @@
   <data name="MailTitle_Forgot" xml:space="preserve">
     <value>【{0}】會員密碼重設</value>
   </data>
+  <data name="Login_Err_NotValidCode" xml:space="preserve">
+    <value>錯誤!無效代碼!</value>
+  </data>
 </root>

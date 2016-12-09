@@ -327,12 +327,68 @@ namespace DotWeb.Api
             }
             return Ok(r);
         }
+
+        [Route("chgPWbyFG")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> chgPWbyFG([FromBody]forgotChgPW md)
+        {
+            ResultInfo r = new ResultInfo();
+            try
+            {
+                db0 = getDB0();
+                var item = await db0.Customer.Where(x => x.email == md.Email).FirstOrDefaultAsync();
+
+                if (md.NewPassword != md.ConfirmPassword)
+                {//確認密碼和新密碼不一致
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_NewPasswordNotSure;
+                    return Ok(r);
+                }
+                if (item == null)
+                {//此用戶不存在
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_NoThisUser;
+                    return Ok(r);
+                }
+                if (!checkCode(md.code))
+                {//無效代碼
+                    r.result = false;
+                    r.message = Resources.Res.Login_Err_NotValidCode;
+                    return Ok(r);
+                }
+
+                item.c_pw = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(md.NewPassword));
+               
+                await db0.SaveChangesAsync();
+                r.result = true;
+                r.message = Resources.Res.Info_ChangePassword_Success;
+                upCheckCode(md.code);
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.ToString();
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+            return Ok(r);
+        }
         #endregion
 
         public class ListParam
         {
             public int? state { get; set; }
             public int? state_val { get; set; }
+        }
+        public class forgotChgPW
+        {
+            public string code { get; set; }
+            public string Email { get; set; }
+            public string NewPassword { get; set; }
+            public string ConfirmPassword { get; set; }
         }
     }
 }

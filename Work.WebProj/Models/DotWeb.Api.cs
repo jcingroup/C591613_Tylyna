@@ -452,6 +452,43 @@ namespace DotWeb.Api
             }
             return r;
         }
+        protected bool checkCode(string code)
+        {
+            using (var db0 = getDB0())
+            {
+                string dec_code = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(code));//解密
+                var item = db0.TimeLinessCode.FirstOrDefault(x => x.Id == dec_code & !x.is_use);
+                bool res = item == null ? false : true;
+
+                return res;
+            }
+        }
+        protected void upCheckCode(string code)
+        {
+            ResultInfo r = new ResultInfo();
+            using (TransactionScope tx = new TransactionScope())
+            {
+                using (var db = getDB0())
+                {
+                    try
+                    {
+                        string dec_code = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(code));//解密
+                        var item = db0.TimeLinessCode.Find(code);
+
+                        item.is_use = true;
+
+                        db.SaveChanges();
+                        tx.Complete();
+                        r.result = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        r.result = false;
+                        r.message = ex.ToString();
+                    }
+                }
+            }
+        }
         #endregion
     }
 
