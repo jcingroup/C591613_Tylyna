@@ -210,6 +210,7 @@ $collapse-title-hover-icon-color: false;
 .cart-list, .payment-list {
     h5 { @extend .m-y-4; }
     .pic { width: 90px; }
+    img { max-width: 70px; max-height: 70px; }
 }
 .submit { @extend .m-t-24; }
 
@@ -217,7 +218,6 @@ $collapse-title-hover-icon-color: false;
 .cart-list {
     @extend %full, .table-bordered, .bg-white;
 
-    img { max-width: 70px; max-height: 70px; }
     th {
         &:nth-of-type(n+2) { width: 12.5%; }
         &:last-of-type { width: 7%; }
