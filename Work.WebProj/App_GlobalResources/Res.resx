@@ -415,4 +415,7 @@
   <data name="Log_Err_Delete_Used" xml:space="preserve">
     <value>此筆資料與已有訂單使用，無法刪除!</value>
   </data>
+  <data name="Log_Err_EmailNoExist" xml:space="preserve">
+    <value>此Email未被註冊為會員，請確認Email是否正確。</value>
+  </data>
 </root>

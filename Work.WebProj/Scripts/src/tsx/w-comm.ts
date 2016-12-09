@@ -1,5 +1,5 @@
 ﻿import $ = require('jquery');
-import {fetchPost} from '../ts-comm/ajax';
+import {fetchPost, fetchGet} from '../ts-comm/ajax';
 
 // 頁籤切換
 var tab = $('.js-tab');
@@ -109,6 +109,22 @@ namespace MemberLogin {
                     $("#m_pwd").val("");
                     //$("#m_login_img").attr("src", "/_Code/Ashx/ValidateCode.ashx?vn=CheckCode&t" + (new Date()).getTime());
                     //$("#m_Validate").val("");
+                    alert(data.message);
+                }
+            })
+            .catch((reason) => { mask_off(); })
+    });
+
+    $("#MForgogPW").submit(function (event) {
+        event.preventDefault();
+        let data: string = $("#m_email").val();
+        mask_show();
+        fetchGet(gb_approot + 'api/FrontUser/forgotPWSendMail', { email: data })
+            .then((data: LoginResult) => {
+                mask_off();
+                if (data.result) {
+                }
+                else {
                     alert(data.message);
                 }
             })

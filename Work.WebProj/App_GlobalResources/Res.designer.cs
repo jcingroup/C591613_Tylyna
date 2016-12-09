@@ -628,6 +628,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   查詢類似 此Email未被註冊為會員，請確認Email是否正確。 的當地語系化字串。
+        /// </summary>
+        internal static string Log_Err_EmailNoExist {
+            get {
+                return ResourceManager.GetString("Log_Err_EmailNoExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 檔案數量超過限制。 的當地語系化字串。
         /// </summary>
         internal static string Log_Err_FileCountOver {

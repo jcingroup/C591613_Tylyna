@@ -283,6 +283,38 @@ namespace DotWeb.Api
         }
         #endregion
 
+        #region 忘記密碼
+        [Route("forgotPWSendMail")]
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> forgotPWSendMail([FromUri]string email)
+        {
+            ResultInfo r = new ResultInfo();
+            try
+            {
+                db0 = getDB0();
+
+                if (!db0.Customer.Any(x => x.email == email))
+                {
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_EmailNoExist;
+                    return Ok(r);
+                }
+                r.result = true;
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.ToString();
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+            return Ok(r);
+        }
+        #endregion
+
         public class ListParam
         {
             public int? state { get; set; }

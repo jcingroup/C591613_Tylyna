@@ -30,6 +30,13 @@ namespace DotWeb.Controllers
             }
             return View();
         }
+
+        // 會員忘記密碼
+        [AllowAnonymous]
+        public ActionResult ChangePassWord(string code)
+        {
+            return View();
+        }
     }
 
 }
