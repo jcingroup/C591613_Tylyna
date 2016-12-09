@@ -789,7 +789,7 @@ namespace DotWeb.Controller
         {
             if ((Request.Browser.Type == "IE" || Request.Browser.Type == "MSIE") && Request.Browser.MajorVersion < 10)
             {
-                Response.Redirect("~/Content/images/noIE/noIE.html");
+                Response.Redirect("~/Content/noIE/noIE.html");
             }
         }
 
