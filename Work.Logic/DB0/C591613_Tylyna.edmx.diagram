@@ -36,6 +36,7 @@
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Product" />
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_ProductDetail" />
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Purchase" />
+        <EntityTypeShape EntityType="C591613_TylynaModel.TimeLinessCode" Width="1.5" PointX="3.375" PointY="12.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

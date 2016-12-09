@@ -76,7 +76,7 @@
           </Key>
           <Property Name="customer_id" Type="int" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="c_pw" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="c_pw" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="c_name" Type="nvarchar" MaxLength="64" />
           <Property Name="gender" Type="bit" />
           <Property Name="tel" Type="varchar" MaxLength="50" />
@@ -309,6 +309,16 @@
           <Property Name="shipment_fee" Type="int" Nullable="false" />
           <Property Name="bank_charges" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="TimeLinessCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="is_use" Type="bit" Nullable="false" />
+          <Property Name="i_InsertDateTime" Type="datetime" Nullable="false" />
+          <Property Name="i_ExpiryDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -485,6 +495,7 @@
           <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeLinessCode" EntityType="Self.TimeLinessCode" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -789,6 +800,7 @@
             <End Role="Purchase" EntitySet="Purchase" />
             <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
           </AssociationSet>
+          <EntitySet Name="TimeLinessCode" EntityType="C591613_TylynaModel.TimeLinessCode" />
           </EntityContainer>
         <EntityType Name="ProductKind">
           <Key>
@@ -878,7 +890,7 @@
           </Key>
           <Property Name="customer_id" Type="Int32" Nullable="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="c_pw" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="c_pw" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="c_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="gender" Type="Boolean" />
           <Property Name="tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1017,6 +1029,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TimeLinessCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="is_use" Type="Boolean" Nullable="false" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="i_ExpiryDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1342,6 +1364,17 @@
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="purchase_no" ColumnName="purchase_no" />
                 <ScalarProperty Name="purchase_detail_id" ColumnName="purchase_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeLinessCode">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.TimeLinessCode">
+              <MappingFragment StoreEntitySet="TimeLinessCode">
+                <ScalarProperty Name="i_ExpiryDateTime" ColumnName="i_ExpiryDateTime" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="is_use" ColumnName="is_use" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -418,4 +418,7 @@
   <data name="Log_Err_EmailNoExist" xml:space="preserve">
     <value>此Email未被註冊為會員，請確認Email是否正確。</value>
   </data>
+  <data name="MailTitle_Forgot" xml:space="preserve">
+    <value>【{0}】會員密碼重設</value>
+  </data>
 </root>

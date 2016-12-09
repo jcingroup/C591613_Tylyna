@@ -123,8 +123,8 @@ namespace MemberLogin {
             .then((data: LoginResult) => {
                 mask_off();
                 if (data.result) {
-                }
-                else {
+                    alert("Email已成功送出,請至信箱確認.");
+                } else {
                     alert(data.message);
                 }
             })

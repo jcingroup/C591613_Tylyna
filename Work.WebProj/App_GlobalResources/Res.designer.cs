@@ -862,6 +862,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   查詢類似 【{0}】會員密碼重設 的當地語系化字串。
+        /// </summary>
+        internal static string MailTitle_Forgot {
+            get {
+                return ResourceManager.GetString("MailTitle_Forgot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 【{0}】訂單確認 的當地語系化字串。
         /// </summary>
         internal static string MailTitle_Order {

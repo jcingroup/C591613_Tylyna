@@ -655,6 +655,7 @@
     <Content Include="Views\Home\Quality3.cshtml" />
     <Content Include="Views\Home\Quality-nav.cshtml" />
     <Content Include="Views\User\ChangePassWord.cshtml" />
+    <Content Include="Views\User\LinkFail.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

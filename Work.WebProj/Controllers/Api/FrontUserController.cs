@@ -287,7 +287,7 @@ namespace DotWeb.Api
         [Route("forgotPWSendMail")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> forgotPWSendMail([FromUri]string email)
+        public IHttpActionResult forgotPWSendMail([FromUri]string email)
         {
             ResultInfo r = new ResultInfo();
             try
@@ -300,7 +300,21 @@ namespace DotWeb.Api
                     r.message = Resources.Res.Log_Err_EmailNoExist;
                     return Ok(r);
                 }
-                r.result = true;
+                //產生驗證
+                ResultInfo addcode = addCheckCode(email);
+                if (!addcode.result)
+                {
+                    r.result = false;
+                    r.message = addcode.message;
+                    return Ok(r);
+                }
+                ForgotPwEmail emd = new ForgotPwEmail()
+                {
+                    mail = email,
+                    code = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(addcode.no))//要加密
+                };
+                ResultInfo sendmail = (new EmailController()).sendForgotPWMail(emd);
+                r = sendmail;
             }
             catch (Exception ex)
             {

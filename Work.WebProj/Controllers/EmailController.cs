@@ -57,7 +57,12 @@ namespace DotWeb.Controllers
         }
         public ActionResult Forgot()
         {//忘記密碼
-            return View("Email_forgot");
+            ForgotPwEmail emd = new ForgotPwEmail()
+            {
+                mail = "aaa@aaa.com",
+                code = "ddd"
+            };
+            return View("Email_forgot",emd);
         }
 
         #region email寄送程式
@@ -187,6 +192,48 @@ namespace DotWeb.Controllers
             }
             return r;
         }
+
+        /// <summary>
+        /// 忘記密碼
+        /// </summary>
+        /// <param name="code">驗證代碼</param>
+        /// <param name="email">對應mail</param>
+        /// <returns></returns>
+        public ResultInfo sendForgotPWMail(ForgotPwEmail md)
+        {
+            ResultInfo r = new ResultInfo();
+            try
+            {
+                #region 信件發送
+                string Body = getMailBody("../Email/Email_forgot", md, newContext);//套用信件版面
+                Boolean mail;
+
+                #region 收信人及寄信人
+                string sendMail = openLogic().getReceiveMails()[0];
+                List<string> r_mails = new List<string>() { md.mail };
+                #endregion
+
+                mail = Mail_Send(sendMail, //寄信人
+                                r_mails.ToArray(), //收信人
+                                string.Format(Resources.Res.MailTitle_Forgot, Resources.Res.System_FrontName), //信件標題
+                                Body, //信件內容
+                                true); //是否為html格式
+                if (mail == false)
+                {//送信失敗
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_SendMailFail;
+                    return r;
+                }
+                r.result = true;
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message;
+            }
+            return r;
+        }
         #endregion
     }
     public class OrderEmail
@@ -209,6 +256,11 @@ namespace DotWeb.Controllers
     public class ShipEmail : RemitEmail
     {
         public string name { get; set; }
+        public string mail { get; set; }
+    }
+    public class ForgotPwEmail
+    {
+        public string code { get; set; }
         public string mail { get; set; }
     }
 }

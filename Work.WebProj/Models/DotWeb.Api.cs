@@ -417,6 +417,42 @@ namespace DotWeb.Api
         }
 
         #endregion
+        #region forgot mail code
+        protected ResultInfo addCheckCode(string mail)
+        {
+            ResultInfo r = new ResultInfo();
+            using (TransactionScope tx = new TransactionScope())
+            {
+                using (var db = getDB0())
+                {
+                    try
+                    {
+                        TimeLinessCode md = new TimeLinessCode()
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            email = mail,
+                            is_use = false,
+                            i_InsertDateTime = DateTime.Now,
+                            i_ExpiryDateTime = DateTime.Now.AddHours(1)//有效時間為1小時
+                        };
+
+                        db.TimeLinessCode.Add(md);
+
+                        db.SaveChanges();
+                        tx.Complete();
+                        r.result = true;
+                        r.no = md.Id;
+                    }
+                    catch (Exception ex)
+                    {
+                        r.result = false;
+                        r.message = ex.ToString();
+                    }
+                }
+            }
+            return r;
+        }
+        #endregion
     }
 
     #region 泛型控制器擴充
