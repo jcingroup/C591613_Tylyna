@@ -52,8 +52,12 @@ namespace DotWeb.Controllers
                 {
                     check = true;
                 }
-                else if (DateTime.Now > item.i_ExpiryDateTime || item.is_use)
-                {//超過有效期限 或 已使用過
+                else if (DateTime.Now > item.i_ExpiryDateTime)
+                {//超過有效期限
+                    check = true;
+                }
+                else if (item.is_use)
+                {//已使用過
                     check = true;
                 }
 

@@ -473,7 +473,7 @@ namespace DotWeb.Api
                     try
                     {
                         string dec_code = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(code));//解密
-                        var item = db0.TimeLinessCode.Find(code);
+                        var item = db.TimeLinessCode.Find(dec_code);
 
                         item.is_use = true;
 
