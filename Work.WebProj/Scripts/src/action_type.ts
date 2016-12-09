@@ -1,7 +1,7 @@
 ﻿export const ac_type_comm = {
     load: 'load', //進人報表 一般為ajax調用
     load_list: 'load_list',
-    load_field:'load_field',
+    load_field: 'load_field',
     get_init: 'get_init',//載入 參數
     grid: 'grid', //Gird List 狀態
     add: 'add', //新增編輯狀態
@@ -29,4 +29,11 @@
 
 export const remit_type = {
     chg_remit_list: 'change_remit_list'
+}
+
+export const customer_type = {
+    email_update: 'email_update',
+    email_cancel: 'email_cancel',
+    pw_update: 'password_update',
+    pw_cancel: 'password_cancel'
 }

@@ -59,10 +59,9 @@ export const setInputValue = (type, name, value) => {
     }
 }
 
-export const chgOperPage = (data) => {
+export const chgViewMode = (type) => {
     return {
-        type: ac_type_comm.chg_oper_page,
-        data
+        type: type
     }
 }
 

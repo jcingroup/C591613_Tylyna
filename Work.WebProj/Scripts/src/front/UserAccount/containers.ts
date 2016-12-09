@@ -4,18 +4,20 @@ import {bindActionCreators} from 'redux';
 //view
 import {AStart} from './vwAStart';
 
-import { setInputValue, chgOperPage, callSumbit} from './actions'
+import { setInputValue, chgViewMode, callSumbit} from './actions'
 
 const m1ToProps = (state, ownProps) => {
     return {
-        field: state.field
+        field: state.field,
+        email_view_mode: state.email_view_mode,
+        pw_view_mode: state.pw_view_mode
     }
 }
 
 const m1Dispatch = (dispatch, ownProps) => {
     let s = bindActionCreators({
         setInputValue,
-        chgOperPage,
+        chgViewMode,
         callSumbit
     }, dispatch);
 
