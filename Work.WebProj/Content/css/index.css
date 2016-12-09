@@ -937,7 +937,8 @@ figure {
   figure > a {
     z-index: 1;
     white-space: nowrap;
-    opacity: 0; }
+    opacity: 0;
+    background: #fff; }
 
 .news-list {
   max-width: 350px; }

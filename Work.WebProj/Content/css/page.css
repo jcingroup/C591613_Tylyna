@@ -1060,7 +1060,8 @@ figure {
   figure > a {
     z-index: 1;
     white-space: nowrap;
-    opacity: 0; }
+    opacity: 0;
+    background: #fff; }
 
 .news-list {
   max-width: 350px; }
@@ -1758,10 +1759,10 @@ figure {
 
 .cart-list .pic, .payment-list .pic {
   width: 90px; }
-
-.cart-list img {
+.cart-list img, .payment-list img {
   max-width: 70px;
   max-height: 70px; }
+
 .cart-list th:nth-of-type(n+2) {
   width: 12.5%; }
 .cart-list th:last-of-type {

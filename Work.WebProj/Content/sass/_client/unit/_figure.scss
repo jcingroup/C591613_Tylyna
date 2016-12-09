@@ -50,6 +50,7 @@ figure {
         z-index: z(figure);
         white-space: nowrap;
         opacity: 0;
+        background: #fff; // for IE10 bug fix
     }
     img {
         @if $figure-img-full {
