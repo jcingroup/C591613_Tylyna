@@ -120,7 +120,7 @@ export class GridTable extends React.Component<any, any>{
                                 <td className="text-xs-center">{item.customer_name}</td>
                                 <td className="text-xs-center">{item.remit_no}</td>
                                 <td className="text-xs-center">{item.remit_money}</td>
-                                <td className="text-xs-center">{(item.remit_date != null && item.remit_date != undefined) ? Moment(item.remit_date).format(config.dateTime) : "" }</td>
+                                <td className="text-xs-center">{(item.remit_date != null && item.remit_date != undefined) ? Moment(item.remit_date).format(config.dateFT) : "" }</td>
                                 <td className="text-xs-center">
                                     <RadioBox
                                         inputViewMode={InputViewMode.view}

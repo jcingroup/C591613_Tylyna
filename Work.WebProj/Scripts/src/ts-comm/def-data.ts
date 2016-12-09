@@ -527,7 +527,7 @@ export const IHideTypeData: Array<server.OptionTemplate> = [
 ];
 export const IStockStateData: Array<server.OptionTemplate> = [
     { val: 1, Lname: '上架', className: 'w3-tag label-success w3-round' },
-    { val: -1, Lname: '補貨中', className: 'w3-tag label-default w3-round' }
+    { val: -1, Lname: '訂單已滿', className: 'w3-tag label-default w3-round' }
 ];
 
 export const IPackTypeData: Array<server.OptionTemplate> = [

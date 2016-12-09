@@ -24,6 +24,7 @@ module.exports = {
         "../front/remitcheck": path.resolve(__dirname, 'Scripts/src/front/RemitCheck/app.js'),
         "../front/receiptlist": path.resolve(__dirname, 'Scripts/src/front/ReceiptList/app.js'),
         "../front/receiptcontent": path.resolve(__dirname, 'Scripts/src/front/ReceiptContent/app.js'),
+        "../front/useraccount": path.resolve(__dirname, 'Scripts/src/front/UserAccount/app.js'),
         "w-comm": path.resolve(__dirname, 'Scripts/src/tsx/w-comm.js'),
 
         vendors: ['jquery', 'react', 'react-dom', 'redux', 'react-redux', 'redux-thunk', 'react-addons-update', 'moment',

@@ -143,6 +143,60 @@ namespace DotWeb.Api
         }
         #endregion
 
+        #region 會員資料編輯
+        /// <summary>
+        /// 取得會員資料
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetItem")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetItem()
+        {
+            using (db0 = getDB0())
+            {
+                int c_id = int.Parse(this.UserId);
+                Customer item = await db0.Customer.FindAsync(c_id);
+                var r = new ResultInfo<Customer>() { data = item };
+                r.result = true;
+                return Ok(r);
+            }
+        }
+        public async Task<IHttpActionResult> Put([FromBody]Customer md)
+        {
+            ResultInfo rAjaxResult = new ResultInfo();
+            try
+            {
+                db0 = getDB0();
+                int c_id = int.Parse(this.UserId);
+                var item = await db0.Customer.FindAsync(c_id);
+
+                md.i_UpdateDateTime = DateTime.Now;
+                md.i_UpdateDeptID = departmentId;
+                md.i_UpdateUserID = UserId;
+
+                item.c_name = md.c_name;
+                item.gender = md.gender;
+                item.birthday = md.birthday;
+                item.mobile = md.mobile;
+                item.zip = md.zip;
+                item.address = md.address;
+
+                await db0.SaveChangesAsync();
+                rAjaxResult.result = true;
+            }
+            catch (Exception ex)
+            {
+                rAjaxResult.result = false;
+                rAjaxResult.message = ex.ToString();
+            }
+            finally
+            {
+                db0.Dispose();
+            }
+            return Ok(rAjaxResult);
+        }
+        #endregion
+
         public class ListParam
         {
             public int? state { get; set; }

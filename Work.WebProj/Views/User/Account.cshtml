@@ -8,7 +8,14 @@
 
 @Html.Partial("user-nav")
 
-<form action="" class="account-data">
+@section Scripts {
+    <script src="~/Scripts/build/front/useraccount.js?v=@CommWebSetup.CacheVer"></script>
+}
+
+<div id="page_content"></div>
+
+<!--
+  <form action="" class="account-data">
     <fieldset class="m-b-48">
        <legend>登入設定</legend>
        <table class="full">
@@ -76,4 +83,6 @@
            <button class="btn font-lg p-y-12 p-x-48">儲存</button>
        </footer>
     </fieldset>
-</form>
+</form>  
+
+-->
