@@ -239,45 +239,50 @@ namespace DotWeb.Api
             ResultInfo r = new ResultInfo();
             try
             {
-                db0 = getDB0();
-                int c_id = int.Parse(this.UserId);
-                var item = await db0.Customer.FindAsync(c_id);
+                if (ModelState.IsValid)
+                {
+                    if (md.NewPassword == md.OldPassword)
+                    {//新密碼和舊密碼不可相同
+                        r.result = false;
+                        r.message = Resources.Res.Log_Err_NewPasswordSame;
+                        return Ok(r);
+                    }
+                    using (var db0 = getDB0())
+                    {
+                        int c_id = int.Parse(this.UserId);
+                        var item = await db0.Customer.FindAsync(c_id);
 
-                if (md.NewPassword != md.ConfirmPassword)
-                {//確認密碼和新密碼不一致
-                    r.result = false;
-                    r.message = Resources.Res.Log_Err_NewPasswordNotSure;
-                    return Ok(r);
+                        string old = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(md.OldPassword));
+                        if (item.c_pw != old)
+                        {//舊密碼輸入錯誤
+                            r.result = false;
+                            r.message = Resources.Res.Log_Err_Password;
+                            return Ok(r);
+                        }
+                        else
+                        {
+                            item.c_pw = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(md.NewPassword));
+                            await db0.SaveChangesAsync();
+                            r.result = true;
+                            r.message = Resources.Res.Info_ChangePassword_Success;
+                        }
+                    }               
                 }
-                if (md.NewPassword == md.OldPassword)
-                {//新密碼和舊密碼不可相同
+                else
+                {
+                    List<string> errMessage = new List<string>();
+                    foreach (System.Web.Http.ModelBinding.ModelState modelState in ModelState.Values)
+                        foreach (System.Web.Http.ModelBinding.ModelError error in modelState.Errors)
+                            errMessage.Add(error.ErrorMessage);
+
+                    r.message = String.Join(":", errMessage);
                     r.result = false;
-                    r.message = Resources.Res.Log_Err_NewPasswordSame;
-                    return Ok(r);
                 }
-                string old = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(md.OldPassword));
-                if (item.c_pw != old)
-                {//舊密碼輸入錯誤
-                    r.result = false;
-                    r.message = Resources.Res.Log_Err_Password;
-                    return Ok(r);
-                }
-
-
-                item.c_pw = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(md.NewPassword));
-
-                await db0.SaveChangesAsync();
-                r.result = true;
-                r.message = Resources.Res.Info_ChangePassword_Success;
             }
             catch (Exception ex)
             {
                 r.result = false;
                 r.message = ex.ToString();
-            }
-            finally
-            {
-                db0.Dispose();
             }
             return Ok(r);
         }
@@ -359,7 +364,7 @@ namespace DotWeb.Api
                 }
 
                 item.c_pw = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(md.NewPassword));
-               
+
                 await db0.SaveChangesAsync();
                 r.result = true;
                 r.message = Resources.Res.Info_ChangePassword_Success;
