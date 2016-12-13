@@ -339,8 +339,94 @@ namespace DotWeb.Areas.Base.Controllers
             sheet.Cell(row_index, col_end).Style.Font.FontColor = XLColor.FromArgb(156, 101, 0);
             sheet.Cell(row_index, col_end).Style.Fill.BackgroundColor = XLColor.FromArgb(255, 235, 156);
             #endregion
-            sheet.Range(1,2, row_index, col_end).Style.Border.OutsideBorder= XLBorderStyleValues.Thick;
-            sheet.Range(1,2, row_index, col_end).Style.Border.InsideBorder= XLBorderStyleValues.Thin;
+            sheet.Range(1, 2, row_index, col_end).Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
+            sheet.Range(1, 2, row_index, col_end).Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+            sheet.ColumnsUsed().AdjustToContents();//自動調整寬度
+        }
+        #endregion
+        #region 客戶資料
+        [HttpGet]
+        public FileResult Excel_Customer(Api.CustomerController.queryParam q)
+        {
+            var outputStream = stmCustomer(q);
+            string setFileName = "會員資料-" + Guid.NewGuid().ToString() + ".xlsx";
+
+            return File(outputStream, "application/vnd.ms-excel", setFileName);
+        }
+        private MemoryStream stmCustomer(Api.CustomerController.queryParam q)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            try
+            {
+                db0 = getDB0();
+
+                XLWorkbook excel = new XLWorkbook();
+                IXLWorksheet getSheet = excel.Worksheets.Add("會員資料");
+
+                #region 取得資料
+                var items = getCustomerData(q);
+                #endregion
+
+
+                #region Excel Handle
+                makeCustomer(items, getSheet);
+                #endregion
+
+                excel.SaveAs(outputStream);
+                outputStream.Position = 0;
+                excel.Dispose();
+                return outputStream;
+            }
+            catch (Exception ex)
+            {
+                //logger.Error(ex);
+                return null;
+            }
+        }
+        private List<Customer> getCustomerData(Api.CustomerController.queryParam q)
+        {
+            List<Customer> res = new List<Customer>();
+            using (var db0 = getDB0())
+            {
+                #region getdata
+                var predicate = PredicateBuilder.True<Customer>();
+
+                if (q.name != null)
+                    predicate = predicate.And(x => x.c_name.Contains(q.name) || x.email.Contains(q.name)
+                                                   || x.tel.Contains(q.name) || x.mobile.Contains(q.name)
+                                                   || x.zip.Contains(q.name) || x.address.Contains(q.name));
+
+                res = db0.Customer.AsExpandable().Where(predicate).ToList();
+                #endregion
+            }
+            return res;
+        }
+        private void makeCustomer(List<Customer> data, IXLWorksheet sheet)
+        {
+            sheet.Cell(1, 1).Value = "客戶資料(" + data.Count() + ")";
+            int row_index = 2;
+            #region 主標題
+            sheet.Cell(row_index, 1).Value = "[客戶姓名]";
+            sheet.Cell(row_index, 2).Value = "[email]";
+            sheet.Cell(row_index, 3).Value = "[電話]";
+            sheet.Cell(row_index, 4).Value = "[手機]";
+            sheet.Cell(row_index, 5).Value = "[郵遞區號]";
+            sheet.Cell(row_index, 6).Value = "[地址]";
+
+            setFontColor_Label(sheet, row_index, row_index, 1, 6, XLColor.Blue);
+            row_index++;
+            #endregion
+
+            foreach (var i in data)
+            {
+                sheet.Cell(row_index, 1).Value = i.c_name;
+                sheet.Cell(row_index, 2).Value = i.email;
+                sheet.Cell(row_index, 3).Value = i.tel;
+                sheet.Cell(row_index, 4).Value = i.mobile;
+                sheet.Cell(row_index, 5).Value = i.zip;
+                sheet.Cell(row_index, 6).Value = i.address;
+                row_index++;
+            }
             sheet.ColumnsUsed().AdjustToContents();//自動調整寬度
         }
         #endregion

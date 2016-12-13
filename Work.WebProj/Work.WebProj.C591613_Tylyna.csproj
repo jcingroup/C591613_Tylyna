@@ -210,6 +210,7 @@
     <Compile Include="Areas\Active\ActiveAreaRegistration.cs" />
     <Compile Include="Areas\Active\Controllers\ParamDataController.cs" />
     <Compile Include="Areas\Active\Controllers\OrderDataController.cs" />
+    <Compile Include="Areas\Active\Controllers\UserDataController.cs" />
     <Compile Include="Areas\Active\Controllers\ProductDataController.cs" />
     <Compile Include="Areas\Active\Controllers\SysDemoController.cs" />
     <Compile Include="Areas\Base\Controllers\DocController.cs" />
@@ -265,6 +266,7 @@
     <Content Include="Areas\Active\Views\OrderData\Ship.cshtml" />
     <Content Include="Areas\Active\Views\OrderData\Main.cshtml" />
     <Content Include="Areas\Active\Views\OrderData\Remit.cshtml" />
+    <Content Include="Areas\Active\Views\UserData\Main.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
@@ -319,6 +321,7 @@
     <Content Include="ckfinder\core\connector\aspx\lang\zh-tw.xml" />
     <Compile Include="Controllers\Api\ParamController.cs" />
     <Compile Include="Controllers\Api\FrontUserController.cs" />
+    <Compile Include="Controllers\Api\CustomerController.cs" />
     <Compile Include="Controllers\Api\PurchaseController.cs" />
     <Compile Include="Controllers\Api\ProductDetailController.cs" />
     <Compile Include="Controllers\Api\ProductController.cs" />
@@ -607,6 +610,7 @@
     <Content Include="Scripts\build\app\m_purchaseremit.js" />
     <Content Include="Scripts\build\app\m_purchaseship.js" />
     <Content Include="Scripts\build\app\m_roles.js" />
+    <Content Include="Scripts\build\app\m_userdata.js" />
     <Content Include="Scripts\build\app\m_users.js" />
     <Content Include="Scripts\build\app\vendors.js" />
     <Content Include="Scripts\build\app\w-comm.js" />
@@ -775,6 +779,16 @@
     <TypeScriptCompile Include="Scripts\src\Param\pub.ts" />
     <TypeScriptCompile Include="Scripts\src\Param\store.ts" />
     <TypeScriptCompile Include="Scripts\src\Param\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\UserData\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\UserData\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\UserData\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\UserData\pub.ts" />
+    <TypeScriptCompile Include="Scripts\src\UserData\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\UserData\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\UserData\vwEdit.tsx" />
+    <TypeScriptCompile Include="Scripts\src\UserData\vwGrid.tsx" />
+    <TypeScriptCompile Include="Scripts\src\UserData\vwGridSearch.tsx" />
+    <TypeScriptCompile Include="Scripts\src\UserData\vwGridTable.tsx" />
     <TypeScriptCompile Include="Scripts\src\Product\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\Product\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\Product\containers.ts" />
@@ -940,6 +954,7 @@
     <Content Include="Areas\Active\Views\ProductData\App_LocalResources\Kind.cshtml.resx" />
     <Content Include="Areas\Active\Views\ParamData\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\OrderData\App_LocalResources\Main.cshtml.resx" />
+    <Content Include="Areas\Active\Views\UserData\App_LocalResources\Main.cshtml.resx" />
     <EmbeddedResource Include="_Code\RPTFile\MemeberLabel.rdlc" />
   </ItemGroup>
   <PropertyGroup>
