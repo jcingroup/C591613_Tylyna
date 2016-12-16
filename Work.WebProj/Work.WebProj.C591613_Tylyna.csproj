@@ -272,6 +272,10 @@
     <Content Include="Areas\Active\Views\WebData\Banner.cshtml" />
     <Content Include="Areas\Active\Views\WebData\News.cshtml" />
     <Content Include="Areas\Active\Views\WebData\FAQ.cshtml" />
+    <Content Include="Areas\Active\Views\WebData\AboutUs.cshtml" />
+    <Content Include="Areas\Active\Views\WebData\Quality.cshtml" />
+    <Content Include="Areas\Active\Views\WebData\Story.cshtml" />
+    <Content Include="Areas\Active\Views\WebData\Editor.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
@@ -325,6 +329,7 @@
     <Content Include="ckfinder\core\connector\aspx\lang\zh-cn.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-tw.xml" />
     <Compile Include="Controllers\Api\FAQController.cs" />
+    <Compile Include="Controllers\Api\Editor_L1Controller.cs" />
     <Compile Include="Controllers\Api\NewsController.cs" />
     <Compile Include="Controllers\Api\ParamController.cs" />
     <Compile Include="Controllers\Api\FrontUserController.cs" />
@@ -607,10 +612,13 @@
     <Content Include="ckeditor\config.js" />
     <Content Include="ckeditor\contents.css" />
     <Content Include="ckeditor\styles.js" />
+    <Content Include="Scripts\build\app\m_banner.js" />
     <Content Include="Scripts\build\app\m_change_password.js" />
+    <Content Include="Scripts\build\app\m_faq.js" />
     <Content Include="Scripts\build\app\m_login.js" />
     <Content Include="Scripts\build\app\m_menu.js" />
     <Content Include="Scripts\build\app\m_menu_set.js" />
+    <Content Include="Scripts\build\app\m_news.js" />
     <Content Include="Scripts\build\app\m_param.js" />
     <Content Include="Scripts\build\app\m_paramyoutube.js" />
     <Content Include="Scripts\build\app\m_product.js" />

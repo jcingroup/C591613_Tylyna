@@ -7,6 +7,7 @@ using System.IO;
 using System.Web.Mvc;
 using System.Linq;
 using System.Collections.Generic;
+using ProcCore.Business.DB0;
 
 namespace DotWeb.Areas.Active.Controllers
 {
@@ -25,6 +26,29 @@ namespace DotWeb.Areas.Active.Controllers
         }
         public ActionResult FAQ()
         {//常見問答
+            ActionRun();
+            return View();
+        }
+        public ActionResult AboutUs()
+        {//利它精神
+            ActionRun();
+            ViewBag.id = (int)EditorState.AboutUs;
+            return View();
+        }
+        public ActionResult Quality()
+        {//利他嚴選
+            ActionRun();
+            ViewBag.id = (int)EditorState.Quality;
+            return View();
+        }
+        public ActionResult Story()
+        {//利他故事
+            ActionRun();
+            ViewBag.id = (int)EditorState.Story;
+            return View();
+        }
+        public ActionResult Editor()
+        {//總編輯器管理
             ActionRun();
             return View();
         }

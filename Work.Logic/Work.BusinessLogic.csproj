@@ -109,6 +109,12 @@
     <Compile Include="DB0\Department.cs">
       <DependentUpon>C591613_Tylyna.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB0\Editor_L1.cs">
+      <DependentUpon>C591613_Tylyna.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\Editor_L2.cs">
+      <DependentUpon>C591613_Tylyna.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB0\FAQ.cs">
       <DependentUpon>C591613_Tylyna.tt</DependentUpon>
     </Compile>
@@ -160,6 +166,8 @@
     <Compile Include="LogicCenter.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Banner.cs" />
+    <Compile Include="Models\Editor_L2.cs" />
+    <Compile Include="Models\Editor_L1.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\PurchaseDetail.cs" />

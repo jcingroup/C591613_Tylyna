@@ -23,6 +23,12 @@ namespace ProcCore.Business.DB0
         view = 0,
         edit = 1
     }
+    public enum EditorState
+    {
+        AboutUs = 1,//利它精神
+        Quality = 2,//利他嚴選
+        Story = 3,//利他故事
+    }
     public enum IStockState
     {//產品狀況
         on_store_shelves = 1,//上架中

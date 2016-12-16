@@ -18,7 +18,8 @@ namespace ProcCore.Business
         ProductKind, Product, ProductDetail,
         Customer,
         Purchase, PurchaseDetail,
-        Banner, News, FAQ
+        Banner, News, FAQ,
+        Editor_L1, Editor_L2
     }
     public enum SNType
     {

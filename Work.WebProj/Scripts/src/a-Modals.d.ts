@@ -272,4 +272,26 @@
         i_UpdateDateTime?: Date;
         i_Lang?: string;
     }
+    interface Editor_L1 {
+        editor_l1_id?: number;
+        name?: string;
+        sort?: number;
+        Editor_L2?: Array<server.Editor_L2>;
+    }
+    interface Editor_L2 {
+        editor_l2_id?: number;
+        editor_l1_id?: number;
+        l2_name?: string;
+        l2_content?: string;
+        sort?: number;
+        i_Hide?: boolean;
+        i_InsertUserID?: string;
+        i_InsertDeptID?: number;
+        i_InsertDateTime?: Date;
+        i_UpdateUserID?: string;
+        i_UpdateDeptID?: number;
+        i_UpdateDateTime?: Date;
+        i_Lang?: string;
+        Editor_L1?: server.Editor_L1;
+    }
 } 
