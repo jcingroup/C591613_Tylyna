@@ -271,6 +271,7 @@
     <Content Include="Areas\Active\Views\ParamData\Youtube.cshtml" />
     <Content Include="Areas\Active\Views\WebData\Banner.cshtml" />
     <Content Include="Areas\Active\Views\WebData\News.cshtml" />
+    <Content Include="Areas\Active\Views\WebData\FAQ.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
@@ -323,6 +324,7 @@
     <Content Include="ckfinder\core\connector\aspx\lang\vi.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-cn.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-tw.xml" />
+    <Compile Include="Controllers\Api\FAQController.cs" />
     <Compile Include="Controllers\Api\NewsController.cs" />
     <Compile Include="Controllers\Api\ParamController.cs" />
     <Compile Include="Controllers\Api\FrontUserController.cs" />
@@ -735,6 +737,16 @@
     <TypeScriptCompile Include="app_modules\simple-ajax-uploader\SimpleAjaxUploader.def.ts" />
     <TypeScriptCompile Include="app_modules\funtest\fun.ts" />
     <TypeScriptCompile Include="Scripts\src\action_type.ts" />
+    <TypeScriptCompile Include="Scripts\src\FAQ\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\FAQ\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\FAQ\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\FAQ\pub.ts" />
+    <TypeScriptCompile Include="Scripts\src\FAQ\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\FAQ\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\FAQ\vwEdit.tsx" />
+    <TypeScriptCompile Include="Scripts\src\FAQ\vwGrid.tsx" />
+    <TypeScriptCompile Include="Scripts\src\FAQ\vwGridSearch.tsx" />
+    <TypeScriptCompile Include="Scripts\src\FAQ\vwGridTable.tsx" />
     <TypeScriptCompile Include="Scripts\src\News\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\News\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\News\containers.ts" />

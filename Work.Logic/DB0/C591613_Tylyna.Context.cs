@@ -48,5 +48,6 @@ namespace ProcCore.Business.DB0
         public virtual DbSet<TimeLinessCode> TimeLinessCode { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<FAQ> FAQ { get; set; }
     }
 }

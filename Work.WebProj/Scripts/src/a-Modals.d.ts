@@ -258,4 +258,18 @@
         i_UpdateDateTime?: Date;
         i_Lang?: string;
     }
+    interface FAQ {
+        faq_id?: number;
+        q_title?: string;
+        a_content?: string;
+        sort?: number;
+        i_Hide?: boolean;
+        i_InsertUserID?: string;
+        i_InsertDeptID?: number;
+        i_InsertDateTime?: Date;
+        i_UpdateUserID?: string;
+        i_UpdateDeptID?: number;
+        i_UpdateDateTime?: Date;
+        i_Lang?: string;
+    }
 } 

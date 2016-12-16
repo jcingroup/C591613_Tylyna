@@ -23,6 +23,11 @@ namespace DotWeb.Areas.Active.Controllers
             ActionRun();
             return View();
         }
+        public ActionResult FAQ()
+        {//常見問答
+            ActionRun();
+            return View();
+        }
         #endregion
 
         #region ajax file section
