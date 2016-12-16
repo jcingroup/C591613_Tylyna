@@ -267,6 +267,7 @@
     <Content Include="Areas\Active\Views\OrderData\Main.cshtml" />
     <Content Include="Areas\Active\Views\OrderData\Remit.cshtml" />
     <Content Include="Areas\Active\Views\UserData\Main.cshtml" />
+    <Content Include="Areas\Active\Views\ParamData\Youtube.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
@@ -773,6 +774,12 @@
     <TypeScriptCompile Include="Scripts\src\front\ProductDetail\containers.ts" />
     <TypeScriptCompile Include="Scripts\src\front\ProductDetail\store.ts" />
     <TypeScriptCompile Include="Scripts\src\front\ProductDetail\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\ParamYoutube\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\ParamYoutube\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\ParamYoutube\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\ParamYoutube\pub.ts" />
+    <TypeScriptCompile Include="Scripts\src\ParamYoutube\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\ParamYoutube\vwAStart.tsx" />
     <TypeScriptCompile Include="Scripts\src\Param\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\Param\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\Param\containers.ts" />

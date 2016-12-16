@@ -18,6 +18,11 @@ namespace DotWeb.Areas.Active.Controllers
             ActionRun();
             return View();
         }
+        public ActionResult Youtube()
+        {
+            ActionRun();
+            return View();
+        }
         #endregion
     }
 }

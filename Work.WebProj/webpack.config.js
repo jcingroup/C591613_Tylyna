@@ -18,6 +18,7 @@ module.exports = {
         m_purchaseremit: path.resolve(__dirname, 'Scripts/src/PurchaseRemit/app.js'),
         m_purchaseship: path.resolve(__dirname, 'Scripts/src/PurchaseShip/app.js'),
         m_userdata: path.resolve(__dirname, 'Scripts/src/UserData/app.js'),
+        m_paramyoutube: path.resolve(__dirname, 'Scripts/src/ParamYoutube/app.js'),
         //前台 頁面
         "../front/productdetail": path.resolve(__dirname, 'Scripts/src/front/ProductDetail/app.js'),
         "../front/shoppingcart": path.resolve(__dirname, 'Scripts/src/front/ShoppingCart/app.js'),

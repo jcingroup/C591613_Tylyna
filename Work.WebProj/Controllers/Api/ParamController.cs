@@ -20,6 +20,7 @@ namespace DotWeb.Api
     [RoutePrefix("api/Param")]
     public class ParamController : ajaxBaseApi
     {
+        #region 購物金流維護
         public async Task<IHttpActionResult> Get()
         {
             Param md = new Param();
@@ -94,6 +95,58 @@ namespace DotWeb.Api
             }
 
         }
+        #endregion
+
+        #region 首頁影片維護
+        [Route("GetYoutube")]
+        [HttpGet]
+        public IHttpActionResult GetYoutube()
+        {
+            ParamYoutube md = new ParamYoutube();
+            var open = openLogic();
+            using (db0 = getDB0())
+            {
+                md.YoutubeUrl = (string)open.getParmValue(ParmDefine.YoutubeUrl);
+
+                var r = new ResultInfo<ParamYoutube>() { data = md };
+                r.result = true;
+                return Ok(r);
+            }
+        }
+
+        [Route("PostYoutube")]
+        [HttpPost]
+        public IHttpActionResult PostYoutube([FromBody]ParamYoutube md)
+        {
+            var r = new ResultInfo<ParamYoutube>();
+
+            try
+            {
+                #region param
+                var open = openLogic();
+
+                open.setParmValue(ParmDefine.YoutubeUrl, md.YoutubeUrl);
+
+                #endregion
+
+                r.result = true;
+                return Ok(r);
+            }
+            catch (DbEntityValidationException ex) //欄位驗證錯誤
+            {
+                r.message = getDbEntityValidationException(ex);
+                r.result = false;
+                return Ok(r);
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message + "\r\n" + getErrorMessage(ex);
+                return Ok(r);
+            }
+
+        }
+        #endregion
 
         public class Param
         {
@@ -104,6 +157,10 @@ namespace DotWeb.Api
             public string BankCode { get; set; }
             public string AccountNumber { get; set; }
             public IEnumerable<Shipment> ship { get; set; }//運費
+        }
+        public class ParamYoutube
+        {
+            public string YoutubeUrl { get; set; }
         }
     }
 }

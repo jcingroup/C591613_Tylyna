@@ -51,7 +51,8 @@ namespace ProcCore.Business.LogicConect
     public enum ParmDefine
     {
         Open, AboutUs, Email,
-        AccountName, BankName, BankCode, AccountNumber
+        AccountName, BankName, BankCode, AccountNumber,
+        YoutubeUrl
     }
     #endregion
 
