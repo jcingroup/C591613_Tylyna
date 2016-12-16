@@ -3,20 +3,21 @@ import Moment = require('moment');
 import {Init_Data} from './pub';
 import {config, IStockStateData} from '../ts-comm/def-data';
 import {ac_type_comm} from '../action_type';
+import {TagShowAndHide, PWButton} from '../components';
 //view
 import {GridTableView} from './containers';
 import {GridSearch} from './vwGridSearch';
 import {NavPage} from '../components';
 
-export class Grid extends React.Component<any, any>{
+export class Grid extends React.Component<any, { infoShow: boolean }>{
 
     constructor() {
         super();
         this.queryGridData = this.queryGridData.bind(this);
-
         this.addState = this.addState.bind(this);
 
         this.state = {
+            infoShow: true
         };
     }
     queryGridData(page?: number) {//navpage 用
@@ -42,6 +43,9 @@ export class Grid extends React.Component<any, any>{
         };
         this.props.editState(ac_type_comm.add, 0, data);
     }
+    hideInfo(e) {
+        this.setState({ infoShow: false });
+    }
     render() {
         let out_html: JSX.Element = null;
         let pp = this.props;
@@ -53,9 +57,10 @@ export class Grid extends React.Component<any, any>{
                     <h3 className="h3">
                         {gb_caption}
                     </h3>
-                    <div className="alert alert-warning">
+                    <TagShowAndHide show={this.state.infoShow} TagName={TagName.div}  className="alert alert-warning">
+                        <PWButton className="close" iconClassName="fa-times" enable={true} onClick={this.hideInfo.bind(this) } />
                         <strong>前台顯示排序：</strong> 數字愈大愈前面
-                    </div>
+                    </TagShowAndHide>
                     <GridSearch search={pp.search} page_operator={pp.page_operator} init_data={pp.init_data}
                         setInputValue={this.props.setInputValue}
                         callGridLoad={this.props.callGridLoad}/>

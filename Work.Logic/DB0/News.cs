@@ -16,11 +16,10 @@ namespace ProcCore.Business.DB0
     {
         public int news_id { get; set; }
         public string news_title { get; set; }
-        public int news_category { get; set; }
         public System.DateTime day { get; set; }
-        public string news_info { get; set; }
         public string news_content { get; set; }
         public int sort { get; set; }
+        public bool no_index { get; set; }
         public bool i_Hide { get; set; }
         public string i_InsertUserID { get; set; }
         public Nullable<int> i_InsertDeptID { get; set; }

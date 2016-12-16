@@ -1,9 +1,9 @@
 ﻿import $ = require('jquery');
 import React = require('react');
 import Moment = require('moment');
-import {config, UIText, IHideTypeData, IStockStateData, IPackTypeData} from '../ts-comm/def-data';
+import {config, UIText, IHideTypeData} from '../ts-comm/def-data';
 import {ac_type_comm} from '../action_type';
-import {InputText, InputNum, SelectText, RadioBox, AreaText, PWButton, TagShowAndHide} from '../components';
+import {InputText, InputNum, RadioBox, PWButton, TagShowAndHide} from '../components';
 import {MasterImageUpload} from '../ts-comm/comm-cmpt';
 import {Init_Params} from './pub';
 

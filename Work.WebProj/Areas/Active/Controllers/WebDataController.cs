@@ -18,6 +18,11 @@ namespace DotWeb.Areas.Active.Controllers
             ActionRun();
             return View();
         }
+        public ActionResult News()
+        {//最新消息
+            ActionRun();
+            return View();
+        }
         #endregion
 
         #region ajax file section
@@ -30,9 +35,8 @@ namespace DotWeb.Areas.Active.Controllers
             {
                 if (filekind == "BannerImg")
                     hdlUpImage(filename, filekind, id, ImageFileUpParm.BannerRotator);
-                //代表 圖片
-                //if (filekind == "Photo1")
-                //    handleImageSave(filename, id, ImageFileUpParm.ProductList, filekind, "Albums", "Photo");
+                if (filekind == "NewsImg")
+                    hdlUpImage(filename, filekind, id, ImageFileUpParm.NewsList);
 
                 r.result = true;
                 r.file_name = filename;

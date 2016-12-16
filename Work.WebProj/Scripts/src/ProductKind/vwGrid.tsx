@@ -4,12 +4,13 @@ import Moment = require('moment');
 import { clone, makeInputValue} from '../ts-comm/comm-func';
 import {config} from '../ts-comm/def-data';
 import {ac_type_comm} from '../action_type';
+import {TagShowAndHide, PWButton} from '../components';
 //view
 import {GridTableView} from './containers';
 import {GridSearch} from './vwGridSearch';
 import {NavPage} from '../components';
 
-export class Grid extends React.Component<any, any>{
+export class Grid extends React.Component<any, { infoShow: boolean }>{
 
     constructor() {
         super();
@@ -19,6 +20,7 @@ export class Grid extends React.Component<any, any>{
         this.deleteItem = this.deleteItem.bind(this);
 
         this.state = {
+            infoShow: true
         };
     }
     queryGridData(page?: number) {//navpage 用
@@ -46,6 +48,9 @@ export class Grid extends React.Component<any, any>{
         params['page'] = this.props.page_operator.page;
         this.props.callDelete(id, params);
     }
+    hideInfo(e) {
+        this.setState({ infoShow: false });
+    }
     render() {
         let out_html: JSX.Element = null;
         let pp = this.props;
@@ -54,9 +59,10 @@ export class Grid extends React.Component<any, any>{
         out_html =
             (
                 <div>
-                    <div className="alert alert-warning">
+                    <TagShowAndHide show={this.state.infoShow} TagName={TagName.div}  className="alert alert-warning">
+                        <PWButton className="close" iconClassName="fa-times" enable={true} onClick={this.hideInfo.bind(this) } />
                         <strong>前台顯示排序：</strong> 數字愈大愈前面
-                    </div>
+                    </TagShowAndHide>
                     <GridSearch search={pp.search} page_operator={pp.page_operator}
                         setInputValue={this.props.setInputValue}
                         callGridLoad={this.props.callGridLoad}/>

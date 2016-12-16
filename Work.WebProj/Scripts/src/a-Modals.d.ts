@@ -241,4 +241,21 @@
         i_UpdateDateTime?: Date;
         i_Lang?: string;
     }
+
+    interface News {
+        news_id?: number;
+        news_title?: string;
+        day?: any;
+        news_content?: string;
+        sort?: number;
+        no_index?: boolean;
+        i_Hide?: boolean;
+        i_InsertUserID?: string;
+        i_InsertDeptID?: number;
+        i_InsertDateTime?: Date;
+        i_UpdateUserID?: string;
+        i_UpdateDeptID?: number;
+        i_UpdateDateTime?: Date;
+        i_Lang?: string;
+    }
 } 

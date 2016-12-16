@@ -211,11 +211,10 @@
           </Key>
           <Property Name="news_id" Type="int" Nullable="false" />
           <Property Name="news_title" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="news_category" Type="int" Nullable="false" />
           <Property Name="day" Type="datetime" Nullable="false" />
-          <Property Name="news_info" Type="nvarchar" MaxLength="512" />
           <Property Name="news_content" Type="ntext" />
           <Property Name="sort" Type="int" Nullable="false" />
+          <Property Name="no_index" Type="bit" Nullable="false" />
           <Property Name="i_Hide" Type="bit" Nullable="false" />
           <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
           <Property Name="i_InsertDeptID" Type="int" />
@@ -792,7 +791,6 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <EntitySet Name="Shipment" EntityType="C591613_TylynaModel.Shipment" />
-          <EntitySet Name="News" EntityType="C591613_TylynaModel.News" />
           <EntitySet Name="Customer" EntityType="C591613_TylynaModel.Customer" />
           <EntitySet Name="Purchase" EntityType="C591613_TylynaModel.Purchase" />
           <AssociationSet Name="FK_Purchase_Customer" Association="C591613_TylynaModel.FK_Purchase_Customer">
@@ -819,6 +817,7 @@
           </AssociationSet>
           <EntitySet Name="TimeLinessCode" EntityType="C591613_TylynaModel.TimeLinessCode" />
           <EntitySet Name="Banner" EntityType="C591613_TylynaModel.Banner" />
+          <EntitySet Name="News" EntityType="C591613_TylynaModel.News" />
           </EntityContainer>
         <EntityType Name="ProductKind">
           <Key>
@@ -881,26 +880,6 @@
           <Property Name="limit_money" Type="Int32" Nullable="false" />
           <Property Name="shipment_fee" Type="Int32" Nullable="false" />
           <Property Name="bank_charges" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="News">
-          <Key>
-            <PropertyRef Name="news_id" />
-          </Key>
-          <Property Name="news_id" Type="Int32" Nullable="false" />
-          <Property Name="news_title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="news_category" Type="Int32" Nullable="false" />
-          <Property Name="day" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="news_info" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="news_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="sort" Type="Int32" Nullable="false" />
-          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
-          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="i_InsertDeptID" Type="Int32" />
-          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
-          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="i_UpdateDeptID" Type="Int32" />
-          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
-          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -1064,6 +1043,25 @@
           <Property Name="banner_id" Type="Int32" Nullable="false" />
           <Property Name="b_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="news_id" />
+          </Key>
+          <Property Name="news_id" Type="Int32" Nullable="false" />
+          <Property Name="news_title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="day" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="news_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="no_index" Type="Boolean" Nullable="false" />
           <Property Name="i_Hide" Type="Boolean" Nullable="false" />
           <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="i_InsertDeptID" Type="Int32" />
@@ -1299,27 +1297,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="News">
-            <EntityTypeMapping TypeName="C591613_TylynaModel.News">
-              <MappingFragment StoreEntitySet="News">
-                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
-                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
-                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
-                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
-                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
-                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
-                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
-                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
-                <ScalarProperty Name="sort" ColumnName="sort" />
-                <ScalarProperty Name="news_content" ColumnName="news_content" />
-                <ScalarProperty Name="news_info" ColumnName="news_info" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="news_category" ColumnName="news_category" />
-                <ScalarProperty Name="news_title" ColumnName="news_title" />
-                <ScalarProperty Name="news_id" ColumnName="news_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customer">
             <EntityTypeMapping TypeName="C591613_TylynaModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -1426,6 +1403,26 @@
                 <ScalarProperty Name="sort" ColumnName="sort" />
                 <ScalarProperty Name="b_name" ColumnName="b_name" />
                 <ScalarProperty Name="banner_id" ColumnName="banner_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
+                <ScalarProperty Name="no_index" ColumnName="no_index" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="news_content" ColumnName="news_content" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="news_title" ColumnName="news_title" />
+                <ScalarProperty Name="news_id" ColumnName="news_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

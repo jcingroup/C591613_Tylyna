@@ -368,6 +368,7 @@ interface AreaTextProps {
     defaultValue?: string;
     maxLength?: number;
     name?: string;
+    placeholder?: string;
 }
 export class AreaText extends React.Component<AreaTextProps, any>{
 
@@ -409,6 +410,7 @@ export class AreaText extends React.Component<AreaTextProps, any>{
                         value={value}
                         defaultValue={pp.defaultValue}
                         maxLength={pp.maxLength}
+                        placeholder={pp.placeholder}
                         ></textarea>
                 );
         }

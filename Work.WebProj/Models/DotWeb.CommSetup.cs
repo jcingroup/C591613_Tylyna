@@ -195,13 +195,13 @@ namespace DotWeb.CommSetup
                 return imUp;
             }
         }
-        public static ImageUpScope FirmRotator
+        public static ImageUpScope NewsList
         {
             get
             {
-                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
+                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 800 };
                 imUp.Parm = new ImageSizeParm[] {
-                    new ImageSizeParm(){ heigh=65}
+                    new ImageSizeParm(){ folderName="size1",heigh=500}
                 };
                 return imUp;
             }

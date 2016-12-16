@@ -28,9 +28,12 @@ export class Grid extends React.Component<any, { infoShow: boolean }>{
         this.props.callGridLoad(params);
     }
     addState() {
-        let data: server.Banner = {
-            banner_id: 0,
-            b_name: '',
+        let data: server.News = {
+            news_id: 0,
+            news_title: '',
+            day: Moment().format(config.dateFT),
+            news_content: null,
+            no_index: true,
             sort: 0,
             i_Hide: false,
             i_Lang: 'zh-TW'
@@ -44,7 +47,7 @@ export class Grid extends React.Component<any, { infoShow: boolean }>{
         let out_html: JSX.Element = null;
         let pp = this.props;
         let p_info: server.PageInfo = pp.page_operator;
-        let grid: Array<server.Banner> = pp.grid;
+        let grid: Array<server.News> = pp.grid;
         out_html =
             (
                 <div>
@@ -53,7 +56,7 @@ export class Grid extends React.Component<any, { infoShow: boolean }>{
                     </h3>
                     <TagShowAndHide show={this.state.infoShow} TagName={TagName.div}  className="alert alert-warning">
                         <PWButton className="close" iconClassName="fa-times" enable={true} onClick={this.hideInfo.bind(this) } />
-                        <strong>前台顯示排序：</strong> 數字愈大愈前面
+                        首頁顯示最多3則
                     </TagShowAndHide>
                     <GridSearch search={pp.search} page_operator={pp.page_operator}
                         setInputValue={this.props.setInputValue}
