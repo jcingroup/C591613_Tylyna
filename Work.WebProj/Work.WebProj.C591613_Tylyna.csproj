@@ -335,6 +335,7 @@
     <Compile Include="Controllers\Api\FrontUserController.cs" />
     <Compile Include="Controllers\Api\CustomerController.cs" />
     <Compile Include="Controllers\Api\BannerController.cs" />
+    <Compile Include="Controllers\Api\Editor_L2Controller.cs" />
     <Compile Include="Controllers\Api\PurchaseController.cs" />
     <Compile Include="Controllers\Api\ProductDetailController.cs" />
     <Compile Include="Controllers\Api\ProductController.cs" />
@@ -614,6 +615,7 @@
     <Content Include="ckeditor\styles.js" />
     <Content Include="Scripts\build\app\m_banner.js" />
     <Content Include="Scripts\build\app\m_change_password.js" />
+    <Content Include="Scripts\build\app\m_editorall.js" />
     <Content Include="Scripts\build\app\m_faq.js" />
     <Content Include="Scripts\build\app\m_login.js" />
     <Content Include="Scripts\build\app\m_menu.js" />
@@ -745,6 +747,7 @@
     <TypeScriptCompile Include="app_modules\simple-ajax-uploader\SimpleAjaxUploader.def.ts" />
     <TypeScriptCompile Include="app_modules\funtest\fun.ts" />
     <TypeScriptCompile Include="Scripts\src\action_type.ts" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\vwEditDetail.tsx" />
     <TypeScriptCompile Include="Scripts\src\FAQ\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\FAQ\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\FAQ\containers.ts" />
@@ -755,6 +758,16 @@
     <TypeScriptCompile Include="Scripts\src\FAQ\vwGrid.tsx" />
     <TypeScriptCompile Include="Scripts\src\FAQ\vwGridSearch.tsx" />
     <TypeScriptCompile Include="Scripts\src\FAQ\vwGridTable.tsx" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\pub.ts" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\vwEdit.tsx" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\vwGrid.tsx" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\vwGridSearch.tsx" />
+    <TypeScriptCompile Include="Scripts\src\EditorAll\vwGridTable.tsx" />
     <TypeScriptCompile Include="Scripts\src\News\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\News\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\News\containers.ts" />

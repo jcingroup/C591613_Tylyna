@@ -24,6 +24,18 @@ namespace DotWeb.Api
             using (db0 = getDB0())
             {
                 Editor_L1 item = await db0.Editor_L1.FindAsync(id);
+                item.Deatil = item.Editor_L2
+                                  .Select(x => new m_Editor_L2()
+                                  {
+                                      editor_l1_id = x.editor_l1_id,
+                                      editor_l2_id = x.editor_l2_id,
+                                      l2_name = x.l2_name,
+                                      l2_content = x.l2_content,
+                                      sort = x.sort,
+                                      edit_type = IEditType.Update,
+                                      view_mode = InputViewMode.view
+                                  })
+                                .ToList();
                 var r = new ResultInfo<Editor_L1>() { data = item };
                 r.result = true;
                 return Ok(r);
@@ -94,11 +106,55 @@ namespace DotWeb.Api
             try
             {
                 db0 = getDB0();
-                //item = await db0.ProductKind.FindAsync(param.id);
+                item = await db0.Editor_L1.FindAsync(param.id);
                 var md = param.md;
 
+                #region detail update
+                var details = item.Editor_L2;
 
-                db0.Entry(md).State = EntityState.Modified;
+                foreach (var detail in details)
+                {
+                    var md_detail = md.Deatil.FirstOrDefault(x => x.editor_l2_id == detail.editor_l2_id);
+                    if (detail.sort != md_detail.sort ||
+                        detail.l2_name != md_detail.l2_name ||
+                        detail.l2_content != md_detail.l2_content)
+                    {
+                        detail.i_UpdateUserID = UserId;
+                        detail.i_UpdateDateTime = DateTime.Now;
+                        detail.i_UpdateDeptID = departmentId;
+                    }
+                    detail.sort = md_detail.sort;
+                    detail.l2_name = md_detail.l2_name;
+                    detail.l2_content = md_detail.l2_content != null ? RemoveScriptTag(md_detail.l2_content) : null;
+                }
+                #endregion
+                #region add
+                var add_detail = md.Deatil.Where(x => x.edit_type == IEditType.Insert);
+                foreach (var detail in add_detail)
+                {
+                    var add_item = new Editor_L2()
+                    {
+                        editor_l1_id = md.editor_l1_id,
+                        editor_l2_id = GetNewId(CodeTable.Editor_L2),
+                        l2_name = detail.l2_name,
+                        l2_content = detail.l2_content != null ? RemoveScriptTag(detail.l2_content) : null,
+                        sort = detail.sort,
+                        i_Hide = false,
+                        i_InsertUserID = UserId,
+                        i_InsertDateTime = DateTime.Now,
+                        i_InsertDeptID = departmentId,
+                        i_UpdateUserID = UserId,
+                        i_UpdateDateTime = DateTime.Now,
+                        i_UpdateDeptID = departmentId,
+                        i_Lang = "zh-TW"
+                    };
+                    details.Add(add_item);
+                }
+
+                #endregion
+
+                item.name = md.name;
+                item.sort = md.sort;
 
                 await db0.SaveChangesAsync();
                 rAjaxResult.result = true;

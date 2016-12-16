@@ -277,8 +277,10 @@
         name?: string;
         sort?: number;
         Editor_L2?: Array<server.Editor_L2>;
+
+        Deatil?: Array<server.Editor_L2>;
     }
-    interface Editor_L2 {
+    interface Editor_L2 extends BaseEntityTable  {
         editor_l2_id?: number;
         editor_l1_id?: number;
         l2_name?: string;

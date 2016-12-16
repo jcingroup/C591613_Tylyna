@@ -14,9 +14,10 @@ namespace ProcCore.Business.DB0
 
     public enum IEditType
     {
-        none = 0,
-        insert = 1,
-        update = 2
+        None = 0,
+        Insert = 1,
+        Update = 2,
+        View = 3
     }
     public enum InputViewMode
     {
@@ -135,7 +136,8 @@ namespace ProcCore.Business.DB0
         public bool role_use { get; set; }
         public string role_name { get; set; }
     }
-    public class m_ProductDetail
+    #region 共用
+    public class m_ProductDetail : BaseEntityTable
     {
         public int product_detail_id { get; set; }
         public int product_id { get; set; }
@@ -146,9 +148,16 @@ namespace ProcCore.Business.DB0
         public int stock_state { get; set; }
 
         public int qty { get; set; }
-        public IEditType edit_type { get; set; }
-        public InputViewMode view_mode { get; set; }
     }
+    public class m_Editor_L2 : BaseEntityTable
+    {
+        public int editor_l2_id { get; set; }
+        public int editor_l1_id { get; set; }
+        public string l2_name { get; set; }
+        public string l2_content { get; set; }
+        public int sort { get; set; }
+    }
+    #endregion
     public partial class C591613_TylynaEntities : DbContext
     {
         public C591613_TylynaEntities(string connectionstring)

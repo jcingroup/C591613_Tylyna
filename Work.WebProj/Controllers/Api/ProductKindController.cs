@@ -79,7 +79,7 @@ namespace DotWeb.Api
                     x.i_UpdateDeptID,
                     x.i_UpdateDateTime,
                     x.i_Lang,
-                    edit_type = IEditType.update,
+                    edit_type = IEditType.Update,
                     view_mode = InputViewMode.view
                 })
                 .ToListAsync();

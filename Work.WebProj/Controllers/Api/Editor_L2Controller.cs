@@ -16,15 +16,15 @@ using System.Linq.Dynamic;
 
 namespace DotWeb.Api
 {
-    [RoutePrefix("api/ProductDetail")]
-    public class ProductDetailController : ajaxApi<ProductDetail>
+    [RoutePrefix("api/Editor_L2")]
+    public class Editor_L2Controller : ajaxApi<Editor_L2>
     {
         public async Task<IHttpActionResult> Get(int id)
         {
             using (db0 = getDB0())
             {
-                ProductDetail item = await db0.ProductDetail.FindAsync(id);
-                var r = new ResultInfo<ProductDetail>() { data = item };
+                Editor_L2 item = await db0.Editor_L2.FindAsync(id);
+                var r = new ResultInfo<Editor_L2>() { data = item };
                 r.result = true;
                 return Ok(r);
             }
@@ -35,17 +35,15 @@ namespace DotWeb.Api
 
             db0 = getDB0();
 
-            var resultItems = await db0.ProductDetail
-                .Where(x => x.product_id == q.main_id)
-                .Select(x => new
+            var resultItems = await db0.Editor_L2
+                .Where(x => x.editor_l1_id == q.main_id)
+                .Select(x => new m_Editor_L2
                 {
-                    product_id = x.product_id,
-                    product_detail_id = x.product_detail_id,
-                    sn = x.sn,//料號
-                    pack_name = x.pack_name,//包裝
-                    weight = x.weight,//重量
-                    price = x.price,//單價
-                    stock_state = x.stock_state,//狀態 上架/缺貨中
+                    editor_l1_id = x.editor_l1_id,
+                    editor_l2_id = x.editor_l2_id,
+                    l2_name = x.l2_name,
+                    l2_content = x.l2_content,
+                    sort = x.sort,
                     edit_type = IEditType.Update,
                     view_mode = InputViewMode.view
                 })
@@ -82,11 +80,11 @@ namespace DotWeb.Api
             }
             return Ok(rAjaxResult);
         }
-        public async Task<IHttpActionResult> Post([FromBody]ProductDetail md)
+        public async Task<IHttpActionResult> Post([FromBody]Editor_L2 md)
         {
-            md.product_detail_id = GetNewId(CodeTable.ProductDetail);
+            md.editor_l2_id = GetNewId(CodeTable.Editor_L2);
 
-            r = new ResultInfo<ProductDetail>();
+            r = new ResultInfo<Editor_L2>();
             if (!ModelState.IsValid)
             {
                 r.message = ModelStateErrorPack();
@@ -99,11 +97,11 @@ namespace DotWeb.Api
                 #region working
                 db0 = getDB0();
 
-                db0.ProductDetail.Add(md);
+                db0.Editor_L2.Add(md);
                 await db0.SaveChangesAsync();
 
                 r.result = true;
-                r.id = md.product_detail_id;
+                r.id = md.editor_l2_id;
                 return Ok(r);
                 #endregion
             }
@@ -129,20 +127,13 @@ namespace DotWeb.Api
             try
             {
                 db0 = getDB0();
-                r = new ResultInfo<ProductDetail>();
+                r = new ResultInfo<Editor_L2>();
 
-                item = await db0.ProductDetail.FindAsync(param.id);
-
-                if (db0.PurchaseDetail.Any(x => x.product_detail_id == param.id))
-                {
-                    r.result = false;
-                    r.message = Resources.Res.Log_Err_Delete_Used;
-                    return Ok(r);
-                }
+                item = await db0.Editor_L2.FindAsync(param.id);
 
                 if (item != null)
                 {
-                    db0.ProductDetail.Remove(item);
+                    db0.Editor_L2.Remove(item);
                     await db0.SaveChangesAsync();
                     r.result = true;
                     return Ok(r);
@@ -183,7 +174,7 @@ namespace DotWeb.Api
         public class putBodyParam
         {
             public int id { get; set; }
-            public ProductDetail md { get; set; }
+            public Editor_L2 md { get; set; }
         }
         public class queryParam : QueryBase
         {

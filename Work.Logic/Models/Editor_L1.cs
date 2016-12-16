@@ -8,6 +8,7 @@ namespace ProcCore.Business.DB0
     [MetadataType(typeof(Editor_L1Metadata))]
     public partial class Editor_L1
     {
+        public IEnumerable<m_Editor_L2> Deatil { get; set; }
         private class Editor_L1Metadata
         {
             [JsonIgnore()]

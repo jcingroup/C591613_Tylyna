@@ -22,6 +22,7 @@ module.exports = {
         m_banner: path.resolve(__dirname, 'Scripts/src/Banner/app.js'),
         m_news: path.resolve(__dirname, 'Scripts/src/News/app.js'),
         m_faq: path.resolve(__dirname, 'Scripts/src/FAQ/app.js'),
+        m_editorall: path.resolve(__dirname, 'Scripts/src/EditorAll/app.js'),
         //前台 頁面
         "../front/productdetail": path.resolve(__dirname, 'Scripts/src/front/ProductDetail/app.js'),
         "../front/shoppingcart": path.resolve(__dirname, 'Scripts/src/front/ShoppingCart/app.js'),

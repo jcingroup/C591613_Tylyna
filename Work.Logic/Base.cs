@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProcCore.Business.DB0;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 
@@ -26,7 +27,8 @@ namespace ProcCore.Business
     }
     public abstract class BaseEntityTable
     {
-        public Int16 edit_type { get; set; }
+        public IEditType edit_type { get; set; }
+        public InputViewMode view_mode { get; set; }
         public bool check_del { get; set; }
     }
 }

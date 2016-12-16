@@ -34,7 +34,7 @@ namespace DotWeb.Api
                         weight = x.weight,//重量
                         price = x.price,//單價
                         stock_state = x.stock_state,//狀態 上架/缺貨中
-                        edit_type = IEditType.update,
+                        edit_type = IEditType.Update,
                         view_mode = InputViewMode.view
                     })
                     .ToList();
