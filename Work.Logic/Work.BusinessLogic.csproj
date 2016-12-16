@@ -159,6 +159,8 @@
     </Compile>
     <Compile Include="LogicCenter.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Banner.cs" />
+    <Compile Include="Models\News.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\PurchaseDetail.cs" />
     <Compile Include="Models\ProductDetail.cs" />

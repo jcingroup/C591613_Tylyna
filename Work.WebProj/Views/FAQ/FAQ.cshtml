@@ -1,21 +1,19 @@
-﻿
+﻿@model List<DotWeb.Controllers.m_FAQ>
 @{
     ViewBag.Title = "FAQ";
     ViewBag.BodyClass = "FAQ";
     Layout = "~/Views/Shared/Layout.cshtml";
+    int index = 1;
 }
 
-<section class="panel">
-    <header class="collapse-title" data-toggle="collapse"><span>Q1</span> 如何購物、付款</header>
-    <article class="collapse-content">
-        @* 編輯器 *@
-        購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式 購物方式
-    </article>
-</section>
+@foreach (var i in Model)
+{
+    <section class="panel">
+        <header class="collapse-title" data-toggle="collapse"><span>Q@(index)</span>@i.q_title</header>
+        <article class="collapse-content">
+            @Html.Raw(i.a_content)
+        </article>
+    </section>
 
-<section class="panel">
-    <header class="collapse-title" data-toggle="collapse"><span>Q2</span> 問題二</header>
-    <article class="collapse-content">
-        問題二內容問題二內容問題二內容問題二內容問題二內容問題二內容問題二內容問題二內容
-    </article>
-</section>
+    index++;
+}

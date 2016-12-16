@@ -1,4 +1,4 @@
-﻿
+﻿@model ProcCore.Business.DB0.News
 @{
     ViewBag.Title = "LITA NEWS";
     ViewBag.BodyClass = "News";
@@ -6,12 +6,12 @@
 }
 
 <section class="news-content m-b-24">
-    <header class="font-xxl">一顆咖啡豆的溫度</header>
-    <small class="label label-danger">2016/10/19</small>@* 訊息更新時間 *@
+    <header class="font-xxl">@Model.news_title</header>
+    <small class="label label-danger">@(((DateTime)Model.i_UpdateDateTime).ToString("yyyy/MM/dd"))</small>@* 訊息更新時間 *@
     <article>
-        <img class="float-r" src="~/Content/images/News/pic1.jpg" alt="消息列表圖">
+        <img class="float-r" src="@Model.img_src" alt="@Model.news_title">
         @* 編輯器內容 *@
-        2012年冬天，一群不畏寒冷的志工前往OO國小開辦了第一屆課後陪讀班，許多隔代教養的孩子
+        @Html.Raw(Model.news_content)
     </article>
 </section>
 

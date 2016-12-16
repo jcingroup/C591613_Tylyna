@@ -1,39 +1,29 @@
-﻿
+﻿@model List<DotWeb.Controllers.m_News>
 @{
     ViewBag.Title = "LITA NEWS";
     ViewBag.BodyClass = "News";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<figure class="news-list">
-    <img src="~/Content/images/News/pic1.jpg" alt="消息列表圖">
-    <a href="~/News/Content"></a>
-    <figcaption>
-        <h3>一顆咖啡豆的溫度</h3>
-        @* 消息簡介，最多45字，多的加... *@
-        <p>2012年冬天，一群不畏寒冷的志工前往OO國小開辦了第一屆課後陪讀班，許多隔代教養的孩子...</p>
-        <a href="~/News/Content" class="btn float-r">Read More</a>
-    </figcaption>
-</figure>
-
-<figure class="news-list">
-    <img src="~/Content/images/News/pic2.jpg" alt="消息列表圖">
-    <a href="~/News/Content"></a>
-    <figcaption>
-        <h3>一顆咖啡豆的溫度</h3>
-        @* 消息簡介，最多45字，多的加... *@
-        <p>2012年冬天，一群不畏寒冷的志工前往OO國小開辦了第一屆課後陪讀班，許多隔代教養的孩子...</p>
-        <a href="~/News/Content" class="btn float-r">Read More</a>
-    </figcaption>
-</figure>
-
-<figure class="news-list">
-    <img src="~/Content/images/News/pic3.jpg" alt="消息列表圖">
-    <a href="~/News/Content"></a>
-    <figcaption>
-        <h3>一顆咖啡豆的溫度</h3>
-        @* 消息簡介，最多45字，多的加... *@
-        <p>2012年冬天，一群不畏寒冷的志工前往OO國小開辦了第一屆課後陪讀班，許多隔代教養的孩子...</p>
-        <a href="~/News/Content" class="btn float-r">Read More</a>
-    </figcaption>
-</figure>
+@foreach (var i in Model)
+{
+    <figure class="news-list">
+        <img src="@i.img_src" alt="@i.news_title">
+        <a href="~/News/Content?id=@i.news_id"></a>
+        <figcaption>
+            <h3>@i.news_title</h3>
+            @if (i.news_content != null)
+            {//消息簡介，最多45字，多的加...
+                if (i.news_content.Length > 45)
+                {
+                    <p>@i.news_content.Substring(0, 45) ...</p>
+                }
+                else
+                {
+                    <p>@i.news_content</p>
+                }
+            }
+            <a href="~/News/Content?id=@i.news_id" class="btn float-r">Read More</a>
+        </figcaption>
+    </figure>
+}
