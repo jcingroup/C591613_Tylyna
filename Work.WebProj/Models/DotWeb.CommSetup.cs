@@ -177,43 +177,9 @@ namespace DotWeb.CommSetup
         {
             get
             {
-                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 20 };
+                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 450 };
                 imUp.Parm = new ImageSizeParm[] {
                     new ImageSizeParm(){ folderName="600", width=600}
-                };
-                return imUp;
-            }
-        }
-        public static ImageUpScope ProductRoll
-        {
-            get
-            {
-                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 10, limitSize = 1024 * 1024 * 2 };
-                imUp.Parm = new ImageSizeParm[] {
-                    new ImageSizeParm(){ folderName="400", width=400}
-                };
-                return imUp;
-            }
-        }
-
-        public static ImageUpScope Member
-        {
-            get
-            {
-                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
-                imUp.Parm = new ImageSizeParm[] {
-                    new ImageSizeParm(){ folderName="162", width=162}
-                };
-                return imUp;
-            }
-        }
-        public static ImageUpScope Company
-        {
-            get
-            {
-                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
-                imUp.Parm = new ImageSizeParm[] {
-                    new ImageSizeParm(){ folderName="162", width=162}
                 };
                 return imUp;
             }
@@ -222,9 +188,9 @@ namespace DotWeb.CommSetup
         {
             get
             {
-                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
+                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 500 };
                 imUp.Parm = new ImageSizeParm[] {
-                    new ImageSizeParm(){ width=1300}
+                    new ImageSizeParm(){ width=1280,heigh=420,folderName="size1"}
                 };
                 return imUp;
             }

@@ -13,12 +13,13 @@ module.exports = {
         //後台 管理者
         m_productkind: path.resolve(__dirname, 'Scripts/src/ProductKind/app.js'),
         m_product: path.resolve(__dirname, 'Scripts/src/Product/app.js'),
-        m_param: path.resolve(__dirname, 'Scripts/src/Param/app.js'),
         m_purchase: path.resolve(__dirname, 'Scripts/src/Purchase/app.js'),
         m_purchaseremit: path.resolve(__dirname, 'Scripts/src/PurchaseRemit/app.js'),
         m_purchaseship: path.resolve(__dirname, 'Scripts/src/PurchaseShip/app.js'),
         m_userdata: path.resolve(__dirname, 'Scripts/src/UserData/app.js'),
         m_paramyoutube: path.resolve(__dirname, 'Scripts/src/ParamYoutube/app.js'),
+        m_param: path.resolve(__dirname, 'Scripts/src/Param/app.js'),
+        m_banner: path.resolve(__dirname, 'Scripts/src/Banner/app.js'),
         //前台 頁面
         "../front/productdetail": path.resolve(__dirname, 'Scripts/src/front/ProductDetail/app.js'),
         "../front/shoppingcart": path.resolve(__dirname, 'Scripts/src/front/ShoppingCart/app.js'),

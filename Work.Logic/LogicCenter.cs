@@ -17,7 +17,8 @@ namespace ProcCore.Business
         Base, Menu,
         ProductKind, Product, ProductDetail,
         Customer,
-        Purchase, PurchaseDetail
+        Purchase, PurchaseDetail,
+        Banner
     }
     public enum SNType
     {

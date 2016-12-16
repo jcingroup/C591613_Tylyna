@@ -495,7 +495,7 @@ export const UIText = {
     view: '檢視',
     delete: '刪除',
     print: '列印',
-    return: '回上頁',
+    return: '回列表',
     report: '報表',
     search: '搜尋',
     mk_loading: '資料載入中...',

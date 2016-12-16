@@ -227,4 +227,18 @@
         i_Lang?: string;
         Purchase?: Array<server.Purchase>;
     }
+
+    interface Banner {
+        banner_id?: number;
+        b_name?: string;
+        sort?: number;
+        i_Hide?: boolean;
+        i_InsertUserID?: string;
+        i_InsertDeptID?: number;
+        i_InsertDateTime?: Date;
+        i_UpdateUserID?: string;
+        i_UpdateDeptID?: number;
+        i_UpdateDateTime?: Date;
+        i_Lang?: string;
+    }
 } 
