@@ -615,6 +615,7 @@
     <Content Include="ckeditor\styles.js" />
     <Content Include="Scripts\build\app\m_banner.js" />
     <Content Include="Scripts\build\app\m_change_password.js" />
+    <Content Include="Scripts\build\app\m_editor.js" />
     <Content Include="Scripts\build\app\m_editorall.js" />
     <Content Include="Scripts\build\app\m_faq.js" />
     <Content Include="Scripts\build\app\m_login.js" />
