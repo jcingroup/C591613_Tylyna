@@ -46,8 +46,8 @@ export class AStart extends React.Component<any, { infoShow: boolean }>{
                         </TagShowAndHide>
                         <EditDetailView />
 
-                        <div className="form-action">
-                            <PWButton iconClassName="fa-check" className="btn btn-primary btn-sm col-xs-offset-1"
+                        <div className="form-action  text-xs-center">
+                            <PWButton iconClassName="fa-check" className="btn btn-primary btn-sm"
                                 title={UIText.save} enable={true} type="submit" >{UIText.save}</PWButton> { }
                         </div>
 

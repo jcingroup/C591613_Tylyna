@@ -70,6 +70,10 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.is_folder == q.is_folder);
                 }
+                if (q.parent_menu_id != null)
+                {
+                    items = items.Where(x => x.parent_menu_id == q.parent_menu_id);
+                }
 
                 int page = (q.page == null ? 1 : (int)q.page);
                 int startRecord = PageCount.PageInfo(page, this.defPageSize, items.Count());
@@ -234,6 +238,7 @@ namespace DotWeb.Api
     {
         public string keyword { get; set; }
         public bool? is_folder { get; set; }
+        public int? parent_menu_id { get; set; }
     }
     public partial class m_Menu : BaseEntityTable
     {
