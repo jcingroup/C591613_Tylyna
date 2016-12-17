@@ -44,36 +44,70 @@ export class Edit extends React.Component<any, any>{
                         {gb_caption}<small className="sub"><i className="fa-angle-double-right"></i> {UIText.edit}</small>
                     </h3>
 
-                    <section className="col-xs-12">
-                        <div className="form-group row">
-                            <label className="col-xs-1 form-control-label text-xs-right">
-                                <span className="text-danger">*</span> 名稱
-                            </label>
-                            <div className="col-xs-5">
-                                <InputText
-                                    type="text"
-                                    inputClassName="form-control"
-                                    inputViewMode={view_mode}
-                                    value={field.name}
-                                    onChange= {this.chgVal.bind(this, 'name') }
-                                    required={true}
-                                    maxLength={64}
-                                    placeholder="請輸入名稱..."
-                                    /> { }
-                            </div>
-                            <label className="col-xs-1 form-control-label text-xs-right">
-                                排序
-                            </label>
-                            <div className="col-xs-2">
-                                <InputNum
-                                    inputClassName="form-control"
-                                    inputViewMode={view_mode}
-                                    required={true}
-                                    value={field.sort}
-                                    onChange= {this.chgVal.bind(this, 'sort') }
-                                    /> { }
-                            </div>
-                            <small className="col-xs-3 text-muted">數字愈大愈前面</small>
+                    <section className="form-group row">
+                        <label className="col-xs-1 form-control-label text-xs-right">
+                            <span className="text-danger">*</span> 名稱
+                        </label>
+                        <div className="col-xs-5">
+                            <InputText
+                                type="text"
+                                inputClassName="form-control"
+                                inputViewMode={view_mode}
+                                value={field.name}
+                                onChange= {this.chgVal.bind(this, 'name') }
+                                required={true}
+                                maxLength={64}
+                                placeholder="請輸入名稱..."
+                                /> { }
+                        </div>
+                        <label className="col-xs-1 form-control-label text-xs-right">
+                            排序
+                        </label>
+                        <div className="col-xs-2">
+                            <InputNum
+                                inputClassName="form-control"
+                                inputViewMode={view_mode}
+                                required={true}
+                                value={field.sort}
+                                onChange= {this.chgVal.bind(this, 'sort') }
+                                /> { }
+                        </div>
+                        <small className="col-xs-3 text-muted">數字愈大愈前面</small>
+                    </section>
+                    <section className="form-group row">
+                        <label className="col-xs-1 form-control-label text-xs-right">
+                            <span className="text-danger">*</span> 新增
+                        </label>
+                        <div className="col-xs-5">
+                            <RadioBox
+                                inputViewMode={view_mode}
+                                name={"hide_add"}
+                                id={"hide_add"}
+                                value={field.hide_add}
+                                onChange= {this.chgVal.bind(this, 'hide_add') }
+                                required={true}
+                                labelClassName="c-input c-radio"
+                                spanClassName="c-indicator"
+                                textClassName="text-sm"
+                                radioList={IHideTypeData}
+                                />
+                        </div>
+                        <label className="col-xs-1 form-control-label text-xs-right">
+                            <span className="text-danger">*</span> 刪除
+                        </label>
+                        <div className="col-xs-5">
+                            <RadioBox
+                                inputViewMode={view_mode}
+                                name={"hide_del"}
+                                id={"hide_del"}
+                                value={field.hide_del}
+                                onChange= {this.chgVal.bind(this, 'hide_del') }
+                                required={true}
+                                labelClassName="c-input c-radio"
+                                spanClassName="c-indicator"
+                                textClassName="text-sm"
+                                radioList={IHideTypeData}
+                                />
                         </div>
                     </section>
 

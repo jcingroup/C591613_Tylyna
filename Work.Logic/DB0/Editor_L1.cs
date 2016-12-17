@@ -23,6 +23,8 @@ namespace ProcCore.Business.DB0
         public int editor_l1_id { get; set; }
         public string name { get; set; }
         public int sort { get; set; }
+        public bool hide_add { get; set; }
+        public bool hide_del { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Editor_L2> Editor_L2 { get; set; }

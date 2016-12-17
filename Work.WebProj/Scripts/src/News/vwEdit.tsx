@@ -6,7 +6,7 @@ import {ac_type_comm} from '../action_type';
 import {InputText, InputNum, SelectText, RadioBox, AreaText, PWButton, TagShowAndHide} from '../components';
 import {MasterImageUpload} from '../ts-comm/comm-cmpt';
 import {Init_Params} from './pub';
-import {MntV} from '../ts-comm/comm-func'
+import {MntV, uniqid} from '../ts-comm/comm-func'
 
 import DatePicker = require('react-datepicker');
 import "react-datepicker/dist/react-datepicker.css";
@@ -21,7 +21,7 @@ export class Edit extends React.Component<any, any>{
         };
     }
     componentDidMount() {
-        CKEDITOR.replace('news_content', { customConfig: '../ckeditor/ConfigMin.js?v2' });
+        CKEDITOR.replace('news_content', { customConfig: '../ckeditor/config.js?v2=' + uniqid() });
     }
     chgVal(name: string, value: any, e: React.SyntheticEvent) {
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);

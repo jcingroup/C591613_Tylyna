@@ -6,7 +6,7 @@ import {ac_type_comm} from '../action_type';
 import {InputText, InputNum, SelectText, RadioBox, AreaText, PWButton, TagShowAndHide} from '../components';
 import {MasterImageUpload} from '../ts-comm/comm-cmpt';
 import {Init_Params} from './pub';
-import {clone, tosMessage} from '../ts-comm/comm-func';
+import {clone, tosMessage, uniqid} from '../ts-comm/comm-func';
 
 
 let EditRowButton = ({view_mode, is_edit, del, update, cancel, done}) => {
@@ -39,8 +39,8 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
     }
     keep_detail: Array<server.ProductDetail> = [];
     componentDidMount() {
-        CKEDITOR.replace('info', { customConfig: '../ckeditor/ConfigMin.js?v2' });
-        CKEDITOR.replace('more_info', { customConfig: '../ckeditor/Config.js?v2' });
+        CKEDITOR.replace('info', { customConfig: '../ckeditor/ConfigMin.js?v2=' + uniqid() });
+        CKEDITOR.replace('more_info', { customConfig: '../ckeditor/Config.js?v2=' + uniqid() });
     }
     chgVal(name: string, value: any, e: React.SyntheticEvent) {
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);

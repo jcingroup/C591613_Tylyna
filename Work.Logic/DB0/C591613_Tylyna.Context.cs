@@ -49,7 +49,7 @@ namespace ProcCore.Business.DB0
         public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<FAQ> FAQ { get; set; }
-        public virtual DbSet<Editor_L1> Editor_L1 { get; set; }
         public virtual DbSet<Editor_L2> Editor_L2 { get; set; }
+        public virtual DbSet<Editor_L1> Editor_L1 { get; set; }
     }
 }

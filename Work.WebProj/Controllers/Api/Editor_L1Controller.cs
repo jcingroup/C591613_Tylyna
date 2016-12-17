@@ -155,6 +155,8 @@ namespace DotWeb.Api
 
                 item.name = md.name;
                 item.sort = md.sort;
+                item.hide_add = md.hide_add;
+                item.hide_del = md.hide_del;
 
                 await db0.SaveChangesAsync();
                 rAjaxResult.result = true;

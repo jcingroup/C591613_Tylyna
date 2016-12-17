@@ -28,15 +28,12 @@ export class Grid extends React.Component<any, { infoShow: boolean }>{
         this.props.callGridLoad(params);
     }
     addState() {
-        let data: server.News = {
-            news_id: 0,
-            news_title: '',
-            day: Moment().format(config.dateFT),
-            news_content: null,
-            no_index: true,
+        let data: server.Editor_L1 = {
+            editor_l1_id: 0,
+            name: '',
             sort: 0,
-            i_Hide: false,
-            i_Lang: 'zh-TW'
+            hide_add: false,
+            hide_del: false
         };
         this.props.editState(ac_type_comm.add, 0, data);
     }

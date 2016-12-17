@@ -276,6 +276,8 @@
         editor_l1_id?: number;
         name?: string;
         sort?: number;
+        hide_add?: boolean;
+        hide_del?: boolean;
         Editor_L2?: Array<server.Editor_L2>;
 
         Deatil?: Array<server.Editor_L2>;

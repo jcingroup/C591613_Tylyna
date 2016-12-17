@@ -5,6 +5,7 @@ import {config, UIText, IHideTypeData} from '../ts-comm/def-data';
 import {ac_type_comm} from '../action_type';
 import {InputText, InputNum, SelectText, RadioBox, AreaText, PWButton, TagShowAndHide} from '../components';
 import {Init_Params} from './pub';
+import {uniqid} from '../ts-comm/comm-func';
 
 
 export class Edit extends React.Component<any, any>{
@@ -17,7 +18,7 @@ export class Edit extends React.Component<any, any>{
         };
     }
     componentDidMount() {
-        CKEDITOR.replace('a_content', { customConfig: '../ckeditor/ConfigMin.js?v2' });
+        CKEDITOR.replace('a_content', { customConfig: '../ckeditor/ConfigMin.js?v2=' + uniqid() });
     }
     chgVal(name: string, value: any, e: React.SyntheticEvent) {
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);

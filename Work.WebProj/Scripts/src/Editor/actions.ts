@@ -4,19 +4,14 @@ import {UIText} from '../ts-comm/def-data';
 import {tosMessage} from '../ts-comm/comm-func';
 import { mask_show, mask_off} from '../ts-comm/vwMaskLoading';
 
-//ajax--
-const apiPath: string = gb_approot + 'api/Editor_L1';
-export const callGridLoad = (search: any) => {
-    return dispatch => {
-        mask_show(UIText.mk_loading);
-        return fetchGet(apiPath, search)
-            .then((data) => {
-                mask_off();
-                dispatch(getGridItem(data));
-            })
-            .catch((reason) => { mask_off(); })
+export const callLoad = () => {
+    return {
+        type: ac_type_comm.load
     }
 }
+
+//ajax--
+const apiPath: string = gb_approot + 'api/Editor_L1';
 export const callUpdateItem = (id) => {
     return dispatch => {
         let pm = { id: id };
@@ -36,46 +31,10 @@ export const callUpdateItem = (id) => {
 export const callSubmit = (id, md: server.Editor_L1, edit_type: IEditType) => {
     return dispatch => {
         let pm = { id: id, md: md };
-
-        if (edit_type == IEditType.insert) {
-            mask_show(UIText.mk_updating);
-            return fetchPost(apiPath, md)
-                .then((data: IResultData<server.Editor_L1>) => {
-                    mask_off();
-                    if (data.result) {
-                        tosMessage(null, UIText.fi_insert, 1);
-                        dispatch(callUpdateItem(data.id));
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch((reason) => { mask_off(); })
-        }
-
-        if (edit_type == IEditType.update) {
-            return fetchPut(apiPath, pm)
-                .then((data: IResultData<server.Editor_L1>) => {
-                    if (data.result) {
-                        tosMessage(null, UIText.fi_update, 1);
-                        //dispatch(callGridLoad(null));
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch((reason) => { mask_off(); })
-        }
-    }
-}
-export const callDelete = (id: number | string, params) => {
-
-    return dispatch => {
-        mask_show(UIText.mk_updating);
-        return fetchDelete(apiPath, { id: id })
+        return fetchPut(apiPath, pm)
             .then((data: IResultData<server.Editor_L1>) => {
-                mask_off();
                 if (data.result) {
-                    tosMessage(null, UIText.fi_delete, 1);
-                    dispatch(callGridLoad(params));
+                    tosMessage(null, UIText.fi_update, 1);
                 } else {
                     alert(data.message);
                 }
@@ -105,23 +64,6 @@ export const callDetailDel = (i: number, id: number | string) => {
 }
 //ajax-deatil--
 
-
-
-const getGridItem = (data) => {
-    return {
-        type: ac_type_comm.load,
-        items: data.rows,
-        pageinfo: {
-            total: data.total,
-            page: data.page,
-            records: data.records,
-            startcount: data.startcount,
-            endcount: data.endcount,
-            field: data.field,
-            sort: data.sort
-        }
-    }
-}
 
 export const setInputValue = (type, name, value) => {
     return {

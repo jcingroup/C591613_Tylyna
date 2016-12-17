@@ -43,7 +43,7 @@ CKEDITOR.editorConfig = function (config) {
     config.font_names = 'Arial;Arial Black;Comic Sans MS;Courier New;Tahoma;Verdana;新細明體;細明體;標楷體;微軟正黑體';
 };
 
-CKEDITOR.stylesSet.add('default', [
+CKEDITOR.stylesSet.add('default1', [
     // Block Styles
     { name: '標題1', element: 'h2' },
     { name: '標題2', element: 'h3' },

@@ -124,6 +124,8 @@
           <Property Name="editor_l1_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="64" />
           <Property Name="sort" Type="int" Nullable="false" />
+          <Property Name="hide_add" Type="bit" Nullable="false" />
+          <Property Name="hide_del" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Editor_L2">
           <Key>
@@ -881,8 +883,8 @@
           <EntitySet Name="Banner" EntityType="C591613_TylynaModel.Banner" />
           <EntitySet Name="News" EntityType="C591613_TylynaModel.News" />
           <EntitySet Name="FAQ" EntityType="C591613_TylynaModel.FAQ" />
-          <EntitySet Name="Editor_L1" EntityType="C591613_TylynaModel.Editor_L1" />
           <EntitySet Name="Editor_L2" EntityType="C591613_TylynaModel.Editor_L2" />
+          <EntitySet Name="Editor_L1" EntityType="C591613_TylynaModel.Editor_L1" />
           <AssociationSet Name="FK_Editor_L2_Editor_L1" Association="C591613_TylynaModel.FK_Editor_L2_Editor_L1">
             <End Role="Editor_L1" EntitySet="Editor_L1" />
             <End Role="Editor_L2" EntitySet="Editor_L2" />
@@ -1157,15 +1159,6 @@
           <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
           <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
         </EntityType>
-        <EntityType Name="Editor_L1">
-          <Key>
-            <PropertyRef Name="editor_l1_id" />
-          </Key>
-          <Property Name="editor_l1_id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="sort" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Editor_L2" Relationship="C591613_TylynaModel.FK_Editor_L2_Editor_L1" FromRole="Editor_L1" ToRole="Editor_L2" />
-        </EntityType>
         <EntityType Name="Editor_L2">
           <Key>
             <PropertyRef Name="editor_l2_id" />
@@ -1184,6 +1177,17 @@
           <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
           <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Editor_L1" Relationship="C591613_TylynaModel.FK_Editor_L2_Editor_L1" FromRole="Editor_L2" ToRole="Editor_L1" />
+        </EntityType>
+        <EntityType Name="Editor_L1">
+          <Key>
+            <PropertyRef Name="editor_l1_id" />
+          </Key>
+          <Property Name="editor_l1_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="hide_add" Type="Boolean" Nullable="false" />
+          <Property Name="hide_del" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Editor_L2" Relationship="C591613_TylynaModel.FK_Editor_L2_Editor_L1" FromRole="Editor_L1" ToRole="Editor_L2" />
         </EntityType>
         <Association Name="FK_Editor_L2_Editor_L1">
           <End Type="C591613_TylynaModel.Editor_L1" Role="Editor_L1" Multiplicity="1" />
@@ -1570,15 +1574,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Editor_L1">
-            <EntityTypeMapping TypeName="C591613_TylynaModel.Editor_L1">
-              <MappingFragment StoreEntitySet="Editor_L1">
-                <ScalarProperty Name="sort" ColumnName="sort" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="editor_l1_id" ColumnName="editor_l1_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Editor_L2">
             <EntityTypeMapping TypeName="C591613_TylynaModel.Editor_L2">
               <MappingFragment StoreEntitySet="Editor_L2">
@@ -1595,6 +1590,17 @@
                 <ScalarProperty Name="l2_name" ColumnName="l2_name" />
                 <ScalarProperty Name="editor_l1_id" ColumnName="editor_l1_id" />
                 <ScalarProperty Name="editor_l2_id" ColumnName="editor_l2_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Editor_L1">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.Editor_L1">
+              <MappingFragment StoreEntitySet="Editor_L1">
+                <ScalarProperty Name="hide_del" ColumnName="hide_del" />
+                <ScalarProperty Name="hide_add" ColumnName="hide_add" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="editor_l1_id" ColumnName="editor_l1_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

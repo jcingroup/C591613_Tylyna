@@ -2,9 +2,9 @@
 import React = require('react');
 import Moment = require('moment');
 import ReactBootstrap = require("react-bootstrap");
-import {config, UIText, IHideTypeData} from '../ts-comm/def-data';
-import {InputText, InputNum, SelectText, RadioBox, AreaText, PWButton, TagShowAndHide} from '../components';
-import { makeInputValue, clone, MntV, uniqid, tosMessage} from '../ts-comm/comm-func';
+import {config, UIText} from '../ts-comm/def-data';
+import {InputText, InputNum, AreaText, PWButton} from '../components';
+import {uniqid, tosMessage} from '../ts-comm/comm-func';
 
 import {ac_type_comm} from '../action_type';
 
@@ -13,7 +13,8 @@ interface DetailFieldProps {
     iKey: number,
     field: server.Editor_L2,
     chgDVal?: Function,
-    delItem?: any
+    delItem?: any,
+    hideDel?: boolean
 }
 export class DetailField extends React.Component<DetailFieldProps, { open?: boolean, editorObj?: any }>{
     constructor() {
@@ -72,7 +73,7 @@ export class DetailField extends React.Component<DetailFieldProps, { open?: bool
                                 />
                         </li>
                         <li className="pull-xs-right m-l-1">
-                            <PWButton className="btn btn-link text-lg text-danger" iconClassName="fa-times" enable={true}
+                            <PWButton className="btn btn-link text-lg text-danger" iconClassName="fa-times" enable={true} hidden={pp.hideDel}
                                 onClick={this.props.delItem}/>
                         </li>
                         <li className="pull-xs-right">
@@ -145,7 +146,9 @@ export class EditDetail extends React.Component<any, any>{
             out_html =
                 (
                     <div>
-                        <PWButton className="btn btn-success btn-sm" iconClassName="fa-plus-circle" enable={true}
+                        <PWButton className="btn btn-success btn-sm" iconClassName="fa-plus-circle"
+                            enable={true}
+                            hidden={field.hide_add}
                             onClick={this.addDetail}> {UIText.add}</PWButton>
 
                         {
@@ -154,6 +157,7 @@ export class EditDetail extends React.Component<any, any>{
                                     key={i + '-' + item.editor_l2_id}
                                     iKey={i}
                                     field={item}
+                                    hideDel={field.hide_del}
                                     chgDVal={this.props.setRowInputValue}
                                     delItem={this.delDetail.bind(this, i, item.editor_l2_id, item.edit_type) }/>;
                             })
