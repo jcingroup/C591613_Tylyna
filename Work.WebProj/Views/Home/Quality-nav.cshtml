@@ -1,5 +1,7 @@
-﻿<nav class="sub-nav sub-navImg m-b-64">
-    <a href="~/Home/Quality#main" class="@(ViewBag.subnav == "n1" ? "current" : "")"><span>嚴選製程</span></a>
-    <a href="~/Home/Quality2#main" class="@(ViewBag.subnav == "n2" ? "current" : "")"><span>專業烘焙</span></a>
-    <a href="~/Home/Quality3#main" class="@(ViewBag.subnav == "n3" ? "current" : "")"><span>安心認證</span></a>
+﻿@model IEnumerable<ProcCore.Business.DB0.Editor_L2>
+<nav class="sub-nav sub-navImg m-b-64">
+    @foreach (var i in Model)
+    {
+        <a class="@(ViewBag.menu == i.editor_l2_id? "current" : "")" href="~/Home/Quality?id=@i.editor_l2_id#main"><span>@i.l2_name</span></a>
+    }
 </nav>

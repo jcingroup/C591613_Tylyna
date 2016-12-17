@@ -1,4 +1,4 @@
-﻿
+﻿@model DotWeb.Controllers.EditorContent
 @{
     ViewBag.Title = "LITA QUALITY";
     ViewBag.BodyClass = "Quality";
@@ -6,9 +6,9 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-@Html.Partial("Quality-nav")
+@Html.Partial("Quality-nav", Model.menuStroe)
 
 <section class="editor">
     @* 編輯器內容放此 *@
-    <img src="~/Content/images/Quality/pic.jpg" alt="嚴選製程-手挑嚴選">
+    @Html.Raw(Model.editor.l2_content)
 </section>

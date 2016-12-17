@@ -57,7 +57,7 @@ export const callSubmit = (id, md: server.Editor_L1, edit_type: IEditType) => {
                 .then((data: IResultData<server.Editor_L1>) => {
                     if (data.result) {
                         tosMessage(null, UIText.fi_update, 1);
-                        //dispatch(callGridLoad(null));
+                        dispatch(callUpdateItem(id));
                     } else {
                         alert(data.message);
                     }
