@@ -1588,7 +1588,7 @@ figure {
   border-bottom: 1px solid #eacb99;
   padding-bottom: 0.66667rem; }
 
-.text-left, #menu.fixed, .news-list figcaption, .User .sub-nav, .products-intro, .shopping-list .item, .shopping-list .spec, .editor, .taste-summary, .account-data, .account-data td, .panel, .news-content {
+.text-left, #menu.fixed, .news-list figcaption, .User .sub-nav, .products-intro, .shopping-list .item, .shopping-list .spec, .taste-summary, .account-data, .account-data td, .panel, .news-content {
   text-align: left; }
 
 .text-right, #menu, .products-pic, .payment-data dt, .reply dt, .account-data td.item {

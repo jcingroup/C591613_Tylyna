@@ -196,7 +196,7 @@ $collapse-title-hover-icon-color: false;
 
 // editor
 .editor {
-    @extend .text-left, .m-t-32;
+    @extend .m-t-32;
 
     img { max-width: 100%; }
 }
