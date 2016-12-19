@@ -73,7 +73,11 @@ export const fetchGet = (url: string, data: any): Promise<any> => {
 
     return fetch(url + (url_param == '' ? '' : '?' + url_param), {
         method: 'GET',
-        credentials: 'same-origin'
+        credentials: 'same-origin',
+        headers: {
+            'pragma': 'no-cache',
+            'cache-control': 'no-cache'
+        },
     }).then((response) => {
         return response.json();
     }).catch((reason) => {
