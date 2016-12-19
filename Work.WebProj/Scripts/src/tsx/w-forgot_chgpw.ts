@@ -19,7 +19,7 @@ namespace MemberChgPW {
 
     let mask_div_id = 'mask_unique_login';
 
-    let mask_show = (text = '登錄中…') => {
+    let mask_show = (text = 'Mail發送中…') => {
         //let body = document.getElementById('wrapper');
         let body = document.getElementsByTagName("BODY")[0];
         let _div = document.createElement('div');

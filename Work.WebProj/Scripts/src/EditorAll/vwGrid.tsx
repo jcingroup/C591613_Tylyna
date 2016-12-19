@@ -7,8 +7,6 @@ import {TagShowAndHide, PWButton} from '../components';
 import {GridTableView} from './containers';
 import {GridSearch} from './vwGridSearch';
 import {NavPage} from '../components';
-//test
-import { mask_show, mask_off} from '../ts-comm/vwMaskLoading';
 
 export class Grid extends React.Component<any, { infoShow: boolean }>{
 
@@ -42,12 +40,6 @@ export class Grid extends React.Component<any, { infoShow: boolean }>{
     hideInfo(e) {
         this.setState({ infoShow: false });
     }
-    openLoadMask() {
-        mask_show(UIText.mk_loading);
-    }
-    closeLoadMask() {
-        mask_off();
-    }
     render() {
         let out_html: JSX.Element = null;
         let pp = this.props;
@@ -59,8 +51,6 @@ export class Grid extends React.Component<any, { infoShow: boolean }>{
                     <h3 className="h3">
                         {gb_caption}
                     </h3>
-                    <PWButton enable={true} onClick={this.openLoadMask.bind(this) } >open</PWButton> { }
-                    <PWButton enable={true} onClick={this.closeLoadMask.bind(this) } >close</PWButton>
                     <TagShowAndHide show={this.state.infoShow} TagName={TagName.div}  className="alert alert-warning">
                         <PWButton className="close" iconClassName="fa-times" enable={true} onClick={this.hideInfo.bind(this) } />
                         內部自己使用
