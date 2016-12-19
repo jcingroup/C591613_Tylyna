@@ -116,3 +116,20 @@
         }
     }
 }
+
+
+// 本次專案
+// ------------------------------------------------------------
+.loading {
+    position: fixed;
+    right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(#000,.5);
+    z-index: 10000;
+    color: #fff;
+    text-align: center;
+}
+.loading .loader {
+    margin-top: 30%;
+}
