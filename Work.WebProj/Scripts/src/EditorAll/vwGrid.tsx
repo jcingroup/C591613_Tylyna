@@ -1,12 +1,14 @@
 ﻿import React = require('react');
 import Moment = require('moment');
-import {config} from '../ts-comm/def-data';
+import {config, UIText} from '../ts-comm/def-data';
 import {ac_type_comm} from '../action_type';
 import {TagShowAndHide, PWButton} from '../components';
 //view
 import {GridTableView} from './containers';
 import {GridSearch} from './vwGridSearch';
 import {NavPage} from '../components';
+//test
+import { mask_show, mask_off} from '../ts-comm/vwMaskLoading';
 
 export class Grid extends React.Component<any, { infoShow: boolean }>{
 
@@ -40,6 +42,9 @@ export class Grid extends React.Component<any, { infoShow: boolean }>{
     hideInfo(e) {
         this.setState({ infoShow: false });
     }
+    openLoadMask() {
+        mask_show(UIText.mk_loading);
+    }
     render() {
         let out_html: JSX.Element = null;
         let pp = this.props;
@@ -51,6 +56,7 @@ export class Grid extends React.Component<any, { infoShow: boolean }>{
                     <h3 className="h3">
                         {gb_caption}
                     </h3>
+                    <PWButton iconClassName="fa-times text-danger" enable={true} onClick={this.openLoadMask.bind(this) } >Test</PWButton>
                     <TagShowAndHide show={this.state.infoShow} TagName={TagName.div}  className="alert alert-warning">
                         <PWButton className="close" iconClassName="fa-times" enable={true} onClick={this.hideInfo.bind(this) } />
                         內部自己使用
