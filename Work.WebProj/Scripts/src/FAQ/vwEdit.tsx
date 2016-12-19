@@ -18,7 +18,7 @@ export class Edit extends React.Component<any, any>{
         };
     }
     componentDidMount() {
-        CKEDITOR.replace('a_content', { customConfig: '../ckeditor/ConfigMin.js?v2=' + uniqid() });
+        CKEDITOR.replace('a_content', { customConfig: '../ckeditor/Config.js?v2=' + uniqid() });
     }
     chgVal(name: string, value: any, e: React.SyntheticEvent) {
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);

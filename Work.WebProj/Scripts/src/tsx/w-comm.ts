@@ -1,5 +1,7 @@
 ﻿import $ = require('jquery');
 import {fetchPost, fetchGet} from '../ts-comm/ajax';
+import { mask_show, mask_off} from '../ts-comm/vwMaskLoading';
+import {UIText} from '../ts-comm/def-data';
 
 // 頁籤切換
 var tab = $('.js-tab');
@@ -77,23 +79,6 @@ namespace MemberLogin {
         url: string;
     }
 
-    let mask_div_id = 'mask_unique_login';
-
-    let mask_show = (text = '登錄中…') => {
-        //let body = document.getElementById('wrapper');
-        let body = document.getElementsByTagName("BODY")[0];
-        let _div = document.createElement('div');
-        _div.id = mask_div_id;
-        _div.className = 'loading';
-        _div.innerHTML = '<div class="loader" data-loader="circle-side"></div><p>' + text + '</p>';
-        body.appendChild(_div);
-    }
-    let mask_off = () => {
-        let body = document.getElementsByTagName("BODY")[0];
-        let _div = document.getElementById(mask_div_id);
-        body.removeChild(_div);
-    }
-
     $("#MLogin").submit(function (event) {
         event.preventDefault();
         let data: LoginData = {
@@ -103,7 +88,7 @@ namespace MemberLogin {
             "lang": 'zh-TW'
         };
 
-        mask_show();
+        mask_show(UIText.mk_login);
         fetchPost(gb_approot + 'Base/Login/member_Login', data)
             .then((data: LoginResult) => {
                 mask_off();
@@ -121,11 +106,9 @@ namespace MemberLogin {
             .catch((reason) => { mask_off(); })
     });
 
-    $("#MForgogPW").submit(function (event) {
-        event.preventDefault();
-        let data: string = $("#m_email").val();
-        mask_show();
-        fetchGet(gb_approot + 'api/FrontUser/forgotPWSendMail', { email: data })
+    function sendForgotPWMail(d) {
+        mask_show(UIText.mk_mail);
+        fetchGet(gb_approot + 'api/FrontUser/forgotPWSendMail', { email: d })
             .then((data: LoginResult) => {
                 mask_off();
                 if (data.result) {
@@ -135,5 +118,16 @@ namespace MemberLogin {
                 }
             })
             .catch((reason) => { mask_off(); })
+    }
+
+    $("#MForgotPW").submit(function (event) {
+        event.preventDefault();
+        let data: string = $("#m_email").val();
+        sendForgotPWMail(data);
+    });
+    $("#ResetMForgogPW").submit(function (event) {
+        event.preventDefault();
+        let data: string = $("#rm_email").val();
+        sendForgotPWMail(data);
     });
 }

@@ -503,6 +503,7 @@ export const UIText = {
     mk_updating: '資料更新中...',
     mk_login: '登錄中...',
     mk_searching: '查詢中...',
+    mk_mail: 'Mail發送中...',
     fi_insert: '新增完成',
     fi_update: '修改完成',
     fi_delete: '刪除完成',
