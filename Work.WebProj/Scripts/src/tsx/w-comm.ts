@@ -4,7 +4,7 @@ import {fetchPost, fetchGet} from '../ts-comm/ajax';
 // 頁籤切換
 var tab = $('.js-tab');
 var tabContent = '.tab-content';
-$('.tab-content:gt(0)').hide();
+$(tabContent).slice(1).hide();
 // $(tab.eq(0).addClass('active').attr('href')).siblings(tabContent).hide();
 tab.click(function () {
     event.preventDefault();
@@ -13,22 +13,28 @@ tab.click(function () {
     tab.not(this).removeClass('active');
 });
 
+$(window).scroll(function () {
+    // 卷動到定位時固定位置
+    var scroll = $(window).scrollTop(),
+        top = $('#menu'),
+        topHeight = top.height() + 110;
 
-$('.scroll').click(function (event) {
-    $('html, body').animate({
-        scrollTop: $($(this).attr(this, 'href')).offset().top - 50
-    }, 750);
-    event.preventDefault();
-});
-$('.goTop').click(function () {
-    $('body, html').stop(true).animate({ scrollTop: 0 }, 750);
-    event.preventDefault();
+    if (scroll >= $('#header').height()) {
+        top.addClass('fixed');
+        $('.top-nav').addClass('fixed');
+        $('#main').css('padding-top', topHeight);
+    } else {
+        top.removeClass('fixed');
+        $('.top-nav').removeClass('fixed');
+        $('#main').removeAttr('style');
+    }
 });
 
 // 縮放特效
 var $collapse = $("[data-toggle='collapse']");
 var fall = '.collapse-content';
-
+// 除第一個外隱藏
+$(fall).slice(1).hide();
 $collapse.click(function () {
     $(this).next(fall).slideToggle();
     $(this).parent().siblings().children().next().slideUp(100);
@@ -40,16 +46,16 @@ $collapse.click(function () {
 
 
 // 行動裝置的主選單
-let $menuLeft = $('#menu');
-let $trigger = $('.mobile-trigger');
+// let $menuLeft = $('#menu');
+// let $trigger = $('.mobile-trigger');
 
-$trigger.click(function () {
-    $(this).toggleClass('active');
-    $('body').toggleClass('push');
-});
-$('.toggle').click(function () {
-    $('body').removeClass('push');
-});
+// $trigger.click(function () {
+//     $(this).toggleClass('active');
+//     $('body').toggleClass('push');
+// });
+// $('.toggle').click(function () {
+//     $('body').removeClass('push');
+// });
 
 //登入會員彈出視窗
 $("#Btn_Mlogin").click(() => {

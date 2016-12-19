@@ -24,14 +24,19 @@ html {
 
 @-moz-viewport {
   width: device-width; }
+
 @-ms-viewport {
   width: device-width; }
+
 @-o-viewport {
   width: device-width; }
+
 @-webkit-viewport {
   width: device-width; }
+
 @viewport {
   width: device-width; }
+
 body {
   font-family: \5FAE\8EDF\6B63\9ED1\9AD4, "微軟正黑體", "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -753,6 +758,20 @@ textarea {
 
 .bg-danger {
   background: #EF8F7F; }
+
+.loading {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  color: #fff;
+  text-align: center; }
+
+.loading .loader {
+  margin-top: 30%; }
 
 body {
   padding: 10px 15px;

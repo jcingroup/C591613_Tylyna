@@ -35,8 +35,7 @@
 }
 
 .wrap {
-    @extend %center;
-    @extend %contain;
+    @extend %center, %contain;
 }
 
 .container {
@@ -44,7 +43,7 @@
     padding: $gutter;
 }
 
-#header, #footer, #main {
+#main {
     @extend %contain;
     position: relative;
 }
@@ -98,10 +97,12 @@
 // footer 頁腳
 // ----------------------------------------------------------------------
 #footer {
+    @extend %contain;
     @if $footer-bg { background: $footer-bg; }
     min-height: $footer-height;
     margin-top: -($footer-height);
     z-index: z(footer);
+    position: relative;
 
     // 本次專案樣式
     color: $brand-primary;
@@ -131,7 +132,7 @@
         margin-bottom: 10px;
     }
     span, dd {
-        @extend %inline-block, .font-sp, .m-a-0;
+        @extend %inline-block, .m-a-0;
         line-height: 1.001;
     }
     dd {
@@ -157,7 +158,7 @@
 // main
 // ----------------------------------------------------------------------
 #main {
-    padding-top: 80px;
+    padding-top: 50px;
     @if $index {
         background: url(#{$img-index}/mainBg.gif) center 0 no-repeat;
     }

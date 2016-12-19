@@ -39,6 +39,29 @@ $mobile-menu-width:     100% !default;
     position: relative;
     top: 34px;
 
+    &.fixed {
+        @extend .text-left;
+        @include fixed(left 0 top 0);
+        width: 100%;
+        background: url(#{$img-path}/headerBg.gif) repeat-x 0 0;
+        padding-top: 18px;
+        height: 65px;
+        box-shadow: 0 6px 0 rgba($brand-secondary,.55);
+
+        nav {
+            @extend %center, %contain;
+        }
+        #{$nav-root} {
+            @extend .p-l-12;
+
+            &.first-child { padding-left: 0 !important; }
+
+            &:not(:last-child) {
+                @extend .p-r-12;
+            }
+        }
+    }
+
     #{$nav-root} {
         @if $nav-color     { color: $nav-color; }
         @if $nav-font-size { font-size: em($nav-font-size); }
@@ -89,6 +112,11 @@ $mobile-menu-width:     100% !default;
     position: relative;
     top: 63px;
     color: $nav-color;
+
+    &.fixed {
+        @include fixed(right 20px top 18px);
+        z-index: z(menu) + 1;
+    }
 
     // 登入前
     button, a {

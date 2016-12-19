@@ -83,7 +83,7 @@ export class AStart extends React.Component<any, any>{
                                             </TagShowAndHide>
                                             <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== IStockState.replenishment} className="add-cart"  key={'d-b-' + i}>
                                                 <i className="icon-cart"></i>
-                                                <button className="btn" type="button" onClick={this.addProductToCart.bind(this, detail) }>ADD</button>
+                                                <button className="btn" type="button" onClick={this.addProductToCart.bind(this, detail) }>放入購物車</button>
                                             </TagShowAndHide>
                                         </tr>;
                                     })

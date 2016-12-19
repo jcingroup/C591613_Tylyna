@@ -45,6 +45,12 @@ export class Edit extends React.Component<any, any>{
                         {gb_caption}<small className="sub"><i className="fa-angle-double-right"></i> {UIText.edit}</small>
                     </h3>
 
+                    <div className="alert alert-warning text-sm">
+                        <strong>圖片注意事項: </strong><br/>
+                        寬度為 1280(px)，高度為 420 (px)，解析度為 72 dpi (<a href="/Content/images/sys/banner.jpg" target="new">點選看圖示</a>)<br/>
+                        建議儲存為 jpeg格式，品質選擇 8 (<a href="/Content/images/sys/banner2.jpg" target="new">點選看圖示</a>)
+                    </div>
+
                     <section className="form-group row">
                         <label className="col-xs-1 form-control-label text-xs-right">
                             首頁輪播圖

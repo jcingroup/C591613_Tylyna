@@ -70,15 +70,17 @@ $checkbox-radius:           $form-element-radius !default;
 
     @each $type in $types {
         @if $type == textarea or $type == select {
-            $return: $return, unquote('#{$type}');
+            // $return: $return, unquote('#{$type}'); // scout-app 不支援
+            $return: append($return, unquote('#{$type}'), comma);
 
             @if $selector != input {
-                $return: unquote('#{$return}#{$selector}')
+                $return: unquote('#{$return}#{$selector}');
             }
         }
         @else {
             // $return: $return, unquote('#{$selector}[type="#{$type}"]');
-            $return: $return, unquote('[type="#{$type}"]');
+            // $return: $return, unquote('[type="#{$type}"]'); // scout-app 不支援
+            $return: append($return, unquote('[type="#{$type}"]'), comma);
         }
     }
     @return $return;
@@ -263,10 +265,10 @@ input:not([type]), #{text-inputs(all)}, .form-element {
 }
 
 @if $enable-input-size {
-    .input-size-sm { width: $input-size-sm; }
-    .input-size-md { width: $input-size-md; }
-    .input-size-lg { width: $input-size-lg; }
-    .input-size-xl { width: $input-size-xl; }
+    .input-size-sm { width: $input-size-sm !important; }
+    .input-size-md { width: $input-size-md !important; }
+    .input-size-lg { width: $input-size-lg !important; }
+    .input-size-xl { width: $input-size-xl !important; }
 }
 
 // 底線

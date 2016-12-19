@@ -165,6 +165,13 @@ export class Edit extends React.Component<any, any>{
                             <span className="text-danger">*</span> 消息內容
                         </label>
                         <div className="col-xs-11">
+                            <div className="alert alert-warning text-sm">
+                                <strong>編輯器注意事項: </strong><br/>
+                                從 WORD 複製文字時，請使用下方的 <img src="/Content/images/icon-word.jpg" /> 圖示來貼上 WORD 文字，避免跑版<br/>
+                                編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除) ，以免行動裝置顯示時會跑版。<br/>
+                                檔案尺寸寬度超過 1600 或 高度超過1200 的圖片會被壓縮(PNG透明背景會變成不透明)<br/>
+                                youtube 可勾選「用自適應縮放模式」
+                            </div>
                             <AreaText
                                 id="news_content" name="news_content"
                                 value={field.news_content} onChange={this.chgVal.bind(this, 'news_content') }

@@ -196,7 +196,9 @@ $collapse-title-hover-icon-color: false;
 
 // editor
 .editor {
-    @extend .m-t-48; // .text-left,
+    @extend .text-left, .m-t-32;
+
+    img { max-width: 100%; }
 }
 
 
@@ -272,6 +274,18 @@ $collapse-title-hover-icon-color: false;
             width: 130px;
         }
         // &:last-of-type { @extend .text-left; }
+    }
+}
+// 連結失效的寄送忘記密碼
+.forgot-pwd {
+    @extend .m-t-48, .m-x-auto;
+
+    max-width: 600px;
+
+    .input-group {
+        @extend %float-l;
+
+        width: 70%;
     }
 }
 

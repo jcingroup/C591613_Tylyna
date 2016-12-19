@@ -76,7 +76,8 @@ figure {
 
 // 最新消息
 .news-list {
-    max-width: 350px;
+    // max-width: 350px;
+    width: 350px;
 
     @if $index {
         @extend .m-a-0;

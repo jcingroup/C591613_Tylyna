@@ -87,15 +87,17 @@
                     <a class="icon-cart" href="~/Order/Cart">購物車<i class="cart-num" id="cart-num">@ViewBag.P_Count</i></a>
                     @* <a href="">Contact Us</a> *@
                 </nav>
-                <nav id="menu" class="navbar">
-                    <a class="@(ViewBag.BodyClass == "AboutUs" ? "current" : "")" href="~/Home/AboutUs">利他精神</a>
-                    <a class="@(ViewBag.BodyClass == "Quality" ? "current" : "")" href="~/Home/Quality">利他嚴選</a>
-                    <a class="@(ViewBag.BodyClass == "Products" ? "current" : "")" href="~/Products">利他咖啡</a>
-                    <a class="@(ViewBag.BodyClass == "Story" ? "current" : "")" href="~/Home/Story">利他故事</a>
-                    <a class="@(ViewBag.BodyClass == "News" ? "current" : "")" href="~/News">最新消息</a>
-                    <a class="@(ViewBag.BodyClass == "FAQ" ? "current" : "")" href="~/FAQ">常見問答</a>
-                    <a class="@(ViewBag.BodyClass == "ContactUs" ? "current" : "")" href="~/Home/ContactUs">聯絡我們</a>
-                </nav>
+                <div id="menu" class="navbar">
+                    <nav>
+                        <a class="@(ViewBag.BodyClass == "AboutUs" ? "current" : "")" href="~/Home/AboutUs">利他精神</a>
+                        <a class="@(ViewBag.BodyClass == "Quality" ? "current" : "")" href="~/Home/Quality">利他嚴選</a>
+                        <a class="@(ViewBag.BodyClass == "Products" ? "current" : "")" href="~/Products">利他咖啡</a>
+                        <a class="@(ViewBag.BodyClass == "Story" ? "current" : "")" href="~/Home/Story">利他故事</a>
+                        <a class="@(ViewBag.BodyClass == "News" ? "current" : "")" href="~/News">最新消息</a>
+                        <a class="@(ViewBag.BodyClass == "FAQ" ? "current" : "")" href="~/FAQ">常見問答</a>
+                        <a class="@(ViewBag.BodyClass == "ContactUs" ? "current" : "")" href="~/Home/ContactUs">聯絡我們</a>
+                    </nav>
+                </div>
             </div><!-- wrap //-->
         </header>
 
@@ -112,10 +114,10 @@
             <dt>
                 <strong class="logo-s">LITA CAFE</strong>
                 <span>幸福企業社</span>
-                <span>統編 41446054</span>
+                @* <span>統編 41446054</span> *@
             </dt>
-            <dd>0979-777-270</dd>
-            <dd>03-4275-832</dd>
+            <dd>客服專線: 0979-777-270</dd>
+            <dd>03-427-5832</dd>
             <dd>桃園市中壢區復興路161號4樓</dd>
             <dd><a href="mailto:litacafe9797@gmail.com">litacafe9797@gmail.com</a></dd>
         </dl>

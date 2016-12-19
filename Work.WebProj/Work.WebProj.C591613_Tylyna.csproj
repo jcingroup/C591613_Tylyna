@@ -406,6 +406,7 @@
     <Content Include="Content\images\icon-cart.gif" />
     <Content Include="Content\images\icon-social.gif" />
     <Content Include="Content\images\icon-topnav.gif" />
+    <Content Include="Content\images\icon-word.jpg" />
     <Content Include="Content\images\Index\banner.jpg" />
     <Content Include="Content\images\Index\banner2.jpg" />
     <Content Include="Content\images\Index\banner3.jpg" />
@@ -434,6 +435,9 @@
     <Content Include="Content\images\Quality\sort2.png" />
     <Content Include="Content\images\Quality\sort3.png" />
     <Content Include="Content\images\subNav-line.gif" />
+    <Content Include="Content\images\sys\banner.jpg" />
+    <Content Include="Content\images\sys\banner2.jpg" />
+    <Content Include="Content\images\sys\youtube.jpg" />
     <Content Include="Content\images\titleBg.gif" />
     <Content Include="Content\images\titleBg.png" />
     <Content Include="Content\js\bootstrap\collapse.js" />

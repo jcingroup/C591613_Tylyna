@@ -55,10 +55,10 @@ $input-group-addon-size:     false !default;
 .input-group-addon {
     width: 1%;
     height: 100%;
-    line-height: $input-group-height;
     white-space: nowrap;
     padding: 0 $gutter/2;
 
+    @if $input-group-height       { line-height: $input-group-height; }
     @if $input-group-addon-size   { font-size: em($input-group-addon-size); }
     @if $input-group-addon-color  { color: $input-group-addon-color; }
     @if $input-group-addon-bg     { background: $input-group-addon-bg; }

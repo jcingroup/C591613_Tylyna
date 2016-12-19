@@ -374,13 +374,20 @@ export class Edit extends React.Component<any, { tab: Array<{ id: string, name: 
                         </tbody>
                     </table>
                     <section>
+                        <div className="alert alert-warning text-sm">
+                            {/* <PWButton className="close" iconClassName="fa-times" enable={true} onClick={this.hideInfo.bind(this) } /> */}
+                            <strong>編輯器注意事項: </strong><br/>
+                            從 WORD 複製文字時，請使用下方的 <img src="/Content/images/icon-word.jpg" /> 圖示來貼上 WORD 文字，避免跑版<br/>
+                            編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除) ，以免行動裝置顯示時會跑版。<br/>
+                            檔案尺寸寬度超過 1600 或 高度超過1200 的圖片會被壓縮(PNG透明背景會變成不透明)<br/>
+                            youtube 可勾選「用自適應縮放模式」
+                        </div>
                         <nav className="nav nav-tabs">
                             {
                                 this.state.tab.map((item, i) => {
                                     return <a key={i} href={"#" + item.id} className={item.class} onClick={this.tabClick.bind(this, item.id) }>{item.name}</a>;
                                 })
                             }
-
                         </nav>
                         <div className="tab-content">
                             <article id="tab1" className="tab-pane active">

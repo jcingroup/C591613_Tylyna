@@ -35,6 +35,10 @@ export class AStart extends React.Component<any, any>{
                     <h3 className="h3">
                         {gb_caption}
                     </h3>
+                    <div className="alert alert-warning text-sm">
+                        <strong>YouTube注意事項: </strong><br/>
+                        嵌入連結路徑如圖示 (<a href="/Content/images/sys/youtube.jpg" target="new">點選看圖示</a>)
+                    </div>
                     <form className="form form-sm" onSubmit={this.handleSubmit}>
 
                         <InputText
