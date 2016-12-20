@@ -23,6 +23,12 @@ namespace DotWeb.Areas.Active.Controllers
             ActionRun();
             return View();
         }
+        //測試sortable用
+        public ActionResult Sortable()
+        {
+            ActionRun();
+            return View();
+        }
         #endregion
     }
 }

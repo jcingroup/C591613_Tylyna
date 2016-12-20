@@ -276,6 +276,7 @@
     <Content Include="Areas\Active\Views\WebData\Quality.cshtml" />
     <Content Include="Areas\Active\Views\WebData\Story.cshtml" />
     <Content Include="Areas\Active\Views\WebData\Editor.cshtml" />
+    <Content Include="Areas\Active\Views\ParamData\Sortable.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
@@ -857,6 +858,7 @@
     <TypeScriptCompile Include="Scripts\src\Banner\vwGrid.tsx" />
     <TypeScriptCompile Include="Scripts\src\Banner\vwGridSearch.tsx" />
     <TypeScriptCompile Include="Scripts\src\Banner\vwGridTable.tsx" />
+    <TypeScriptCompile Include="Scripts\src\tsx\m-sortable.tsx" />
     <TypeScriptCompile Include="Scripts\src\UserData\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\UserData\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\UserData\containers.ts" />

@@ -129,6 +129,7 @@ namespace DotWeb.Api
         public async Task<IHttpActionResult> Put([FromBody]putBodyParam param)
         {
             ResultInfo rAjaxResult = new ResultInfo();
+            rAjaxResult.hasData = true;
             try
             {
                 db0 = getDB0();
@@ -161,11 +162,11 @@ namespace DotWeb.Api
                     ShipEmail emd = new ShipEmail()
                     {
                         no = md.purchase_no,
-                        day = md.ship_date,
+                        day = item.ship_date,
                         name = md.receive_name,
                         mail = md.receive_email
                     };
-                    ResultInfo sendmail = (new EmailController()).sendShipMail(emd);
+                    ResultInfo sendmail = (new EmailController()).sendShipMail(emd);                
                     if (!sendmail.result)
                     {
                         rAjaxResult.hasData = sendmail.result;//暫時放hasdata

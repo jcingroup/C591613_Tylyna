@@ -10,6 +10,7 @@ module.exports = {
         m_roles: path.resolve(__dirname, 'Scripts/src/tsx/m-roles.js'),
         m_change_password: path.resolve(__dirname, 'Scripts/src/tsx/m-change_password.js'),
         m_users: path.resolve(__dirname, 'Scripts/src/tsx/m-users.js'),
+        m_sortable: path.resolve(__dirname, 'Scripts/src/tsx/m-sortable.js'),
         //後台 管理者
         m_productkind: path.resolve(__dirname, 'Scripts/src/ProductKind/app.js'),
         m_product: path.resolve(__dirname, 'Scripts/src/Product/app.js'),
