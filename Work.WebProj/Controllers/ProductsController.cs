@@ -5,6 +5,8 @@ using ProcCore.Business.DB0;
 using System.Linq;
 using ProcCore.HandleResult;
 using System;
+using System.Web;
+using Newtonsoft.Json;
 
 namespace DotWeb.Controllers
 {
@@ -102,6 +104,7 @@ namespace DotWeb.Controllers
         {
             ResultInfo r = new ResultInfo();
             List<PurchaseDetail> mds = null;
+            HttpCookie cart = Request.Cookies[this.CartSession];//改用cookie+json格式方式記錄購物車內容
             try
             {
                 using (var db0 = getDB0())
@@ -121,14 +124,20 @@ namespace DotWeb.Controllers
                         md.price = p_d.price;//產品價格
                         #endregion
 
-                        if (Session[this.CartSession] == null)
+                        if (cart == null)
                         {
+                            #region 新增cookie
+                            cart = new HttpCookie(this.CartSession);
+                            cart.HttpOnly = true;//避免被js隨意抓取cookie內容
+                            //設置過期日(未設置的話一瀏覽器關閉時間)
+                            //cart.Expires = DateTime.Now.AddDays(1);
+                            #endregion
                             mds = new List<PurchaseDetail>();
                             mds.Add(md);
                         }
                         else
                         {
-                            mds = (List<PurchaseDetail>)Session[this.CartSession];
+                            mds =JsonConvert.DeserializeObject<List<PurchaseDetail>>(Server.UrlDecode(cart.Value));
                             //判斷產品是否已存在
                             var item = mds.Where(x => x.product_id == md.product_id & x.product_detail_id == md.product_detail_id).FirstOrDefault();
                             if (item != null)
@@ -142,7 +151,9 @@ namespace DotWeb.Controllers
                                 mds.Add(md);
                             }
                         }
-                        Session[this.CartSession] = mds;
+                        cart.Value =Server.UrlEncode(JsonConvert.SerializeObject(mds));
+                        //新增or修改cookie值,寫法都一樣
+                        Response.AppendCookie(cart);
                         r.result = true;
                         r.id = mds.Count();//購物車目前數量
                     }

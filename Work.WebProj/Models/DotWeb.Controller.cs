@@ -771,10 +771,11 @@ namespace DotWeb.Controller
 
                 #region 購物車
                 ViewBag.P_Count = 0;
-                if (Session["ShoppingCart"] != null)
+                HttpCookie cart = Request.Cookies[this.CartSession];
+                if (cart != null)
                 {
-                    List<PurchaseDetail> cart = (List<PurchaseDetail>)Session["ShoppingCart"];
-                    ViewBag.P_Count = cart.Count;
+                    List<PurchaseDetail> cart_data = JsonConvert.DeserializeObject<List<PurchaseDetail>>(Server.UrlDecode(cart.Value));
+                    ViewBag.P_Count = cart_data.Count;
                 }
                 #endregion
 

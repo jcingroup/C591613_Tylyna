@@ -8,6 +8,8 @@ using System.Linq;
 using DotWeb.CommSetup;
 using ProcCore.Business.LogicConect;
 using ProcCore;
+using System.Web;
+using Newtonsoft.Json;
 
 namespace DotWeb.Controllers
 {
@@ -27,8 +29,9 @@ namespace DotWeb.Controllers
         {
             OrderInfo md = new OrderInfo();
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
-            if (Session[this.CartSession] != null)
-                mds = (List<PurchaseDetail>)Session[this.CartSession];
+            HttpCookie cart = Request.Cookies[this.CartSession];//改用cookie+json格式方式記錄購物車內容
+            if (cart != null)
+                mds = JsonConvert.DeserializeObject<List<PurchaseDetail>>(Server.UrlDecode(cart.Value));
 
             if (mds.Count() <= 0)//購物車內沒資料,無法連到確認訂單
             {
@@ -92,7 +95,7 @@ namespace DotWeb.Controllers
         {
             ResultInfo r = new ResultInfo();
             r.result = true; r.hasData = true;//預設
-            List<PurchaseDetail> mds = new List<PurchaseDetail>();
+            HttpCookie cart = Request.Cookies[this.CartSession];//改用cookie+json格式方式記錄購物車內容
             try
             {
                 #region 送出訂單
@@ -185,7 +188,13 @@ namespace DotWeb.Controllers
                         r.message = Resources.Res.Log_Success_Order;
                     }
 
-                    Session.Remove(this.CartSession);
+                    #region 刪除Cookie
+                    if (cart != null)
+                    {
+                        cart.Expires = DateTime.Now.AddDays(-1);
+                        Response.AppendCookie(cart);
+                    }
+                    #endregion
                 }
                 #endregion
             }
@@ -208,10 +217,11 @@ namespace DotWeb.Controllers
         {
             ResultInfo<List<PurchaseDetail>> r = new ResultInfo<List<PurchaseDetail>>();
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
+            HttpCookie cart = Request.Cookies[this.CartSession];//改用cookie+json格式方式記錄購物車內容
             try
             {
-                if (Session[this.CartSession] != null)
-                    mds = (List<PurchaseDetail>)Session[this.CartSession];
+                if (cart != null)
+                    mds = JsonConvert.DeserializeObject<List<PurchaseDetail>>(Server.UrlDecode(cart.Value));
 
                 foreach (var i in mds)
                 {
@@ -234,23 +244,25 @@ namespace DotWeb.Controllers
         {
             ResultInfo<List<PurchaseDetail>> r = new ResultInfo<List<PurchaseDetail>>();
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
+            HttpCookie cart = Request.Cookies[this.CartSession];//改用cookie+json格式方式記錄購物車內容
             try
             {
-                if (Session[this.CartSession] != null)
-                    mds = (List<PurchaseDetail>)Session[this.CartSession];
+                if (cart != null)
+                    mds = JsonConvert.DeserializeObject<List<PurchaseDetail>>(Server.UrlDecode(cart.Value));
 
                 var del_item = mds.Where(x => x.product_detail_id == p_d_id).FirstOrDefault();
                 if (del_item != null)
                     mds.Remove(del_item);
 
-                if (Session[this.CartSession] == null || del_item == null)
+                if (cart == null || del_item == null)
                 {
                     r.result = false;
                     r.message = Resources.Res.Log_Err_Cart_ProductExist;
                 }
                 else
                 {//有抓到購物車及刪除資料才更新購物車內容
-                    Session[this.CartSession] = mds;
+                    cart.Value = Server.UrlEncode(JsonConvert.SerializeObject(mds));
+                    Response.AppendCookie(cart);
                     r.result = true;
                     r.id = mds.Count();
                 }
@@ -268,10 +280,11 @@ namespace DotWeb.Controllers
         {
             ResultInfo<List<PurchaseDetail>> r = new ResultInfo<List<PurchaseDetail>>();
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
+            HttpCookie cart = Request.Cookies[this.CartSession];//改用cookie+json格式方式記錄購物車內容
             try
             {
-                if (Session[this.CartSession] != null)
-                    mds = (List<PurchaseDetail>)Session[this.CartSession];
+                if (cart != null)
+                    mds = JsonConvert.DeserializeObject<List<PurchaseDetail>>(Server.UrlDecode(cart.Value));
 
                 var item = mds.Where(x => x.product_detail_id == p.p_d_id).FirstOrDefault();
                 if (item != null)
@@ -280,14 +293,15 @@ namespace DotWeb.Controllers
                     item.sub_total = p.qty * item.price;
                 }
 
-                if (Session[this.CartSession] == null || item == null)
+                if (cart == null || item == null)
                 {
                     r.result = false;
                     r.message = Resources.Res.Log_Err_Cart_ProductExist;
                 }
                 else
                 {//有抓到購物車及修改資料才更新購物車內容
-                    Session[this.CartSession] = mds;
+                    cart.Value = Server.UrlEncode(JsonConvert.SerializeObject(mds));
+                    Response.AppendCookie(cart);
                     r.result = true;
                 }
             }
