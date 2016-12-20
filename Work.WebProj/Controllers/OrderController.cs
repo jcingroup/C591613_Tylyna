@@ -52,6 +52,7 @@ namespace DotWeb.Controllers
                     purchase_no = null,//後面再帶入
                     pay_state = (int)IPayState.unpaid,
                     ship_state = (int)IShipState.unshipped,
+                    pay_type = (int)IPayType.Remit,
                     total = mds.Sum(x => x.sub_total),
                     ship_fee = 0,
                     bank_charges = 0,
@@ -68,6 +69,15 @@ namespace DotWeb.Controllers
                     purchase.receive_address = item.address;
                 }
                 md.ship = db0.Shipment.OrderByDescending(x => x.limit_money).ToList();
+                #region 付款方式預設轉帳匯款
+                var ship_item = md.ship.Where(x => x.pay_type == purchase.pay_type & x.limit_money > purchase.total).FirstOrDefault();
+                if (ship_item != null)
+                {
+                    purchase.ship_fee = ship_item.shipment_fee;//運費
+                    purchase.bank_charges = ship_item.bank_charges;//手續費
+                }
+                #endregion
+
                 md.purchase = purchase;
             }
 

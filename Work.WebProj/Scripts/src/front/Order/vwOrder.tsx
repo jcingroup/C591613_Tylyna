@@ -111,7 +111,7 @@ export class Order extends React.Component<any, any>{
                                             })
                                         }
                                     </span>
-                                    <span className="radio-group">
+                                    {/*<span className="radio-group">
                                         <input type="radio" name="pay" id="pay2"
                                             checked={field.pay_type == IPayType.CashOnDelivery}
                                             value={IPayType.CashOnDelivery} onChange={this.chgPayType.bind(this, 'pay_type') } />
@@ -121,7 +121,7 @@ export class Order extends React.Component<any, any>{
                                                 return <span key={i}>(未滿NT${fmt_money(item.limit_money) } 運費NT${fmt_money(item.shipment_fee) } 手續費NT${fmt_money(item.bank_charges) }) </span>;
                                             })
                                         }
-                                    </span>
+                                    </span>*/}
                                 </td>
                                 <td className="text-right">運費
                                     <TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.CashOnDelivery}>、手續費</TagShowAndHide>
