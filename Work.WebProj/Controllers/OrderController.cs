@@ -75,6 +75,7 @@ namespace DotWeb.Controllers
                 {
                     purchase.ship_fee = ship_item.shipment_fee;//運費
                     purchase.bank_charges = ship_item.bank_charges;//手續費
+                    purchase.total += (purchase.ship_fee + purchase.bank_charges);//總計+運費&手續費
                 }
                 #endregion
 
