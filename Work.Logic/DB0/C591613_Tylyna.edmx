@@ -126,6 +126,7 @@
           <Property Name="sort" Type="int" Nullable="false" />
           <Property Name="hide_add" Type="bit" Nullable="false" />
           <Property Name="hide_del" Type="bit" Nullable="false" />
+          <Property Name="hide_sort" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Editor_L2">
           <Key>
@@ -1187,6 +1188,7 @@
           <Property Name="sort" Type="Int32" Nullable="false" />
           <Property Name="hide_add" Type="Boolean" Nullable="false" />
           <Property Name="hide_del" Type="Boolean" Nullable="false" />
+          <Property Name="hide_sort" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Editor_L2" Relationship="C591613_TylynaModel.FK_Editor_L2_Editor_L1" FromRole="Editor_L1" ToRole="Editor_L2" />
         </EntityType>
         <Association Name="FK_Editor_L2_Editor_L1">
@@ -1596,6 +1598,7 @@
           <EntitySetMapping Name="Editor_L1">
             <EntityTypeMapping TypeName="C591613_TylynaModel.Editor_L1">
               <MappingFragment StoreEntitySet="Editor_L1">
+                <ScalarProperty Name="hide_sort" ColumnName="hide_sort" />
                 <ScalarProperty Name="hide_del" ColumnName="hide_del" />
                 <ScalarProperty Name="hide_add" ColumnName="hide_add" />
                 <ScalarProperty Name="sort" ColumnName="sort" />

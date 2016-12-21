@@ -59,7 +59,8 @@ export class DetailField extends React.Component<DetailFieldProps, { open?: bool
             <article className="w3-card-2 m-y-1" data-id={pp.iKey + '-' + field.editor_l2_id}>
                 <header className="w3-padding w3-light-blue form-inline">
                     <ul className="list-inline clearfix m-b-0">
-                        <li className="pull-xs-left"># {pp.iKey}</li>
+                        <li className="pull-xs-left"><strong className="fa-bars"></strong></li>
+                        <li className="pull-xs-left">#{pp.iKey}</li>
                         <li className="pull-xs-left">
                             <InputText
                                 type="text"
@@ -157,6 +158,7 @@ export class EditDetail extends React.Component<any, any>{
             let _this = this;
 
             let options = {
+                handle: '.fa-bars',
                 draggable: "article",
                 group: "shared",
                 onSort: function (evt) {
@@ -188,6 +190,13 @@ export class EditDetail extends React.Component<any, any>{
             out_html =
                 (
                     <div>
+                        <div className="alert alert-warning w3-small">
+                            <button type="button" className="close"><i className="fa-times"></i></button>
+                            <ol className="m-b-0">
+                                <li><span>點選 </span><strong className="fa-bars"></strong><span> 並</span><strong>拖曳</strong><span>，可修改排列順序。</span></li>
+                                <li><span>點選 </span><strong className="fa-chevron-up"></strong><span> 可收合/展開，點選 </span><strong className="fa-times"></strong><span> 可刪除。</span></li>
+                            </ol>
+                        </div>
                         <PWButton className="btn btn-success btn-sm" iconClassName="fa-plus-circle" enable={true}
                             onClick={this.addDetail}> {UIText.add}</PWButton>
                         <div ref={this.sortableGroup}>

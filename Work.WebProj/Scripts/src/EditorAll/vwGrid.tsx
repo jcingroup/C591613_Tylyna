@@ -33,7 +33,8 @@ export class Grid extends React.Component<any, { infoShow: boolean }>{
             name: '',
             sort: 0,
             hide_add: false,
-            hide_del: false
+            hide_del: false,
+            hide_sort: false
         };
         this.props.editState(ac_type_comm.add, 0, data);
     }

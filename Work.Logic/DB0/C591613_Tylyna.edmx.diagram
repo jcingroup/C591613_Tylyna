@@ -40,7 +40,7 @@
         <EntityTypeShape EntityType="C591613_TylynaModel.News" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="C591613_TylynaModel.FAQ" Width="1.5" PointX="5.375" PointY="12.75" />
         <EntityTypeShape EntityType="C591613_TylynaModel.Editor_L2" Width="1.5" PointX="16.625" PointY="1" />
-        <EntityTypeShape EntityType="C591613_TylynaModel.Editor_L1" Width="1.5" PointX="14.75" PointY="2.125" />
+        <EntityTypeShape EntityType="C591613_TylynaModel.Editor_L1" Width="1.5" PointX="14.75" PointY="2.875" />
         <AssociationConnector Association="C591613_TylynaModel.FK_Editor_L2_Editor_L1" />
         </Diagram>
     </edmx:Diagrams>

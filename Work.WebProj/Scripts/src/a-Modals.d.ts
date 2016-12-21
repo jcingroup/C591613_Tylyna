@@ -278,6 +278,7 @@
         sort?: number;
         hide_add?: boolean;
         hide_del?: boolean;
+        hide_sort?: boolean;
         Editor_L2?: Array<server.Editor_L2>;
 
         Deatil?: Array<server.Editor_L2>;

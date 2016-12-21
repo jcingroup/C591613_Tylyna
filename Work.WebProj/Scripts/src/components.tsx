@@ -747,11 +747,11 @@ export class TagShowAndHide extends React.Component<{ show: boolean, className?:
                     </table>
                 );
             }
-            else if (pp.TagName === TagName.Thead) {
+            else if (pp.TagName === TagName.li) {
                 out_html = (
-                    <thead style={pp.style} className={pp.className}>
+                    <li style={pp.style} className={pp.className}>
                         {pp.children}
-                    </thead>
+                    </li>
                 );
             }
         }

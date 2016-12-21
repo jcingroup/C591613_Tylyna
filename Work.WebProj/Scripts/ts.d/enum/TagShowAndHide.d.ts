@@ -7,5 +7,5 @@
     dl = 6,
     div = 7,
     table = 8,
-    Thead = 9
+    li = 9
 }

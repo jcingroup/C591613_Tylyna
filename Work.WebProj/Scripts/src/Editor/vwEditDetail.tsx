@@ -4,7 +4,7 @@ import Moment = require('moment');
 import Sortable = require('sortablejs');
 import ReactBootstrap = require("react-bootstrap");
 import {config, UIText} from '../ts-comm/def-data';
-import {InputText, InputNum, AreaText, PWButton} from '../components';
+import {InputText, InputNum, AreaText, PWButton, TagShowAndHide} from '../components';
 import {uniqid, tosMessage} from '../ts-comm/comm-func';
 
 import {ac_type_comm} from '../action_type';
@@ -16,6 +16,7 @@ interface DetailFieldProps {
     chgDVal?: Function,
     delItem?: any,
     hideDel?: boolean
+    hideSort?: boolean
 }
 export class DetailField extends React.Component<DetailFieldProps, { open?: boolean, editorObj?: any }>{
     constructor() {
@@ -60,6 +61,9 @@ export class DetailField extends React.Component<DetailFieldProps, { open?: bool
             <article className="w3-card-2 m-y-1" data-id={pp.iKey + '-' + field.editor_l2_id}>
                 <header className="w3-padding w3-light-blue form-inline">
                     <ul className="list-inline clearfix m-b-0">
+                        <TagShowAndHide className="pull-xs-left" TagName={TagName.li} show={!pp.hideSort}>
+                            <strong className="fa-bars"></strong>
+                        </TagShowAndHide>
                         <li className="pull-xs-left"># {pp.iKey}</li>
                         <li className="pull-xs-left">
                             <InputText
@@ -80,7 +84,7 @@ export class DetailField extends React.Component<DetailFieldProps, { open?: bool
                         <li className="pull-xs-right m-l-1">
                             <PWButton onClick={this.collaspesDetail.bind(this) } enable={true} className="btn btn-link text-muted" iconClassName="fa-chevron-down"> 收合/展開</PWButton>
                         </li>
-                        <li className="pull-xs-right m-l-1">
+                        <TagShowAndHide className="pull-xs-right m-l-1" TagName={TagName.li} show={!pp.hideSort}>
                             <InputNum
                                 inputClassName="form-control"
                                 inputViewMode={view_mode}
@@ -89,7 +93,7 @@ export class DetailField extends React.Component<DetailFieldProps, { open?: bool
                                 onChange= {this.chgDetailVal.bind(this, 'sort') }
                                 placeholder="排序."
                                 /> { }
-                        </li>
+                        </TagShowAndHide>
                     </ul>
                 </header>
                 <Collapse in={this.state.open}>
@@ -150,13 +154,15 @@ export class EditDetail extends React.Component<any, any>{
     sortableGroup(componentBackingInstance) {
         if (componentBackingInstance) {
             let _this = this;
-
+            let field: server.Editor_L1 = _this.props.field;
             let options = {
+                handle: '.fa-bars',
                 draggable: "article",
                 group: "shared",
+                disabled: field.hide_sort,
                 onSort: function (evt) {
                     var itemEl = evt.item;
-                    let detail: Array<server.Editor_L2> = _this.props.field.Deatil == undefined ? [] : _this.props.field.Deatil;
+                    let detail: Array<server.Editor_L2> = field.Deatil == undefined ? [] : field.Deatil;
 
                     detail.movesort(evt.oldIndex, evt.newIndex);
 
@@ -195,6 +201,7 @@ export class EditDetail extends React.Component<any, any>{
                                         iKey={i}
                                         field={item}
                                         hideDel={field.hide_del}
+                                        hideSort={field.hide_sort}
                                         chgDVal={this.props.setRowInputValue}
                                         delItem={this.delDetail.bind(this, i, item.editor_l2_id, item.edit_type) }/>;
                                 })

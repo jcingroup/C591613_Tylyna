@@ -2,7 +2,13 @@
     Layout = "~/Views/Shared/Manage/RLayout.cshtml";
 }
 @section IncludeCSS{
-
+    <!--拖拉時出現手圖案-->
+    <style>
+        .fa-bars {
+            cursor: move;
+            cursor: -webkit-grabbing;
+        }
+    </style>
 }
 @section IncludeScript{
     @Html.Partial("Manage/JSGlobalVar")

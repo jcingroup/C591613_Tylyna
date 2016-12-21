@@ -78,7 +78,7 @@ export class Edit extends React.Component<any, any>{
                         <label className="col-xs-1 form-control-label text-xs-right">
                             <span className="text-danger">*</span> 新增
                         </label>
-                        <div className="col-xs-5">
+                        <div className="col-xs-2">
                             <RadioBox
                                 inputViewMode={view_mode}
                                 name={"hide_add"}
@@ -95,13 +95,30 @@ export class Edit extends React.Component<any, any>{
                         <label className="col-xs-1 form-control-label text-xs-right">
                             <span className="text-danger">*</span> 刪除
                         </label>
-                        <div className="col-xs-5">
+                        <div className="col-xs-2">
                             <RadioBox
                                 inputViewMode={view_mode}
                                 name={"hide_del"}
                                 id={"hide_del"}
                                 value={field.hide_del}
                                 onChange= {this.chgVal.bind(this, 'hide_del') }
+                                required={true}
+                                labelClassName="c-input c-radio"
+                                spanClassName="c-indicator"
+                                textClassName="text-sm"
+                                radioList={IHideTypeData}
+                                />
+                        </div>
+                        <label className="col-xs-1 form-control-label text-xs-right">
+                            <span className="text-danger">*</span> 排序
+                        </label>
+                        <div className="col-xs-2">
+                            <RadioBox
+                                inputViewMode={view_mode}
+                                name={"hide_sort"}
+                                id={"hide_sort"}
+                                value={field.hide_sort}
+                                onChange= {this.chgVal.bind(this, 'hide_sort') }
                                 required={true}
                                 labelClassName="c-input c-radio"
                                 spanClassName="c-indicator"
