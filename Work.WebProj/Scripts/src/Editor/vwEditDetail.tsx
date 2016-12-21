@@ -59,7 +59,7 @@ export class DetailField extends React.Component<DetailFieldProps, { open?: bool
 
         out_html = (
             <article className="w3-card-2 m-y-1" data-id={pp.iKey + '-' + field.editor_l2_id}>
-                <header className="w3-padding w3-light-blue form-inline">
+                <header className="w3-padding w3-light-blue form-inline text-sm">
                     <ul className="list-inline clearfix m-b-0">
                         <TagShowAndHide className="pull-xs-left" TagName={TagName.li} show={!pp.hideSort}>
                             <strong className="fa-bars"></strong>
@@ -82,11 +82,11 @@ export class DetailField extends React.Component<DetailFieldProps, { open?: bool
                                 onClick={this.props.delItem}/>
                         </li>
                         <li className="pull-xs-right m-l-1">
-                            <PWButton onClick={this.collaspesDetail.bind(this) } enable={true} className="btn btn-link text-muted" iconClassName="fa-chevron-down"> 收合/展開</PWButton>
+                            <PWButton onClick={this.collaspesDetail.bind(this) } enable={true} className="btn btn-link btn-sm text-white" iconClassName="fa-chevron-down"> 收合/展開</PWButton>
                         </li>
                         <TagShowAndHide className="pull-xs-right m-l-1" TagName={TagName.li} show={!pp.hideSort}>
                             <InputNum
-                                inputClassName="form-control"
+                                inputClassName="form-control w-x-5 text-xs-center"
                                 inputViewMode={view_mode}
                                 required={true}
                                 value={field.sort}

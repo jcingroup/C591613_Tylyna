@@ -26,7 +26,7 @@ CKEDITOR.editorConfig = function (config) {
         { name: 'insert', items: ['Image', 'Youtube', 'Table', 'Smiley', 'Iframe'] },'/',
         {
             name: "clipboard",
-            items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "Undo", "Redo"]
+            items: ["Cut", "Copy", "Paste", "PasteFromWord", "Undo", "Redo"]
         },
         { name: "document", items: ["Source", "-"] },
         { name: "tools", items: ["Maximize", "-"] },
@@ -39,7 +39,7 @@ CKEDITOR.editorConfig = function (config) {
 
     // 不要轉換htmltag
     config.allowedContent = true;
-    config.fontSize_sizes = '13px/13px;14/14px;15/15px;16/16px;17/17px;18/18px;19/19px;20/20px;22/22px;24/24px;36/36px;48/48px;';
+    config.fontSize_sizes = '13/13px;14/14px;15/15px;16/16px;17/17px;18/18px;19/19px;20/20px;22/22px;24/24px;36/36px;48/48px;';
     config.font_names = 'Arial;Arial Black;Comic Sans MS;Courier New;Tahoma;Verdana;新細明體;細明體;標楷體;微軟正黑體';
 
     // 本次專案用樣式

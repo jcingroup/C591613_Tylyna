@@ -281,6 +281,7 @@ $brand-primary: #438EB9;
   width: 80px !important;
 }
 
+// loading
 .loading {
     position: fixed;
     right: 0; bottom: 0;
@@ -294,3 +295,6 @@ $brand-primary: #438EB9;
 .loading .loader {
     margin-top: 30%;
 }
+
+// text white
+.text-white { color: #fff; }

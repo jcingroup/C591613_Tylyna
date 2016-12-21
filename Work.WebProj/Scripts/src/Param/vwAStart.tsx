@@ -146,7 +146,8 @@ export class AStart extends React.Component<any, any>{
                         <section className="col-xs-5 w3-card-2 p-a-0 w3-margin-left m-b-2">
                             <header className="w3-padding-medium w3-padding-4 w3-green">貨到付款資料設定</header>
                             <main className="w3-padding-medium m-t-1">
-                                {
+                                目前無貨到付款<br/>若要開啟請聯絡 傑興資訊 (03)4257-385
+                                {/*
                                     ship.map((item, i) => {
                                         if (item.pay_type == IPayType.CashOnDelivery) {
                                             return <dl key={i} className="form-group row">
@@ -191,7 +192,7 @@ export class AStart extends React.Component<any, any>{
                                             </dl>;
                                         }
                                     })
-                                }
+                                */}
 
                             </main>
                         </section>
