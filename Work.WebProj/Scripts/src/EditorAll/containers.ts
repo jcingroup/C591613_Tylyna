@@ -9,7 +9,7 @@ import {EditDetail} from './vwEditDetail';
 
 import { callGridLoad, callDelete, callSubmit, callUpdateItem,
     setInputValue, editState,
-    addRowState, delRowState, setRowInputValue, callDetailDel} from './actions'
+    getDetailData,addRowState, delRowState, setRowInputValue, callDetailDel} from './actions'
 
 const m1ToProps = (state, ownProps) => {
     return {
@@ -68,7 +68,8 @@ const EditDetailDispatch = (dispatch, ownProps) => {
     let s = bindActionCreators({
         setRowInputValue,
         addRowState, delRowState,
-        callDetailDel
+        callDetailDel,
+        getDetailData
     }, dispatch);
 
     return s;

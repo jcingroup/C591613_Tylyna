@@ -15,22 +15,50 @@ namespace SortableTest {
     }
 
     export class GridForm extends React.Component<any, { list: Array<number> }>{
-
+        _sortable: any;
         constructor() {
             super();
             this.sortableGroup = this.sortableGroup.bind(this);
             this.render = this.render.bind(this);
 
             this.state = {
-                list: [1, 2, 3, 4, 5, 6, 7, 8]
+                list: [5, 6, 7, 8, 9, 10, 11, 12]
             }
+            this._sortable = null;
         }
         static defaultProps: BaseDefine.GridFormPropsBase = {
 
         }
         sortableGroup(componentBackingInstance) {
             if (componentBackingInstance) {
-                console.log('hello', componentBackingInstance);
+                let _this = this;
+
+                let options = {
+                    draggable: "li",
+                    group: "shared",
+                    onSort: function (evt) {
+                        var itemEl = evt.item;
+                        //console.log('sort', itemEl);
+
+                        var data_array = _this.state.list;
+                        //alert('submit move')
+                        //console.log(evt.oldIndex, evt.newIndex);
+                        data_array.movesort(evt.oldIndex, evt.newIndex);
+
+                        var parms = [];
+                        data_array.forEach((item, i) => {
+                            parms.push(item);
+                        })
+                        //console.log('sortable', data_array);
+                    },
+                    onUpdate: function (evt) {
+                        var itemEl = evt.item;  // dragged HTMLElement
+                        //console.log('update', itemEl);
+                        // + indexes from onEnd
+                    }
+                };
+
+                this._sortable = Sortable.create(componentBackingInstance, options);
             }
         }
         render() {
@@ -38,10 +66,10 @@ namespace SortableTest {
             var outHtml: JSX.Element = null;
             outHtml = (
                 <div>
-                    <ol className="upload-img list-inline" ref={this.sortableGroup}>
+                    <ol ref={this.sortableGroup}>
                         {
                             this.state.list.map((item, i) => {
-                                return <li></li>;
+                                return <li key={item}>{item}</li>;
                             })
                         }
                     </ol>

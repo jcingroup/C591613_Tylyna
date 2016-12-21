@@ -1,6 +1,7 @@
 ﻿import $ = require('jquery');
 import React = require('react');
 import Moment = require('moment');
+import Sortable = require('sortablejs');
 import ReactBootstrap = require("react-bootstrap");
 import {config, UIText, IHideTypeData} from '../ts-comm/def-data';
 import {InputText, InputNum, SelectText, RadioBox, AreaText, PWButton, TagShowAndHide} from '../components';
@@ -75,8 +76,18 @@ export class DetailField extends React.Component<DetailFieldProps, { open?: bool
                             <PWButton className="btn btn-link text-lg text-danger" iconClassName="fa-times" enable={true}
                                 onClick={this.props.delItem}/>
                         </li>
-                        <li className="pull-xs-right">
+                        <li className="pull-xs-right m-l-1">
                             <PWButton onClick={this.collaspesDetail.bind(this) } enable={true} className="btn btn-link text-muted" iconClassName="fa-chevron-down"> 收合/展開</PWButton>
+                        </li>
+                        <li className="pull-xs-right m-l-1">
+                            <InputNum
+                                inputClassName="form-control"
+                                inputViewMode={view_mode}
+                                required={true}
+                                value={field.sort}
+                                onChange= {this.chgDetailVal.bind(this, 'sort') }
+                                placeholder="排序."
+                                /> { }
                         </li>
                     </ul>
                 </header>
@@ -101,14 +112,16 @@ export class DetailField extends React.Component<DetailFieldProps, { open?: bool
     }
 }
 export class EditDetail extends React.Component<any, any>{
-
+    _sortable: any;
     constructor() {
         super();
         this.addDetail = this.addDetail.bind(this);
         this.delDetail = this.delDetail.bind(this);
-
+        this.sortableGroup = this.sortableGroup.bind(this);
+        this.componentWillUnmount = this.componentWillUnmount.bind(this);
         this.state = {
         };
+        this._sortable = null;
     }
     addDetail(e: React.SyntheticEvent) {
         let data: server.Editor_L2 = {
@@ -134,6 +147,36 @@ export class EditDetail extends React.Component<any, any>{
             this.props.callDetailDel(i, id);
         }
     }
+    componentWillUnmount() {
+        if (this.props.ParentEditType == IEditType.update) {
+            if (this._sortable != null) { this._sortable.destroy(); }
+        }
+    }
+    sortableGroup(componentBackingInstance) {
+        if (componentBackingInstance) {
+            let _this = this;
+
+            let options = {
+                draggable: "article",
+                group: "shared",
+                onSort: function (evt) {
+                    var itemEl = evt.item;
+                    let detail: Array<server.Editor_L2> = _this.props.field.Deatil == undefined ? [] : _this.props.field.Deatil;
+
+                    detail.movesort(evt.oldIndex, evt.newIndex);
+
+                    let count = detail.length;
+                    detail.forEach((item, i) => {//更新排序
+                        item.sort = count - i;
+                    })
+
+                    _this.props.getDetailData(detail);
+                }
+            };
+
+            this._sortable = Sortable.create(componentBackingInstance, options);
+        }
+    }
     render() {
         let out_html: JSX.Element = null;
         let pp = this.props;
@@ -147,17 +190,18 @@ export class EditDetail extends React.Component<any, any>{
                     <div>
                         <PWButton className="btn btn-success btn-sm" iconClassName="fa-plus-circle" enable={true}
                             onClick={this.addDetail}> {UIText.add}</PWButton>
-
-                        {
-                            detail.map((item, i) => {
-                                return <DetailField
-                                    key={i + '-' + item.editor_l2_id}
-                                    iKey={i}
-                                    field={item}
-                                    chgDVal={this.props.setRowInputValue}
-                                    delItem={this.delDetail.bind(this, i, item.editor_l2_id, item.edit_type) }/>;
-                            })
-                        }
+                        <div ref={this.sortableGroup}>
+                            {
+                                detail.map((item, i) => {
+                                    return <DetailField
+                                        key={i + '-' + item.editor_l2_id}
+                                        iKey={i}
+                                        field={item}
+                                        chgDVal={this.props.setRowInputValue}
+                                        delItem={this.delDetail.bind(this, i, item.editor_l2_id, item.edit_type) }/>;
+                                })
+                            }
+                        </div>
                     </div>
                 );
         }

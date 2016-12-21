@@ -92,6 +92,13 @@ export const setRowInputValue = (type, i, name, value) => {
         value
     }
 }
+//更新detail list
+export const getDetailData = (data) => {
+    return {
+        type: ac_type_comm.get_dil_data,
+        data
+    }
+}
 export const addRowState = (add_item: any, e: React.SyntheticEvent) => {
     //新增狀態
     return {

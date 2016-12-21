@@ -25,6 +25,7 @@ namespace DotWeb.Api
             {
                 Editor_L1 item = await db0.Editor_L1.FindAsync(id);
                 item.Deatil = item.Editor_L2
+                                  .OrderByDescending(x => x.sort)
                                   .Select(x => new m_Editor_L2()
                                   {
                                       editor_l1_id = x.editor_l1_id,
