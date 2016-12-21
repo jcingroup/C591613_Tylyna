@@ -16,7 +16,9 @@ namespace DotWeb.Controllers
             int l1_id = (int)EditorState.AboutUs;
             using (var db0 = getDB0())
             {
-                md = db0.Editor_L2.Where(x => x.editor_l1_id == l1_id & !x.i_Hide).ToList();
+                md = db0.Editor_L2
+                    .OrderByDescending(x => x.sort)
+                    .Where(x => x.editor_l1_id == l1_id & !x.i_Hide).ToList();
             }
             return View(md);
         }
@@ -65,7 +67,9 @@ namespace DotWeb.Controllers
             int l1_id = (int)EditorState.Story;
             using (var db0 = getDB0())
             {
-                md = db0.Editor_L2.Where(x => x.editor_l1_id == l1_id & !x.i_Hide).ToList();
+                md = db0.Editor_L2
+                    .OrderByDescending(x => x.sort)
+                    .Where(x => x.editor_l1_id == l1_id & !x.i_Hide).ToList();
             }
             return View(md);
         }
