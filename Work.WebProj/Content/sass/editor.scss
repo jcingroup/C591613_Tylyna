@@ -13,8 +13,11 @@
 @import "base/basic";
 @import "base/util";
 
+@import "_client/unit/list";
 @import "_client/unit/classes";
 
 body { padding: 10px 15px; height: auto; }
 h1,h2,h3,h4,h5,h6,p,blockquote,
 ul,ol,li,dl,dt,dd { text-align: left; }
+
+img { max-width: 100%; }

@@ -201,6 +201,14 @@ textarea {
   clip: rect(0, 0, 0, 0);
   border: 0; }
 
+.list-inline, .list-unstyled {
+  list-style: none; }
+
+.list-inline > li {
+  display: inline-block; }
+  .list-inline > li:not(:last-child) {
+    margin-right: 5px; }
+
 .clear {
   clear: both; }
 
@@ -780,3 +788,6 @@ body {
 h1, h2, h3, h4, h5, h6, p, blockquote,
 ul, ol, li, dl, dt, dd {
   text-align: left; }
+
+img {
+  max-width: 100%; }

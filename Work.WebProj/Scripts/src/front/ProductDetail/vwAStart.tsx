@@ -71,7 +71,7 @@ export class AStart extends React.Component<any, any>{
                                             <TagShowAndHide TagName={TagName.Td} show={detail.stock_state === IStockState.replenishment} colSpan={2} className="text-left" key={'d-' + i}>
                                                 <span className="label label-secondary font-lg">訂單已滿</span>
                                             </TagShowAndHide>
-                                            <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== IStockState.replenishment} className="num"  key={'d-t-' + i}>
+                                            <TagShowAndHide TagName={TagName.Td} show={detail.stock_state !== IStockState.replenishment} className="num"  key={'d-t-' + i}>
                                                 <InputNum
                                                     inputClassName="form-element text-center"
                                                     inputViewMode={InputViewMode.edit}
@@ -81,7 +81,7 @@ export class AStart extends React.Component<any, any>{
                                                     min={1}
                                                     />
                                             </TagShowAndHide>
-                                            <TagShowAndHide TagName={TagName.Td}  show={detail.stock_state !== IStockState.replenishment} className="add-cart"  key={'d-b-' + i}>
+                                            <TagShowAndHide TagName={TagName.Td} show={detail.stock_state !== IStockState.replenishment} className="add-cart"  key={'d-b-' + i}>
                                                 <i className="icon-cart"></i>
                                                 <button className="btn" type="button" onClick={this.addProductToCart.bind(this, detail) }>放入購物車</button>
                                             </TagShowAndHide>

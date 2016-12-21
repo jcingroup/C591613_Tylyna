@@ -48,8 +48,8 @@ $footer-color:          darken($brand-primary,10) !default; //#63889D;
 
 // z-index
 $z-index: (
-    header:             2,
-    main:               3,
+    header:             3,
+    main:               2,
     footer:             5,
     sidebar:            4,
     banner:             1,

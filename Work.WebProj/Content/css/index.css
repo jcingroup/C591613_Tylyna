@@ -569,7 +569,8 @@ input:not([type]), [type="text"], [type="password"], [type="date"], [type="datet
 #header {
   background: #fffbc7 url(../images/headerBg.gif) repeat-x 0 100px;
   height: 165px;
-  z-index: 2;
+  z-index: 3;
+  position: relative;
   box-shadow: 0 10px 0 rgba(221, 171, 90, 0.6); }
   #header .wrap {
     position: relative; }

@@ -68,6 +68,7 @@
     @if $header-bg { background: $header-bg; }
     height: $header-height;
     z-index: z(header);
+    position: relative;
 
     // 本次專案
     .wrap { position: relative; }

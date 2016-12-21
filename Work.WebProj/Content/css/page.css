@@ -645,7 +645,8 @@ th {
 #header {
   background: #fffbc7 url(../images/headerBg.gif) repeat-x 0 100px;
   height: 165px;
-  z-index: 2;
+  z-index: 3;
+  position: relative;
   box-shadow: 0 6px 0 rgba(221, 171, 90, 0.55); }
   #header .wrap {
     position: relative; }
@@ -1288,7 +1289,7 @@ figure {
 .m-a-32 {
   margin: 32px; }
 
-.m-t-32, .editor, .taste-summary:not(:first-of-type), .payment-infor {
+.m-t-32, .taste-summary:not(:first-of-type), .payment-infor {
   margin-top: 32px; }
 
 .m-r-32 {
@@ -1518,7 +1519,7 @@ figure {
 .p-a-32, .modal-content {
   padding: 32px; }
 
-.p-t-32 {
+.p-t-32, .editor {
   padding-top: 32px; }
 
 .p-r-32 {

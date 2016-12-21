@@ -9,7 +9,7 @@ import { UIText, twDistrict, config } from './ts-comm/def-data';
 import { UITpl } from './ts-comm/tpl';
 import * as Modal from 'react-modal';
 
-//Input 
+//Input
 interface InputTextProps {
     inputViewMode: InputViewMode
     inputClassName?: string;
@@ -350,7 +350,7 @@ export class SelectText extends React.Component<SelectTextProps, any>{
     }
 }
 
-//TextArea 
+//TextArea
 interface AreaTextProps {
     inputViewMode: InputViewMode
     inputClassName?: string;
@@ -488,7 +488,6 @@ export class PWButton extends React.Component<PWButtonProps, any>{
                     {this.props.children}
                 </button>
             );
-
 
         return out_html;
     }
