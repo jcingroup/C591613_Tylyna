@@ -154,7 +154,7 @@ export class Order extends React.Component<any, any>{
                                     placeholder="請填寫常用的電子信箱，未來將以此做為預設登入帳號"
                                     />
                                 <TagShowAndHide show={field.customer_id == 0} TagName={TagName.Span}>{/* 有登入就不用出現 */}
-                                    初此購物免註冊，購買完成將自動升為會員，若已有會員請先
+                                    初次購物免註冊，購買完成將自動升為會員，若已有會員請先
                                     <PWButton className="btn-link text-success" enable={true} onClick={this.showLogin}>會員登入</PWButton>
                                 </TagShowAndHide>
 
@@ -186,6 +186,7 @@ export class Order extends React.Component<any, any>{
                                     onChange={this.chgVal.bind(this, 'receive_mobile') }
                                     required={true}
                                     maxLength={32}
+                                    placeholder="預設為會員初次登錄密碼"
                                     />
                             </dd>
                             <dt className="col-2">聯絡電話</dt>
