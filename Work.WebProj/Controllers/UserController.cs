@@ -20,6 +20,11 @@ namespace DotWeb.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        public ActionResult Finish()
+        {
+            return View();
+        }
         // 會員資料編輯
         public ActionResult Account()
         {

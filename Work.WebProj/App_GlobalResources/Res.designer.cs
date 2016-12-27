@@ -889,6 +889,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   查詢類似 【{0}】會員註冊通知 的當地語系化字串。
+        /// </summary>
+        internal static string MailTitle_Register {
+            get {
+                return ResourceManager.GetString("MailTitle_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 【{0}】客戶已付款通知 的當地語系化字串。
         /// </summary>
         internal static string MailTitle_Reply {

@@ -647,6 +647,7 @@
     <Content Include="Scripts\build\front\remitcheck.js" />
     <Content Include="Scripts\build\front\shoppingcart.js" />
     <Content Include="Scripts\build\front\useraccount.js" />
+    <Content Include="Scripts\build\front\userregister.js" />
     <Content Include="Scripts\cdn\bootstrap\collapse.js" />
     <Content Include="Scripts\cdn\bootstrap\util.js" />
     <Content Include="Scripts\cdn\jquery-1.10.2.min.js" />
@@ -687,6 +688,8 @@
     <Content Include="Views\User\ChangePassWord.cshtml" />
     <Content Include="Views\User\LinkFail.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Email\Email_register.cshtml" />
+    <Content Include="Views\User\Finish.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -782,6 +785,13 @@
     <TypeScriptCompile Include="Scripts\src\EditorAll\vwGrid.tsx" />
     <TypeScriptCompile Include="Scripts\src\EditorAll\vwGridSearch.tsx" />
     <TypeScriptCompile Include="Scripts\src\EditorAll\vwGridTable.tsx" />
+    <TypeScriptCompile Include="Scripts\src\front\UserRegister\actions.ts" />
+    <TypeScriptCompile Include="Scripts\src\front\UserRegister\app.tsx" />
+    <TypeScriptCompile Include="Scripts\src\front\UserRegister\containers.ts" />
+    <TypeScriptCompile Include="Scripts\src\front\UserRegister\store.ts" />
+    <TypeScriptCompile Include="Scripts\src\front\UserRegister\vwAStart.tsx" />
+    <TypeScriptCompile Include="Scripts\src\front\UserRegister\vwFinish.tsx" />
+    <TypeScriptCompile Include="Scripts\src\front\UserRegister\vwRegister.tsx" />
     <TypeScriptCompile Include="Scripts\src\News\actions.ts" />
     <TypeScriptCompile Include="Scripts\src\News\app.tsx" />
     <TypeScriptCompile Include="Scripts\src\News\containers.ts" />

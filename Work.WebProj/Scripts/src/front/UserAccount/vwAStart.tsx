@@ -118,7 +118,7 @@ export class AStart extends React.Component<any, { pram?: PadParm }>{
                                             onChange={this.chgVal.bind(this, 'email') }
                                             required={true}
                                             maxLength={128}
-                                            patternString="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
+                                            patternString="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}[.]{1}[a-zA-Z]{2,}(?:[.]{1}[a-zA-Z]{2,}|)$"
                                             patternInfo="Email格式錯誤,請修正!\n帳號長度至上3個字元以上\n「@」符號後面須為一個網域名稱"
                                             placeholder="請填寫常用的電子信箱，未來將以此做為預設登入帳號"
                                             />

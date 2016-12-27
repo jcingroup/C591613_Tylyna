@@ -23,10 +23,10 @@ const field = (state: server.Purchase = init_f, action) => {
 }
 
 //操作頁面
-export const oper_page = (state = OrderOperatorType.Order, action): OrderOperatorType => {
+export const oper_page = (state = OperatorType.Set, action): OperatorType => {
     switch (action.type) {
         case ac_type_comm.load:
-            return OrderOperatorType.Order;
+            return OperatorType.Set;
         case ac_type_comm.chg_oper_page:
             return action.data;
         default:

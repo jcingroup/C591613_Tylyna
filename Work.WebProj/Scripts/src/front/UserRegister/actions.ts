@@ -6,31 +6,16 @@ import { mask_show, mask_off} from '../../ts-comm/vwMaskLoading';
 
 
 //ajax--
-const apiPath: string = gb_approot + 'api/Purchase';
-export const callLoad = (no: string) => {
-    return dispatch => {
-        let pm = { no: no };
-        mask_show(UIText.mk_loading);
-        return fetchGet(apiPath + "/getRemitData", pm)
-            .then((data: IResultData<server.Purchase>) => {
-                mask_off();
-                if (data.result) {
-                    dispatch(setData(data.data));
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch((reason) => { mask_off(); })
-    }
-}
+const apiPath: string = gb_approot + 'api/FrontUser';
 
-export const callSumbit = (md: server.Purchase) => {
+export const callSumbit = (md: server.Customer) => {
     return dispatch => {
         mask_show(UIText.mk_updating);
-        return fetchPost(apiPath + '/upRemitData', md)
-            .then((data: IResultData<server.Purchase>) => {
+        return fetchPost(apiPath, md)
+            .then((data: IResultData<server.Customer>) => {
                 mask_off();
                 if (data.result) {
+                    tosMessage(null, UIText.fi_addCustomer, 1);
                     dispatch(chgOperPage(OperatorType.Finish));
                 } else {
                     alert(data.message);
@@ -40,13 +25,6 @@ export const callSumbit = (md: server.Purchase) => {
     }
 }
 //ajax--
-export const setData = (data: server.Purchase) => {
-    return {
-        type: ac_type_comm.load,
-        item: data
-    }
-}
-
 export const setInputValue = (type, name, value) => {
     return {
         type: type,
@@ -61,4 +39,5 @@ export const chgOperPage = (data) => {
         data
     }
 }
+
 

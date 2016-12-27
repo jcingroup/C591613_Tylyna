@@ -1,12 +1,8 @@
 ﻿import update = require('react-addons-update');
 import { combineReducers } from 'redux'
-import {ac_type_comm} from '../../action_type';
+import {ac_type_comm, customer_type} from '../../action_type';
 
-let init_f: server.Purchase = {
-    Deatil: []
-};
-const detail = 'Deatil';
-const field = (state: server.Purchase = init_f, action) => {
+const field = (state: server.Customer = {}, action) => {
     switch (action.type) {
         case ac_type_comm.load:
             return action.item;
@@ -21,14 +17,6 @@ const field = (state: server.Purchase = init_f, action) => {
     }
 }
 
-const ship = (state: Array<server.Shipment> = [], action) => {
-    switch (action.type) {
-        case ac_type_comm.load:
-            return action.ship;
-        default:
-            return state
-    }
-}
 
 //操作頁面
 export const oper_page = (state = OperatorType.Set, action): OperatorType => {
@@ -43,7 +31,7 @@ export const oper_page = (state = OperatorType.Set, action): OperatorType => {
 }
 
 export const combine = combineReducers({
-    field, ship, oper_page
+    field, oper_page
 })
 
 export default combine;

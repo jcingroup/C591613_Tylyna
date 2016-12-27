@@ -15,11 +15,11 @@ export class AStart extends React.Component<any, any>{
     render() {
         let out_html: JSX.Element = null;
 
-        if (this.props.oper_page == OrderOperatorType.Order) {
+        if (this.props.oper_page == OperatorType.Set) {
             out_html = <Check {...this.props} />;
         }
 
-        if (this.props.oper_page == OrderOperatorType.Finish) {
+        if (this.props.oper_page == OperatorType.Finish) {
             out_html = <Finish {...this.props} />;
         }
 

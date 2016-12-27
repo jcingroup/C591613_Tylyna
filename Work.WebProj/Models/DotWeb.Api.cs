@@ -39,24 +39,30 @@ namespace DotWeb.Api
 
             var identity = User.Identity; //一定要有值 無值為系統出問題
             #region 判斷是管理端、用戶端登入
-            var getLoginUserFlag = controllerContext.Request.Headers.GetCookies(CommWebSetup.LoginType).SingleOrDefault();
-            LoginUserFlag = getLoginUserFlag == null ? "" :
-                EncryptString.desDecryptBase64(getLoginUserFlag[CommWebSetup.LoginType].Value);
+            //var getLoginUserFlag = controllerContext.Request.Headers.GetCookies(CommWebSetup.LoginType).SingleOrDefault();
+            //LoginUserFlag = getLoginUserFlag == null ? "" :
+            //    EncryptString.desDecryptBase64(getLoginUserFlag[CommWebSetup.LoginType].Value);
             #endregion
             if (identity.IsAuthenticated)
             {
                 var FormsIdentity = (System.Web.Security.FormsIdentity)User.Identity; //一定要有值 無值為系統出問題
                 var id = EncryptString.desDecryptBase64(HttpUtility.UrlDecode(FormsIdentity.Ticket.Name));//userid
-                if (LoginUserFlag == "N")
+                //取得權限
+                var roles = FormsIdentity.Ticket.UserData.Split(',');
+                var roleId = roles.FirstOrDefault();
+                string[] r_s = new string[] { "Admins", "Managers" };
+                if (r_s.Contains(roleId))
                 {//管理端登入
+                    LoginUserFlag = "N";
                     aspUserId = id;
                     ApplicationUser aspnet_user = UserManager.FindById(aspUserId);
                     UserId = aspnet_user.Id;
                     departmentId = aspnet_user.department_id;
                     UserRoles = aspnet_user.Roles.Select(x => x.RoleId);
                 }
-                else if (LoginUserFlag == "Y")
+                else
                 {
+                    LoginUserFlag = "Y";
                     UserId = id;
                     //取得權限
                     UserRoles = FormsIdentity.Ticket.UserData.Split(',');

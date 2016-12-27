@@ -7,50 +7,8 @@
 
 
 @section Scripts {
+    <script src="~/Scripts/build/front/userregister.js?v=@CommWebSetup.CacheVer"></script>
 }
 
-<h2>新會員註冊</h2>
+<div id="page_content"></div>
 
-<form action="" class="register text-left m-t-48">
-
-    <dl class="row">
-        <dt class="col-2">E-mail</dt>
-        <dd class="col-5">
-            <input type="email" class="form-element" placeholder="請填寫常用的電子信箱，未來將以此做為預設登入帳號" required>
-        </dd>
-        <dd class="col-5 text-danger">* 必填</dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-2">姓名</dt>
-        <dd class="col-5">
-            <input type="text" class="form-element" placeholder="預設為會員名稱" required>
-        </dd>
-        <dd class="col-5 text-danger">* 必填</dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-2">手機</dt>
-        <dd class="col-5">
-            <input type="tel" class="form-element" placeholder="預設為會員初次登錄密碼" required>
-        </dd>
-        <dd class="col-5 text-danger">* 必填</dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-2">聯絡電話</dt>
-        <dd class="col-5">
-            <input type="tel" class="form-element">
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-2">地址</dt>
-        <dd class="col-2">
-            <input type="number" min="0" class="form-element" placeholder="請輸入郵遞區號">
-        </dd>
-        <dd class="col-8">
-            <input type="text" class="form-element">
-        </dd>
-    </dl>
-
-   <footer class="submit text-center">
-       <button class="btn font-lg p-y-12 p-x-48">註冊</button>
-   </footer>
-</form>

@@ -62,9 +62,17 @@ namespace DotWeb.Controllers
                 mail = "aaa@aaa.com",
                 code = "ddd"
             };
-            return View("Email_forgot",emd);
+            return View("Email_forgot", emd);
         }
-
+        public ActionResult Register()
+        {//會員註冊
+            RegisterEmail emd = new RegisterEmail()
+            {
+                mail = "aaa@aaa.com",
+                name = "ddd"
+            };
+            return View("Email_register", emd);
+        }
         #region email寄送程式
         /// <summary>
         /// 送出訂單
@@ -234,6 +242,48 @@ namespace DotWeb.Controllers
             }
             return r;
         }
+
+
+        /// <summary>
+        /// 註冊會員
+        /// </summary>
+        /// <param name="md"></param>
+        /// <returns></returns>
+        public ResultInfo sendRegisterMail(RegisterEmail md)
+        {
+            ResultInfo r = new ResultInfo();
+            try
+            {
+                #region 信件發送
+                string Body = getMailBody("../Email/Email_register", md, newContext);//套用信件版面
+                Boolean mail;
+
+                #region 收信人及寄信人
+                string sendMail = openLogic().getReceiveMails()[0];
+                List<string> r_mails = new List<string>() { md.mail };
+                #endregion
+
+                mail = Mail_Send(sendMail, //寄信人
+                                r_mails.ToArray(), //收信人
+                                string.Format(Resources.Res.MailTitle_Register, Resources.Res.System_FrontName), //信件標題
+                                Body, //信件內容
+                                true); //是否為html格式
+                if (mail == false)
+                {//送信失敗
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_SendMailFail;
+                    return r;
+                }
+                r.result = true;
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message;
+            }
+            return r;
+        }
         #endregion
     }
     public class OrderEmail
@@ -261,6 +311,11 @@ namespace DotWeb.Controllers
     public class ForgotPwEmail
     {
         public string code { get; set; }
+        public string mail { get; set; }
+    }
+    public class RegisterEmail
+    {
+        public string name { get; set; }
         public string mail { get; set; }
     }
 }

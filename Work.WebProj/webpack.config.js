@@ -26,14 +26,16 @@ module.exports = {
         m_editorall: path.resolve(__dirname, 'Scripts/src/EditorAll/app.js'),
         m_editor: path.resolve(__dirname, 'Scripts/src/Editor/app.js'),
         //前台 頁面
-        "../front/productdetail": path.resolve(__dirname, 'Scripts/src/front/ProductDetail/app.js'),
-        "../front/shoppingcart": path.resolve(__dirname, 'Scripts/src/front/ShoppingCart/app.js'),
-        "../front/order": path.resolve(__dirname, 'Scripts/src/front/Order/app.js'),
-        "../front/remitcheck": path.resolve(__dirname, 'Scripts/src/front/RemitCheck/app.js'),
-        "../front/receiptlist": path.resolve(__dirname, 'Scripts/src/front/ReceiptList/app.js'),
-        "../front/receiptcontent": path.resolve(__dirname, 'Scripts/src/front/ReceiptContent/app.js'),
-        "../front/useraccount": path.resolve(__dirname, 'Scripts/src/front/UserAccount/app.js'),
-        "../front/forgotchgpw": path.resolve(__dirname, 'Scripts/src/tsx/w-forgot_chgpw.js'),
+        "../front/productdetail": path.resolve(__dirname, 'Scripts/src/front/ProductDetail/app.js'),//產品明細
+        "../front/shoppingcart": path.resolve(__dirname, 'Scripts/src/front/ShoppingCart/app.js'),//購物車頁面
+        "../front/order": path.resolve(__dirname, 'Scripts/src/front/Order/app.js'),//下訂單
+        "../front/remitcheck": path.resolve(__dirname, 'Scripts/src/front/RemitCheck/app.js'),//已付款通知頁面
+        "../front/receiptlist": path.resolve(__dirname, 'Scripts/src/front/ReceiptList/app.js'),//訂單紀錄-list
+        "../front/receiptcontent": path.resolve(__dirname, 'Scripts/src/front/ReceiptContent/app.js'),//訂單紀錄-content
+        "../front/useraccount": path.resolve(__dirname, 'Scripts/src/front/UserAccount/app.js'),//會員帳號管理
+
+        "../front/userregister": path.resolve(__dirname, 'Scripts/src/front/UserRegister/app.js'),//新會員註冊
+        "../front/forgotchgpw": path.resolve(__dirname, 'Scripts/src/tsx/w-forgot_chgpw.js'),//忘記密碼
         "w-comm": path.resolve(__dirname, 'Scripts/src/tsx/w-comm.js'),
 
         vendors: ['jquery', 'react', 'react-dom', 'redux', 'react-redux', 'redux-thunk', 'react-addons-update', 'moment',

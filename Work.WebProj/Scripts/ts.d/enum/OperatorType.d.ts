@@ -1,6 +1,6 @@
-﻿declare const enum OrderOperatorType {
-    Order = 1,//訂單
-    Finish = 2,//完成訂單
+﻿declare const enum OperatorType {
+    Set = 1,//設定
+    Finish = 2,//完成
 }
 declare const enum ListOperatorType {
     List = 1,

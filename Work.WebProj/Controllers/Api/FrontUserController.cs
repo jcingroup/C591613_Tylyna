@@ -266,7 +266,7 @@ namespace DotWeb.Api
                             r.result = true;
                             r.message = Resources.Res.Info_ChangePassword_Success;
                         }
-                    }               
+                    }
                 }
                 else
                 {
@@ -380,6 +380,72 @@ namespace DotWeb.Api
                 db0.Dispose();
             }
             return Ok(r);
+        }
+        #endregion
+
+        #region 會員註冊
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> Post([FromBody]Customer md)
+        {
+            md.customer_id = GetNewId(CodeTable.Customer);
+
+            md.i_InsertDateTime = DateTime.Now;
+            md.i_UpdateDateTime = DateTime.Now;
+            md.i_Lang = "zh-TW";
+            md.c_pw = HttpUtility.UrlEncode(EncryptString.desEncryptBase64(md.mobile));//預設密碼改為手機
+            var r = new ResultInfo<Customer>();
+            if (!ModelState.IsValid)
+            {
+                r.message = ModelStateErrorPack();
+                r.result = false;
+                return Ok(r);
+            }
+
+            try
+            {
+                #region working
+                db0 = getDB0();
+
+                bool check_email = db0.Customer.Any(x => x.email == md.email);
+                if (check_email)
+                {
+                    r.result = false;
+                    r.message = Resources.Res.Log_Err_EmailExist;
+                    return Ok(r);
+                }
+
+                db0.Customer.Add(md);
+                await db0.SaveChangesAsync();
+
+
+                RegisterEmail emd = new RegisterEmail()
+                {
+                    mail = md.email,
+                    name = md.c_name
+                };
+                ResultInfo sendmail = (new EmailController()).sendRegisterMail(emd);
+
+                r.result = true;
+                r.id = md.customer_id;
+                return Ok(r);
+                #endregion
+            }
+            catch (DbEntityValidationException ex) //欄位驗證錯誤
+            {
+                r.message = getDbEntityValidationException(ex);
+                r.result = false;
+                return Ok(r);
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message + "\r\n" + getErrorMessage(ex);
+                return Ok(r);
+            }
+            finally
+            {
+                db0.Dispose();
+            }
         }
         #endregion
 

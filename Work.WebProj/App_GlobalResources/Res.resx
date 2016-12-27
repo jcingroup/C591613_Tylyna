@@ -424,4 +424,7 @@
   <data name="Login_Err_NotValidCode" xml:space="preserve">
     <value>錯誤!無效代碼!</value>
   </data>
+  <data name="MailTitle_Register" xml:space="preserve">
+    <value>【{0}】會員註冊通知</value>
+  </data>
 </root>
