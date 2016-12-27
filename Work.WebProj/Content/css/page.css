@@ -1703,6 +1703,18 @@ figure {
     -ms-transform: scaleX(1);
     -webkit-transform: scaleX(1);
     transform: scaleX(1); }
+  .Products .sub-navImg a:nth-child(1) {
+    background-image: url(../images/Products/sort.png); }
+  .Products .sub-navImg a:nth-child(2) {
+    background-image: url(../images/Products/sort2.png); }
+  .Products .sub-navImg a:nth-child(3) {
+    background-image: url(../images/Products/sort3.png); }
+  .Quality .sub-navImg a:nth-child(1) {
+    background-image: url(../images/Quality/sort.png); }
+  .Quality .sub-navImg a:nth-child(2) {
+    background-image: url(../images/Quality/sort2.png); }
+  .Quality .sub-navImg a:nth-child(3) {
+    background-image: url(../images/Quality/sort3.png); }
 
 .sub-navImg span {
   position: relative;
@@ -1723,24 +1735,6 @@ figure {
     transform-origin: 50%;
     -webkit-transition: transform 0.35s ease-out;
     transition: transform 0.35s ease-out; }
-
-.Products .sub-navImg a:nth-child(1) {
-  background-image: url(../images/Products/sort.png); }
-
-.Products .sub-navImg a:nth-child(2) {
-  background-image: url(../images/Products/sort2.png); }
-
-.Products .sub-navImg a:nth-child(3) {
-  background-image: url(../images/Products/sort3.png); }
-
-.Quality .sub-navImg a:nth-child(1) {
-  background-image: url(../images/Quality/sort.png); }
-
-.Quality .sub-navImg a:nth-child(2) {
-  background-image: url(../images/Quality/sort2.png); }
-
-.Quality .sub-navImg a:nth-child(3) {
-  background-image: url(../images/Quality/sort3.png); }
 
 .User .sub-nav a {
   font-size: 1.6875em;

@@ -77,6 +77,19 @@ $collapse-title-hover-icon-color: false;
 
             span::before { @include transform(scaleX(1)); }
         }
+
+        // 利他咖啡
+        .Products & {
+            &:nth-child(1) { background-image: url(#{$img-path}/Products/sort.png); }
+            &:nth-child(2) { background-image: url(#{$img-path}/Products/sort2.png); }
+            &:nth-child(3) { background-image: url(#{$img-path}/Products/sort3.png); }
+        }
+        // 利他嚴選
+        .Quality & {
+            &:nth-child(1) { background-image: url(#{$img-path}/Quality/sort.png); }
+            &:nth-child(2) { background-image: url(#{$img-path}/Quality/sort2.png); }
+            &:nth-child(3) { background-image: url(#{$img-path}/Quality/sort3.png); }
+        }
     }
     span {
         @extend .font-sp;
@@ -94,18 +107,6 @@ $collapse-title-hover-icon-color: false;
         font-size: em(30);
         font-weight: bold;
     }
-}
-
-// 利他咖啡的子選單
-.Products .sub-navImg a {
-    &:nth-child(1) { background-image: url(#{$img-path}/Products/sort.png); }
-    &:nth-child(2) { background-image: url(#{$img-path}/Products/sort2.png); }
-    &:nth-child(3) { background-image: url(#{$img-path}/Products/sort3.png); }
-}
-.Quality .sub-navImg a {
-    &:nth-child(1) { background-image: url(#{$img-path}/Quality/sort.png); }
-    &:nth-child(2) { background-image: url(#{$img-path}/Quality/sort2.png); }
-    &:nth-child(3) { background-image: url(#{$img-path}/Quality/sort3.png); }
 }
 
 // 會員資料的子選單
