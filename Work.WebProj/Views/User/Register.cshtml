@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "LITA ACCOUNT";
+    ViewBag.BodyClass = "User";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+@section Scripts {
+}
+
+<form action="" class="Register">
+
+    <h2>會員資料修改</h2>
+
+    <dl class="row row-x-0">
+        <dt class="col-2">* E-mail</dt>
+        <dd class="col-10">
+            <input type="email" class="form-element" placeholder="請填寫常用的電子信箱，未來將以此做為預設登入帳號" required>
+        </dd>
+    </dl>
+    <dl class="row row-x-0">
+        <dt class="col-2">* 姓名</dt>
+        <dd class="col-10">
+            <input type="text" class="form-element" placeholder="預設為會員名稱" required>
+        </dd>
+    </dl>
+    <dl class="row row-x-0">
+        <dt class="col-2">* 手機</dt>
+        <dd class="col-4">
+            <input type="tel" class="form-element" placeholder="預設為會員初次登錄密碼" required>
+        </dd>
+        <dt class="col-2">聯絡電話</dt>
+        <dd class="col-4">
+            <input type="tel" class="form-element">
+        </dd>
+    </dl>
+    <dl class="row row-x-0">
+        <dt class="col-2">地址</dt>
+        <dd class="col-2">
+            <input type="number" min="0" class="form-element" placeholder="請輸入郵遞區號">
+        </dd>
+        <dd class="col-8">
+            <input type="text" class="form-element">
+        </dd>
+    </dl>
+
+   <footer class="submit text-center">
+       <button class="btn font-lg p-y-12 p-x-48">確認註冊</button>
+   </footer>
+</form>

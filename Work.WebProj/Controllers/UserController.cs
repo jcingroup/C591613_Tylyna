@@ -14,6 +14,11 @@ namespace DotWeb.Controllers
         {
             return View("Account");
         }
+        // 會員註冊
+        public ActionResult Register()
+        {
+            return View();
+        }
         // 會員資料編輯
         public ActionResult Account()
         {
