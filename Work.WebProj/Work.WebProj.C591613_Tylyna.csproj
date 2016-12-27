@@ -689,7 +689,6 @@
     <Content Include="Views\User\LinkFail.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Email\Email_register.cshtml" />
-    <Content Include="Views\User\Finish.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

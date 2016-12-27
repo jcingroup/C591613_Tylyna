@@ -19,7 +19,7 @@ export class Finish extends React.Component<any, any>{
 
         out_html = (
             <div>
-                <h2>感謝您的註冊！我們將發送會員註冊通知Mail。</h2>
+                <h2>會員註冊已成功，感謝您的註冊！請至您的 E-mail 收取會員註冊資料。</h2>
             </div>
         );
         return out_html;
