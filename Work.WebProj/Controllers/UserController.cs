@@ -15,6 +15,7 @@ namespace DotWeb.Controllers
             return View("Account");
         }
         // 會員註冊
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
