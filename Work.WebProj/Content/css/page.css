@@ -432,7 +432,7 @@ input:not([type]), [type="text"], [type="password"], [type="date"], [type="datet
   background: white;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
 
-.form-element-label {
+.form-element-label, .register dt {
   padding: 5.44px 6px;
   line-height: 1.5;
   margin-bottom: 0; }
@@ -1592,7 +1592,7 @@ figure {
 .text-left, #menu.fixed, .news-list figcaption, .User .sub-nav, .products-intro, .shopping-list .item, .shopping-list .spec, .taste-summary, .account-data, .account-data td, .panel, .news-content {
   text-align: left; }
 
-.text-right, #menu, .products-pic, .payment-data dt, .reply dt, .account-data td.item {
+.text-right, #menu, .products-pic, .payment-data dt, .reply dt, .register dt, .account-data td.item {
   text-align: right; }
 
 .text-center, .label {

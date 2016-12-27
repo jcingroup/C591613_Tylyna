@@ -264,7 +264,15 @@ $collapse-title-hover-icon-color: false;
     small { @extend .m-r-16; }
 }
 
-// == 會員資料
+// == 會員
+// 會員註冊
+.register {
+    dt {
+        @extend .text-right, .form-element-label;
+    }
+}
+
+// 會員資料修改
 .account-data {
     @extend .text-left;
     td {
