@@ -547,7 +547,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 無法登錄!請重輸入帳號或密碼。 的當地語系化字串。
+        ///   查詢類似 無法登錄!密碼錯誤。 的當地語系化字串。
         /// </summary>
         internal static string Login_Err_Password {
             get {

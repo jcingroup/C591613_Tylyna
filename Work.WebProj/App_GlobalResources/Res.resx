@@ -158,7 +158,7 @@
     <value>無法登錄!狀態不符。</value>
   </data>
   <data name="Login_Err_Password" xml:space="preserve">
-    <value>無法登錄!請重輸入帳號或密碼。</value>
+    <value>無法登錄!密碼錯誤。</value>
   </data>
   <data name="Log_Err_ProdSerialExists" xml:space="preserve">
     <value>該產品序號已存在。</value>

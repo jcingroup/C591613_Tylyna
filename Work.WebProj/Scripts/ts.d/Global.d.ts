@@ -13,5 +13,5 @@ declare var debug_validate: string;
 declare var gb_no: string;
 
 //google reCAPTCHA
-var grecaptcha: any;
-var widgetId: any;
+declare var grecaptcha: any;
+declare var widgetId: any;
