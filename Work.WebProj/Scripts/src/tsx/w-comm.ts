@@ -89,16 +89,17 @@ namespace MemberLogin {
             "lang": 'zh-TW'
         };
 
-        mask_show(UIText.mk_login);
+        //mask_show(UIText.mk_login);
         fetchPost(gb_approot + 'Base/Login/member_Login', data)
             .then((data: LoginResult) => {
-                mask_off();
+                //mask_off();
                 if (data.result) {
                     //document.location.href = data.url;
                     document.location.reload();
                 }
                 else {
                     $("#m_pwd").val("");
+                    grecaptcha.reset(widgetId);
                     //$("#m_login_img").attr("src", "/_Code/Ashx/ValidateCode.ashx?vn=CheckCode&t" + (new Date()).getTime());
                     //$("#m_Validate").val("");
                     if (data.nothaveAccount) {

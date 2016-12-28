@@ -11,3 +11,7 @@ declare var debug_account: string;
 declare var debug_password: string;
 declare var debug_validate: string;
 declare var gb_no: string;
+
+//google reCAPTCHA
+var grecaptcha: any;
+var widgetId: any;
