@@ -511,6 +511,7 @@ export const UIText = {
     fi_addCustomer: '已成功加入會員',
     option_blank: '請選擇',
     delete_sure: '確定是否刪除?',
+    register_sure: '目前系統無此帳號，請問是要註冊會員?',
 }
 //menu set 使用
 export const IMenuParentsData: Array<server.OptionTemplate> = [

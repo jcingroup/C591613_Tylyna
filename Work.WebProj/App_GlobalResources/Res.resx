@@ -386,7 +386,7 @@
     <value>Email已送出，我們會儘快與您聯絡!</value>
   </data>
   <data name="Log_Err_googleValideNotEquel" xml:space="preserve">
-    <value>請驗證您不是自動程式。</value>
+    <value>請勾選我不是機器人，來驗證是否為自動程式。</value>
   </data>
   <data name="Log_Err_EmailExist" xml:space="preserve">
     <value>此Email已被申請，不可使用。</value>

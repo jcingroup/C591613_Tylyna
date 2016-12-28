@@ -664,7 +664,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 請驗證您不是自動程式。 的當地語系化字串。
+        ///   查詢類似 請勾選我不是機器人，來驗證是否為自動程式。 的當地語系化字串。
         /// </summary>
         internal static string Log_Err_googleValideNotEquel {
             get {

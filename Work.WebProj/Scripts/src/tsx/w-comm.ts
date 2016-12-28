@@ -77,6 +77,7 @@ namespace MemberLogin {
         result: boolean;
         message: string;
         url: string;
+        nothaveAccount: boolean;
     }
 
     $("#MLogin").submit(function (event) {
@@ -100,7 +101,14 @@ namespace MemberLogin {
                     $("#m_pwd").val("");
                     //$("#m_login_img").attr("src", "/_Code/Ashx/ValidateCode.ashx?vn=CheckCode&t" + (new Date()).getTime());
                     //$("#m_Validate").val("");
-                    alert(data.message);
+                    if (data.nothaveAccount) {
+                        if (!confirm(UIText.register_sure)) {
+                            return;
+                        }
+                        document.location.href = data.url;
+                    } else {
+                        alert(data.message);
+                    }
                 }
             })
             .catch((reason) => { mask_off(); })

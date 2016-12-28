@@ -473,12 +473,12 @@ namespace DotWeb.Areas.Base.Controllers
             getLoginResult.vildate = true;
 #else
             #region Google驗證
-            if (!ModelState.IsValid)
-            {
-                getLoginResult.result = false;
-                getLoginResult.message = Resources.Res.Login_Err_Normal;
-                return defJSON(getLoginResult);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    getLoginResult.result = false;
+            //    getLoginResult.message = Resources.Res.Login_Err_Normal;
+            //    return defJSON(getLoginResult);
+            //}
             ValidateResponse Validate = ValidateCaptcha(model.validate);
             getLoginResult.vildate = Validate.Success;
             #endregion
@@ -500,6 +500,7 @@ namespace DotWeb.Areas.Base.Controllers
                 {
                     string pw = Server.UrlEncode(EncryptString.desEncryptBase64(model.password));
                     var get_user = await db0.Customer.Where(x => x.email == model.account & x.c_pw == pw).FirstOrDefaultAsync();
+                    bool check_account = await db0.Customer.AnyAsync(x => x.email == model.account);
 
                     if (get_user != null)
                     {
@@ -535,6 +536,11 @@ namespace DotWeb.Areas.Base.Controllers
                     }
                     else
                     {
+                        if (!check_account)
+                        {
+                            getLoginResult.nothaveAccount = true;
+                            getLoginResult.url = Url.Content(CommWebSetup.MemberRegisterCTR);
+                        }
                         getLoginResult.result = false;
                         getLoginResult.message = Resources.Res.Login_Err_Password;//帳號或密碼錯誤 請重新輸入
                         return defJSON(getLoginResult);
@@ -569,6 +575,7 @@ namespace DotWeb.Areas.Base.Controllers
             public Boolean result { get; set; }
             public String message { get; set; }
             public String url { get; set; }
+            public bool nothaveAccount { get; set; }
         }
         public class LoginViewModel
         {
