@@ -3,7 +3,7 @@ import React = require('react');
 import Moment = require('moment');
 import {TagShowAndHide, InputText, AreaText, PWButton} from '../../components';
 import {ac_type_comm} from '../../action_type';
-import {UIText, IPackTypeData} from '../../ts-comm/def-data';
+import {UIText, config} from '../../ts-comm/def-data';
 import {fmt_money, makeInputValue} from '../../ts-comm/comm-func';
 
 export class Order extends React.Component<any, any>{
@@ -35,12 +35,6 @@ export class Order extends React.Component<any, any>{
         this.props.setInputValue(ac_type_comm.chg_fld_val, "bank_charges", bank_charges);
         this.props.setInputValue(ac_type_comm.chg_fld_val, "total", sub_total + ship_fee + bank_charges);
     }
-    getPackName(val: number): string {
-        let res: string = "";
-        let item = IPackTypeData.find(x => x.val === val);
-        res = (item != null && item != undefined) ? item.Lname : res;
-        return res;
-    }
     showLogin() {
         $("#login").css('display', 'block');
         //按下登入會員按鈕時,頁簽一定要再第一個
@@ -61,6 +55,7 @@ export class Order extends React.Component<any, any>{
         let out_html: JSX.Element = null;
         let field: server.Purchase = this.props.field;
         let ship: Array<server.Shipment> = this.props.ship;
+
         out_html =
             (<form onSubmit={this.handleSubmit}>
                 <section className="m-b-32 text-left">
@@ -239,11 +234,13 @@ export class Order extends React.Component<any, any>{
                                     inputViewMode={InputViewMode.edit}
                                     onChange={this.chgVal.bind(this, 'receive_memo') }
                                     required={false}
-                                    maxLength={256}/>
+                                    maxLength={256}
+                                    placeholder={`請於${config.remitLimitDay}日內完成轉帳付款，並填寫「已付款通知」或來電告知帳號後五碼，確認付款後於約${config.shipLimitDay}個工作天後出貨。`}
+                                />
                             </dd>
                         </dl>
                         <p className="icon-error">
-                            請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於 <strong className="text-danger">5</strong> 日內付款完成，並填寫 <u>已付款通知</u> 或來電告知帳號後五碼，完成訂購。
+                        請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於 <strong className="text-danger">{config.remitLimitDay}</strong> 日內付款完成，並填寫 <u>已付款通知</u> 或來電告知帳號後五碼，貨品將於完成付款後<strong className="text-danger">{config.shipLimitDay}</strong>個工作天內送達。
                         </p>
                         <footer className="submit">
                             <a href={gb_approot + "Order/Cart"} className="float-l icon-navigate_before">繼續選購</a>

@@ -23,7 +23,7 @@ export class Finish extends React.Component<any, CheckState>{
         out_html =
             (
                 <div>
-                    <h2>感謝您的購買！我們將盡快核對資料出貨。</h2>
+                <h2>感謝您的購買！我們將盡快確認付款，貨品將於完成付款後7個工作天內送達。</h2>
                     <h5>
                         您現在可至
                         <a href={this.state.Account} className="text-success">會員資料</a> 的

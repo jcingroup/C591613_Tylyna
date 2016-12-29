@@ -3,7 +3,7 @@ import React = require('react');
 import Moment = require('moment');
 import {TagShowAndHide, InputNum, PWButton} from '../../components';
 import {ac_type_comm} from '../../action_type';
-import {UIText, IPackTypeData, IPayTypeData} from '../../ts-comm/def-data';
+import {UIText, config, IPayTypeData} from '../../ts-comm/def-data';
 import {fmt_money, makeInputValue, htmlbr} from '../../ts-comm/comm-func';
 
 interface CheckState {
@@ -99,9 +99,9 @@ export class Check extends React.Component<any, CheckState>{
                         </li>
                     </ul>
                     <p className="icon-error">
-                        請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於 <strong className="text-danger">5</strong> 日內付款完成，並填寫
+                        請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於 <strong className="text-danger">{config.remitLimitDay}</strong> 日內付款完成，並填寫
                         <a href={this.state.Order + "?no=" + field.purchase_no} className="btn btn-sm bg-danger m-x-4">已付款通知</a>
-                        或來電告知帳號後五碼，完成訂購。
+                        或來電告知帳號後五碼，貨品將於完成付款後<strong className="text-danger">{config.shipLimitDay}</strong>個工作天內送達。
                     </p>
                     <footer className="submit">
                         <a href={this.state.Product} className="float-r btn font-lg btn-success">繼續購物 <i className="icon-navigate_next"></i></a>

@@ -478,7 +478,9 @@
 export const config = {
     RegNewLineBR: /(?:\\[rn]|[\r\n]+)+/g,
     dateFT: 'YYYY-MM-DD',
-    dateTime: 'YYYY-MM-DD A hh:mm:ss'
+    dateTime: 'YYYY-MM-DD A hh:mm:ss',
+    remitLimitDay: 5,
+    shipLimitDay: 7
 }
 
 export const UIText = {
@@ -531,12 +533,6 @@ export const IHideTypeData: Array<server.OptionTemplate> = [
 export const IStockStateData: Array<server.OptionTemplate> = [
     { val: 1, Lname: '上架', className: 'w3-tag label-success w3-round' },
     { val: -1, Lname: '訂單已滿', className: 'w3-tag label-default w3-round' }
-];
-
-export const IPackTypeData: Array<server.OptionTemplate> = [
-    { val: 1, Lname: '袋裝咖啡豆', className: 'w3-tag label-success w3-round' },
-    { val: 2, Lname: '5入濾掛式包', className: 'w3-tag label-success w3-round' },
-    { val: 3, Lname: '10入濾掛式包', className: 'w3-tag label-success w3-round' }
 ];
 
 export const IPayTypeData: Array<server.OptionTemplate> = [
