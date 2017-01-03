@@ -19,7 +19,24 @@ export class Check extends React.Component<any, any>{
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);
     }
     chgDate(name: string, MM: moment.Moment) {
-        let value = (MM != null) ? MM.format() : null;
+        let value = null;
+        if (typeof MM.format === "function") {
+            value = (MM != null) ? MM.format() : null;
+        } else {
+            let ds: any = MM;
+            let pattern_num = /(\d)/;
+            let pattern_d = /(下午)|(晚上)|(凌晨12)/;//判斷是否+12
+            let Day_s: Array<string> = ds.split(/(\D)/g).filter(x => pattern_num.test(x));//先取得數字
+            if (Day_s.length >= 5) {
+                let year = Day_s[0],
+                    month = parseInt(Day_s[1]) - 1,// months are zero indexed
+                    day = Day_s[2],
+                    hour = pattern_d.test(ds) ? (parseInt(Day_s[3]) + 12) == 24 ? 0 : (parseInt(Day_s[3]) + 12) : parseInt(Day_s[3]),
+                    minute = parseInt(Day_s[4]);
+                let new_mm = Moment([year, month, day, hour, minute]);
+                value = new_mm.isValid() ? new_mm.format() : null;
+            }
+        }
 
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);
     }
@@ -78,6 +95,7 @@ export class Check extends React.Component<any, any>{
                             <DatetimeInput
                                 inputProps={InputProps}
                                 locale={"zh-TW"}
+                                timeFormat={false}
                                 onChange={this.chgDate.bind(this, 'remit_date') }
                                 />
                         </dd>
