@@ -1,7 +1,7 @@
 ﻿import React = require('react');
 import Moment = require('moment');
 import {PWButton} from '../../components';
-import {config, UIText, IPackTypeData, IPayTypeData, IPayStateData, IShipStateData} from '../../ts-comm/def-data';
+import {config, UIText, IPayTypeData, IPayStateData, IShipStateData} from '../../ts-comm/def-data';
 import {fmt_money} from '../../ts-comm/comm-func';
 import {ac_type_comm} from '../../action_type';
 import { ReceiptList, Search_Data, IOrderStateData} from './pub';

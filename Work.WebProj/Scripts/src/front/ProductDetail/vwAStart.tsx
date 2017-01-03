@@ -2,7 +2,6 @@
 import Moment = require('moment');
 import {TagShowAndHide, InputNum} from '../../components';
 import {ac_type_comm} from '../../action_type';
-import {IPackTypeData} from '../../ts-comm/def-data';
 import {fmt_money} from '../../ts-comm/comm-func';
 
 declare var id: number;
@@ -22,12 +21,6 @@ export class AStart extends React.Component<any, any>{
     }
     closeDetailModal() {
         document.getElementById('detail').style.display = 'none';
-    }
-    getPackName(val: number): string {
-        let res: string = "";
-        let item = IPackTypeData.find(x => x.val === val);
-        res = (item != null && item != undefined) ? item.Lname : res;
-        return res;
     }
     chgVal(i: number, name: string, value: any, e: React.SyntheticEvent) {
         this.props.setRowInputValue(ac_type_comm.chg_dil_fld_val, i, name, value);

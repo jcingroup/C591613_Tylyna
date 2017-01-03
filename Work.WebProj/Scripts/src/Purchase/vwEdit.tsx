@@ -1,7 +1,7 @@
 ﻿import $ = require('jquery');
 import React = require('react');
 import Moment = require('moment');
-import {config, UIText, IPayTypeData, IPayStateData, IPackTypeData, IPayStateDataForRemit, IYesOrNoData} from '../ts-comm/def-data';
+import {config, UIText, IPayTypeData, IPayStateData, IPayStateDataForRemit, IYesOrNoData} from '../ts-comm/def-data';
 import {ac_type_comm} from '../action_type';
 import {InputText, RadioBox, PWButton, TagShowAndHide} from '../components';
 import {Init_Params} from './pub';

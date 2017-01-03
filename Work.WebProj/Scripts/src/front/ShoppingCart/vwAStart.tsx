@@ -2,7 +2,7 @@
 import Moment = require('moment');
 import {TagShowAndHide, InputNum, PWButton} from '../../components';
 import {ac_type_comm} from '../../action_type';
-import {UIText, IPackTypeData} from '../../ts-comm/def-data';
+import {UIText} from '../../ts-comm/def-data';
 import {fmt_money} from '../../ts-comm/comm-func';
 
 export class AStart extends React.Component<any, any>{
@@ -19,12 +19,6 @@ export class AStart extends React.Component<any, any>{
 
         this.props.setRowInputValue(ac_type_comm.chg_grid_val, i, name, value);
         this.props.setRowInputValue(ac_type_comm.chg_grid_val, i, "sub_total", sub_total);
-    }
-    getPackName(val: number): string {
-        let res: string = "";
-        let item = IPackTypeData.find(x => x.val === val);
-        res = (item != null && item != undefined) ? item.Lname : res;
-        return res;
     }
     delProduct(id: number) {
         if (!confirm(UIText.delete_sure)) {
