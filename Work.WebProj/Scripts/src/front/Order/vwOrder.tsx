@@ -235,7 +235,6 @@ export class Order extends React.Component<any, any>{
                                     onChange={this.chgVal.bind(this, 'receive_memo') }
                                     required={false}
                                     maxLength={256}
-                                    placeholder={`請於${config.remitLimitDay}日內完成轉帳付款，並填寫「已付款通知」或來電告知帳號後五碼，確認付款後於約${config.shipLimitDay}個工作天後出貨。`}
                                 />
                             </dd>
                         </dl>
