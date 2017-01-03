@@ -3,6 +3,18 @@ import {fetchPost, fetchGet} from '../ts-comm/ajax';
 import { mask_show, mask_off} from '../ts-comm/vwMaskLoading';
 import {UIText} from '../ts-comm/def-data';
 
+// 控制卷軸特效
+$('.scroll').click(function () {
+    $('html, body').animate({
+        scrollTop: $($(this).attr('href')).offset().top - 50
+    }, 750);
+    return false;
+});
+$('.goTop').click(function() {
+    $('body, html').stop(true).animate({scrollTop:0},750);
+    return false;
+});
+
 // 頁籤切換
 var tab = $('.js-tab');
 var tabContent = '.tab-content';
@@ -45,19 +57,6 @@ $collapse.click(function () {
         $collapse.not(this).removeClass("current");
     return false;
 });
-
-
-// 行動裝置的主選單
-// let $menuLeft = $('#menu');
-// let $trigger = $('.mobile-trigger');
-
-// $trigger.click(function () {
-//     $(this).toggleClass('active');
-//     $('body').toggleClass('push');
-// });
-// $('.toggle').click(function () {
-//     $('body').removeClass('push');
-// });
 
 //登入會員彈出視窗
 $("#Btn_Mlogin").click(() => {
