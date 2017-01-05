@@ -3,42 +3,60 @@
 
   <file>
     <sort>1</sort>
-    <name>A01_community.html</name>
-    <memo>【社區資料】新增、修改、刪除</memo>
+    <name>A01_orders.html</name>
+    <memo>【訂單管理】訂單資料維護</memo>
   </file>
 
   <file>
     <sort>2</sort>
-    <name>A02_community_news.html</name>
-    <memo>【社區新聞】新增、修改、刪除</memo>
+    <name>A02_count.html</name>
+    <memo>【訂單管理】未出貨統計</memo>
   </file>
 
   <file>
     <sort>3</sort>
-    <name>A03_community_ad.html</name>
-    <memo>【社區廣告】新增、修改、刪除</memo>
+    <name>A03_payment.html</name>
+    <memo>【訂單管理】已付款通知維護</memo>
   </file>
 
   <file>
     <sort>4</sort>
-    <name>A04_community_matter.html</name>
-    <memo>【社區物件】新增、修改、刪除</memo>
+    <name>B01_products.html</name>
+    <memo>【產品管理】產品規格-新增、修改、刪除</memo>
   </file>
 
   <file>
     <sort>5</sort>
+    <name>B02_products_kind.html</name>
+    <memo>【產品管理】產品主分類維護</memo>
+  </file>
+
+  <file>
+    <sort>6</sort>
+    <name>C01_normal_list.html</name>
+    <memo>【網站資料管理】列表型-新增、修改、刪除</memo>
+  </file>
+
+  <file>
+    <sort>7</sort>
+    <name>C02_normal_single.html</name>
+    <memo>【網站資料管理】單頁文章型-新增、修改、刪除</memo>
+  </file>
+
+  <file>
+    <sort>8</sort>
     <name>Z01_editor_text.html</name>
     <memo>【文章編輯】文字段落編排</memo>
   </file>
 
   <file>
-    <sort>6</sort>
+    <sort>9</sort>
     <name>Z02_editor_insert.html</name>
     <memo>【文章編輯】插入圖片/影片</memo>
   </file>
 
   <file>
-    <sort>7</sort>
+    <sort>10</sort>
     <name>Z03_editor_table.html</name>
     <memo>【文章編輯】表格 增加/刪除列</memo>
   </file>

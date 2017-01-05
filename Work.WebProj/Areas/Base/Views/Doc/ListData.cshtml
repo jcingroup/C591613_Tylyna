@@ -4,7 +4,7 @@
 @{
     Layout = "~/Views/Shared/Manage/RLayout.cshtml";
     ViewBag.MenuName = "系統設定";
-    ViewBag.Caption = "教學影片";
+    ViewBag.Caption = "系統操作教學";
 }
 @section IncludeScript{
     @Html.Partial("Manage/JSGlobalVar")
@@ -15,25 +15,20 @@
 }
 <ul class="breadcrumb">
     <li><i class="fa-caret-right"></i> @ViewBag.MenuName</li>
-    <li><i class="fa-angle-right"></i> @ViewBag.Caption</li>         
+    <li><i class="fa-angle-right"></i> @ViewBag.Caption</li>
 </ul>
 
 <h3 class="h3">
-    <span>操作教學影片</span>
+    <span>系統操作教學</span>
 </h3>
 
-<div class="alert alert-warning" role="alert">
+<div class="alert alert-warning w3-padding-tiny text-sm" role="alert">
     <p>影片開啟後，可點選 <i class="fa-arrows-alt"></i> 圖示，以全螢幕方式觀看。</p>
 </div>
 
-<ul class="list-group">
+<ul class="list-link list-unstyled">
     @foreach (DocInfo doc in Model)
     {
-        <li>
-            <a class="list-group-item" href="@doc.Link" target="new">
-                <strong class="text-primary">@doc.Sort.</strong>
-                <span>@doc.Momo</span>
-            </a>
-        </li>
+        <li><a href="@doc.Link" target="new"><i>@doc.Sort</i>@doc.Momo</a></li>
     }
 </ul>
