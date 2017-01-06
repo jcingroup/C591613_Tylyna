@@ -245,6 +245,7 @@ ModelManifest.xml
 .fake/
 
 /Work.WebProj/_Code/cache/
+/Work.WebProj/_Code/cache/*.json
 Work.WebProj/_Code/Cache
 /Work.WebProj/_Code/Log/
 Work.WebProj/_Code/SysUpFiles/
@@ -258,3 +259,6 @@ Work.WebProj/app_modules/comm-typeahead/main.js
 Work.WebProj/app_modules/Pikaday/pikadaydef.js
 Work.WebProj/app_modules/simple-ajax-uploader/SimpleAjaxUploader.def.js
 *.db
+/Work.WebProj/_Code/SysDoc/*.html
+/Work.WebProj/_Code/SysDoc/*.webm
+/Work.WebProj/_Code/SysDoc/*.mp4

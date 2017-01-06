@@ -36,6 +36,42 @@ hr {
 	&:not(:last-child) {margin-right: $spacer*0.6;}
 }
 
+.list-link {
+    > li { margin-bottom: 4px; }
+    a {
+        display: block;
+        position: relative;
+        padding: 4px;
+        padding-left: 45px;
+        background: #f9f9f9;
+        border: 1px solid #d7e7f1;
+
+        &:hover {
+            color: #fff;
+            background: #7ab0cf;
+
+            i {
+                background: #438EB9;
+                border-right-color: #f9f9f9;
+            }
+        }
+    }
+    i {
+        display: block;
+        width: 35px;
+        height: 100%;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        text-align: center;
+        background: #f2f2f2;
+        border-right: 1px solid #d7e7f1;
+        transition: color 0.35s, background 0.35s;
+    }
+}
+
 
 // table
 // ----------------------------------------------------------------------

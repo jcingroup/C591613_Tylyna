@@ -62,6 +62,7 @@ var Login;
                 }
                 else {
                     let obj = this.state;
+                    grecaptcha.reset(widgetId);
                     obj.validateUrl = this.getValidateUrl();
                     obj.field.password = '';
                     this.setState(obj);

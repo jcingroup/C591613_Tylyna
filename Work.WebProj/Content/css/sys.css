@@ -4586,6 +4586,37 @@ a.bg-danger:focus, a.bg-danger:hover {
 .list-inline-item:not(:last-child), .list-inline > li:not(:last-child) {
   margin-right: 0.6rem; }
 
+.list-link > li {
+  margin-bottom: 4px; }
+
+.list-link a {
+  display: block;
+  position: relative;
+  padding: 4px;
+  padding-left: 45px;
+  background: #f9f9f9;
+  border: 1px solid #d7e7f1; }
+  .list-link a:hover {
+    color: #fff;
+    background: #7ab0cf; }
+    .list-link a:hover i {
+      background: #438EB9;
+      border-right-color: #f9f9f9; }
+
+.list-link i {
+  display: block;
+  width: 35px;
+  height: 100%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  background: #f2f2f2;
+  border-right: 1px solid #d7e7f1;
+  transition: color 0.35s, background 0.35s; }
+
 .table {
   width: 100%;
   margin-bottom: 0; }
