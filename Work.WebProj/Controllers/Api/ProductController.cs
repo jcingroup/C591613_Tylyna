@@ -208,6 +208,7 @@ namespace DotWeb.Api
                 if (item != null)
                 {
                     db0.Product.Remove(item);
+                    db0.ProductDetail.RemoveRange(item.ProductDetail);
                     await db0.SaveChangesAsync();
                     r.result = true;
                     return Ok(r);
