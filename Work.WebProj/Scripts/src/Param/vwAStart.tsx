@@ -135,6 +135,10 @@ export class AStart extends React.Component<any, any>{
                                                         min={0}
                                                         />
                                                     元
+                                                    {/* 滿3000元打95折
+                                                        訂單金額滿 NT$ <input type="number" className="form-control form-control-sm text-xs-center" style="width:80px">
+                                                        ，運費 <input type="number" className="form-control form-control-sm text-xs-center" style="width:30px"> 折
+                                                    */}
                                                 </dd>
                                             </dl>;
                                         }
