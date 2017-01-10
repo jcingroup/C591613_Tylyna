@@ -94,6 +94,7 @@ export class AStart extends React.Component<any, any>{
                         </tr>
                     </tfoot>
                 </table>
+                <p className="text-left">※ 訂單金額若滿 NT$ <span className="text-danger">3000</span> 元，享 <span className="text-danger">95</span> 折優惠。</p>
                 <footer className="submit">
                     <a href={gb_approot + "Products"} className="float-l icon-navigate_before">繼續選購</a>
                     <PWButton className="float-r btn font-lg btn-success" iconClassName="icon-navigate_next"
