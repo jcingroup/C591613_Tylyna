@@ -98,6 +98,13 @@ export class Order extends React.Component<any, any>{
                         <tfoot>
                             <tr>
                                 <td colSpan="3" className="text-left">
+                                    轉帳匯款
+                                    {
+                                        ship.filter(x => x.pay_type == IPayType.Remit).map((item, i) => {
+                                            return <span key={i}>(未滿 {fmt_money(item.limit_money) } 元，運費 {fmt_money(item.shipment_fee) } 元)</span>;
+                                        })
+                                    }
+                                    {/* 等加入貨到付款時才改用下方
                                     <span className="radio-group">
                                         <input type="radio" name="pay" id="pay1"
                                             checked={field.pay_type == IPayType.Remit}
@@ -105,11 +112,11 @@ export class Order extends React.Component<any, any>{
                                         <label htmlFor="pay1" className="icon"></label>轉帳匯款
                                         {
                                             ship.filter(x => x.pay_type == IPayType.Remit).map((item, i) => {
-                                                return <span key={i}>(未滿NT${fmt_money(item.limit_money) } 運費NT${fmt_money(item.shipment_fee) }) </span>;
+                                                return <span key={i}>(未滿 {fmt_money(item.limit_money) } 元，運費 {fmt_money(item.shipment_fee) } 元)</span>;
                                             })
                                         }
                                     </span>
-                                    {/*<span className="radio-group">
+                                    <span className="radio-group">
                                         <input type="radio" name="pay" id="pay2"
                                             checked={field.pay_type == IPayType.CashOnDelivery}
                                             value={IPayType.CashOnDelivery} onChange={this.chgPayType.bind(this, 'pay_type') } />
@@ -124,13 +131,13 @@ export class Order extends React.Component<any, any>{
                                 <td className="text-right">運費
                                     <TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.CashOnDelivery}>、手續費</TagShowAndHide>
                                 </td>
-                                <td className="text-right">NT$ {fmt_money(field.ship_fee + field.bank_charges) }</td>
+                                <td className="text-right">{fmt_money(field.ship_fee + field.bank_charges) }</td>
                             </tr>
                             {//金額有大於等於折扣才出現
                                 dis_limt != null ? <tr>
-                                    <td colSpan="3" className="text-left">訂單滿NT$ {dis_limt.limit_money} 元，享 {dis_limt.per} 折優惠</td>
+                                    <td colSpan="3" className="text-left">訂單金額滿 {dis_limt.limit_money} 元，享 {dis_limt.per} 折優惠</td>
                                     <td className="text-right">折扣金額</td>
-                                    <td className="text-right"> NT$ {field.discount}</td>
+                                    <td className="text-right">{field.discount}</td>
                                 </tr> : null
                             }
 

@@ -79,12 +79,12 @@ export class Check extends React.Component<any, CheckState>{
                                 <td colSpan="4" className="text-right">運費
                                     <TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.CashOnDelivery}>、手續費</TagShowAndHide>
                                 </td>
-                                <td className="text-left">NT$ {fmt_money(field.ship_fee + field.bank_charges) }</td>
+                                <td className="text-left">{fmt_money(field.ship_fee + field.bank_charges) }</td>
                             </tr>
                             {
                                 (field.discount != 0 && field.discount != undefined) ? <tr>
                                     <td colSpan="4" className="text-right">折扣</td>
-                                    <td className="text-left">NT$ {fmt_money(field.discount) }</td>
+                                    <td className="text-left">{fmt_money(field.discount) }</td>
                                 </tr> : null
                             }
 

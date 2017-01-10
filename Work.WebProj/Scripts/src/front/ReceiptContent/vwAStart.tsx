@@ -68,15 +68,15 @@ export class AStart extends React.Component<any, any>{
                                     {/*<TagShowAndHide TagName={TagName.Span} show={field.pay_type == IPayType.CashOnDelivery}>、手續費</TagShowAndHide>*/}
                                 </td>
                                 {/*<td className="text-left"><small>NT$</small> {fmt_money(field.ship_fee + field.bank_charges) }</td>*/}
-                                <td className="text-right p-r-32"><small>NT$</small> {fmt_money(field.ship_fee) }</td>
+                                <td className="text-right p-r-32">{fmt_money(field.ship_fee) }</td>
                             </tr>
                             <TagShowAndHide TagName={TagName.Tr} show={field.pay_type == IPayType.CashOnDelivery}>
                                 <td colSpan={4} className="text-right">手續費</td>
-                                <td className="text-right p-r-32"><small>NT$</small> {fmt_money(field.bank_charges) }</td>
+                                <td className="text-right p-r-32">{fmt_money(field.bank_charges) }</td>
                             </TagShowAndHide>
                             <TagShowAndHide TagName={TagName.Tr} show={field.discount != 0 && field.discount != undefined && field.discount != null}>
                                 <td colSpan={4} className="text-right">{field.discount_memo}</td>
-                                <td className="text-right p-r-32"><small>NT$</small> {fmt_money(field.discount) }</td>
+                                <td className="text-right p-r-32">{fmt_money(field.discount) }</td>
                             </TagShowAndHide>
                             <tr>
                                 <td colSpan="4" className="text-right">總計</td>
