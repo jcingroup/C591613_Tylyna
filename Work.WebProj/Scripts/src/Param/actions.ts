@@ -45,7 +45,8 @@ export const callSubmit = (md: ajaxParams) => {
 const getParamItem = (data: ajaxParams) => {
     return {
         type: ac_type_comm.load,
-        items: data.ship,
+        ships: data.ship,
+        discounts: data.discount,
         params: {
             Email: data.Email,
             //匯款帳戶資料

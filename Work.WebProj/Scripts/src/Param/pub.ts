@@ -9,4 +9,5 @@
 
 export interface ajaxParams extends Init_Params {
     ship?: Array<server.Shipment>;
+    discount?: Array<server.Discount>;
 }

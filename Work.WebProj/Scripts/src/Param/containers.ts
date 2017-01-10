@@ -9,7 +9,8 @@ import { callParamLoad, callSubmit, setRowInputValue, setInputValue} from './act
 
 const m1ToProps = (state, ownProps) => {
     return {
-        grid: state.grid,
+        ship_grid: state.ship_grid,
+        discount_grid: state.discount_grid,
         params: state.params
     }
 }

@@ -37,3 +37,8 @@ export const customer_type = {
     pw_update: 'password_update',
     pw_cancel: 'password_cancel'
 }
+
+export const param_type = {
+    chg_s_grid_val: 'chg_ship_grid_val',
+    chg_d_grid_val: 'chg_discount_grid_val'
+}

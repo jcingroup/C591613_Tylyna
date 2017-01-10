@@ -109,6 +109,9 @@
     <Compile Include="DB0\Department.cs">
       <DependentUpon>C591613_Tylyna.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB0\Discount.cs">
+      <DependentUpon>C591613_Tylyna.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB0\Editor_L1.cs">
       <DependentUpon>C591613_Tylyna.tt</DependentUpon>
     </Compile>

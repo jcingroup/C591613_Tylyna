@@ -31,6 +31,7 @@ namespace ProcCore.Business.DB0
         public double total { get; set; }
         public double ship_fee { get; set; }
         public double bank_charges { get; set; }
+        public double discount { get; set; }
         public string receive_email { get; set; }
         public string receive_name { get; set; }
         public string receive_tel { get; set; }

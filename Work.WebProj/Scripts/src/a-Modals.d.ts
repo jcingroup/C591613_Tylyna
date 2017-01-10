@@ -283,7 +283,7 @@
 
         Deatil?: Array<server.Editor_L2>;
     }
-    interface Editor_L2 extends BaseEntityTable  {
+    interface Editor_L2 extends BaseEntityTable {
         editor_l2_id?: number;
         editor_l1_id?: number;
         l2_name?: string;
@@ -298,5 +298,10 @@
         i_UpdateDateTime?: Date;
         i_Lang?: string;
         Editor_L1?: server.Editor_L1;
+    }
+    interface Discount extends BaseEntityTable {
+        discount_id?: number;
+        limit_money?: number;
+        per?: number;
     }
 } 

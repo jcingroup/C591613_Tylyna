@@ -1,7 +1,7 @@
 ﻿import React = require('react');
 import Moment = require('moment');
 import {Init_Params, ajaxParams} from './pub';
-import {ac_type_comm} from '../action_type';
+import {ac_type_comm, param_type} from '../action_type';
 import {HeadView} from '../ts-comm/vwHeadView';
 import {InputText, InputNum, PWButton} from '../components';
 import {config, UIText} from '../ts-comm/def-data';
@@ -16,20 +16,25 @@ export class AStart extends React.Component<any, any>{
     chgVal(name: string, value: any, e: React.SyntheticEvent) {
         this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);
     }
-    chgRowVal(i: number, name: string, value: any, e: React.SyntheticEvent) {
-        this.props.setRowInputValue(ac_type_comm.chg_grid_val, i, name, value);
+    chgShipVal(i: number, name: string, value: any, e: React.SyntheticEvent) {
+        this.props.setRowInputValue(param_type.chg_s_grid_val, i, name, value);
+    }
+    chgDisVal(i: number, name: string, value: any, e: React.SyntheticEvent) {
+        this.props.setRowInputValue(param_type.chg_d_grid_val, i, name, value);
     }
     handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         let params: Init_Params = this.props.params;
-        let ship: Array<server.Shipment> = this.props.grid;
+        let ship: Array<server.Shipment> = this.props.ship_grid;
+        let discount: Array<server.Discount> = this.props.discount_grid;
         let md: ajaxParams = {
             AccountName: params.AccountName,
             AccountNumber: params.AccountNumber,
             BankCode: params.BankCode,
             BankName: params.BankName,
             Email: params.Email,
-            ship: ship
+            ship: ship,
+            discount: discount
         };
 
         this.props.callSubmit(md);
@@ -39,7 +44,8 @@ export class AStart extends React.Component<any, any>{
         let out_html: JSX.Element = null;
         let view_mode: InputViewMode = InputViewMode.edit;
         let params: Init_Params = this.props.params;
-        let ship: Array<server.Shipment> = this.props.grid;
+        let ship: Array<server.Shipment> = this.props.ship_grid;
+        let discount: Array<server.Discount> = this.props.discount_grid;
 
         out_html =
             (
@@ -108,7 +114,7 @@ export class AStart extends React.Component<any, any>{
                                             />
                                     </dd>
                                 </dl>
-                                {
+                                {//運費對總金額做+的方式做計算
                                     ship.map((item, i) => {
                                         if (item.pay_type == IPayType.Remit) {
                                             return <dl key={i} className="form-group row">
@@ -121,7 +127,7 @@ export class AStart extends React.Component<any, any>{
                                                         style={{ "width": "80px" }}
                                                         required={true}
                                                         value={item.limit_money}
-                                                        onChange= {this.chgRowVal.bind(this, i, 'limit_money') }
+                                                        onChange= {this.chgShipVal.bind(this, i, 'limit_money') }
                                                         min={0}
                                                         />
                                                     ，須付運費 NT$ { }
@@ -131,20 +137,43 @@ export class AStart extends React.Component<any, any>{
                                                         style={{ "width": "80px" }}
                                                         required={true}
                                                         value={item.shipment_fee}
-                                                        onChange= {this.chgRowVal.bind(this, i, 'shipment_fee') }
+                                                        onChange= {this.chgShipVal.bind(this, i, 'shipment_fee') }
                                                         min={0}
                                                         />
                                                     元
                                                 </dd>
-                                                {/* 滿3000元打95折
-                                                    <dt className="col-xs-3 form-control-label text-xs-right">折扣設定</dt>
-                                                    <dd className="col-xs-9 form-inline">
-                                                        訂單金額滿 NT$ <input type="number" className="form-control form-control-sm text-xs-center" style="width:80px">
-                                                        ，總金額打 <input type="number" className="form-control form-control-sm text-xs-center" style="width:30px"> 折
-                                                    </dd>
-                                                */}
                                             </dl>;
                                         }
+                                    })
+                                }
+                                {//折扣以對總金額最-的方式做計算
+                                    discount.map((item, i) => {
+                                        return <dl key={i} className="form-group row">
+                                            <dt className="col-xs-3 form-control-label text-xs-right">折扣設定</dt>
+                                            <dd className="col-xs-9 form-inline">
+                                                訂單金額滿 NT$ { }
+                                                <InputNum
+                                                    inputClassName="form-control form-control-sm text-xs-center"
+                                                    inputViewMode={view_mode}
+                                                    style={{ "width": "80px" }}
+                                                    required={true}
+                                                    value={item.limit_money}
+                                                    onChange= {this.chgDisVal.bind(this, i, 'limit_money') }
+                                                    min={0}
+                                                    />
+                                                ，總金額打 { }
+                                                <InputNum
+                                                    inputClassName="form-control form-control-sm text-xs-center"
+                                                    inputViewMode={view_mode}
+                                                    style={{ "width": "80px" }}
+                                                    required={true}
+                                                    value={item.per}
+                                                    onChange= {this.chgDisVal.bind(this, i, 'per') }
+                                                    min={0}
+                                                    />
+                                                折
+                                            </dd>
+                                        </dl>;
                                     })
                                 }
                             </main>
@@ -153,7 +182,7 @@ export class AStart extends React.Component<any, any>{
                         <section className="col-xs-5 w3-card-2 p-a-0 w3-margin-left m-b-2">
                             <header className="w3-padding-medium w3-padding-4 w3-green">貨到付款資料設定</header>
                             <main className="w3-padding-medium m-t-1">
-                                目前無貨到付款<br/>若要開啟請聯絡 傑興資訊 (03)4257-385
+                                目前無貨到付款<br/>若要開啟請聯絡 傑興資訊 (03) 4257-385
                                 {/*
                                     ship.map((item, i) => {
                                         if (item.pay_type == IPayType.CashOnDelivery) {

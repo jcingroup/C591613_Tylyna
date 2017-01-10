@@ -35,6 +35,7 @@ namespace DotWeb.Api
                 md.AccountNumber = (string)open.getParmValue(ParmDefine.AccountNumber);
 
                 md.ship = await db0.Shipment.ToListAsync();
+                md.discount = await db0.Discount.ToListAsync();
 
                 var r = new ResultInfo<Param>() { data = md };
                 r.result = true;
@@ -61,22 +62,39 @@ namespace DotWeb.Api
                 #endregion
 
                 #region working
-                using (var db0 = getDB0())
+                using (var tx = defAsyncScope())
                 {
-                    var ships = md.ship;
-
-                    foreach (var ship in ships)
+                    using (var db0 = getDB0())
                     {
-                        var item = db0.Shipment.Find(ship.shipment_id);
+                        #region 運費
+                        var ships = md.ship;
 
-                        item.limit_money = ship.limit_money;
-                        item.shipment_fee = ship.shipment_fee;
-                        item.bank_charges = ship.bank_charges;
+                        foreach (var ship in ships)
+                        {
+                            var item = db0.Shipment.Find(ship.shipment_id);
+
+                            item.limit_money = ship.limit_money;
+                            item.shipment_fee = ship.shipment_fee;
+                            item.bank_charges = ship.bank_charges;
+                        }
+                        #endregion
+
+                        #region 折扣
+                        var discounts = md.discount;
+
+                        foreach (var discount in discounts)
+                        {
+                            var item = db0.Discount.Find(discount.discount_id);
+
+                            item.limit_money = discount.limit_money;
+                            item.per = discount.per;
+                        }
+                        #endregion
+
+                        await db0.SaveChangesAsync();
+                        tx.Complete();
                     }
-
-                    await db0.SaveChangesAsync();
                 }
-
                 r.result = true;
                 return Ok(r);
                 #endregion
@@ -157,6 +175,7 @@ namespace DotWeb.Api
             public string BankCode { get; set; }
             public string AccountNumber { get; set; }
             public IEnumerable<Shipment> ship { get; set; }//運費
+            public IEnumerable<Discount> discount { get; set; }//折扣
         }
         public class ParamYoutube
         {
