@@ -124,6 +124,11 @@ export class Order extends React.Component<any, any>{
                                 <td className="text-right">NT$ {fmt_money(field.ship_fee + field.bank_charges) }</td>
                             </tr>
                             <tr>
+                                <td colSpan="3" class="text-left">訂單滿NT$ 3000 元，享 95 折優惠</td>
+                                <td className="text-right">折扣金額</td>
+                                <td className="text-right">- NT$ </td>
+                            </tr>
+                            <tr>
                                 <td colSpan="4" className="text-right">總計</td>
                                 <td className="text-right text-danger">NT$ {fmt_money(field.total) }</td>
                             </tr>
