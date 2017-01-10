@@ -29,6 +29,14 @@ const ship = (state: Array<server.Shipment> = [], action) => {
             return state
     }
 }
+const discount = (state: Array<server.Discount> = [], action) => {
+    switch (action.type) {
+        case ac_type_comm.load:
+            return action.discount;
+        default:
+            return state
+    }
+}
 
 //操作頁面
 export const oper_page = (state = OperatorType.Set, action): OperatorType => {
@@ -43,7 +51,7 @@ export const oper_page = (state = OperatorType.Set, action): OperatorType => {
 }
 
 export const combine = combineReducers({
-    field, ship, oper_page
+    field, ship, discount, oper_page
 })
 
 export default combine;

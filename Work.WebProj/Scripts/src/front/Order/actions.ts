@@ -9,7 +9,8 @@ export const setData = (data: Init_Data) => {
     return {
         type: ac_type_comm.load,
         item: data.purchase,
-        ship: data.ship
+        ship: data.ship,
+        discount: data.discount
     }
 }
 

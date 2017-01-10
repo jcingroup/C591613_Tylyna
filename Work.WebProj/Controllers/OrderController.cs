@@ -54,8 +54,9 @@ namespace DotWeb.Controllers
                     ship_state = (int)IShipState.unshipped,
                     pay_type = (int)IPayType.Remit,
                     total = mds.Sum(x => x.sub_total),
-                    ship_fee = 0,
-                    bank_charges = 0,
+                    ship_fee = 0,//運費
+                    bank_charges = 0,//手續費
+                    discount = 0,//折扣
                     Deatil = mds
                 };
                 if (item != null)
@@ -69,13 +70,23 @@ namespace DotWeb.Controllers
                     purchase.receive_address = item.address;
                 }
                 md.ship = db0.Shipment.OrderByDescending(x => x.limit_money).ToList();
+                md.discount = db0.Discount.OrderByDescending(x => x.limit_money).ToList();
                 #region 付款方式預設轉帳匯款
                 var ship_item = md.ship.Where(x => x.pay_type == purchase.pay_type & x.limit_money > purchase.total).FirstOrDefault();
                 if (ship_item != null)
                 {
                     purchase.ship_fee = ship_item.shipment_fee;//運費
                     purchase.bank_charges = ship_item.bank_charges;//手續費
-                    purchase.total += (purchase.ship_fee + purchase.bank_charges);//總計+運費&手續費
+                }
+                var discout_item = md.discount.Where(x => purchase.total >= x.limit_money).FirstOrDefault();
+                if (discout_item != null)
+                {
+                    var sub_total = mds.Sum(x => x.sub_total);
+                    purchase.discount = -(sub_total - Math.Round(sub_total * (double)discout_item.per / 100, 0));//折扣放-的
+                }
+                if (ship_item != null || discout_item != null)
+                {
+                    purchase.total += (purchase.ship_fee + purchase.bank_charges + purchase.discount);//總計+運費&手續費-折扣
                 }
                 #endregion
 
@@ -334,5 +345,6 @@ namespace DotWeb.Controllers
     {
         public Purchase purchase { get; set; }
         public IEnumerable<Shipment> ship { get; set; }
+        public IEnumerable<Discount> discount { get; set; }
     }
 }

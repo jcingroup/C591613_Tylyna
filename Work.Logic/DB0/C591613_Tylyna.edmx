@@ -122,7 +122,7 @@
             <PropertyRef Name="discount_id" />
           </Key>
           <Property Name="discount_id" Type="int" Nullable="false" />
-          <Property Name="limit_money" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="limit_money" Type="int" Nullable="false" />
           <Property Name="per" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Editor_L1">
@@ -1220,7 +1220,7 @@
             <PropertyRef Name="discount_id" />
           </Key>
           <Property Name="discount_id" Type="Int32" Nullable="false" />
-          <Property Name="limit_money" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="limit_money" Type="Int32" Nullable="false" />
           <Property Name="per" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
         </EntityType>
         </Schema>

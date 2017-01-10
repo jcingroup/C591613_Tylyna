@@ -169,6 +169,7 @@
         total?: number;
         ship_fee?: number;//運費
         bank_charges?: number;//手續費
+        discount?: number;//折扣
         receive_email?: string;
         receive_name?: string;
         receive_tel?: string;

@@ -10,6 +10,7 @@ const m1ToProps = (state, ownProps) => {
     return {
         field: state.field,
         ship: state.ship,
+        discount: state.discount,
         oper_page: state.oper_page
     }
 }

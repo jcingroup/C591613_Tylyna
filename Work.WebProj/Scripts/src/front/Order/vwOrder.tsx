@@ -55,6 +55,9 @@ export class Order extends React.Component<any, any>{
         let out_html: JSX.Element = null;
         let field: server.Purchase = this.props.field;
         let ship: Array<server.Shipment> = this.props.ship;
+        let discount: Array<server.Discount> = this.props.discount;
+        let sub_total: number = field.Deatil.sum(x => x.sub_total);
+        let dis_limt = discount.filter(x => sub_total >= x.limit_money).length > 0 ? discount.filter(x => sub_total >= x.limit_money)[0] : null;
 
         out_html =
             (<form onSubmit={this.handleSubmit}>
@@ -123,11 +126,14 @@ export class Order extends React.Component<any, any>{
                                 </td>
                                 <td className="text-right">NT$ {fmt_money(field.ship_fee + field.bank_charges) }</td>
                             </tr>
-                            <tr>
-                                <td colSpan="3" class="text-left">訂單滿NT$ 3000 元，享 95 折優惠</td>
-                                <td className="text-right">折扣金額</td>
-                                <td className="text-right">- NT$ </td>
-                            </tr>
+                            {//金額有大於等於折扣才出現
+                                dis_limt != null ? <tr>
+                                    <td colSpan="3" className="text-left">訂單滿NT$ {dis_limt.limit_money} 元，享 {dis_limt.per} 折優惠</td>
+                                    <td className="text-right">折扣金額</td>
+                                    <td className="text-right">{field.discount} NT$ </td>
+                                </tr> : null
+                            }
+
                             <tr>
                                 <td colSpan="4" className="text-right">總計</td>
                                 <td className="text-right text-danger">NT$ {fmt_money(field.total) }</td>
@@ -240,11 +246,11 @@ export class Order extends React.Component<any, any>{
                                     onChange={this.chgVal.bind(this, 'receive_memo') }
                                     required={false}
                                     maxLength={256}
-                                />
+                                    />
                             </dd>
                         </dl>
                         <p className="icon-error">
-                        請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於 <strong className="text-danger">{config.remitLimitDay}</strong> 日內付款完成，並填寫 <u>已付款通知</u> 或來電告知帳號後五碼，貨品將於完成付款後<strong className="text-danger">{config.shipLimitDay}</strong>個工作天內送達。
+                            請至您的 Email 收取訂單相關資料。若您採用轉帳匯款，請於 <strong className="text-danger">{config.remitLimitDay}</strong> 日內付款完成，並填寫 <u>已付款通知</u> 或來電告知帳號後五碼，貨品將於完成付款後<strong className="text-danger">{config.shipLimitDay}</strong>個工作天內送達。
                         </p>
                         <footer className="submit">
                             <a href={gb_approot + "Order/Cart"} className="float-l icon-navigate_before">繼續選購</a>

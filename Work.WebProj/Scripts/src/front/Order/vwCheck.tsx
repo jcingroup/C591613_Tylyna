@@ -81,6 +81,13 @@ export class Check extends React.Component<any, CheckState>{
                                 </td>
                                 <td className="text-left">NT$ {fmt_money(field.ship_fee + field.bank_charges) }</td>
                             </tr>
+                            {
+                                (field.discount != 0 && field.discount != undefined) ? <tr>
+                                    <td colSpan="4" className="text-right">折扣</td>
+                                    <td className="text-left">NT$ {fmt_money(field.discount) }</td>
+                                </tr> : null
+                            }
+
                             <tr>
                                 <td colSpan="4" className="text-right">總計</td>
                                 <td className="text-left text-danger">NT$ {fmt_money(field.total) }</td>
