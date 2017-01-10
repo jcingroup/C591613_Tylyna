@@ -74,10 +74,10 @@ export class AStart extends React.Component<any, any>{
                                 <td colSpan={4} className="text-right">手續費</td>
                                 <td className="text-right p-r-32"><small>NT$</small> {fmt_money(field.bank_charges) }</td>
                             </TagShowAndHide>
-                            {/* 訂單滿 3000元 時顯示
-                                <td colSpan="4" className="text-left">訂單滿 NT$ 3000 元，享 95 折</td>
-                                <td className="text-right p-r-32"><small>- NT$</small> </td>
-                            */}
+                            <TagShowAndHide TagName={TagName.Tr} show={field.discount != 0 && field.discount != undefined && field.discount != null}>
+                                <td colSpan={4} className="text-right">{field.discount_memo}</td>
+                                <td className="text-right p-r-32"><small>NT$</small> {fmt_money(field.discount) }</td>
+                            </TagShowAndHide>
                             <tr>
                                 <td colSpan="4" className="text-right">總計</td>
                                 <td className="text-right text-danger p-r-32"><small>NT$</small> {fmt_money(field.total) }</td>

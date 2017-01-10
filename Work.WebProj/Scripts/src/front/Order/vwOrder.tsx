@@ -130,7 +130,7 @@ export class Order extends React.Component<any, any>{
                                 dis_limt != null ? <tr>
                                     <td colSpan="3" className="text-left">訂單滿NT$ {dis_limt.limit_money} 元，享 {dis_limt.per} 折優惠</td>
                                     <td className="text-right">折扣金額</td>
-                                    <td className="text-right">{field.discount} NT$ </td>
+                                    <td className="text-right"> NT$ {field.discount}</td>
                                 </tr> : null
                             }
 

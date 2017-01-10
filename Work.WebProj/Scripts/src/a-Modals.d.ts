@@ -170,6 +170,7 @@
         ship_fee?: number;//運費
         bank_charges?: number;//手續費
         discount?: number;//折扣
+        discount_memo?: string;//折扣備註註記是多少金額折扣多少%
         receive_email?: string;
         receive_name?: string;
         receive_tel?: string;

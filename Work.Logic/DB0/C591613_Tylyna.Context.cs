@@ -50,7 +50,7 @@ namespace ProcCore.Business.DB0
         public virtual DbSet<FAQ> FAQ { get; set; }
         public virtual DbSet<Editor_L2> Editor_L2 { get; set; }
         public virtual DbSet<Editor_L1> Editor_L1 { get; set; }
-        public virtual DbSet<Purchase> Purchase { get; set; }
         public virtual DbSet<Discount> Discount { get; set; }
+        public virtual DbSet<Purchase> Purchase { get; set; }
     }
 }

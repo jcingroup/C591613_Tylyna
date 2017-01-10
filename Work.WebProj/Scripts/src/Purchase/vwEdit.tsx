@@ -294,6 +294,9 @@ export class Edit extends React.Component<any, any>{
                             <tr>
                                 <td colSpan="6" className="text-xs-right">
                                     運費+手續費: {fmt_money(field.ship_fee + field.bank_charges) }<br />
+                                    {(field.discount != 0 && field.discount != undefined && field.discount != null) ? <span>
+                                        {field.discount_memo} ，折扣金額: {fmt_money(field.discount) } <br/>
+                                    </span> : null}
                                     {/* 若金額滿3000元時顯示
                                         訂單滿 3000 元，享 95 折，折扣金額: 150 <br/>
                                     */}

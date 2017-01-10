@@ -83,6 +83,7 @@ namespace DotWeb.Controllers
                 {
                     var sub_total = mds.Sum(x => x.sub_total);
                     purchase.discount = -(sub_total - Math.Round(sub_total * (double)discout_item.per / 100, 0));//折扣放-的
+                    purchase.discount_memo = string.Format("訂單滿 NT$ {0} 元，享 {1} 折", discout_item.limit_money, Math.Round(discout_item.per, 0));
                 }
                 if (ship_item != null || discout_item != null)
                 {
@@ -151,7 +152,7 @@ namespace DotWeb.Controllers
                         r.message = string.Format(Resources.Res.Log_Err_AddCart_Exist, String.Join("、", err.ToArray()));
                         return defJSON(r);
                     }
-                    md.total = md.Deatil.Sum(x => x.sub_total) + md.ship_fee + md.bank_charges;
+                    md.total = md.Deatil.Sum(x => x.sub_total) + md.ship_fee + md.bank_charges + md.discount;
                     #endregion
                 }
                 #region 加入會員

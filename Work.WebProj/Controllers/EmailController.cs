@@ -90,10 +90,13 @@ namespace DotWeb.Controllers
                 Boolean mail;
 
                 #region 收信人及寄信人
-                string sendMail = openLogic().getReceiveMails()[0];
+                //string sendMail = openLogic().getReceiveMails()[0];
+                string sendMail = "sdec0817@gmail.com";
 
-                List<string> r_mails = openLogic().getReceiveMails().ToList();
-                if (!r_mails.Any(x => x == md.purchase.receive_name)) { r_mails.Add(md.purchase.receive_name + ":" + md.purchase.receive_email); }
+                //List<string> r_mails = openLogic().getReceiveMails().ToList();
+                //if (!r_mails.Any(x => x == md.purchase.receive_name)) { r_mails.Add(md.purchase.receive_name + ":" + md.purchase.receive_email); }
+
+                List<string> r_mails = new List<string>() { "sdec0817@gmail.com" };
                 #endregion
 
                 mail = Mail_Send(sendMail, //寄信人

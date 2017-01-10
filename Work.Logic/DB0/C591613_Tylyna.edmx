@@ -342,6 +342,7 @@
           <Property Name="ship_fee" Type="float" Nullable="false" />
           <Property Name="bank_charges" Type="float" Nullable="false" />
           <Property Name="discount" Type="float" Nullable="false" />
+          <Property Name="discount_memo" Type="nvarchar" MaxLength="64" />
           <Property Name="receive_email" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="receive_name" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="receive_tel" Type="nvarchar" MaxLength="32" />
@@ -891,6 +892,7 @@
             <End Role="Editor_L1" EntitySet="Editor_L1" />
             <End Role="Editor_L2" EntitySet="Editor_L2" />
           </AssociationSet>
+          <EntitySet Name="Discount" EntityType="C591613_TylynaModel.Discount" />
           <EntitySet Name="Purchase" EntityType="C591613_TylynaModel.Purchase" />
           <AssociationSet Name="FK_Purchase_Customer" Association="C591613_TylynaModel.FK_Purchase_Customer">
             <End Role="Customer" EntitySet="Customer" />
@@ -900,7 +902,6 @@
             <End Role="Purchase" EntitySet="Purchase" />
             <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
           </AssociationSet>
-          <EntitySet Name="Discount" EntityType="C591613_TylynaModel.Discount" />
           </EntityContainer>
         <EntityType Name="ProductKind">
           <Key>
@@ -1161,6 +1162,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="discount_id" />
+          </Key>
+          <Property Name="discount_id" Type="Int32" Nullable="false" />
+          <Property Name="limit_money" Type="Int32" Nullable="false" />
+          <Property Name="per" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="Purchase">
           <Key>
             <PropertyRef Name="purchase_no" />
@@ -1177,6 +1186,7 @@
           <Property Name="ship_fee" Type="Double" Nullable="false" />
           <Property Name="bank_charges" Type="Double" Nullable="false" />
           <Property Name="discount" Type="Double" Nullable="false" />
+          <Property Name="discount_memo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="receive_email" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="receive_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="receive_tel" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -1215,14 +1225,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Discount">
-          <Key>
-            <PropertyRef Name="discount_id" />
-          </Key>
-          <Property Name="discount_id" Type="Int32" Nullable="false" />
-          <Property Name="limit_money" Type="Int32" Nullable="false" />
-          <Property Name="per" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1599,6 +1601,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Discount">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.Discount">
+              <MappingFragment StoreEntitySet="Discount">
+                <ScalarProperty Name="per" ColumnName="per" />
+                <ScalarProperty Name="limit_money" ColumnName="limit_money" />
+                <ScalarProperty Name="discount_id" ColumnName="discount_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Purchase">
             <EntityTypeMapping TypeName="C591613_TylynaModel.Purchase">
               <MappingFragment StoreEntitySet="Purchase">
@@ -1613,6 +1624,7 @@
                 <ScalarProperty Name="receive_tel" ColumnName="receive_tel" />
                 <ScalarProperty Name="receive_name" ColumnName="receive_name" />
                 <ScalarProperty Name="receive_email" ColumnName="receive_email" />
+                <ScalarProperty Name="discount_memo" ColumnName="discount_memo" />
                 <ScalarProperty Name="discount" ColumnName="discount" />
                 <ScalarProperty Name="bank_charges" ColumnName="bank_charges" />
                 <ScalarProperty Name="ship_fee" ColumnName="ship_fee" />
@@ -1625,15 +1637,6 @@
                 <ScalarProperty Name="order_date" ColumnName="order_date" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
                 <ScalarProperty Name="purchase_no" ColumnName="purchase_no" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Discount">
-            <EntityTypeMapping TypeName="C591613_TylynaModel.Discount">
-              <MappingFragment StoreEntitySet="Discount">
-                <ScalarProperty Name="per" ColumnName="per" />
-                <ScalarProperty Name="limit_money" ColumnName="limit_money" />
-                <ScalarProperty Name="discount_id" ColumnName="discount_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

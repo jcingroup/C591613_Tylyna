@@ -39,10 +39,10 @@
         <EntityTypeShape EntityType="C591613_TylynaModel.Editor_L2" Width="1.5" PointX="16.625" PointY="1" />
         <EntityTypeShape EntityType="C591613_TylynaModel.Editor_L1" Width="1.5" PointX="14.75" PointY="2.875" />
         <AssociationConnector Association="C591613_TylynaModel.FK_Editor_L2_Editor_L1" />
+        <EntityTypeShape EntityType="C591613_TylynaModel.Discount" Width="1.5" PointX="13.375" PointY="9.75" />
         <EntityTypeShape EntityType="C591613_TylynaModel.Purchase" Width="1.5" PointX="12.875" PointY="16.75" />
         <AssociationConnector Association="C591613_TylynaModel.FK_Purchase_Customer" />
         <AssociationConnector Association="C591613_TylynaModel.FK_PurchaseDetail_Purchase" />
-        <EntityTypeShape EntityType="C591613_TylynaModel.Discount" Width="1.5" PointX="13.375" PointY="9.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
