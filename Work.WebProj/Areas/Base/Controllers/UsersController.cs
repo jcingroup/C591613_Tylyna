@@ -38,7 +38,8 @@ namespace DotWeb.Areas.Base.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), md.OldPassword, md.NewPassword);
+                    //IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), md.OldPassword, md.NewPassword);
+                    IdentityResult result = await UserManager.ChangePasswordAsync(this.aspUserId, md.OldPassword, md.NewPassword);
 
                     if (result.Succeeded)
                     {
