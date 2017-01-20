@@ -40,6 +40,7 @@ export class AStart extends React.Component<any, any>{
     render() {
         let out_html: JSX.Element = null;
         let grid: Array<server.PurchaseDetail> = this.props.grid;
+        let discount: Array<server.Discount> = this.props.discount;
         out_html =
             (<div>
                 <h2 className="text-left">購物車</h2>
@@ -94,7 +95,11 @@ export class AStart extends React.Component<any, any>{
                         </tr>
                     </tfoot>
                 </table>
-                <p className="text-left">※ 訂單金額若滿 NT$ <span className="text-danger">3000</span> 元，享 <span className="text-danger">95</span> 折優惠。</p>
+                {
+                    discount.map((item, i) => {
+                        return <p key={i} className="text-left">※ 訂單金額若滿 NT$ <span className="text-danger">{fmt_money(item.limit_money) }</span> 元，享 <span className="text-danger">{item.per}</span> 折優惠。</p>;
+                    })
+                }
                 <footer className="submit">
                     <a href={gb_approot + "Products"} className="float-l icon-navigate_before">繼續選購</a>
                     <PWButton className="float-r btn font-lg btn-success" iconClassName="icon-navigate_next"

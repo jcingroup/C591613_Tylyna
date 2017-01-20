@@ -8,7 +8,8 @@ import {setRowInputValue, delProduct, chgProductQty} from './actions'
 
 const m1ToProps = (state, ownProps) => {
     return {
-        grid: state.grid
+        grid: state.grid,
+        discount: state.discount
     }
 }
 

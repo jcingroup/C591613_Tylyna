@@ -238,7 +238,8 @@ namespace DotWeb.Controllers
         [HttpGet]
         public string getCart()
         {
-            ResultInfo<List<PurchaseDetail>> r = new ResultInfo<List<PurchaseDetail>>();
+            ResultInfo<CartInfo> r = new ResultInfo<CartInfo>();
+            CartInfo res = new CartInfo();
             List<PurchaseDetail> mds = new List<PurchaseDetail>();
             HttpCookie cart = Request.Cookies[this.CartSession];//改用cookie+json格式方式記錄購物車內容
             try
@@ -251,8 +252,13 @@ namespace DotWeb.Controllers
                     var img = getImgFirst("ProductImg", i.product_id.ToString(), "600");
                     i.img_src = img != null ? img.src_path : null;
                 }
+                res.data = mds;
+                using (var db0 = getDB0())
+                {
+                    res.discount = db0.Discount.OrderByDescending(x => x.limit_money).ToList();
+                }
 
-                r.data = mds;
+                r.data = res;
                 r.result = true;
             }
             catch (Exception ex)
@@ -346,6 +352,11 @@ namespace DotWeb.Controllers
     {
         public Purchase purchase { get; set; }
         public IEnumerable<Shipment> ship { get; set; }
+        public IEnumerable<Discount> discount { get; set; }
+    }
+    public class CartInfo
+    {
+        public IEnumerable<PurchaseDetail> data { get; set; }
         public IEnumerable<Discount> discount { get; set; }
     }
 }

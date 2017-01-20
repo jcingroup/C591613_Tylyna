@@ -18,8 +18,17 @@ const grid = (state: Array<server.PurchaseDetail> = [], action): Array<server.Pu
             return state;
     }
 }
+
+const discount = (state: Array<server.Discount> = [], action) => {
+    switch (action.type) {
+        case ac_type_comm.load:
+            return action.discount;
+        default:
+            return state
+    }
+}
 export const combine = combineReducers({
-    grid
+    grid, discount
 })
 
 export default combine;

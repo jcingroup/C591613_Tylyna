@@ -21,10 +21,11 @@ export const callLoad = () => {
     }
 }
 
-export const setLoadData = (items) => {
+export const setLoadData = (data) => {
     return {
         type: ac_type_comm.load,
-        items
+        items: data.data,
+        discount: data.discount
     }
 }
 
