@@ -16,7 +16,8 @@ export class AStart extends React.Component<any, any>{
     chgShVal(name: string, e: React.SyntheticEvent) {
         let input: HTMLInputElement = e.target as HTMLInputElement;
         let value: any = input.value != null ? parseFloat(input.value) : null;
-        let obj = IOrderStateData.find(x => x.id == value);
+        let obj = isNaN(value) ? IOrderStateData[0] : IOrderStateData.find(x => x.id == value);
+
         this.props.setInputValue(ac_type_comm.chg_sch_val, name, value);
         this.props.setInputValue(ac_type_comm.chg_sch_val, "state", obj.state);
         this.props.setInputValue(ac_type_comm.chg_sch_val, "state_val", obj.state_val);
@@ -76,7 +77,7 @@ export class AStart extends React.Component<any, any>{
                             return <tr key={i}>
                                 <td>{Moment(item.order_date).format(config.dateFT) }</td>
                                 <td className="text-left">
-                                    <a href={gb_approot+"User/Receipt_content?no="+item.purchase_no} className="text-success">{item.purchase_no}</a>
+                                    <a href={gb_approot + "User/Receipt_content?no=" + item.purchase_no} className="text-success">{item.purchase_no}</a>
                                 </td>
                                 <td className="text-left">{item.p_name}-{item.p_d_pack_name } </td>
                                 <td>{fmt_money(item.qty) }</td>

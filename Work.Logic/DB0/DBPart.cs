@@ -38,7 +38,8 @@ namespace ProcCore.Business.DB0
     public enum IPayType
     {//付款方式
         Remit = 1,//轉帳付款
-        CashOnDelivery = 2//貨到付款
+        CashOnDelivery = 2,//貨到付款
+        PayOnStore = 3//門市自取付款
     }
     public enum IPayState
     {//付款狀態
@@ -66,7 +67,8 @@ namespace ProcCore.Business.DB0
         public static List<i_Code> IPayTypeData = new List<i_Code>()
         {
             new i_Code{ Code = 1, Value = "轉帳匯款", LangCode = "wait" },
-            new i_Code{ Code = 2, Value = "貨到付款", LangCode = "progress" }
+            new i_Code{ Code = 2, Value = "貨到付款", LangCode = "progress" },
+            new i_Code{ Code = 3, Value = "門市自取付款", LangCode = "progress" }
         };
         public static List<i_Code> IPayStateData = new List<i_Code>()
         {

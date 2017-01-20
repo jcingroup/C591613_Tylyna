@@ -20,20 +20,20 @@ export class Order extends React.Component<any, any>{
     }
     chgPayType(name: string, e: React.SyntheticEvent) {//付款方式切換
         let field: server.Purchase = this.props.field;
-        let ship: Array<server.Shipment> = this.props.ship;
+        let ship: Array<server.Shipment> = this.props.ship;//運費計算
         let sub_total: number = field.Deatil.sum(x => x.sub_total);//產品小計
         let ship_fee: number = 0, bank_charges: number = 0;//運費、手續費
 
         let value = makeInputValue(e);
-
+        //運費計算
         let tmp = ship.filter(x => x.pay_type == value && x.limit_money > sub_total);
         ship_fee = tmp.length > 0 ? tmp[0].shipment_fee : ship_fee;
         bank_charges = tmp.length > 0 ? tmp[0].bank_charges : bank_charges;
 
-        this.props.setInputValue(ac_type_comm.chg_fld_val, name, value);
+        this.props.setInputValue(ac_type_comm.chg_fld_val, name, parseInt(value));
         this.props.setInputValue(ac_type_comm.chg_fld_val, "ship_fee", ship_fee);
         this.props.setInputValue(ac_type_comm.chg_fld_val, "bank_charges", bank_charges);
-        this.props.setInputValue(ac_type_comm.chg_fld_val, "total", sub_total + ship_fee + bank_charges);
+        this.props.setInputValue(ac_type_comm.chg_fld_val, "total", sub_total + ship_fee + bank_charges + field.discount);
     }
     showLogin() {
         $("#login").css('display', 'block');
@@ -44,7 +44,9 @@ export class Order extends React.Component<any, any>{
     handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         let field: server.Purchase = this.props.field;
-        if (field.pay_type != IPayType.Remit && field.pay_type != IPayType.CashOnDelivery) {
+        let pt_list: Array<any> = [IPayType.Remit, IPayType.PayOnStore, IPayType.PayOnStore];
+
+        if (pt_list.indexOf(field.pay_type) == -1) {
             alert("請選擇「付款方式」！");
             return;
         }
@@ -98,12 +100,24 @@ export class Order extends React.Component<any, any>{
                         <tfoot>
                             <tr>
                                 <td colSpan="3" className="text-left">
-                                    轉帳匯款
-                                    {
-                                        ship.filter(x => x.pay_type == IPayType.Remit).map((item, i) => {
-                                            return <span key={i}>(未滿 {fmt_money(item.limit_money) } 元，運費 {fmt_money(item.shipment_fee) } 元)</span>;
-                                        })
-                                    }
+                                    <span className="radio-group">
+                                        <input type="radio" name="pay" id="pay1"
+                                            checked={field.pay_type == IPayType.Remit}
+                                            value={IPayType.Remit} onChange={this.chgPayType.bind(this, 'pay_type') } />
+                                        <label htmlFor="pay1" className="icon"></label>轉帳匯款
+                                        {
+                                            ship.filter(x => x.pay_type == IPayType.Remit).map((item, i) => {
+                                                return <span key={i}>(未滿 {fmt_money(item.limit_money) } 元，運費 {fmt_money(item.shipment_fee) } 元) </span>;
+                                            })
+                                        }
+                                    </span>
+                                    <span className="radio-group">
+                                        <input type="radio" name="pay" id="pay3"
+                                            checked={field.pay_type == IPayType.PayOnStore}
+                                            value={IPayType.PayOnStore} onChange={this.chgPayType.bind(this, 'pay_type') } />
+                                        <label htmlFor="pay3" className="icon"></label>門市自取付款(免運費)
+                                    </span>
+
                                     {/* 等加入貨到付款時才改用下方
                                     <span className="radio-group">
                                         <input type="radio" name="pay" id="pay1"

@@ -537,7 +537,8 @@ export const IStockStateData: Array<server.OptionTemplate> = [
 
 export const IPayTypeData: Array<server.OptionTemplate> = [
     { val: 1, Lname: '轉帳匯款', className: 'w3-tag label-primary w3-round' },
-    { val: 2, Lname: '貨到付款', className: 'w3-tag label-primary w3-round' }
+    { val: 2, Lname: '貨到付款', className: 'w3-tag label-primary w3-round' },
+    { val: 3, Lname: '門市自取付款', className: 'w3-tag label-primary w3-round' }
 ];
 
 export const IPayStateData: Array<server.OptionTemplate> = [
