@@ -1,7 +1,7 @@
 ﻿import $ = require('jquery');
 import React = require('react');
 import Moment = require('moment');
-import {config, UIText, IPayStateDataForRemit} from '../ts-comm/def-data';
+import {config, UIText, IPayStateDataForRemit, IPayTypeData} from '../ts-comm/def-data';
 import {PWButton, RadioBox} from '../components';
 import { OrderButton } from '../ts-comm/OrderButton';
 import {ac_type_comm} from '../action_type';
@@ -66,6 +66,14 @@ export class GridTable extends React.Component<any, any>{
                             </th>
                             <th>
                                 <OrderButton
+                                    title="付款方式"
+                                    field={"pay_type"}
+                                    sort={pp.page_operator.sort}
+                                    now_field={pp.page_operator.field}
+                                    setSort={this.setSort} />
+                            </th>
+                            <th>
+                                <OrderButton
                                     title="購買人"
                                     field={"receive_name"}
                                     sort={pp.page_operator.sort}
@@ -117,6 +125,15 @@ export class GridTable extends React.Component<any, any>{
                                     </label>
                                 </td>
                                 <td><a href={this.state.Order + "?no=" + item.purchase_no}>{item.purchase_no}</a></td>
+                                <td className="text-xs-center">
+                                    <RadioBox
+                                        inputViewMode={InputViewMode.view}
+                                        name={"pay_tpye-" + i}
+                                        id={"pay_type-" + i}
+                                        value={item.pay_type}
+                                        radioList={IPayTypeData}
+                                        />
+                                </td>
                                 <td className="text-xs-center">{item.customer_name}</td>
                                 <td className="text-xs-center">{item.remit_no}</td>
                                 <td className="text-xs-center">{item.remit_money}</td>

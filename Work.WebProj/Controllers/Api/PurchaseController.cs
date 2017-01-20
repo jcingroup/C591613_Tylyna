@@ -166,7 +166,7 @@ namespace DotWeb.Api
                         name = md.receive_name,
                         mail = md.receive_email
                     };
-                    ResultInfo sendmail = (new EmailController()).sendShipMail(emd);                
+                    ResultInfo sendmail = (new EmailController()).sendShipMail(emd);
                     if (!sendmail.result)
                     {
                         rAjaxResult.hasData = sendmail.result;//暫時放hasdata
@@ -334,12 +334,13 @@ namespace DotWeb.Api
             try
             {
                 db0 = getDB0();
+                int[] pt_list = new int[] { (int)IPayType.Remit, (int)IPayType.PayOnStore };
                 if (!db0.Purchase.Any(x => x.purchase_no == no))
                 {//沒有這筆訂單編號
                     r.result = false;
                     r.message = string.Format(Resources.Res.Log_Err_PurchaseExist, no);
                 }
-                else if (db0.Purchase.Any(x => x.purchase_no == no & x.pay_type != (int)IPayType.Remit))
+                else if (db0.Purchase.Any(x => x.purchase_no == no & !pt_list.Contains(x.pay_type)))
                 {//此筆訂單非轉帳付款不須對帳確認
                     r.result = false;
                     r.message = string.Format(Resources.Res.Log_Err_PurchaseNoRemit, no);
@@ -399,8 +400,8 @@ namespace DotWeb.Api
 
             db0 = getDB0();
             var predicate = PredicateBuilder.True<Purchase>();
-            //只顯示轉帳付款,且付款狀態為 已付款待確認、已付款
-            predicate = predicate.And(x => x.pay_type == (int)IPayType.Remit & x.pay_state >= (int)IPayState.paid_uncheck);
+            //只顯示轉帳付款、門市自取付款,且付款狀態為 已付款待確認、已付款
+            predicate = predicate.And(x => (x.pay_type == (int)IPayType.Remit || x.pay_type == (int)IPayType.PayOnStore) & x.pay_state >= (int)IPayState.paid_uncheck);
 
             if (q.keyword != null)
                 predicate = predicate.And(x => x.purchase_no.Contains(q.keyword) ||
@@ -478,6 +479,7 @@ namespace DotWeb.Api
         public async Task<IHttpActionResult> upRemitState([FromBody]upRemitStateParma md)
         {
             ResultInfo<Purchase> r = new ResultInfo<Purchase>();
+            int[] pt_list = new int[] { (int)IPayType.Remit, (int)IPayType.PayOnStore };
             try
             {
                 using (var db0 = getDB0())
@@ -490,7 +492,7 @@ namespace DotWeb.Api
                             r.message = string.Format(Resources.Res.Log_Err_PurchaseExist, no);
                             return Ok(r);
                         }
-                        else if (db0.Purchase.Any(x => x.purchase_no == no & x.pay_type != (int)IPayType.Remit))
+                        else if (db0.Purchase.Any(x => x.purchase_no == no & !pt_list.Contains(x.pay_type)))
                         {//此筆訂單非轉帳付款不須對帳確認
                             r.result = false;
                             r.message = string.Format(Resources.Res.Log_Err_PurchaseNoRemit, no);
@@ -528,7 +530,9 @@ namespace DotWeb.Api
                 var predicate = PredicateBuilder.True<PurchaseDetail>();
 
                 predicate = predicate.And(x => x.Purchase.ship_state == (int)IShipState.unshipped &
-                ((x.Purchase.pay_type == (int)IPayType.Remit & x.Purchase.pay_state == (int)IPayState.paid) || (x.Purchase.pay_type == (int)IPayType.CashOnDelivery)));
+          ((x.Purchase.pay_type == (int)IPayType.Remit & x.Purchase.pay_state == (int)IPayState.paid) ||
+          (x.Purchase.pay_type == (int)IPayType.PayOnStore & x.Purchase.pay_state == (int)IPayState.paid) ||
+          (x.Purchase.pay_type == (int)IPayType.CashOnDelivery)));
 
                 if (q.keyword != null)
                     predicate = predicate.And(x => x.purchase_no.Contains(q.keyword) ||
@@ -593,7 +597,9 @@ namespace DotWeb.Api
                 var predicate = PredicateBuilder.True<PurchaseDetail>();
 
                 predicate = predicate.And(x => x.Purchase.ship_state == (int)IShipState.unshipped &
-                ((x.Purchase.pay_type == (int)IPayType.Remit & x.Purchase.pay_state == (int)IPayState.paid) || (x.Purchase.pay_type == (int)IPayType.CashOnDelivery)));
+                ((x.Purchase.pay_type == (int)IPayType.Remit & x.Purchase.pay_state == (int)IPayState.paid) ||
+                (x.Purchase.pay_type == (int)IPayType.PayOnStore & x.Purchase.pay_state == (int)IPayState.paid) ||
+                (x.Purchase.pay_type == (int)IPayType.CashOnDelivery)));
 
                 if (q.keyword != null)
                     predicate = predicate.And(x => x.purchase_no.Contains(q.keyword) ||
