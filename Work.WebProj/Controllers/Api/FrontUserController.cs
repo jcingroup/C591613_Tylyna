@@ -64,7 +64,7 @@ namespace DotWeb.Api
 
                     var result = db0.PurchaseDetail.AsExpandable().Where(predicate);
                     var resultItems = await result
-                        .OrderBy(x => x.purchase_no)
+                        .OrderByDescending(x => x.Purchase.order_date)
                         .Select(x => new
                         {
                             x.purchase_no,
