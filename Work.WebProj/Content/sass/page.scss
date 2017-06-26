@@ -197,7 +197,7 @@ $collapse-title-hover-icon-color: false;
 
 // editor
 .editor {
-    @extend .p-t-32;
+    @extend .p-t-32, .text-left;
 
     img { max-width: 100%; }
 }
@@ -324,6 +324,10 @@ $collapse-title-hover-icon-color: false;
     header { @extend .m-b-8; }
     article { @extend .m-t-4; }
     .label { @extend .m-l-0; }
+    aside {
+        max-width: 50%;
+        float: right;
+    }
 }
 
 // == 聯絡我們
