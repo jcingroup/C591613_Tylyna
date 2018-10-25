@@ -36,6 +36,10 @@ const discount_grid = (state: Array<server.Discount> = [], action): Array<server
             let struct_1 = { $push: [action.add_item] };
             let n_state_1 = update(state, struct_1);
             return n_state_1;
+        case param_type.del_d_row:
+            let struct_2 = { $splice: [[action.i, 1]]};
+            let n_state_2 = update(state, struct_2);
+            return n_state_2;
         default:
             return state;
     }

@@ -757,3 +757,97 @@ export class TagShowAndHide extends React.Component<{ show: boolean, className?:
         return out_html;
     }
 }
+
+interface CheckTextProps {
+    inputViewMode?: InputViewMode
+    inputClassName?: string;
+
+    width?: string;
+    style?: React.CSSProperties;
+    viewClassName?: string;
+    disabled?: boolean;
+    onClick?: Function;
+    value?: string | number | boolean;
+    id?: string;
+    required?: boolean;
+    onFocus?: React.EventHandler<React.FocusEvent>;
+    ref?: string | any;
+    tabIndex?: number;
+    checked?: boolean;
+    trueSign?: string;
+    fasleSign?: string;
+    viewShowCheck?: boolean; //
+}
+export class CheckText extends React.Component<CheckTextProps, any>{
+
+    constructor() {
+        super();
+        this.onClick = this.onClick.bind(this);
+    }
+    static defaultProps = {
+        disabled: false,
+        inputViewMode: InputViewMode.edit,
+        checked: false,
+        trueSign: '',
+        fasleSign: '',
+        viewShowFalse: false
+    }
+
+    onClick(e: React.SyntheticEvent) {
+        //let input: HTMLInputElement = e.target as HTMLInputElement;
+        //let value = makeInputValue(e);
+        //console.log('click', '=>', this.props.checked);
+        this.props.onClick(!this.props.checked, e);
+    }
+    render() {
+        let out_html = null;
+        let pp = this.props;
+        let value: any = this.props.value == undefined ? '' : this.props.value;
+
+        if (this.props.inputViewMode == InputViewMode.edit) {
+            out_html =
+                (<input
+                    id={this.props.id}
+                    type="checkbox"
+                    className={pp.inputClassName}
+                    style={pp.style}
+                    value={value}
+                    onClick={this.onClick}
+                    onChange={() => { }}
+                    disabled={pp.disabled}
+                    required={pp.required}
+                    onFocus={pp.onFocus}
+                    tabIndex={pp.tabIndex}
+                    checked={pp.checked}
+                />);
+        }
+
+        if (this.props.inputViewMode == InputViewMode.view) {
+
+            if (!this.props.viewShowCheck)
+                return <span></span>;
+
+            if (this.props.checked) {
+                out_html =
+                    (
+                        <span
+                            id={this.props.id}
+                            className={this.props.viewClassName}>
+                            {this.props.trueSign}
+                        </span>
+                    );
+            }
+            else {
+                out_html =
+                    (
+                        <span
+                            id={this.props.id}
+                            className={this.props.viewClassName}>
+                            {this.props.fasleSign}
+                        </span>
+                    );
+            }
+        }
+        return out_html;
+    }
+}

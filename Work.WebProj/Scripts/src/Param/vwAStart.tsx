@@ -3,7 +3,7 @@ import Moment = require('moment');
 import {Init_Params, ajaxParams} from './pub';
 import {ac_type_comm, param_type} from '../action_type';
 import {HeadView} from '../ts-comm/vwHeadView';
-import {InputText, InputNum, PWButton, RadioBox} from '../components';
+import {InputText, InputNum, PWButton, RadioBox, CheckText} from '../components';
 import {config, UIText, IUsedData} from '../ts-comm/def-data';
 
 declare var role: string;
@@ -13,6 +13,7 @@ export class AStart extends React.Component<any, any>{
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.addDis = this.addDis.bind(this);
+        this.delDis = this.delDis.bind(this);
         this.state = {};
     }
     chgVal(name: string, value: any, e: React.SyntheticEvent) {
@@ -27,14 +28,17 @@ export class AStart extends React.Component<any, any>{
     addDis() {
         let item: server.Discount = {
             discount_id: 0,
-            limit_money: null,
-            per: null,
+            limit_money: 0,
+            per: 0,
             isuse: true,
             view_mode: InputViewMode.edit,
             edit_type: IEditType.insert
         };
         let i = this.props.discount_grid.length;
         this.props.addRowState(i, item);
+    }
+    delDis(i: number) {
+        this.props.delRowState(i);
     }
     handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -143,6 +147,7 @@ export class AStart extends React.Component<any, any>{
                                                         value={item.limit_money}
                                                         onChange= {this.chgShipVal.bind(this, i, 'limit_money') }
                                                         min={0}
+                                                        disabled={item.isfixed}
                                                         />
                                                     ，須付運費 NT$ { }
                                                     <InputNum
@@ -154,21 +159,33 @@ export class AStart extends React.Component<any, any>{
                                                         onChange= {this.chgShipVal.bind(this, i, 'shipment_fee') }
                                                         min={0}
                                                         />
-                                                    元
+                                                    元<br/>
+                                                    <CheckText
+                                                        inputClassName="form-control"
+                                                        inputViewMode={view_mode}
+                                                        value={true}
+                                                        checked={item.isfixed == true}
+                                                        onClick= {this.chgShipVal.bind(this, i, 'isfixed') }
+                                                        required={false}
+                                                        /> 固定運費 {}
                                                 </dd>
                                             </dl>;
                                         }
                                     })
                                 }
-                                {/*role == "Admins" ? <dl className="form-group row">
-                                    <dt className="col-xs-3 form-control-label text-xs-right">折扣設定</dt>
+                                {role == "Admins" ? <dl className="form-group row">
+                                    <dt className="col-xs-3 form-control-label text-xs-right">折扣</dt>
                                     <PWButton iconClassName="fa-check" className="btn btn-success btn-sm"
                                         title={UIText.add} enable={role == "Admins"} onClick={this.addDis} type="button" >{UIText.add}</PWButton> { }
-                                </dl> : null*/}
+                                </dl> : null}
                                 {//折扣以對總金額最-的方式做計算
                                     discount.map((item, i) => {
                                         return <dl key={i} className="form-group row">
-                                            <dt className="col-xs-3 form-control-label text-xs-right">折扣設定</dt>
+                                            <dt className="col-xs-3 form-control-label text-xs-right">
+                                                <PWButton iconClassName="fa-times" className="btn btn-danger btn-sm"
+                                                    title={UIText.delete} enable={role == "Admins"} hidden={role != "Admins"} onClick={this.delDis.bind(this, i) } type="button" ></PWButton>
+                                                折扣設定
+                                            </dt>
                                             <dd className="col-xs-9 form-inline">
                                                 訂單金額滿 NT$ { }
                                                 <InputNum

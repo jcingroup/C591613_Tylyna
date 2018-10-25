@@ -41,5 +41,6 @@ export const customer_type = {
 export const param_type = {
     chg_s_grid_val: 'chg_ship_grid_val',
     chg_d_grid_val: 'chg_discount_grid_val',
-    add_d_row:'add_discount_row'
+    add_d_row: 'add_discount_row',
+    del_d_row: 'del_discount_row'
 }

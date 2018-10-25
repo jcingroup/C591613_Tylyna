@@ -68,7 +68,7 @@ namespace DotWeb.Api
                     {
                         #region 運費
                         var ships = md.ship;
-
+                        //每種付款方式,若有設定固定運費(isfixed=true)只能設一筆
                         foreach (var ship in ships)
                         {
                             var item = db0.Shipment.Find(ship.shipment_id);
@@ -76,20 +76,35 @@ namespace DotWeb.Api
                             item.limit_money = ship.limit_money;
                             item.shipment_fee = ship.shipment_fee;
                             item.bank_charges = ship.bank_charges;
+                            item.isfixed = ship.isfixed;
                         }
                         #endregion
 
                         #region 折扣
-                        var discounts = md.discount;
+                        //目前db有的
+                        var discounts = await db0.Discount.ToListAsync();
+                        List<Discount> del_ditem = new List<Discount>();
 
-                        foreach (var discount in discounts)
+                        foreach (var item in discounts)
                         {
-                            var item = db0.Discount.Find(discount.discount_id);
-
-                            item.limit_money = discount.limit_money;
-                            item.per = discount.per;
-                            item.isuse = discount.isuse;
+                            var md_d = md.discount.FirstOrDefault(x => x.discount_id == item.discount_id);
+                            if (md_d != null)
+                            {
+                                item.limit_money = md_d.limit_money;
+                                item.per = md_d.per;
+                                item.isuse = md_d.isuse;
+                            }
+                            else
+                            {//原本再資料庫,但找不到的須刪除資料
+                                del_ditem.Add(item);
+                            }                         
                         }
+                        //加入沒寫進資料庫的資料
+                        var add_dlist = md.discount.Where(x => x.edit_type == IEditType.Insert);
+                        foreach (var item in add_dlist) {
+                            db0.Discount.Add(item);
+                        }
+                        db0.Discount.RemoveRange(del_ditem);
                         #endregion
 
                         await db0.SaveChangesAsync();

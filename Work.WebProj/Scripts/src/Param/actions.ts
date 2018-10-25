@@ -85,3 +85,11 @@ export const addRowState = (i: number, add_item: any) => {
     }
 
 }
+export const delRowState = (i: number) => {
+    //新增狀態
+    return {
+        type: param_type.del_d_row,
+        i
+    }
+
+}

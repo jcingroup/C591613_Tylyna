@@ -105,6 +105,7 @@
         limit_money: number;
         shipment_fee: number;
         bank_charges: number;
+        isfixed?: boolean;
     }
     interface ProductKind extends BaseEntityTable {
         product_kind_id?: number;

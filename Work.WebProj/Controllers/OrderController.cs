@@ -72,7 +72,8 @@ namespace DotWeb.Controllers
                 md.ship = db0.Shipment.OrderByDescending(x => x.limit_money).ToList();
                 md.discount = db0.Discount.Where(x => x.isuse).OrderByDescending(x => x.limit_money).ToList();
                 #region 付款方式預設轉帳匯款
-                var ship_item = md.ship.Where(x => x.pay_type == purchase.pay_type & x.limit_money > purchase.total).FirstOrDefault();
+                //如果有設定固定運費 或 金額未超過
+                var ship_item = md.ship.Where(x => x.pay_type == purchase.pay_type & (x.limit_money > purchase.total || x.isfixed == true)).FirstOrDefault();
                 if (ship_item != null)
                 {
                     purchase.ship_fee = ship_item.shipment_fee;//運費

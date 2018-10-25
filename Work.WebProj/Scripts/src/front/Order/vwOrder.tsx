@@ -26,7 +26,7 @@ export class Order extends React.Component<any, any>{
 
         let value = makeInputValue(e);
         //運費計算
-        let tmp = ship.filter(x => x.pay_type == value && x.limit_money > sub_total);
+        let tmp = ship.filter(x => x.pay_type == value && (x.limit_money > sub_total || x.isfixed == true));
         ship_fee = tmp.length > 0 ? tmp[0].shipment_fee : ship_fee;
         bank_charges = tmp.length > 0 ? tmp[0].bank_charges : bank_charges;
 
@@ -107,7 +107,7 @@ export class Order extends React.Component<any, any>{
                                         <label htmlFor="pay1" className="icon"></label>轉帳匯款
                                         {
                                             ship.filter(x => x.pay_type == IPayType.Remit).map((item, i) => {
-                                            return <span key={i}>(運費 {fmt_money(item.shipment_fee) } 元，消費滿 {fmt_money(item.limit_money) } 元以上免運) </span>;
+                                                return <span key={i}>(運費 {fmt_money(item.shipment_fee) } 元{item.isfixed ? null : "，消費滿 " + fmt_money(item.limit_money) + " 元以上免運"}) </span>;
                                             })
                                         }
                                     </span>

@@ -167,6 +167,7 @@
       <DependentUpon>C591613_Tylyna.tt</DependentUpon>
     </Compile>
     <Compile Include="LogicCenter.cs" />
+    <Compile Include="Models\Discount.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Banner.cs" />
     <Compile Include="Models\Editor_L2.cs" />

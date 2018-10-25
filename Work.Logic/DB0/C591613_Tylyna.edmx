@@ -380,6 +380,7 @@
           <Property Name="limit_money" Type="int" Nullable="false" />
           <Property Name="shipment_fee" Type="int" Nullable="false" />
           <Property Name="bank_charges" Type="int" Nullable="false" />
+          <Property Name="isfixed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TimeLinessCode">
           <Key>
@@ -867,7 +868,6 @@
             <End Role="ProductKind" EntitySet="ProductKind" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <EntitySet Name="Shipment" EntityType="C591613_TylynaModel.Shipment" />
           <EntitySet Name="Customer" EntityType="C591613_TylynaModel.Customer" />
           <EntitySet Name="ProductDetail" EntityType="C591613_TylynaModel.ProductDetail" />
           <EntitySet Name="PurchaseDetail" EntityType="C591613_TylynaModel.PurchaseDetail" />
@@ -903,6 +903,7 @@
             <End Role="Purchase" EntitySet="Purchase" />
             <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
           </AssociationSet>
+          <EntitySet Name="Shipment" EntityType="C591613_TylynaModel.Shipment" />
           </EntityContainer>
         <EntityType Name="ProductKind">
           <Key>
@@ -956,16 +957,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Shipment">
-          <Key>
-            <PropertyRef Name="shipment_id" />
-          </Key>
-          <Property Name="shipment_id" Type="Int32" Nullable="false" />
-          <Property Name="pay_type" Type="Int32" Nullable="false" />
-          <Property Name="limit_money" Type="Int32" Nullable="false" />
-          <Property Name="shipment_fee" Type="Int32" Nullable="false" />
-          <Property Name="bank_charges" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="customer_id" />
@@ -1227,6 +1218,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Shipment">
+          <Key>
+            <PropertyRef Name="shipment_id" />
+          </Key>
+          <Property Name="shipment_id" Type="Int32" Nullable="false" />
+          <Property Name="pay_type" Type="Int32" Nullable="false" />
+          <Property Name="limit_money" Type="Int32" Nullable="false" />
+          <Property Name="shipment_fee" Type="Int32" Nullable="false" />
+          <Property Name="bank_charges" Type="Int32" Nullable="false" />
+          <Property Name="isfixed" Type="Boolean" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1442,17 +1444,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Shipment">
-            <EntityTypeMapping TypeName="C591613_TylynaModel.Shipment">
-              <MappingFragment StoreEntitySet="Shipment">
-                <ScalarProperty Name="bank_charges" ColumnName="bank_charges" />
-                <ScalarProperty Name="shipment_fee" ColumnName="shipment_fee" />
-                <ScalarProperty Name="limit_money" ColumnName="limit_money" />
-                <ScalarProperty Name="pay_type" ColumnName="pay_type" />
-                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customer">
             <EntityTypeMapping TypeName="C591613_TylynaModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -1640,6 +1631,18 @@
                 <ScalarProperty Name="order_date" ColumnName="order_date" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
                 <ScalarProperty Name="purchase_no" ColumnName="purchase_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shipment">
+            <EntityTypeMapping TypeName="C591613_TylynaModel.Shipment">
+              <MappingFragment StoreEntitySet="Shipment">
+                <ScalarProperty Name="isfixed" ColumnName="isfixed" />
+                <ScalarProperty Name="bank_charges" ColumnName="bank_charges" />
+                <ScalarProperty Name="shipment_fee" ColumnName="shipment_fee" />
+                <ScalarProperty Name="limit_money" ColumnName="limit_money" />
+                <ScalarProperty Name="pay_type" ColumnName="pay_type" />
+                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

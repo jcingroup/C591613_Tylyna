@@ -19,5 +19,6 @@ namespace ProcCore.Business.DB0
         public int limit_money { get; set; }
         public int shipment_fee { get; set; }
         public int bank_charges { get; set; }
+        public bool isfixed { get; set; }
     }
 }
