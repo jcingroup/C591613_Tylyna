@@ -8,13 +8,15 @@
 <section class="news-content m-b-24">
     <header class="font-xxl">@Model.news_title</header>
     <small class="label label-danger">@(((DateTime)Model.i_UpdateDateTime).ToString("yyyy/MM/dd"))</small>@* 訊息更新時間 *@
-    <article>
-        <img class="float-r" src="@Model.img_src" alt="@Model.news_title">
+    <article class="clearfix">
+        <aside>
+            <img class="full" src="@Model.img_src" alt="@Model.news_title">
+        </aside>
         @* 編輯器內容 *@
         @Html.Raw(Model.news_content)
     </article>
 </section>
 
-<footer class="clear">
+<footer>
     <a href="~/News/list" class="btn">回列表</a>
 </footer>
