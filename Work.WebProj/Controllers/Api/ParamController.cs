@@ -88,6 +88,7 @@ namespace DotWeb.Api
 
                             item.limit_money = discount.limit_money;
                             item.per = discount.per;
+                            item.isuse = discount.isuse;
                         }
                         #endregion
 

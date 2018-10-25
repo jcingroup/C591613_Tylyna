@@ -70,7 +70,7 @@ namespace DotWeb.Controllers
                     purchase.receive_address = item.address;
                 }
                 md.ship = db0.Shipment.OrderByDescending(x => x.limit_money).ToList();
-                md.discount = db0.Discount.OrderByDescending(x => x.limit_money).ToList();
+                md.discount = db0.Discount.Where(x => x.isuse).OrderByDescending(x => x.limit_money).ToList();
                 #region 付款方式預設轉帳匯款
                 var ship_item = md.ship.Where(x => x.pay_type == purchase.pay_type & x.limit_money > purchase.total).FirstOrDefault();
                 if (ship_item != null)
@@ -255,7 +255,7 @@ namespace DotWeb.Controllers
                 res.data = mds;
                 using (var db0 = getDB0())
                 {
-                    res.discount = db0.Discount.OrderByDescending(x => x.limit_money).ToList();
+                    res.discount = db0.Discount.Where(x => x.isuse).OrderByDescending(x => x.limit_money).ToList();
                 }
 
                 r.data = res;

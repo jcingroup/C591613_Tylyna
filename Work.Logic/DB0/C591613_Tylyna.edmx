@@ -124,6 +124,7 @@
           <Property Name="discount_id" Type="int" Nullable="false" />
           <Property Name="limit_money" Type="int" Nullable="false" />
           <Property Name="per" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="isuse" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Editor_L1">
           <Key>
@@ -1169,6 +1170,7 @@
           <Property Name="discount_id" Type="Int32" Nullable="false" />
           <Property Name="limit_money" Type="Int32" Nullable="false" />
           <Property Name="per" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="isuse" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Purchase">
           <Key>
@@ -1604,6 +1606,7 @@
           <EntitySetMapping Name="Discount">
             <EntityTypeMapping TypeName="C591613_TylynaModel.Discount">
               <MappingFragment StoreEntitySet="Discount">
+                <ScalarProperty Name="isuse" ColumnName="isuse" />
                 <ScalarProperty Name="per" ColumnName="per" />
                 <ScalarProperty Name="limit_money" ColumnName="limit_money" />
                 <ScalarProperty Name="discount_id" ColumnName="discount_id" />

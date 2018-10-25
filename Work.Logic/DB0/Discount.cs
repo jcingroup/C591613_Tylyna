@@ -17,5 +17,6 @@ namespace ProcCore.Business.DB0
         public int discount_id { get; set; }
         public int limit_money { get; set; }
         public decimal per { get; set; }
+        public bool isuse { get; set; }
     }
 }

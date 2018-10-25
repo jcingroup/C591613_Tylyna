@@ -305,5 +305,6 @@
         discount_id?: number;
         limit_money?: number;
         per?: number;
+        isuse?: boolean;
     }
 } 

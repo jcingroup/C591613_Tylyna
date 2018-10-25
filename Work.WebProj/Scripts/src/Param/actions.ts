@@ -1,5 +1,5 @@
 ﻿import {fetchGet, fetchDelete, fetchPost, fetchPut} from '../ts-comm/ajax';
-import {ac_type_comm} from '../action_type';
+import {ac_type_comm, param_type} from '../action_type';
 import {UIText} from '../ts-comm/def-data';
 import {tosMessage} from '../ts-comm/comm-func';
 import { mask_show, mask_off} from '../ts-comm/vwMaskLoading';
@@ -14,6 +14,9 @@ export const callParamLoad = () => {
             .then((data: IResultData<ajaxParams>) => {
                 mask_off();
                 if (data.result) {
+                    data.data.discount.forEach(x => {
+                        x.edit_type = IEditType.update;
+                    });
                     dispatch(getParamItem(data.data));
                 } else {
                     alert(data.message);
@@ -24,7 +27,7 @@ export const callParamLoad = () => {
 }
 export const callSubmit = (md: ajaxParams) => {
     return dispatch => {
-        let pm = {  md: md };
+        let pm = { md: md };
 
         mask_show(UIText.mk_updating);
         return fetchPost(apiPath, md)
@@ -72,4 +75,13 @@ export const setRowInputValue = (type, i, name, value) => {
         name,
         value
     }
+}
+export const addRowState = (i: number, add_item: any) => {
+    //新增狀態
+    return {
+        type: param_type.add_d_row,
+        i,
+        add_item
+    }
+
 }

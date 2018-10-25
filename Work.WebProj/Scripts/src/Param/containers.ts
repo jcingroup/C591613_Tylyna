@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import {AStart} from './vwAStart';
 
 
-import { callParamLoad, callSubmit, setRowInputValue, setInputValue} from './actions'
+import { callParamLoad, callSubmit, setRowInputValue, setInputValue, addRowState} from './actions'
 
 const m1ToProps = (state, ownProps) => {
     return {
@@ -18,7 +18,8 @@ const m1ToProps = (state, ownProps) => {
 const m1Dispatch = (dispatch, ownProps) => {
     let s = bindActionCreators({
         callParamLoad, callSubmit,
-        setRowInputValue, setInputValue
+        setRowInputValue, setInputValue,
+        addRowState
     }, dispatch);
 
     return s;

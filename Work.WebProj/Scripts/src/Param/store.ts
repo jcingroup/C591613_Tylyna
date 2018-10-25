@@ -32,6 +32,10 @@ const discount_grid = (state: Array<server.Discount> = [], action): Array<server
             };
             let n_state = update(state, struct);
             return n_state;
+        case param_type.add_d_row:
+            let struct_1 = { $push: [action.add_item] };
+            let n_state_1 = update(state, struct_1);
+            return n_state_1;
         default:
             return state;
     }

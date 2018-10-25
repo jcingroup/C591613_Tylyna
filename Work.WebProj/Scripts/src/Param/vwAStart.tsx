@@ -3,14 +3,16 @@ import Moment = require('moment');
 import {Init_Params, ajaxParams} from './pub';
 import {ac_type_comm, param_type} from '../action_type';
 import {HeadView} from '../ts-comm/vwHeadView';
-import {InputText, InputNum, PWButton} from '../components';
-import {config, UIText} from '../ts-comm/def-data';
+import {InputText, InputNum, PWButton, RadioBox} from '../components';
+import {config, UIText, IUsedData} from '../ts-comm/def-data';
 
+declare var role: string;
 export class AStart extends React.Component<any, any>{
 
     constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.addDis = this.addDis.bind(this);
         this.state = {};
     }
     chgVal(name: string, value: any, e: React.SyntheticEvent) {
@@ -21,6 +23,18 @@ export class AStart extends React.Component<any, any>{
     }
     chgDisVal(i: number, name: string, value: any, e: React.SyntheticEvent) {
         this.props.setRowInputValue(param_type.chg_d_grid_val, i, name, value);
+    }
+    addDis() {
+        let item: server.Discount = {
+            discount_id: 0,
+            limit_money: null,
+            per: null,
+            isuse: true,
+            view_mode: InputViewMode.edit,
+            edit_type: IEditType.insert
+        };
+        let i = this.props.discount_grid.length;
+        this.props.addRowState(i, item);
     }
     handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -146,6 +160,11 @@ export class AStart extends React.Component<any, any>{
                                         }
                                     })
                                 }
+                                {/*role == "Admins" ? <dl className="form-group row">
+                                    <dt className="col-xs-3 form-control-label text-xs-right">折扣設定</dt>
+                                    <PWButton iconClassName="fa-check" className="btn btn-success btn-sm"
+                                        title={UIText.add} enable={role == "Admins"} onClick={this.addDis} type="button" >{UIText.add}</PWButton> { }
+                                </dl> : null*/}
                                 {//折扣以對總金額最-的方式做計算
                                     discount.map((item, i) => {
                                         return <dl key={i} className="form-group row">
@@ -172,6 +191,18 @@ export class AStart extends React.Component<any, any>{
                                                     min={0}
                                                     />
                                                 折
+                                                <br/>啟用狀態<RadioBox
+                                                    inputViewMode={view_mode}
+                                                    name={"isuse-" + i}
+                                                    id={"isuse-" + i}
+                                                    value={item.isuse}
+                                                    onChange= {this.chgDisVal.bind(this, i, 'isuse') }
+                                                    required={true}
+                                                    labelClassName="c-input c-radio"
+                                                    spanClassName="c-indicator"
+                                                    textClassName="text-sm"
+                                                    radioList={IUsedData}
+                                                    />
                                             </dd>
                                         </dl>;
                                     })
