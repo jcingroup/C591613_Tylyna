@@ -107,7 +107,7 @@ export class Order extends React.Component<any, any>{
                                         <label htmlFor="pay1" className="icon"></label>轉帳匯款
                                         {
                                             ship.filter(x => x.pay_type == IPayType.Remit).map((item, i) => {
-                                                return <span key={i}>(未滿 {fmt_money(item.limit_money) } 元，運費 {fmt_money(item.shipment_fee) } 元) </span>;
+                                            return <span key={i}>(運費 {fmt_money(item.shipment_fee) } 元，消費滿 {fmt_money(item.limit_money) } 元以上免運) </span>;
                                             })
                                         }
                                     </span>
