@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.1.8.11\tools\Microsoft.TypeScript.Default.props" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.1.8.11\tools\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.1.8.11\tools\Microsoft.TypeScript.NuGet.props" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.1.8.11\tools\Microsoft.TypeScript.NuGet.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -30,6 +31,9 @@
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -689,6 +693,7 @@
     <Content Include="Views\User\LinkFail.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Email\Email_register.cshtml" />
+    <Content Include="tsconfig.json" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -976,32 +981,15 @@
     <TypeScriptCompile Include="Scripts\typings\react-lazyload.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-load-mask.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react-modal\react-modal.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react-redux\react-redux.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-addons-create-fragment.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-addons-css-transition-group.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-addons-linked-state-mixin.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-addons-perf.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-addons-pure-render-mixin.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-addons-shallow-compare.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-addons-test-utils.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-addons-transition-group.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-addons-update.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-dom.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-global.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react-mixin.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\react\react.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\redux-devtools\redux-devtools-2.1.4.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\redux-devtools\redux-devtools.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\redux-logger\redux-logger.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\redux-thunk\redux-thunk.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\redux\redux.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sortablejs.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\swiper\swiper.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\tsd.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\whatwg-fetch\whatwg-fetch.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\whatwg-streams\whatwg-streams.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1053,6 +1041,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.1.8.11\tools\Microsoft.TypeScript.targets" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.1.8.11\tools\Microsoft.TypeScript.targets')" />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptSourceMap>False</TypeScriptSourceMap>
     <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
@@ -1083,7 +1072,6 @@
     <TypeScriptMapRoot />
     <TypeScriptSourceRoot />
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

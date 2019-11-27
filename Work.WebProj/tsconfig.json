@@ -6,8 +6,9 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": false,
-    "target": "es5",
-    "jsx": "react"
+    "target": "es2015",
+    "jsx": "react",
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules",
