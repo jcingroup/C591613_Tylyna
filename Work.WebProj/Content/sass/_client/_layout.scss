@@ -110,8 +110,9 @@
 }
 .logo-s {
     @extend %inline-block;
-    @include text-pic('logo_s.gif', 171px, 21px);
+    @include text-pic('logo_s.gif', 148px, 40px);
     vertical-align: middle;
+    margin-top: -10px;
 }
 .foot-contact {
     position: relative;
